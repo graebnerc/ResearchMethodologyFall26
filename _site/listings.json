@@ -1,14 +1,5 @@
 [
   {
-    "listing": "/content/statrecap.html",
-    "items": [
-      "/content/statrecap/ConceptualFoundations/index.html",
-      "/content/statrecap/DataFundamentals/index.html",
-      "/content/statrecap/DescriptiveStatistics/index.html",
-      "/content/statrecap/ProbabilityTheory/index.html"
-    ]
-  },
-  {
     "listing": "/content/exercises.html",
     "items": [
       "/content/exercises/obj-types-exercises/index.html",
@@ -37,8 +28,7 @@
       "/content/tutorials/experiments/index.html",
       "/content/tutorials/linear-regression/index.html",
       "/content/tutorials/logs/index.html",
-      "/content/tutorials/residuals/index.html",
-      "/content/tutorials/residuals/regression_diagnostics_revised.html"
+      "/content/tutorials/residuals/index.html"
     ]
   }
 ]

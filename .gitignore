@@ -1,5 +1,7 @@
 .vscode/
 /.quarto/
+.claude
+CLAUDE.md
 #/_site/
 content/material/slides/old
 content/material/slides alias
@@ -14,7 +16,7 @@ content/material/session07-QuartoExamples
 
 2023
 MISC
-
+INBOX
 
 # History files
 .Rhistory

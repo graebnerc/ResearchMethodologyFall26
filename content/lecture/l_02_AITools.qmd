@@ -1,0 +1,52 @@
+---
+title: "🗓️ Lecture 02: AI tools in practice"
+date: "2026-09-21"
+date-modified: last-modified
+---
+
+## 🎯 Content and goals
+
+- You understand use cases for different kinds of AI models.
+- You know common AI tools for different tasks.
+- You know the basics on how to write good prompts.
+- You are aware of the main caveats and ethical issues of using AI.
+- You can disclose and document the use of AI.
+- You understand the business models of AI companies.
+
+## 🖥️ Lecture Slides
+
+*The slides for this lecture will be made available here.*
+
+<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
+and embed it with the block below (adjust the filename):
+
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/RM26_L02_AITools.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+-->
+
+## 📚 Mandatory Reading
+
+*No mandatory reading for this lecture.*
+
+## 🏆 Further Readings
+
+*To be announced.*
+
+## ✍️ Exercises and coursework
+
+*Suggested exercises (to help you remember the material; not graded):*
+
+- Try the different tools introduced and decide which one you want to use.
+- Familiarize yourself with the practice of prompting.
+
+-------
+
+If you have questions or problems, please post them in the [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) forum.
+
+## References
+
+::: {#refs}
+:::

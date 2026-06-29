@@ -39,7 +39,7 @@ format:
         %\chead{Kopfzeile Mitte}
         \ohead{\pagemark} %
         \ifoot{}
-        \cfoot{\href{https://researchmethodology25spring.netlify.app}{Research Methodology - Spring Semester 2025}} % Fußzeile Mitte
+        \cfoot{\href{https://researchmethodology-fall26.netlify.app}{Research Methodology - Fall Semester 2026}} % Fußzeile Mitte
         \ofoot{} 
         \setkomafont{disposition}{\color{eufblue}\bfseries}
 ---

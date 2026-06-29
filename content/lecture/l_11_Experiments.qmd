@@ -1,0 +1,50 @@
+---
+title: "🗓️ Lecture 11: Experiments"
+date: "2026-11-30"
+date-modified: last-modified
+---
+
+## 🎯 Content and goals
+
+- You understand the differences between distinct types of experiments.
+- You can explain under which circumstances conducting experiments is helpful and when it can be problematic.
+- You can critically discuss the internal and external validity of an experiment.
+- You know how to describe an experimental design.
+- You know which kinds of statistics are used during the analysis of experimental data.
+
+## 🖥️ Lecture Slides
+
+*The slides for this lecture will be made available here.*
+
+<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
+and embed it with the block below (adjust the filename):
+
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/RM26_L11_Experiments.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+-->
+
+## 📚 Mandatory Reading
+
+*To be announced.*
+
+## 🏆 Further Readings
+
+*To be announced.*
+
+## ✍️ Exercises and coursework
+
+*Take-home exercise:*
+
+- Write a short report about the analysis of experimental data distributed via Moodle.
+
+-------
+
+If you have questions or problems, please post them in the [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) forum.
+
+## References
+
+::: {#refs}
+:::

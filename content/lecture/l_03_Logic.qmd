@@ -1,0 +1,47 @@
+---
+title: "🗓️ Lecture 03: Basics of logic"
+date: "2026-09-28"
+author: "Anna-Katharina Kothe"
+date-modified: last-modified
+---
+
+## 🎯 Content and goals
+
+- You understand the relevance of logic to management studies and decision making in a management context.
+- You understand how an argument is constructed and the most important (technical) terms in logic.
+- You understand basic propositional logic operators and know how to formalize a text into the form of the logical operators.
+
+## 🖥️ Lecture Slides
+
+*The slides for this lecture will be made available here.*
+
+<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
+and embed it with the block below (adjust the filename):
+
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/RM26_L03_Logic.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+-->
+
+## 📚 Mandatory Reading
+
+*To be announced.*
+
+## 🏆 Further Readings
+
+*To be announced.*
+
+## ✍️ Exercises and coursework
+
+*No coursework for this lecture.*
+
+-------
+
+If you have questions or problems, please post them in the [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) forum.
+
+## References
+
+::: {#refs}
+:::

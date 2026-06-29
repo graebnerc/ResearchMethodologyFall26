@@ -43,7 +43,7 @@ format:
         %\chead{Kopfzeile Mitte}
         \ohead{\pagemark} %
         \ifoot{}
-        \cfoot{\href{https://researchmethodology-fall25.netlify.app/}{\normalfont\color{eufblue}{Empirical and Theoretical Research Methodology - Fall Semester 2025}}} % Fußzeile Mitte
+        \cfoot{\href{https://researchmethodology-fall26.netlify.app/}{\normalfont\color{eufblue}{Empirical and Theoretical Research Methodology - Fall Semester 2026}}} % Fußzeile Mitte
         \ofoot{} 
         \setkomafont{disposition}{\color{eufblue}\bfseries}
 ---

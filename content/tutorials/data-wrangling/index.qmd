@@ -36,7 +36,7 @@ format:
         %\chead{Kopfzeile Mitte}
         \ohead{\pagemark} %
         \ifoot{}
-        \cfoot{\href{https://euf-datascience-spring24.netlify.app/}{\normalfont\color{eufblue}{Data Science Using R - Spring Semester 2024}}} % Fußzeile Mitte
+        \cfoot{\href{https://researchmethodology-fall26.netlify.app/}{\normalfont\color{eufblue}{Theoretical and Empirical Research Methodology - Fall Semester 2026}}} % Fußzeile Mitte
         \ofoot{} 
         \setkomafont{disposition}{\color{eufblue}\bfseries}
 ---

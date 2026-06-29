@@ -1,0 +1,49 @@
+---
+title: "🗓️ Lecture 10: Regression analysis"
+date: "2026-11-23"
+date-modified: last-modified
+---
+
+## 🎯 Content and goals
+
+- You understand the logic behind multiple linear regression and how to interpret it.
+- You understand the logic behind different models for interaction effects.
+- You can choose the right functional form based on the visual analysis of the data.
+- You know the steps of a regression analysis.
+
+## 🖥️ Lecture Slides
+
+*The slides for this lecture will be made available here.*
+
+<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
+and embed it with the block below (adjust the filename):
+
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/RM26_L10_Regression.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+-->
+
+## 📚 Mandatory Reading
+
+- @ismay2025moderndive [chapters 5--6]
+
+## 🏆 Further Readings
+
+- @jamesIntroductionStatisticalLearning2021 [chapter 3]
+
+## ✍️ Exercises and coursework
+
+*Take-home exercise:*
+
+- Conduct a regression analysis for the example data provided and present the results in a Quarto report.
+
+-------
+
+If you have questions or problems, please post them in the [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) forum.
+
+## References
+
+::: {#refs}
+:::

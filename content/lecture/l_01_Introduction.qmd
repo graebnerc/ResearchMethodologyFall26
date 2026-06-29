@@ -1,0 +1,51 @@
+---
+title: "🗓️ Lecture 01: General introduction"
+date: "2026-09-14"
+date-modified: last-modified
+---
+
+## 🎯 Content and goals
+
+- We get to know each other and clarify our goals and interests in the topics of the course.
+- You are given a general overview of the course, the kind of examination, the role of the take-home exams, and the rules for using AI.
+- We introduce a set of general software tools that we recommend you use (e.g. for literature management or note-taking).
+
+## 🖥️ Lecture Slides
+
+*The slides for this lecture will be made available here.*
+
+<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
+and embed it with the block below (adjust the filename):
+
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/RM26_L01_Introduction.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+-->
+
+## 📚 Mandatory Reading
+
+*No mandatory reading for this lecture.*
+
+## 🏆 Further Readings
+
+- *For note-taking with Obsidian:* @miller2023obsidian
+- *For writing text with Markdown:* @cone2025markdown; @commonmark
+- *For bibliographic management with Zotero:* @zoteroquickstart
+- *On using LLMs such as Claude:* @kuka2024prompting
+
+## ✍️ Exercises and coursework
+
+*Suggested exercise (to help you remember the material; not graded):*
+
+- Familiarize yourself with Moodle, the course webpage, and the previous knowledge in mathematics and statistics required for the course.
+
+-------
+
+If you have questions or problems, please post them in the [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) forum.
+
+## References
+
+::: {#refs}
+:::

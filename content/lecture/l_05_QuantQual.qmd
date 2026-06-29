@@ -1,0 +1,48 @@
+---
+title: "🗓️ Lecture 05: Quantitative and qualitative research"
+date: "2026-10-19"
+author: "Anna-Katharina Kothe"
+date-modified: last-modified
+---
+
+## 🎯 Content and goals
+
+- You understand how to differentiate and gain an overview over qualitative and quantitative methods.
+- You can connect qualitative and quantitative methods to research designs and critically discuss the strengths and weaknesses of using qualitative or quantitative methods.
+- You know the concept of (methodological) pluralism.
+
+## 🖥️ Lecture Slides
+
+*The slides for this lecture will be made available here.*
+
+<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
+and embed it with the block below (adjust the filename):
+
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/RM26_L05_QuantQual.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+-->
+
+## 📚 Mandatory Reading
+
+*To be announced.*
+
+## 🏆 Further Readings
+
+- @mahoney2006twocultures
+- @nowell2019rigor
+
+## ✍️ Exercises and coursework
+
+*No coursework for this lecture.*
+
+-------
+
+If you have questions or problems, please post them in the [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) forum.
+
+## References
+
+::: {#refs}
+:::

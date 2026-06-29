@@ -1,32 +1,44 @@
 ---
 title: "Theoretical and Empirical Research Methodology"
-subtitle: "Implementation Lab"
+subtitle: "Fall semester 2026"
 ---
 
 # 📑 The course in brief
 
-**Focus:** 
-This course is part of the module *Theoretical and Empirical Research Methodology*.
-It complements the theoretical lectures by introducing you to the statistical 
-programming language R and acquire practical knowledge about how to implement 
-essential research tools and all theoretical concepts discussed during the 
-main lecture in R. 
+**Focus:**
+This is the course website for the module *Theoretical and Empirical Research
+Methodology* in the Master *International Management Studies* at the
+Europa-Universität Flensburg. The module has two complementary parts:
 
-**How:** 
-The implementation lab comprises a mixture of (i) lectures, in which I introduce concepts
-in the classroom, (ii) automated hands-on exercises for you to do at home on
-your own and (iii) instructional videos for topics that are best learned and
-practiced by yourself. Of course, you are always invited to post your questions
-to the course forum on Moodle and more intricate problems can be solved in class.
+- the **[main lecture](/content/lecture/)** (Mondays), which introduces the
+  theoretical and methodological foundations of empirical research — from logic
+  and argumentation, over qualitative methods such as interviews and case
+  studies, to quantitative tools such as regression analysis and experiments;
+- the **[implementation lab](/content/material/)** (Fridays), which puts these
+  concepts into practice by teaching you the statistical programming language R
+  and how to implement the essential research tools discussed in the lecture.
+
+This website hosts the material for **both** parts so that lecture and lab are
+easy to navigate together.
+
+**How:**
+The course comprises a mixture of (i) lectures, in which concepts are introduced
+in the classroom, (ii) on-site and video labs for the practical R work, (iii)
+automated hands-on exercises for you to do at home, and (iv) instructional
+videos for topics that are best learned by yourself. You are always invited to
+post your questions to the course forum on Moodle, and more intricate problems
+can be solved in class.
 
 **Prerequisites:**
-The lab does not require you to have any prior knowledge in R or any other 
-programming language. Depending on your prior knowledge or affinity to 
-programming, the course will be quite demanding, but equip you with 
-computational skills that are most valuable both within academia and the 
-business world. 
+The lab does not require you to have any prior knowledge in R or any other
+programming language. Depending on your prior knowledge or affinity to
+programming, the course will be quite demanding, but it equips you with
+computational skills that are most valuable both within academia and the
+business world.
 
 # 🎯 Learning Objectives
+
+In the **implementation lab** you will learn to:
 
 -	Use R together with the integrated development environment R Studio
 -	Understand the use of R packages to perform specific data analytic tasks
@@ -36,11 +48,14 @@ business world.
 -	Implement and interpret linear regression models with numerical and categorial variables
 - Analyze experimental data in R
 
+The **main lecture** complements these practical skills with the conceptual and
+methodological foundations needed to design, conduct and critically assess
+empirical research.
 
 
 -----------------
 
 
-<a href=https://elearning.uni-flensburg.de/moodle/course/view.php?id=16256>
-    <button class="button-61">The main course on moodle</button>
+<a href=https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920>
+    <button class="button-61">The main course on Moodle</button>
 </a>

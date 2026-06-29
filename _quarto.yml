@@ -1,10 +1,11 @@
 project:
   type: "website"
-  title: "Theoretical and Empirical Research Methodology (Fall 2025)"
+  title: "Theoretical and Empirical Research Methodology (Fall 2026)"
   output-dir: _site
   render:
     - "index.qmd"
     - "content/*.qmd"
+    - "content/lecture/*.qmd"
     - "content/material/*.qmd"
     - "content/material/session*/*.qmd"
     - "content/tutorials/*.qmd"
@@ -15,7 +16,7 @@ project:
     - "content/statrecap/*/*.qmd"
 
 website:
-  title: "Theoretical and Empirical Research Methodology - Implementation Lab" # Title of website shown on top left
+  title: "Theoretical and Empirical Research Methodology" # Title of website shown on top left
   page-navigation: true
   reader-mode: true
   open-graph: true
@@ -30,48 +31,74 @@ website:
         text: "🏠 Home"
       - href: content/index.qmd
         text: "🏢 Getting Started"
-      - section: "🗓️ Material"
+      - section: "📖 Lecture"
+        contents:
+         - href: content/lecture/index.qmd
+           text: Overview
+         - href: content/lecture/l_01_Introduction.qmd
+           text: "L01 · General introduction"
+         - href: content/lecture/l_02_AITools.qmd
+           text: "L02 · AI tools in practice"
+         - href: content/lecture/l_03_Logic.qmd
+           text: "L03 · Basics of logic"
+         - href: content/lecture/l_04_Argumentation.qmd
+           text: "L04 · Logic, argumentation & explanation"
+         - href: content/lecture/l_05_QuantQual.qmd
+           text: "L05 · Quant. & qual. research"
+         - href: content/lecture/l_06_Interviews.qmd
+           text: "L06 · Interviews"
+         - href: content/lecture/l_07_CaseStudies.qmd
+           text: "L07 · Case studies"
+         - href: content/lecture/l_08_LiteratureReviews.qmd
+           text: "L08 · Literature reviews"
+         - href: content/lecture/l_09_StatisticsRecap.qmd
+           text: "L09 · Statistics recap"
+         - href: content/lecture/l_10_Regression.qmd
+           text: "L10 · Regression analysis"
+         - href: content/lecture/l_11_Experiments.qmd
+           text: "L11 · Experiments"
+         - href: content/lecture/l_12_OverallQuestions.qmd
+           text: "L12 · Overall questions"
+      - section: "💻 Implementation Lab"
         contents:
          - href: content/material/index.qmd
            text: Overview
-         - href: content/material/session01.qmd
-           text: Session 01
-         - href: content/material/session02.qmd
-           text: Session 02
-         - href: content/material/session03.qmd
-           text: Session 03
-         - href: content/material/session04.qmd
-           text: Session 04
-         - href: content/material/session05.qmd
-           text: Session 05
-         - href: content/material/session06.qmd
-           text: Session 06
-         - href: content/material/session07.qmd
-           text: Session 07
-         - href: content/material/session08.qmd
-           text: Session 08
-         - href: content/material/session08b.qmd
-           text: Recap
-         - href: content/material/session09.qmd
-           text: Session 09
-         - href: content/material/session10.qmd
-           text: Session 10
-         # - href: content/material/session12.qmd
-         #   text: Session 12
-         # - href: content/material/session13.qmd
-         #   text: Session 13
-      - href: content/tutorials.qmd
-        text: "💻 Tutorials"
-      - href: content/exercises.qmd
-        text: "👾 Additional exercises"
-      - href: content/statrecap.qmd
-        text: "📈 Statistics recap"
+         - href: content/material/s_01_Installation.qmd
+           text: "Session 01 · Introduction & installation"
+         - href: content/material/s_02_Basics.qmd
+           text: "Session 02 · Basics of R and R Studio"
+         - href: content/material/s_03_ProjectManagement.qmd
+           text: "Session 03 · Project management & recap"
+         - href: content/material/s_04_ObjectTypes.qmd
+           text: "Session 04 · Object types"
+         - href: content/material/s_05_Quarto.qmd
+           text: "Session 05 · Quarto and R Markdown"
+         - href: content/material/s_06_DataImport.qmd
+           text: "Session 06 · Importing data"
+         - href: content/material/s_07_DataPreparation.qmd
+           text: "Session 07 · Data preparation"
+         - href: content/material/s_08_Visualization.qmd
+           text: "Session 08 · Data visualization"
+         - href: content/material/s_08b_Recap.qmd
+           text: "Recap"
+         - href: content/material/s_09_AICoding.qmd
+           text: "Session 09 · Using AI for coding"
+         - href: content/material/s_10_LinearModels.qmd
+           text: "Session 10 · Linear models in R"
+         - href: content/material/s_11_Experiments.qmd
+           text: "Session 11 · Experimental data in R"
+         - href: content/tutorials.qmd
+           text: "💻 Tutorials"
+         - href: content/exercises.qmd
+           text: "👾 Additional exercises"
+         - href: https://euf-methodology-hub.netlify.app/tracks/statistics-recap
+           text: "📈 Statistics recap"
 
   navbar:
     background: primary
   page-footer:
     background: light
-    left: "Copyright 2025, Claudius Gräbner-Radkowitsch" 
+    left: "Copyright 2026, Claudius Gräbner-Radkowitsch"
 
 bibliography: references/references.bib
 csl: references/jepp.csl
@@ -91,10 +118,12 @@ format:
     link-external-newwindow: true
     link-external-icon: false
 
+    include-after-body: assets/scripts/collapse-callouts.html
+
     theme:
-      light: 
+      light:
         - journal
-        - css/custom.scss # Change the default colour
+        - css/custom.scss # EUF visual identity
     toc: true
 
 execute:

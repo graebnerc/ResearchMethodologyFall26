@@ -13,6 +13,8 @@ session pages.
 
 - Ismay, C., & Kim, A. Y.-S. (2020). *Statistical inference via data science: A ModernDive, into R and the tidyverse*. CRC Press, Taylor and Francis Group. [https://moderndive.com/index.html](https://moderndive.com/index.html)
 
+- Békés, G., & Kézdi, G. (2021). Data Analysis for Business, Economics, and Policy. Cambridge University Press. [https://gabors-data-analysis.com/](https://gabors-data-analysis.com/)
+
 For more advanced details on the fundamentals of programming in R, I 
 recommend the following:
 
@@ -24,27 +26,35 @@ For the model-related parts of the lecture I recommend the following book as a f
 
 ## 🔖 Session-specific material
 
+The implementation lab takes place on **Fridays** during the lecture period
+**18 September – 11 December 2026**. The schedule below follows the official
+seminar timetable; topics and dates are matched to the
+[main lecture](/content/lecture/).
+
 ::: {.callout-note collapse="true"}
 ## How to use the exercise codes?
-For information on how to use the exercise code, read 
+For information on how to use the exercise code, read
 [this tutorial](/content/tutorials/using-exercises/).
 :::
 
 
-|   Session    | Topic                                                         |       Exercise code                      |
-|:------------:|:--------------------------------------------------------------|:----------------------------------------:|
-|   [1](#s1)   | [General introduction](/content/material/session01.qmd)       |                                          |
-|   [2](#s2)   | [Basics of R and R-Studio](/content/material/session02.qmd) | `Basics`, `Functions` |
-|   [3](#s3)   | [Project management](/content/material/session03.qmd)         | `ProjectOrga`                            |
-|   [4](#s4)   | [Object types](/content/material/session04.qmd)               | `ObjectTypes1`, `ObjectTypes2`           |
-|   [5](#s5)   | [Importing data](/content/material/session05.qmd)             | `Wrangling1`, `Wrangling2`               |
-|  [6](#s6)  | [Preparing data](/content/material/session06.qmd)             | `Wrangling1`, `Wrangling2`               |
-|   [7](#s7)   | [Visualization](/content/material/session07.qmd)              |      `Visualization1`                    |
-|   [8](#s8)   | [Quarto](/content/material/session08.qmd)                     | `Quarto`                                 |
-<!--
-|   [9](#s9)   | [AI for coding](/content/material/session09.qmd)              |                                          |
-|  [11](#s11)  | TBD                                                           |                                          |
-|  [12](#s12)  | Linear models                                                 | `LinearRegression1`, `LinearRegression2` |
-|  [13](#s13)  | Analyzing experimental data                                   |                                          |
-|  [14](#s14)  | Recap & practice                                              |                                          |
--->
+|  Session  | Date        | Topic                                                              | Exercise code                            |
+|:---------:|:-----------:|:-------------------------------------------------------------------|:----------------------------------------:|
+|     1     | 18 Sep 2026 | [General introduction & installation](/content/material/s_01_Installation.qmd) |                                      |
+|     2     | 25 Sep 2026 | [Basics of R and R Studio](/content/material/s_02_Basics.qmd)         | `Basics`, `Functions`                    |
+|     3     | 02 Oct 2026 | [Project management & recap](/content/material/s_03_ProjectManagement.qmd)       | `ProjectOrga`                            |
+|     4     | 09 Oct 2026 | [Object types](/content/material/s_04_ObjectTypes.qmd)                     | `ObjectTypes1`, `ObjectTypes2`           |
+|     5     | 23 Oct 2026 | [Quarto and R Markdown](/content/material/s_05_Quarto.qmd)            | `Quarto`                                 |
+|     6     | 30 Oct 2026 | [Importing data](/content/material/s_06_DataImport.qmd)                   | `Wrangling1`, `Wrangling2`               |
+|     7     | 06 Nov 2026 | [Data preparation](/content/material/s_07_DataPreparation.qmd)                 | `Wrangling1`, `Wrangling2`               |
+|     8     | 13 Nov 2026 | [Data visualization](/content/material/s_08_Visualization.qmd)              | `Visualization1`                         |
+|     9     | 20 Nov 2026 | [Using AI for coding](/content/material/s_09_AICoding.qmd)              |                                          |
+|    10     | 27 Nov 2026 | [Linear models in R](/content/material/s_10_LinearModels.qmd)              | `LinearRegression1`, `LinearRegression2` |
+|    11     | 04 Dec 2026 | [Experimental data in R](/content/material/s_11_Experiments.qmd)           |                                          |
+|    12     | 11 Dec 2026 | Recap session *(material TBA)*                                      |                                          |
+
+: There is no class in the week of 12–16 October 2026. The three **take-home exams**
+are handed out after sessions 5 (23 Oct), 8 (13 Nov) and 10 (27 Nov).
+
+There are also complementary recap exercises on data import, preparation and
+visualization in the [recap session](/content/material/s_08b_Recap.qmd).

@@ -2,14 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Claudius Gräbner-Radkowitsch">
 
-<title>Material overview – Theoretical and Empirical Research Methodology - Implementation Lab</title>
+<title>Material overview – Theoretical and Empirical Research Methodology</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -31,20 +34,19 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../content/material/session01.html" rel="next">
-<link href="../../content/index.html" rel="prev">
+<link href="../../content/material/s_01_Installation.html" rel="next">
+<link href="../../content/lecture/l_12_OverallQuestions.html" rel="prev">
 <link href="../../figures/icons/course_favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63ecf963d60df97e60df67eb5a305458.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-7ed03afd9cad4b9a490e112b22b8940a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5bfe38054094a171cede7d60fce6de08.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,10 +75,10 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Material overview – Theoretical and Empirical Research Methodology - Implementation Lab">
+<meta property="og:title" content="Material overview – Theoretical and Empirical Research Methodology">
 <meta property="og:description" content="">
 <meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
-<meta property="og:site_name" content="Theoretical and Empirical Research Methodology - Implementation Lab">
+<meta property="og:site_name" content="Theoretical and Empirical Research Methodology">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light">
@@ -86,10 +88,8 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Theoretical and Empirical Research Methodology - Implementation Lab</span>
+    <span class="navbar-title">Theoretical and Empirical Research Methodology</span>
     </a>
   </div>
         <div class="quarto-navbar-tools tools-end">
@@ -107,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/material/index.html">🗓️ Material</a></li><li class="breadcrumb-item"><a href="../../content/material/index.html">Overview</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/material/index.html">💻 Implementation Lab</a></li><li class="breadcrumb-item"><a href="../../content/material/index.html">Overview</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -117,10 +117,6 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-      <a href="../../index.html" class="sidebar-logo-link">
-      </a>
-      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -138,12 +134,101 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">🗓️ Material</span></a>
+ <span class="menu-text">📖 Lecture</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/lecture/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/lecture/l_01_Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">L01 · General introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/lecture/l_02_AITools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">L02 · AI tools in practice</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/lecture/l_03_Logic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">L03 · Basics of logic</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/lecture/l_04_Argumentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">L04 · Logic, argumentation &amp; explanation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/lecture/l_05_QuantQual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">L05 · Quant. &amp; qual. research</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/lecture/l_06_Interviews.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">L06 · Interviews</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/lecture/l_07_CaseStudies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">L07 · Case studies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/lecture/l_08_LiteratureReviews.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">L08 · Literature reviews</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/lecture/l_09_StatisticsRecap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">L09 · Statistics recap</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/lecture/l_10_Regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">L10 · Regression analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/lecture/l_11_Experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">L11 · Experiments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/lecture/l_12_OverallQuestions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">L12 · Overall questions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">💻 Implementation Lab</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../content/material/index.html" class="sidebar-item-text sidebar-link active">
@@ -152,90 +237,96 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/material/session01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 01</span></a>
+  <a href="../../content/material/s_01_Installation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 01 · Introduction &amp; installation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/material/session02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 02</span></a>
+  <a href="../../content/material/s_02_Basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 02 · Basics of R and R Studio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/material/session03.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 03</span></a>
+  <a href="../../content/material/s_03_ProjectManagement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 03 · Project management &amp; recap</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/material/session04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 04</span></a>
+  <a href="../../content/material/s_04_ObjectTypes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 04 · Object types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/material/session05.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 05</span></a>
+  <a href="../../content/material/s_05_Quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 05 · Quarto and R Markdown</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/material/session06.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 06</span></a>
+  <a href="../../content/material/s_06_DataImport.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 06 · Importing data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/material/session07.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 07</span></a>
+  <a href="../../content/material/s_07_DataPreparation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 07 · Data preparation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/material/session08.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 08</span></a>
+  <a href="../../content/material/s_08_Visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 08 · Data visualization</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/material/session08b.html" class="sidebar-item-text sidebar-link">
+  <a href="../../content/material/s_08b_Recap.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Recap</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/material/session09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 09</span></a>
+  <a href="../../content/material/s_09_AICoding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 09 · Using AI for coding</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/material/session10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 10</span></a>
+  <a href="../../content/material/s_10_LinearModels.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 10 · Linear models in R</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/material/s_11_Experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 11 · Experimental data in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../content/tutorials.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">💻 Tutorials</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../content/exercises.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">👾 Additional exercises</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/statrecap.html" class="sidebar-item-text sidebar-link">
+  <a href="https://euf-methodology-hub.netlify.app/tracks/statistics-recap" class="sidebar-item-text sidebar-link">
  <span class="menu-text">📈 Statistics recap</span></a>
   </div>
 </li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -254,7 +345,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/material/index.html">🗓️ Material</a></li><li class="breadcrumb-item"><a href="../../content/material/index.html">Overview</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../content/material/index.html">💻 Implementation Lab</a></li><li class="breadcrumb-item"><a href="../../content/material/index.html">Overview</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Material overview</h1>
 </div>
@@ -294,6 +385,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><p>Wickham, H., Çetinkaya-Rundel, M., &amp; Grolemund, G. (2023). <em>R for data science: Import, tidy, transform, visualize, and model data</em> (2nd edition). O’Reilly. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a></p></li>
 <li><p>Ismay, C., &amp; Kim, A. Y.-S. (2020). <em>Statistical inference via data science: A ModernDive, into R and the tidyverse</em>. CRC Press, Taylor and Francis Group. <a href="https://moderndive.com/index.html">https://moderndive.com/index.html</a></p></li>
+<li><p>Békés, G., &amp; Kézdi, G. (2021). Data Analysis for Business, Economics, and Policy. Cambridge University Press. <a href="https://gabors-data-analysis.com/">https://gabors-data-analysis.com/</a></p></li>
 </ul>
 <p>For more advanced details on the fundamentals of programming in R, I recommend the following:</p>
 <ul>
@@ -306,6 +398,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="session-specific-material" class="level2">
 <h2 class="anchored" data-anchor-id="session-specific-material">🔖 Session-specific material</h2>
+<p>The implementation lab takes place on <strong>Fridays</strong> during the lecture period <strong>18 September – 11 December 2026</strong>. The schedule below follows the official seminar timetable; topics and dates are matched to the <a href="../../content/lecture/">main lecture</a>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -323,68 +416,120 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <table class="caption-top table">
+<caption>There is no class in the week of 12–16 October 2026. The three <strong>take-home exams</strong> are handed out after sessions 5 (23 Oct), 8 (13 Nov) and 10 (27 Nov).</caption>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Session</th>
+<th style="text-align: center;">Date</th>
 <th style="text-align: left;">Topic</th>
 <th style="text-align: center;">Exercise code</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><a href="#s1">1</a></td>
-<td style="text-align: left;"><a href="../../content/material/session01.html">General introduction</a></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">18 Sep 2026</td>
+<td style="text-align: left;"><a href="../../content/material/s_01_Installation.html">General introduction &amp; installation</a></td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><a href="#s2">2</a></td>
-<td style="text-align: left;"><a href="../../content/material/session02.html">Basics of R and R-Studio</a></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">25 Sep 2026</td>
+<td style="text-align: left;"><a href="../../content/material/s_02_Basics.html">Basics of R and R Studio</a></td>
 <td style="text-align: center;"><code>Basics</code>, <code>Functions</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><a href="#s3">3</a></td>
-<td style="text-align: left;"><a href="../../content/material/session03.html">Project management</a></td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">02 Oct 2026</td>
+<td style="text-align: left;"><a href="../../content/material/s_03_ProjectManagement.html">Project management &amp; recap</a></td>
 <td style="text-align: center;"><code>ProjectOrga</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><a href="#s4">4</a></td>
-<td style="text-align: left;"><a href="../../content/material/session04.html">Object types</a></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">09 Oct 2026</td>
+<td style="text-align: left;"><a href="../../content/material/s_04_ObjectTypes.html">Object types</a></td>
 <td style="text-align: center;"><code>ObjectTypes1</code>, <code>ObjectTypes2</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><a href="#s5">5</a></td>
-<td style="text-align: left;"><a href="../../content/material/session05.html">Importing data</a></td>
-<td style="text-align: center;"><code>Wrangling1</code>, <code>Wrangling2</code></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">23 Oct 2026</td>
+<td style="text-align: left;"><a href="../../content/material/s_05_Quarto.html">Quarto and R Markdown</a></td>
+<td style="text-align: center;"><code>Quarto</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><a href="#s6">6</a></td>
-<td style="text-align: left;"><a href="../../content/material/session06.html">Preparing data</a></td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">30 Oct 2026</td>
+<td style="text-align: left;"><a href="../../content/material/s_06_DataImport.html">Importing data</a></td>
 <td style="text-align: center;"><code>Wrangling1</code>, <code>Wrangling2</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><a href="#s7">7</a></td>
-<td style="text-align: left;"><a href="../../content/material/session07.html">Visualization</a></td>
-<td style="text-align: center;"><code>Visualization1</code></td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">06 Nov 2026</td>
+<td style="text-align: left;"><a href="../../content/material/s_07_DataPreparation.html">Data preparation</a></td>
+<td style="text-align: center;"><code>Wrangling1</code>, <code>Wrangling2</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><a href="#s8">8</a></td>
-<td style="text-align: left;"><a href="../../content/material/session08.html">Quarto</a></td>
-<td style="text-align: center;"><code>Quarto</code></td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">13 Nov 2026</td>
+<td style="text-align: left;"><a href="../../content/material/s_08_Visualization.html">Data visualization</a></td>
+<td style="text-align: center;"><code>Visualization1</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">20 Nov 2026</td>
+<td style="text-align: left;"><a href="../../content/material/s_09_AICoding.html">Using AI for coding</a></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">27 Nov 2026</td>
+<td style="text-align: left;"><a href="../../content/material/s_10_LinearModels.html">Linear models in R</a></td>
+<td style="text-align: center;"><code>LinearRegression1</code>, <code>LinearRegression2</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">04 Dec 2026</td>
+<td style="text-align: left;"><a href="../../content/material/s_11_Experiments.html">Experimental data in R</a></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">11 Dec 2026</td>
+<td style="text-align: left;">Recap session <em>(material TBA)</em></td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
-<!--
-|   [9](#s9)   | [AI for coding](/content/material/session09.qmd)              |                                          |
-|  [11](#s11)  | TBD                                                           |                                          |
-|  [12](#s12)  | Linear models                                                 | `LinearRegression1`, `LinearRegression2` |
-|  [13](#s13)  | Analyzing experimental data                                   |                                          |
-|  [14](#s14)  | Recap & practice                                              |                                          |
--->
+<p>There are also complementary recap exercises on data import, preparation and visualization in the <a href="../../content/material/s_08b_Recap.html">recap session</a>.</p>
 
 
 </section>
 
 </main> <!-- /main -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.callout').forEach(function (callout, i) {
+    var header = callout.querySelector('.callout-header');
+    var body = callout.querySelector('.callout-body-container');
+    if (!header || !body || header.hasAttribute('data-bs-toggle')) return;
+
+    var id = 'callout-collapse-' + i;
+    body.id = id;
+    body.classList.add('collapse');
+
+    header.setAttribute('data-bs-toggle', 'collapse');
+    header.setAttribute('data-bs-target', '#' + id);
+    header.setAttribute('aria-expanded', 'false');
+    header.setAttribute('aria-controls', id);
+    header.style.cursor = 'pointer';
+
+    var btn = document.createElement('div');
+    btn.className = 'callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end';
+    btn.innerHTML = '<i class="callout-toggle"></i>';
+    header.appendChild(btn);
+  });
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -792,13 +937,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../content/index.html" class="pagination-link" aria-label="🏢 Getting Started">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">🏢 Getting Started</span>
+      <a href="../../content/lecture/l_12_OverallQuestions.html" class="pagination-link" aria-label="L12 · Overall questions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">L12 · Overall questions</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../content/material/session01.html" class="pagination-link" aria-label="Session 01">
-        <span class="nav-page-text">Session 01</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../content/material/s_01_Installation.html" class="pagination-link" aria-label="Session 01 · Introduction &amp; installation">
+        <span class="nav-page-text">Session 01 · Introduction &amp; installation</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -806,7 +951,7 @@ ul.task-list li input[type="checkbox"] {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2025, Claudius Gräbner-Radkowitsch</p>
+<p>Copyright 2026, Claudius Gräbner-Radkowitsch</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

@@ -1,0 +1,40 @@
+---
+title: "🗓️ Lecture 12: Overall questions and open Q&A"
+date: "2026-12-07"
+date-modified: last-modified
+---
+
+## Abstract
+
+*An abstract for this lecture will be added here before the session.*
+
+## 🖥️ Lecture Slides
+
+*The slides for this lecture will be made available here.*
+
+<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
+and embed it with the block below (adjust the filename):
+
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/RM26_L12_OverallQuestions.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+-->
+
+## 📚 Mandatory Reading
+
+*The mandatory reading for this lecture will be added here.*
+
+## 🏆 Further Readings
+
+*Optional further readings will be added here.*
+
+-------
+
+If you have questions or problems, please post them in the [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) forum.
+
+## References
+
+::: {#refs}
+:::

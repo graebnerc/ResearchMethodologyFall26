@@ -1,0 +1,48 @@
+---
+title: "🗓️ Lecture 06: Interviews"
+date: "2026-10-26"
+author: "Anna-Katharina Kothe"
+date-modified: last-modified
+---
+
+## 🎯 Content and goals
+
+- You can describe different kinds of interviews and can explain when (for what kind of research question) to use which type of interview.
+- You understand the main strengths and weaknesses of each interview type.
+- You know how to conduct an interview, including how to select the interviewees, how to build a theory-driven interview guide, and which question techniques work best and are to be avoided.
+- You know the major sources/handbooks for further research.
+
+## 🖥️ Lecture Slides
+
+*The slides for this lecture will be made available here.*
+
+<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
+and embed it with the block below (adjust the filename):
+
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/RM26_L06_Interviews.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+-->
+
+## 📚 Mandatory Reading
+
+*To be announced.*
+
+## 🏆 Further Readings
+
+*To be announced.*
+
+## ✍️ Exercises and coursework
+
+*No coursework for this lecture.*
+
+-------
+
+If you have questions or problems, please post them in the [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) forum.
+
+## References
+
+::: {#refs}
+:::

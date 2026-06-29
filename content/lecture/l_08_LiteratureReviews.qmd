@@ -1,0 +1,56 @@
+---
+title: "🗓️ Lecture 08: Literature reviews"
+date: "2026-11-09"
+date-modified: last-modified
+---
+
+## 🎯 Content and goals
+
+- You can describe the different kinds of literature review and can decide which type is adequate for what purpose.
+- You know about the PRISMA guidelines for systematic literature reviews and understand central concepts, such as 'search strategy', 'keywords', or 'citation networks'.
+- You can use Web of Science to conduct a systematic literature review.
+- You know how to document a systematic literature review.
+- You know about various assistance tools for literature reviews; in particular, you understand the difference between citation-based and syntax-based tools and can decide which one is better suited for a given task.
+
+## 🖥️ Lecture Slides
+
+*The slides for this lecture will be made available here.*
+
+<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
+and embed it with the block below (adjust the filename):
+
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/RM26_L08_LiteratureReviews.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+-->
+
+## 📚 Mandatory Reading
+
+- @page2021prisma
+- @page2021prismaexplanation
+- It is also insightful to have a look at the materials at the [PRISMA website](https://www.prisma-statement.org).
+- Supplementary material specific to the context of this course is distributed via Moodle.
+
+## 🏆 Further Readings
+
+*As concrete examples for systematic reviews:*
+
+- @aistleitner2021capability
+- @graebner2023degrowth
+
+## ✍️ Exercises and coursework
+
+*Take-home examination (graded; must be passed to be admitted to the final exam):*
+
+- Conduct a small systematic literature review as described in the lecture slides and on Moodle.
+
+-------
+
+If you have questions or problems, please post them in the [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) forum.
+
+## References
+
+::: {#refs}
+:::

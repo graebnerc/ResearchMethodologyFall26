@@ -1,0 +1,66 @@
+---
+title: "🗓️ Lecture 04: Logic, argumentation, models, and explanation"
+date: "2026-10-05"
+author: "Anna-Katharina Kothe"
+date-modified: last-modified
+---
+
+## 🎯 Content and goals
+
+*On logic, argumentation, and models:*
+
+- You know different types of arguments, most importantly deductive and inductive arguments and the most common argumentative fallacies.
+- You can evaluate an argument and know the difference between the concepts of validity and truth.
+- You can analyze arguments through reconstruction.
+
+*On scientific arguments, models, and explanation:*
+
+- You understand the concepts of a theory, a model, and an explanation, as well as the deductive-nomological model.
+- You know about the structure of scientific progress and scientific paradigms.
+- You understand the concepts of ontology, epistemology, and methodology.
+
+## 🖥️ Lecture Slides
+
+*The slides for this lecture will be made available here.*
+
+<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
+and embed it with the block below (adjust the filename):
+
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/RM26_L04_Argumentation.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+-->
+
+## 📚 Mandatory Reading
+
+- @shraderfrechette2014tainted [pp. 17--28]
+
+## 🏆 Further Readings
+
+*On logic, argumentation, and models:*
+
+- @lutz2022reviews
+- @hundleby2023feminist
+
+*On scientific arguments, models, and explanation:*
+
+- @reiss2013economics [pp. 15--26]
+- @popper2007conjectures
+- @hansson2021pseudoscience
+
+## ✍️ Exercises and coursework
+
+*Take-home exercise:*
+
+- Take-home exercise on Logic & Argumentation (available on Moodle).
+
+-------
+
+If you have questions or problems, please post them in the [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) forum.
+
+## References
+
+::: {#refs}
+:::

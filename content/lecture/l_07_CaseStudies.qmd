@@ -1,0 +1,49 @@
+---
+title: "🗓️ Lecture 07: Case studies"
+date: "2026-11-02"
+author: "Anna-Katharina Kothe"
+date-modified: last-modified
+---
+
+## 🎯 Content and goals
+
+- You understand what a case study design is, when to best choose a case-oriented approach, and the central elements of the research design.
+- You know what a case is and can explain the main strategies of case selection.
+- You understand the comparative method and its different types.
+- You can critically discuss this method in comparison to other research methods.
+
+## 🖥️ Lecture Slides
+
+*The slides for this lecture will be made available here.*
+
+<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
+and embed it with the block below (adjust the filename):
+
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/RM26_L07_CaseStudies.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+-->
+
+## 📚 Mandatory Reading
+
+*No mandatory reading for this lecture.*
+
+## 🏆 Further Readings
+
+- @beach2016causal
+- @yin2018casestudy
+
+## ✍️ Exercises and coursework
+
+*To be announced.*
+
+-------
+
+If you have questions or problems, please post them in the [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) forum.
+
+## References
+
+::: {#refs}
+:::

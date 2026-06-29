@@ -1,0 +1,50 @@
+---
+title: "🗓️ Lecture 09: Statistics recap"
+date: "2026-11-16"
+date-modified: last-modified
+---
+
+## 🎯 Content and goals
+
+- This lecture clarifies your questions regarding the concepts described under "Required prior knowledge in Mathematics and Statistics" in the course description.
+- It is essential that you work through the full track [A Recap of Undergraduate Statistics](https://euf-methodology-hub.netlify.app/tracks/statistics-recap) as soon as possible. We assume you know about all these concepts by the beginning of the lecture, so the lecture itself is just to recap and illustrate certain concepts.
+- Please ask your questions in advance via the Moodle forum (at least two weeks before the lecture).
+
+## 🖥️ Lecture Slides
+
+*The slides for this lecture will be made available here.*
+
+<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
+and embed it with the block below (adjust the filename):
+
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/RM26_L09_StatisticsRecap.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+-->
+
+## 📚 Mandatory Reading
+
+- The full track [A Recap of Undergraduate Statistics
+](https://euf-methodology-hub.netlify.app/tracks/statistics-recap) 
+  - We will assume you know about all these concepts by the beginning of the lecture. Please post questions at least two weeks before the lecture in the Moodle forum.
+
+## 🏆 Further Readings
+
+_Feel free to complement the mandatory reading with your favorite statistics textbook._
+
+## ✍️ Exercises and coursework
+
+*Take-home examination (graded; must be passed to be admitted to the final exam):*
+
+- The take-home examination tests your ability to apply the mathematical and statistical concepts covered in the lecture and described in the course description as required prior knowledge.
+
+-------
+
+If you have questions or problems, please post them in the [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) forum.
+
+## References
+
+::: {#refs}
+:::

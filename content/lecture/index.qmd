@@ -1,0 +1,45 @@
+---
+title: "Lecture overview"
+---
+
+# 📖 The main lecture
+
+This is the landing page for the **main lecture** of the module *Theoretical and
+Empirical Research Methodology*. The lecture introduces the theoretical and
+methodological foundations of empirical research; the
+[Implementation Lab](/content/material/) then puts these concepts into practice
+using the statistical programming language R.
+
+The lecture takes place on **Mondays** during the lecture period
+**14 September – 11 December 2026**. It is taught jointly by several members of
+the teaching team (see the individual session pages for who teaches what).
+
+::: {.callout-note collapse="true"}
+## How does the lecture relate to the lab?
+The two parts run in parallel and are designed to complement each other: a topic
+discussed conceptually in the Monday lecture is, where applicable, implemented
+hands-on in the Friday lab. You find the lab schedule on the
+[lab overview page](/content/material/).
+:::
+
+## 🗓️ Lecture schedule
+
+|  Lecture  | Date        | Topic                                                                      | Instructor |
+|:---------:|:-----------:|:---------------------------------------------------------------------------|:----------:|
+|     1     | 14 Sep 2026 | [General introduction](/content/lecture/l_01_Introduction.qmd)             | Anna-Katharina & Claudius |
+|     2     | 21 Sep 2026 | [AI tools in practice](/content/lecture/l_02_AITools.qmd)                   |    Claudius     |
+|     3     | 28 Sep 2026 | [Basics of logic](/content/lecture/l_03_Logic.qmd)                         |    Anna-Katharina     |
+|     4     | 05 Oct 2026 | [Logic, argumentation, models, and explanation](/content/lecture/l_04_Argumentation.qmd) |    Anna-Katharina     |
+|     5     | 19 Oct 2026 | [Quantitative and qualitative research](/content/lecture/l_05_QuantQual.qmd) |   Anna-Katharina     |
+|     6     | 26 Oct 2026 | [Interviews](/content/lecture/l_06_Interviews.qmd)                         |    Anna-Katharina     |
+|     7     | 02 Nov 2026 | [Case studies](/content/lecture/l_07_CaseStudies.qmd)                       |    Anna-Katharina     |
+|     8     | 09 Nov 2026 | [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd)           |    CGG     |
+|     9     | 16 Nov 2026 | [Statistics recap](/content/lecture/l_09_StatisticsRecap.qmd)               |    Claudius     |
+|    10     | 23 Nov 2026 | [Regression analysis](/content/lecture/l_10_Regression.qmd)                 |    Claudius     |
+|    11     | 30 Nov 2026 | [Experiments](/content/lecture/l_11_Experiments.qmd)                       |    Claudius     |
+|    12     | 07 Dec 2026 | [Overall questions and open Q&A](/content/lecture/l_12_OverallQuestions.qmd) |    —      |
+
+: There is no class in the week of 12–16 October 2026.
+
+Slides and reading lists are distributed via the individual session pages above
+and via [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920).

@@ -35,7 +35,7 @@ format:
         %\chead{Kopfzeile Mitte}
         \ohead{\pagemark} %
         \ifoot{}
-        \cfoot{\href{https://euf-datascience-spring24.netlify.app/}{\normalfont\color{eufblue}{Data Science Using R - Spring Semester 2024}}} % Fußzeile Mitte
+        \cfoot{\href{https://researchmethodology-fall26.netlify.app/}{\normalfont\color{eufblue}{Theoretical and Empirical Research Methodology - Fall Semester 2026}}} % Fußzeile Mitte
         \ofoot{} 
         \setkomafont{disposition}{\color{eufblue}\bfseries}
 ---
@@ -94,7 +94,7 @@ In my case the working directory looks like this:
 
 Now assume we produced a plot in our current session and want to save it using 
 the function `ggplot2::ggsave()`. You learn (or have learned) in the session
-on [visualization](content/material/session06.qmd) that this function takes, 
+on [visualization](/content/material/s_08_Visualization.qmd) that this function takes,
 among others, an argument `filename` that specifies the name of the file that is 
 meant to contain the plot.
 Now if I were to tell R to save the plot under the name `test.pdf` like this:
