@@ -49,6 +49,10 @@ vignettes/*.pdf
 *_cache/
 /cache/
 
+# Quarto HTML dependency byproducts in the source tree (the deployed copies
+# under _site/ are tracked separately). Scoped to content/ so _site/ is untouched.
+content/**/index_files/
+
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
