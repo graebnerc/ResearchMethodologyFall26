@@ -33,11 +33,11 @@ hands-on in the Friday lab. You find the lab schedule on the
 |     5     | 19 Oct 2026 | [Quantitative and qualitative research](/content/lecture/l_05_QuantQual.qmd) |   Anna-Katharina     |
 |     6     | 26 Oct 2026 | [Interviews](/content/lecture/l_06_Interviews.qmd)                         |    Anna-Katharina     |
 |     7     | 02 Nov 2026 | [Case studies](/content/lecture/l_07_CaseStudies.qmd)                       |    Anna-Katharina     |
-|     8     | 09 Nov 2026 | [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd)           |    CGG     |
+|     8     | 09 Nov 2026 | [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd)           |    Claudius     |
 |     9     | 16 Nov 2026 | [Statistics recap](/content/lecture/l_09_StatisticsRecap.qmd)               |    Claudius     |
 |    10     | 23 Nov 2026 | [Regression analysis](/content/lecture/l_10_Regression.qmd)                 |    Claudius     |
 |    11     | 30 Nov 2026 | [Experiments](/content/lecture/l_11_Experiments.qmd)                       |    Claudius     |
-|    12     | 07 Dec 2026 | [Overall questions and open Q&A](/content/lecture/l_12_OverallQuestions.qmd) |    —      |
+|    12     | 07 Dec 2026 | [Overall questions and open Q&A](/content/lecture/l_12_OverallQuestions.qmd) |    Anna-Katharina & Claudius      |
 
 : There is no class in the week of 12–16 October 2026.
 

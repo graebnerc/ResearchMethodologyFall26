@@ -18,17 +18,38 @@ format: html
 
 # 📍 When and where
 
-- **Main lecture:** Mondays
-- **Implementation lab:** Fridays
+- **Main lecture:** Mondays, Room MAD 024 (Madrid Building)
+- **Implementation lab:** Fridays, Room MAD 024 (Madrid Building)
 
 The lecture period runs from **14 September to 11 December 2026**. There is no
 class in the week of 12–16 October. Please always check the most recent version
 of the seminar timetable, since dates and rooms can differ from one week to
-another. The authoritative timetable, rooms and times are [here](/content/material/index.qmd).
+another. The authoritative timetable, rooms and times are provided _on this page_.
 For all kinds of official announcement please watch the
 [Moodle course](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920).
 
-You find the full schedule on the [lecture overview](/content/lecture/index.qmd) and the
+The following table gives an overview of the combined schedule and serves as the 
+authoritative schedule: 
+
+| Week | Title Lecture | Title Lab |
+|:----:|:--------------|:----------|
+|  1   | [General introduction](/content/lecture/l_01_Introduction.qmd) | [General introduction & installation](/content/material/s_01_Installation.qmd) |
+|  2   | [AI tools in practice](/content/lecture/l_02_AITools.qmd) | [Basics of R and R Studio](/content/material/s_02_Basics.qmd) |
+|  3   | [Basics of logic](/content/lecture/l_03_Logic.qmd) | [Project management & recap](/content/material/s_03_ProjectManagement.qmd) |
+|  4   | [Logic, argumentation, models, and explanation](/content/lecture/l_04_Argumentation.qmd) | [Object types](/content/material/s_04_ObjectTypes.qmd) |
+|  5   | [Quantitative and qualitative research](/content/lecture/l_05_QuantQual.qmd) | [Quarto and R Markdown](/content/material/s_05_Quarto.qmd) |
+|  6   | [Interviews](/content/lecture/l_06_Interviews.qmd) | [Importing data](/content/material/s_06_DataImport.qmd) |
+|  7   | [Case studies](/content/lecture/l_07_CaseStudies.qmd) | [Data preparation](/content/material/s_07_DataPreparation.qmd) |
+|  8   | [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd) | [Data visualization](/content/material/s_08_Visualization.qmd) |
+|  9   | [Statistics recap](/content/lecture/l_09_StatisticsRecap.qmd) | [Using AI for coding](/content/material/s_09_AICoding.qmd) |
+|  10  | [Regression analysis](/content/lecture/l_10_Regression.qmd) | [Linear models in R](/content/material/s_10_LinearModels.qmd) |
+|  11  | [Experiments](/content/lecture/l_11_Experiments.qmd) | [Experimental data in R](/content/material/s_11_Experiments.qmd) |
+|  12  | [Overall questions and open Q&A](/content/lecture/l_12_OverallQuestions.qmd) | Recap session *(material TBA)* |
+
+: There is no class in the week of 12–16 October 2026.
+
+You find the full schedule with further information on each session on the 
+[lecture overview](/content/lecture/index.qmd) and the
 [lab overview](/content/material/index.qmd) pages.
 
 # 💻 Exercises

@@ -31,9 +31,12 @@ and embed it with the block below (adjust the filename):
 - @page2021prisma
 - @page2021prismaexplanation
 - It is also insightful to have a look at the materials at the [PRISMA website](https://www.prisma-statement.org).
-- Supplementary material specific to the context of this course is distributed via Moodle.
 
 ## 🏆 Further Readings
+
+- The official [PRISMA Website](https://www.prisma-statement.org/) with useful material and templates
+- [Web of Science](https://clarivate.com/academia-government/scientific-and-academic-research/research-discovery-and-referencing/web-of-science/)
+  - Info on how to access it can be found via the [ZHB](https://dbis.ur.de/HDFL/resources/3366?lang=de)
 
 *As concrete examples for systematic reviews:*
 
@@ -44,7 +47,7 @@ and embed it with the block below (adjust the filename):
 
 *Take-home examination (graded; must be passed to be admitted to the final exam):*
 
-- Conduct a small systematic literature review as described in the lecture slides and on Moodle.
+- Conduct a small systematic literature review as described in the lecture slides and on [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) 
 
 -------
 

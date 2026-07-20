@@ -56,6 +56,7 @@ All the videos are available via this [playlist](https://youtube.com/playlist?li
 - @hadleygraphics, who introduces the theory underlying `ggplot2`
 - [ggplot2 cheat sheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf)
 - Browse the website [from Data to Viz](https://www.data-to-viz.com/) and try to re-create some of the figures yourself
+- I like this [blog](https://blog.yan-holtz.com) from Yan Holtz, the creator of [from Data to Viz](https://www.data-to-viz.com/); it helps highlighting the relevance of often under-appreciated aspects of a graph, such as its [title](https://blog.yan-holtz.com/posts/the-neglected-detail)
 
 ## ✍️ Coursework
 

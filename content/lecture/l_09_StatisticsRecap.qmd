@@ -38,7 +38,7 @@ _Feel free to complement the mandatory reading with your favorite statistics tex
 
 *Take-home examination (graded; must be passed to be admitted to the final exam):*
 
-- The take-home examination tests your ability to apply the mathematical and statistical concepts covered in the lecture and described in the course description as required prior knowledge.
+- The take-home examination tests your ability to apply the mathematical and statistical concepts covered in the lecture and described in the course description as required prior knowledge. Is is available via [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920)
 
 -------
 
