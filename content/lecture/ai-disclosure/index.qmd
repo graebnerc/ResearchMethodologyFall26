@@ -1,0 +1,120 @@
+---
+title: "Documenting and disclosing the use of AI"
+subtitle: "A template for term papers and coursework"
+date: "2026-09-21"
+date-modified: last-modified
+format:
+  html: default
+  pdf:
+    pdf-engine: xelatex
+    toc: true
+    number-sections: false
+  docx:
+    toc: true
+  gfm: default
+format-links:
+  - pdf
+  - docx
+  - text: "Markdown (.md)"
+    href: index.md
+    icon: filetype-md
+---
+
+## Why disclose?
+
+If you use an AI system (such as ChatGPT, Claude, Gemini, or Copilot) at any
+stage of your academic work, you are expected to **document what you did and
+disclose it transparently**. Doing so is not an admission that you cut corners —
+it is part of good scientific practice. It lets readers judge how your results
+came about, protects you against accusations of academic misconduct, and forces
+you to reflect critically on where the AI actually helped and where it did not.
+
+The core principle is simple:
+
+> While AI tools may assist your work, **you remain fully responsible** for every
+> claim, analysis, and conclusion you submit.
+
+This page gives you (1) a **fillable template** to include in your work, (2) a
+**worked example**, and (3) a short note on how to **cite** AI in your reference
+list. Always check the concrete requirements of your specific course or
+examination regulations — this template is a sensible default, not a rule that
+overrides them. If in doubt, always clarify this topic with your instructor
+_as early as possible_.
+
+## How to use this template
+
+Copy the table below into an appendix (or, for short pieces, summarise the core
+rows in your methodology section). Fill in the right-hand column for your own
+work. The elements are grouped into two tiers:
+
+- **Core elements** — always report these, even for a one-paragraph disclosure.
+- **Additional elements** — report these when they are relevant to your work
+  (e.g. when AI touched your data, or when its limitations affected your
+  results).
+
+## The disclosure template (fill this in)
+
+### Core elements — always report
+
+| Element | What to include | Your entry |
+|---|---|---|
+| **AI tool & version** | Name and provider of the system, the specific model/version, and the date(s) you accessed it. | |
+| **Access method & plan** | How you used it (web interface, API, IDE plugin …) and which subscription tier, noting capabilities that shaped the output (e.g. document upload, extended reasoning). | |
+| **Contribution scope** | Exactly which parts of the work involved AI (e.g. brainstorming, restructuring, code, language editing) — and, just as importantly, which parts did not. | |
+| **Human oversight & verification** | How you checked, corrected, and revised AI output, and against which sources. | |
+| **Documentation location** | Where the full record lives (e.g. chat logs in Appendix B, key prompts in the methodology section); only if this is required to report. | |
+
+### Additional elements — report when relevant
+
+| Element | What to include | Your entry |
+|---|---|---|
+| **Prompt & iteration strategy** | How you structured your requests and how many rounds of refinement were needed to get usable output. | |
+| **Ethical & data-protection considerations** | How you handled confidentiality, personal data (GDPR — e.g. interview data), and possible bias in the model. | |
+| **Limitations noted** | Known constraints of the tool that affected your work (knowledge cut-off, hallucinated references, topical bias). | |
+
+## Integrity statement
+
+Close your disclosure with an explicit statement of responsibility. You can
+adapt the following:
+
+> While AI tools assisted with aspects of this work, as documented above, I
+> maintain full intellectual responsibility for all content, analysis, and
+> conclusions presented. All AI-generated content has been critically evaluated,
+> substantially revised, and personally endorsed as academically sound. No
+> confidential or personal data was shared with the AI system except where noted
+> and permitted.
+
+## Worked example: using an AI assistant for a term paper
+
+The following shows the template filled in for a fictional Management-Studies
+term paper. Your actual tool, model name, and cut-off date will differ — record
+whatever your tool actually reports.
+
+| Element | Example entry |
+|---|---|
+| **AI tool & version** | Claude (Sonnet 5) by Anthropic; accessed 21–25 September 2026. |
+| **Access method & plan** | Web chat interface at claude.ai, Pro subscription — used for document upload of research papers, extended reasoning, and higher message limits. |
+| **Contribution scope** | (a) Organising the initial literature review; (b) generating *alternative* interpretations of my interview data for me to evaluate; (c) checking the clarity of my argument structure. The research design, data collection, coding, and all conclusions were my own. |
+| **Human oversight & verification** | Every AI suggestion was cross-referenced with course literature, substantially edited to reflect my own analysis, and verified against additional peer-reviewed sources. |
+| **Documentation location** | Full conversation logs in Appendix B; key prompts summarised in the methodology section. |
+| **Prompt & iteration strategy** | Provided specific management theories and asked how they might apply to my case data; used iterative follow-up prompts; shared sample paragraphs for feedback. Roughly three rounds were needed to clarify the theoretical framework. |
+| **Ethical & data-protection considerations** | No confidential company data and no personally identifying interview details were shared. AI-suggested frameworks were always verified against published sources. I stayed alert to the model's tendency toward mainstream management perspectives. |
+| **Limitations noted** | The model's knowledge cut-off preceded some recent developments in the field; I checked recent literature manually. The tool occasionally produced plausible-looking but incorrect citations, which I removed. |
+
+> While AI tools assisted in aspects of this work, as documented above, I
+> maintain full intellectual responsibility for all content, analysis, and
+> conclusions presented in this paper.
+
+## Citing AI in your reference list
+
+Disclosure (the table above) and citation (an entry in your bibliography) are
+**complementary**, not interchangeable. Most style guides now treat generative
+AI as a retrievable source. In **APA 7**, for example, the author is the company
+that made the model, and the format is roughly:
+
+> Anthropic. (2026). *Claude* (Sonnet model) [Large language model]. https://claude.ai
+
+Check the current guidance for the citation style your course requires (APA, MLA,
+Chicago, or the journal style used in this module), as recommendations for AI
+sources are still evolving. Personally, I find acknowledging and documenting the
+use of AI far more useful and important than citing an AI model.

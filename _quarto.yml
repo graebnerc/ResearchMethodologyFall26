@@ -6,6 +6,7 @@ project:
     - "index.qmd"
     - "content/*.qmd"
     - "content/lecture/*.qmd"
+    - "content/lecture/*/*.qmd"
     - "content/material/*.qmd"
     - "content/material/session*/*.qmd"
     - "content/tutorials/*.qmd"

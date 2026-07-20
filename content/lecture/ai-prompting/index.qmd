@@ -1,0 +1,198 @@
+---
+title: "Writing effective AI prompts"
+subtitle: "A practical guide with two templates"
+date: "2026-09-21"
+date-modified: last-modified
+format:
+  html: default
+  pdf:
+    pdf-engine: xelatex
+    toc: false
+    number-sections: false
+    author: "Claudius Gräbner-Radkowitsch"
+  docx:
+    toc: false
+  gfm: default
+format-links:
+  - pdf
+  - docx
+  - text: "Markdown (.md)"
+    href: index.md
+    icon: filetype-md
+---
+
+## The idea
+
+The quality of what an AI system gives you depends heavily on how you ask. A good
+prompt makes your **context**, your **task**, and your **expectations** explicit
+instead of leaving the model to guess. This page offers two templates:
+
+- **Template 1 — the quick skeleton:** four fields for everyday use.
+- **Template 2 — the meta-prompt:** a structured, iterative tool for when the
+  output really matters (e.g. a complex analysis for your term paper).
+
+The examples use Claude, but both templates work with any comparable assistant
+(ChatGPT, Gemini, Copilot …). Adapt the wording to the tool you use.
+
+::: {.callout-important}
+## A better prompt does not replace your judgement
+A well-crafted prompt gets you a more useful *draft* — it does **not** make the
+output true. You must still verify every claim, check every citation, and revise
+the text into your own. **Keep your prompts**: you will need them for the
+"Prompt & iteration strategy" row of the
+[AI use disclosure template](../ai-disclosure/index.qmd).
+:::
+
+::: {.callout-important}
+## Keep your prompts
+You will need them for the "Prompt & iteration strategy" row of the
+[AI use disclosure template](../ai-disclosure/index.qmd).
+Also, it is worth re-using good prompts and not always start from scratch.
+If you are a heavy AI user, it might be worth creating your own prompt repository.
+:::
+
+## How to read the templates
+
+The templates use two kinds of placeholders:
+
+- `[…]` — **replace this** with your own content.
+- `{…}` — an **instruction to the AI** describing what it should produce there.
+
+Do not leave the literal brackets in your final prompt.
+
+## Template 1 — the quick skeleton
+
+For most everyday requests, four fields are enough:
+
+The section labels (**Context**, **Task**, **Format**, **Constraints**) stay as
+they are — they give the prompt its structure. Only the `[…]` placeholders get
+replaced.
+
+```markdown
+## Context
+I am a [role] working on [task/project]. The audience is [who],
+and the relevant background is [key facts, constraints].
+
+## Task
+Please [action verb] a [deliverable] that [core goal].
+
+## Format
+Give the answer as [text / bullet points / a table / …],
+about [length], structured as [sections you want].
+
+## Constraints
+Focus on [scope]. Avoid [what to exclude].
+If you are unsure of a fact, say so rather than guessing.
+```
+
+### Worked example
+
+```markdown
+## Context
+I am a Master's student in International Management writing a term paper. My
+reader is my course instructor. The paper analyses how institutional theory
+explains the market entry of a mid-sized German firm into Southeast Asia.
+
+## Task
+Please help me draft a one-paragraph statement of my research question that is
+specific and answerable with a single case study.
+
+## Format
+One paragraph, about 120 words, in academic English.
+
+## Constraints
+Focus only on institutional theory (not resource-based views). Do not invent
+sources. If a claim needs a citation, mark it [cite].
+```
+
+## Template 2 — the meta-prompt (for demanding tasks)
+
+When the stakes are higher, use the prompt below to make the AI **help you build
+a better prompt** through an iterative process. Paste it into a new chat, then
+describe what you want to accomplish.
+
+```markdown
+You are a prompt-engineering assistant. Your goal is to help me create a highly
+effective prompt through an iterative process. When I describe what I want to
+accomplish, create a structured prompt using the framework below, then offer
+refinements and ask clarifying questions.
+
+## Prompt:
+{Create the most effective prompt based on my request, phrased in the first
+person as if I were directly asking the AI. Use the framework below, adapting
+sections to the specific use case:
+
+**Context**
+- I am a [role] working on [project/challenge].
+- My audience is [stakeholders] with [expertise level] in [topic area].
+- Relevant context: [domain, constraints, timeline, background].
+- I want you to act as [AI role with specific expertise and perspective].
+
+**Task**
+Please help me [action verb] a [deliverable] that addresses [core question].
+
+**Success criteria**
+The response will be successful if it [measurable outcomes that matter to the
+audience].
+
+**Desired output**
+Format: [text/bullets/tables/…]
+Structure:
+1. [Section 1] (approx. X words) — [purpose]
+2. [Section 2] (approx. X words) — [purpose]
+3. [Section 3] (approx. X words) — [purpose]
+
+**Style & tone**
+- Use [formal/conversational/technical] language for [audience].
+- Include [examples, data, frameworks, analogies …].
+
+**Constraints**
+- Length: [word count or limits].
+- Scope: focus only on [region/timeframe/domain].
+- Exclude: [topics or approaches to avoid].
+
+**Examples & references**
+Here is the kind of content I am looking for: [brief example].
+Please draw on: [methodologies, frameworks, or sources].
+
+**Quality checks**
+Before finalising, verify you have: [validation criteria], provided reasoning for
+key recommendations, and addressed limitations.
+
+**Uncertainty instruction**
+If you are uncertain about facts, data, or domain practices, say so clearly
+rather than making assumptions.}
+
+## Possible Additions:
+{Suggest three specific, actionable additions that could improve the prompt:
+A. […]
+B. […]
+C. […]}
+
+## Questions:
+{Ask three targeted questions whose answers would most improve the prompt:
+1. [context/requirements]
+2. [audience/stakeholder needs]
+3. [depth/scope/methodology]}
+
+## Instructions for next steps:
+After I review your Prompt, Additions, and Questions, I will reply with the
+additions I want and answers to your questions. Integrate my feedback while
+preserving the working parts. We continue until the prompt fully meets my needs.
+```
+
+### Quick reference — common output structures
+
+Reuse these in the **Desired output** section:
+
+- **Summary report:** Problem → Analysis → Recommendations → Next steps
+- **Analytical document:** Situation → Options → Evaluation → Implementation plan
+- **Action memo:** Context → Recommendation → Rationale → Required resources
+- **Presentation outline:** Key message → Supporting evidence → Call to action
+- **Tutorial/guide:** Overview → Step-by-step → Examples → Troubleshooting
+
+To start Template 2, open a new chat, paste the block above, and answer the
+assistant's question:
+
+> *What specific challenge, analysis, or deliverable would you like your prompt to
+> address?*

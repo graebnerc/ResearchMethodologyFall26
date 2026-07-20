@@ -27,13 +27,25 @@ and embed it with the block below (adjust the filename):
 ```
 -->
 
+## 🧰 Templates and resources
+
+Two companion resources support this lecture. Each is available on the website and
+as a download (PDF, MS Word, and Markdown source):
+
+- [**Documenting and disclosing the use of AI**](ai-disclosure/index.qmd) — a
+  fillable template plus a worked example for declaring AI use in your term papers
+  and coursework.
+- [**Writing effective AI prompts**](ai-prompting/index.qmd) — a practical guide
+  with a quick prompt skeleton and a more advanced meta-prompt.
+
 ## 📚 Mandatory Reading
 
 *No mandatory reading for this lecture.*
 
 ## 🏆 Further Readings
 
-*To be announced.*
+- [Virtuelles Kompetenzzentrum: Künstliche Intelligenz in Bildung, Wissenschaft & Arbeitswelt](https://www.vkkiwa.de/)
+  - Has a [curated list](https://www.vkkiwa.de/ki-ressourcen/ki-tools/) of AI tools 
 
 ## ✍️ Exercises and coursework
 
