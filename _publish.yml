@@ -1,4 +1,4 @@
 - source: project
   netlify:
-    - id: '0722edd2-d23b-492a-bf8a-66783da9506f'
-      url: 'https://researchmethodology-fall26.netlify.app'
+    - id: 0722edd2-d23b-492a-bf8a-66783da9506f
+      url: https://researchmethodology-fall26.netlify.app

@@ -27,11 +27,14 @@ website:
     type: textbox
   sidebar:
     style: docked
+    collapse-level: 1 # start with "📖 Lecture" and "💻 Implementation Lab" folded
     contents:
       - href: index.qmd
         text: "🏠 Home"
       - href: content/index.qmd
         text: "🏢 Getting Started"
+      - href: content/SeminarDescription.qmd
+        text: "📋 Seminar description"
       - section: "📖 Lecture"
         contents:
          - href: content/lecture/index.qmd

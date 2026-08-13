@@ -6,7 +6,7 @@ date-modified: last-modified
 
 ## 🎯 Content and goals
 
-- This lecture clarifies your questions regarding the concepts described under "Required prior knowledge in Mathematics and Statistics" in the course description.
+- This lecture clarifies your questions regarding the concepts described under "Required prior knowledge in Mathematics and Statistics" in the [seminar description](/content/SeminarDescription.qmd).
 - It is essential that you work through the full track [A Recap of Undergraduate Statistics](https://euf-methodology-hub.netlify.app/tracks/statistics-recap) as soon as possible. We assume you know about all these concepts by the beginning of the lecture, so the lecture itself is just to recap and illustrate certain concepts.
 - Please ask your questions in advance via the Moodle forum (at least two weeks before the lecture).
 
@@ -36,9 +36,11 @@ _Feel free to complement the mandatory reading with your favorite statistics tex
 
 ## ✍️ Exercises and coursework
 
-*Take-home examination (graded; must be passed to be admitted to the final exam):*
+*Take-home examination (pass/fail; you must pass two of the three take-home
+examinations to be admitted to the final exam — see the
+[seminar description](/content/SeminarDescription.qmd)):*
 
-- The take-home examination tests your ability to apply the mathematical and statistical concepts covered in the lecture and described in the course description as required prior knowledge. Is is available via [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920)
+- The take-home examination tests your ability to apply the mathematical and statistical concepts covered in the lecture and described in the [seminar description](/content/SeminarDescription.qmd) as required prior knowledge. Is is available via [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920)
 
 -------
 

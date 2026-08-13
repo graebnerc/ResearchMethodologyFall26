@@ -8,7 +8,8 @@ subtitle: "Fall semester 2026"
 **Focus:**
 This is the course website for the module *Theoretical and Empirical Research
 Methodology* in the Master *International Management Studies* at the
-Europa-Universität Flensburg. The module has two complementary parts:
+Europa-Universität Flensburg. The module has two complementary parts that share
+a single examination:
 
 - the **[main lecture](/content/lecture/)** (Mondays), which introduces the
   theoretical and methodological foundations of empirical research — from logic

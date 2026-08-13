@@ -2,7 +2,7 @@
 /.quarto/
 .claude
 CLAUDE.md
-#/_site/
+/_site/
 content/material/slides/old
 content/material/slides alias
 content/material/NotReady
@@ -49,8 +49,9 @@ vignettes/*.pdf
 *_cache/
 /cache/
 
-# Quarto HTML dependency byproducts in the source tree (the deployed copies
-# under _site/ are tracked separately). Scoped to content/ so _site/ is untouched.
+# Quarto HTML dependency byproducts in the source tree. The rendered site under
+# _site/ is no longer tracked at all (see /_site/ above): it is deployed with
+# `quarto publish netlify`, not from git.
 content/**/index_files/
 
 # Temporary files created by R markdown

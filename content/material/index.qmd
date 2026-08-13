@@ -26,10 +26,16 @@ For the model-related parts of the lecture I recommend the following book as a f
 
 ## 🔖 Session-specific material
 
-The implementation lab takes place on **Fridays** during the lecture period
-**18 September – 11 December 2026**. The schedule below follows the official
-seminar timetable; topics and dates are matched to the
-[main lecture](/content/lecture/).
+The implementation lab takes place on **Fridays, 11:15–12:45**, in **Room MAD 024
+(Madrid Building)** during the lecture period **18 September – 11 December
+2026**. The schedule below follows the official seminar timetable; topics and
+dates are matched to the [main lecture](/content/lecture/). Please bring your
+laptop to every on-site lab session. The goals, rules and workload of the module
+are documented in the [seminar description](/content/SeminarDescription.qmd).
+
+Note that the lab does **not** meet on site every week: the column *Format*
+below states whether a session is an **on-site lab** or a **video lab** that you
+work through on your own.
 
 ::: {.callout-note collapse="true"}
 ## How to use the exercise codes?
@@ -38,23 +44,26 @@ For information on how to use the exercise code, read
 :::
 
 
-|  Session  | Date        | Topic                                                              | Exercise code                            |
-|:---------:|:-----------:|:-------------------------------------------------------------------|:----------------------------------------:|
-|     1     | 18 Sep 2026 | [General introduction & installation](/content/material/s_01_Installation.qmd) |                                      |
-|     2     | 25 Sep 2026 | [Basics of R and R Studio](/content/material/s_02_Basics.qmd)         | `Basics`, `Functions`                    |
-|     3     | 02 Oct 2026 | [Project management & recap](/content/material/s_03_ProjectManagement.qmd)       | `ProjectOrga`                            |
-|     4     | 09 Oct 2026 | [Object types](/content/material/s_04_ObjectTypes.qmd)                     | `ObjectTypes1`, `ObjectTypes2`           |
-|     5     | 23 Oct 2026 | [Quarto and R Markdown](/content/material/s_05_Quarto.qmd)            | `Quarto`                                 |
-|     6     | 30 Oct 2026 | [Importing data](/content/material/s_06_DataImport.qmd)                   | `Wrangling1`, `Wrangling2`               |
-|     7     | 06 Nov 2026 | [Data preparation](/content/material/s_07_DataPreparation.qmd)                 | `Wrangling1`, `Wrangling2`               |
-|     8     | 13 Nov 2026 | [Data visualization](/content/material/s_08_Visualization.qmd)              | `Visualization1`                         |
-|     9     | 20 Nov 2026 | [Using AI for coding](/content/material/s_09_AICoding.qmd)              |                                          |
-|    10     | 27 Nov 2026 | [Linear models in R](/content/material/s_10_LinearModels.qmd)              | `LinearRegression1`, `LinearRegression2` |
-|    11     | 04 Dec 2026 | [Experimental data in R](/content/material/s_11_Experiments.qmd)           |                                          |
-|    12     | 11 Dec 2026 | Recap session *(material TBA)*                                      |                                          |
+|  Session  | Date        | Topic                                                              | Format            | Exercise code                            |
+|:---------:|:-----------:|:-------------------------------------------------------------------|:-----------------:|:----------------------------------------:|
+|     1     | 18 Sep 2026 | [General introduction & installation](/content/material/s_01_Installation.qmd) | on-site  |                                      |
+|     2     | 25 Sep 2026 | [Basics of R and R Studio](/content/material/s_02_Basics.qmd)         | video             | `Basics`, `Functions`                    |
+|     3     | 02 Oct 2026 | [Project management & recap](/content/material/s_03_ProjectManagement.qmd)       | on-site | `ProjectOrga`                            |
+|     4     | 09 Oct 2026 | [Object types](/content/material/s_04_ObjectTypes.qmd)                     | video       | `ObjectTypes1`, `ObjectTypes2`           |
+|     5     | 23 Oct 2026 | [Quarto and R Markdown](/content/material/s_05_Quarto.qmd)            | video & on-site   | `Quarto`                                 |
+|     6     | 30 Oct 2026 | [Importing data](/content/material/s_06_DataImport.qmd)                   | video         | `Wrangling1`, `Wrangling2`               |
+|     7     | 06 Nov 2026 | [Data preparation](/content/material/s_07_DataPreparation.qmd)                 | video   | `Wrangling1`, `Wrangling2`               |
+|     8     | 13 Nov 2026 | [Data visualization](/content/material/s_08_Visualization.qmd)              | video        | `Visualization1`                         |
+|     9     | 20 Nov 2026 | [Using AI for coding](/content/material/s_09_AICoding.qmd)              | on-site          |                                          |
+|    10     | 27 Nov 2026 | [Linear models in R](/content/material/s_10_LinearModels.qmd)              | on-site       | `LinearRegression1`, `LinearRegression2` |
+|    11     | 04 Dec 2026 | [Experimental data in R](/content/material/s_11_Experiments.qmd)           | on-site       |                                          |
+|    12     | 11 Dec 2026 | Recap session *(material TBA)*                                      | on-site           |                                          |
 
-: There is no class in the week of 12–16 October 2026. The three **take-home exams**
-are handed out after sessions 5 (23 Oct), 8 (13 Nov) and 10 (27 Nov).
+: There is no class in the week of 12–16 October 2026. The three **take-home
+examinations** are published after the lectures of weeks 4 (5 Oct, on logic and
+argumentation), 8 (9 Nov, on literature reviews) and 9 (16 Nov, on statistics);
+you must pass two of them to be admitted to the final exam (see the
+[seminar description](/content/SeminarDescription.qmd)).
 
 There are also complementary recap exercises on data import, preparation and
 visualization in the [recap session](/content/material/s_08b_Recap.qmd).

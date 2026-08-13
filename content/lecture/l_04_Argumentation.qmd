@@ -52,9 +52,12 @@ and embed it with the block below (adjust the filename):
 
 ## ✍️ Exercises and coursework
 
-*Take-home exercise:*
+*Take-home examination (pass/fail; you must pass two of the three take-home
+examinations to be admitted to the final exam — see the
+[seminar description](/content/SeminarDescription.qmd)):*
 
-- Take-home exercise on Logic & Argumentation (available on Moodle).
+- Take-home examination on Logic & Argumentation, published after this lecture
+  via [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920).
 
 -------
 

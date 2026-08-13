@@ -10,9 +10,11 @@ methodological foundations of empirical research; the
 [Implementation Lab](/content/material/) then puts these concepts into practice
 using the statistical programming language R.
 
-The lecture takes place on **Mondays** during the lecture period
-**14 September – 11 December 2026**. It is taught jointly by several members of
-the teaching team (see the individual session pages for who teaches what).
+The lecture takes place on **Mondays, 11:30–13:00**, in **Room MAD 024 (Madrid
+Building)** during the lecture period **14 September – 11 December 2026**. It is taught
+jointly by several members of the teaching team (see the individual session
+pages for who teaches what). The goals, rules and workload of the module are
+documented in the [seminar description](/content/SeminarDescription.qmd).
 
 ::: {.callout-note collapse="true"}
 ## How does the lecture relate to the lab?
