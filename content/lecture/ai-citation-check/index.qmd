@@ -1,0 +1,147 @@
+---
+title: "Checking AI-generated citations"
+subtitle: "An in-class exercise for Lecture 02"
+date: "2026-09-21"
+date-modified: last-modified
+format:
+  html: default
+  pdf:
+    pdf-engine: xelatex
+    toc: false
+    number-sections: false
+  docx:
+    toc: false
+  gfm: default
+format-links:
+  - pdf
+  - docx
+  - text: "Markdown (.md)"
+    href: index.md
+    icon: filetype-md
+---
+
+::: {.callout-warning}
+## This page contains a deliberately fabricated reference
+
+The paragraph below was written as **teaching material**. One of its three
+references does not exist, and a second one misrepresents what a real study
+actually found. That is the point of the exercise. Do not quote this paragraph,
+or any of its references, as if it were scholarship.
+:::
+
+## The task
+
+You are handed the paragraph below — the kind of text an AI assistant produces
+when asked to "write a short literature-based paragraph on remote work and
+productivity". It reads well. It is properly formatted. It cites three sources.
+
+**In groups of three, and in about ten minutes:**
+
+1. Establish, for **each** of the three references, whether it exists.
+2. For those that exist, establish whether the paragraph uses them **correctly**.
+3. Write down **how** you reached each verdict — which tool, which search, what
+   you looked at. The method matters more than the answer.
+
+You will need nothing but a browser. Do not ask an AI assistant whether its own
+citations are real; ask it where they came from, then go and look.
+
+## The paragraph
+
+> Recent research has established that remote work raises rather than lowers
+> productivity. In a randomised controlled trial at a large Chinese travel
+> agency, Bloom et al. (2015) found that employees working from home showed a
+> 13% improvement in performance, a result that has since been shown to hold
+> across occupations and national contexts. Part of this effect is attributable
+> to the well-documented tendency of observed workers to raise their output,
+> which Levitt and List (2011) confirmed in their re-analysis of the original
+> Hawthorne data. More recently, Reinhardt and Osei (2021) demonstrated in a
+> study of 42 European firms that hybrid arrangements improve team cohesion
+> while preserving these productivity gains, suggesting that fully co-located
+> work is no longer defensible on performance grounds.
+
+**References as the assistant supplied them**
+
+- Bloom, N., Liang, J., Roberts, J., & Ying, Z. J. (2015). Does working from
+  home work? Evidence from a Chinese experiment. *The Quarterly Journal of
+  Economics*, 130(1), 165–218.
+- Levitt, S. D., & List, J. A. (2011). Was there really a Hawthorne effect at
+  the Hawthorne plant? An analysis of the original illumination experiments.
+  *American Economic Journal: Applied Economics*, 3(1), 224–238.
+- Reinhardt, M., & Osei, K. (2021). Hybrid work arrangements and team cohesion:
+  Evidence from 42 European firms. *Journal of Organizational Behavior*, 42(6),
+  811–834. https://doi.org/10.1002/job.20211
+
+## What to hand back
+
+One sheet per group, with three lines:
+
+| Reference | Verdict | How you established it |
+|:--|:--|:--|
+| Bloom et al. (2015) | | |
+| Levitt & List (2011) | | |
+| Reinhardt & Osei (2021) | | |
+
+-------
+
+<!--- ==========================================================================
+      SOLUTION — uncomment after the session.
+
+      ## Solution
+
+      **Bloom et al. (2015) — real, and the 13% figure is correct.**
+      The reference is accurate and the number is right. What the paragraph gets
+      wrong is the *scope*: the phrase "shown to hold across occupations and
+      national contexts" is not supported by this study and is not attributed to
+      anything else. It is a single firm — a call centre at Ctrip — in one
+      country, with volunteers. This is an external-validity overreach, and it
+      is by far the most common way students misuse a correct citation. Note
+      also that the study itself reports that a large share of participants
+      changed their minds about wanting to work from home.
+
+      → The lesson: a citation can be real, correctly formatted, and still be
+      doing work the source cannot support. Check the scope, not just the number.
+
+      **Levitt & List (2011) — real, but the paragraph inverts its finding.**
+      The paper does re-analyse the original Hawthorne illumination data. Its
+      conclusion, however, is *sceptical*: the authors find little support for a
+      strong Hawthorne effect in the original experiments. The paragraph cites it
+      as having "confirmed" the effect — the opposite of the paper's argument.
+
+      → The lesson: this is the failure mode that a reference manager cannot
+      catch and a plagiarism checker cannot see. Only reading the abstract
+      catches it. It is also the one an examiner is most likely to notice.
+
+      **Reinhardt & Osei (2021) — fabricated.**
+      There is no such article. The author names are invented, the DOI does not
+      resolve, and no search of the journal's contents for volume 42 returns it.
+      The citation is plausible in every superficial respect: a real journal, a
+      volume number consistent with the year, a page range of a believable
+      length, and a title that sounds like the literature.
+
+      → The lesson: plausibility is manufactured. The only test is whether you
+      can retrieve the item. Search the *title* in quotation marks, then the DOI.
+      If neither returns anything, it does not exist, however confident the
+      assistant was.
+
+      ## Debrief questions
+
+      - Which of the three took you longest, and why?
+      - Which one would have survived into a submitted term paper?
+      - Which capability class (Lecture 02, section 2) would have avoided each
+        of these three failures — and which would not have helped at all?
+      - How would you document this checking step in your AI disclosure?
+
+      ========================================================================== --->
+
+## Why this exercise exists
+
+A fabricated reference is the easiest of the three problems to catch and the
+least interesting. The dangerous case is the middle one: a real source, cited in
+good faith, saying something other than what your sentence claims. No tool
+catches that. Reading the abstract does.
+
+This is the concrete meaning of the rule from the lecture: **never cite what you
+have not read**, and *a citation you have not opened is not a citation*.
+
+For how to record the checking you did, see
+[Documenting and disclosing the use of AI](../ai-disclosure/index.qmd).

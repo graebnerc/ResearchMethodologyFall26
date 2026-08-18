@@ -84,3 +84,8 @@ venv.bak/
 
 
 **/*.quarto_ipynb
+
+# Compiled reveal.js theme byproducts. Quarto writes one content-hashed CSS
+# file per render of a revealjs deck; they accumulate and are rebuilt from
+# content/lecture/slides/euf-slides.scss on every render.
+_freeze/site_libs/revealjs/dist/theme/
