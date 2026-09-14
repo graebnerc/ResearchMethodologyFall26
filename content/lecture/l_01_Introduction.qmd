@@ -12,7 +12,7 @@ date-modified: last-modified
 
 ## 🖥️ Lecture Slides
 
-- [Download](content/lecture/slides/L01-Introduction.pdf)
+- [Download](slides/L01-Introduction.pdf)
 
 ## 📚 Mandatory Reading
 

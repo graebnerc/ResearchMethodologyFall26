@@ -14,9 +14,10 @@
 #
 # "Changed" means: newer than the marker file .quarto-last-publish, which this
 # script touches after every successful publish. A full render is forced
-# automatically when the site structure or theme changed (_quarto.yml, css/,
-# assets/, references/, any _metadata.yml), when _site/ is missing, or on the
-# first run.
+# automatically when _site/ is missing, on the first run, and whenever ANY
+# non-.qmd file changed — slide PDFs, images, data files, css/, _quarto.yml.
+# Quarto copies static resources into _site/ only during a full project render,
+# so rendering single pages would leave a newly added PDF out of the upload.
 # ---------------------------------------------------------------------------
 
 emulate -L zsh
@@ -62,35 +63,41 @@ print -r -- ""
 FULL=0
 [[ "${1:-}" == "--full" || "${1:-}" == "-f" ]] && FULL=1
 
-typeset -a changed extra structural
+typeset -a touched changed other extra
 if (( ! FULL )); then
   if [[ ! -f $STAMP ]]; then
     FULL=1; warn "No $STAMP yet (first run) — doing a full render."
   elif [[ ! -d _site ]]; then
     FULL=1; warn "_site/ is missing — doing a full render."
   else
-    # Structural/theme changes affect every page, so they force a full render.
-    typeset -a struct_roots
-    for p in _quarto.yml css assets references .Rprofile renv.lock; do
-      [[ -e $p ]] && struct_roots+=("$p")
-    done
-    structural=( ${(f)"$(find $struct_roots -newer $STAMP -type f 2>/dev/null)"} )
-    structural+=( ${(f)"$(find ./content -name '_metadata.yml' -newer $STAMP -type f 2>/dev/null)"} )
-    structural=( ${structural:#} )
-    if (( ${#structural} )); then
+    # Everything that changed since the last publish, ignoring build output and
+    # tooling scratch. Anything that is NOT a .qmd — a slide PDF, an image, a
+    # data file, the theme, _quarto.yml — is a static resource or affects every
+    # page, and Quarto only copies those into _site/ during a FULL project
+    # render. Rendering single pages would silently leave them out.
+    touched=( ${(f)"$(find . \
+        \( -path './_site' -o -path './_freeze' -o -path './.quarto' \
+           -o -path './.git' -o -path './renv' -o -path './.Rproj.user' \
+           -o -path './INBOX' \) -prune -o \
+        -type f -newer $STAMP \
+        ! -name '.DS_Store' ! -name '.Rhistory' ! -name '.RData' \
+        ! -name '*.command' -print 2>/dev/null)"} )
+    touched=( ${touched:#} )
+
+    changed=( ${(M)touched:#*.qmd} )
+    other=(  ${touched:#*.qmd} )
+
+    if (( ${#other} )); then
       FULL=1
-      warn "Structure/theme changed (${#structural} file(s), e.g. ${structural[1]#./}) — doing a full render."
+      warn "${#other} non-.qmd file(s) changed — these are only copied into _site/"
+      warn "by a full render, so doing one. First few:"
+      for f in ${other[1,5]}; do print -r -- "      ${f#./}"; done
+      (( ${#other} > 5 )) && print -r -- "      … and $(( ${#other} - 5 )) more"
     fi
   fi
 fi
 
 if (( ! FULL )); then
-  changed=( ${(f)"$(find . -name '*.qmd' -type f -newer $STAMP \
-      -not -path './_site/*'      -not -path './_freeze/*' \
-      -not -path './.quarto/*'    -not -path './renv/*' \
-      -not -path './INBOX/*'      -not -path './.Rproj.user/*' 2>/dev/null)"} )
-  changed=( ${changed:#} )
-
   # Listing pages do not notice that one of their entries changed, so rebuild
   # them alongside the entry.
   for f in $changed; do
