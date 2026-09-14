@@ -99,11 +99,9 @@ Evidence for large gains
 - Writing tasks completed **faster and rated better**
   [@noy2023experimental]
 
-- Support agents resolve more cases, with the **largest gains for the least
-  experienced** [@brynjolfsson2023generative]
+- Support agents: more cases, **largest gains for the least experienced** [@brynjolfsson2023generative]
 
-- Consultants perform better **inside** the frontier of what the model does
-  well [@dellacqua2023navigating]
+- Consultants better **inside** the model's frontier [@dellacqua2023navigating]
 :::
 
 ::: {.column width="50%"}
@@ -111,14 +109,11 @@ Evidence for large gains
 Evidence for caution
 :::
 
-- The same study: **worse** results on tasks outside that frontier —
-  the "jagged frontier" [@dellacqua2023navigating]
+- Same study: **worse** outside it — the "jagged frontier" [@dellacqua2023navigating]
 
-- Experienced developers were measurably **slower** with AI assistance,
-  while believing they were faster [@metr2025measuring]
+- Experienced developers **slower** — while believing they were faster [@metr2025measuring]
 
-- Self-assessment of one's own AI skill is a **poor predictor** of actual
-  performance
+- Self-assessed AI skill: **poor predictor** of performance
 :::
 :::
 
@@ -140,11 +135,10 @@ True not only for research; make sure you always check instructor-specific requi
 
 - "The AI said so" is not a reference
 
-- Whether in research or in daily business work: 
-  **you must be able to defend what you claim**
+- Research or business: **defend what you claim**
     - You must be able to do so **without AI**
-    - Does not mean you shouldn't use AI to delineate claims
-    - It is a demand for verification!
+    - AI may still generate the claim
+    - The demand is verification
 
 ::: {.keybox .fragment}
 The tool may be new. The standard is not.
@@ -165,13 +159,12 @@ assistants.
 :::
 
 - AI Tools and products change rapidly
-- **Capabilities** more stable: the kind of work
-  a system does, and how you can **check** the result
+- **Capabilities** are stable: what it does, how you **check** it
 
 - Here: **four capability classes**
   - See the webpage for personal recommendations for each class 
 
-- The relevant skill: determine **which class** a task needs, and **why**
+- The skill: **which class**, and **why**
 
 ::: {.keybox .fragment}
 Learn the classes. Products change.
@@ -229,9 +222,9 @@ A — Conversational assistants
 - **Good for** brainstorming, structuring an argument, explaining a method,
   critiquing your own draft
 
-- Output is **plausible by construction** — fluency is not evidence
+- **Plausible by construction** — fluency ≠ evidence
 
-- No source trail → every factual claim remains **your** responsibility
+- No source trail → every claim is **yours to verify**
 :::
 
 ::: {.column width="50%"}
@@ -242,11 +235,11 @@ B — Grounded search
 - **Good for** finding literature, testing whether a claim is established,
   mapping a debate
 
-- Output carries **citations you can follow** — that is the entire point
+- **Citations you can follow** — the entire point
 
-- Works well for English, open-access work in medicine and the natural
-  sciences; **worse** for books, German-language work and much of
-  the social sciences
+- **Strong**: English, open-access, natural sciences
+
+    - **Weak**: books, German, social sciences
 :::
 :::
 
@@ -271,7 +264,7 @@ C — Document & data analysis
 - **Good for** a first pass over a long PDF, extracting variables into a
   table, exploring a dataset
 
-- Orientation only — **never** a substitute for reading what you cite
+- Orientation only — **never** a substitute for reading
 
 - Interview transcripts and firm data are **not yours to upload**
   → section 4 on ethical aspects!
@@ -287,7 +280,7 @@ D — Agentic systems
 
 - You review the **trace**, not only the answer
 
-- Failure mode: a confident report on work that went wrong in step three
+- Failure mode: confident report, wrong at step three
 :::
 :::
 
@@ -331,14 +324,11 @@ Demo
 Three questions that apply to any AI output you plan to use in written work.
 :::
 
-- **Where does the claim come from?** Is there a source at all, or only
-  fluent prose?
+- **Where does the claim come from?** A source, or only prose?
 
-- **Does the source say what the answer says?** Open it. This is where most
-  AI-assisted work fails.
+- **Does the source say it?** Open it — you'd be surprised how often this fails
 
-- **What has been left out?** Confident summaries are confident about the
-  parts they kept.
+- **What was left out?** Summaries are confident about what they kept
 
 ::: {.keybox .fragment}
 Fluency is not evidence.
@@ -358,26 +348,26 @@ request. Four elements fix the majority of cases.
 :::
 
 ::: {.grid2}
-::: {.cap}
+::: {.cap .fragment}
 [Context]{.caphead}
 
 Who you are, what the work is for, who will read it, what the model should
 act as.
 :::
 
-::: {.cap}
+::: {.cap .fragment}
 [Task]{.caphead}
 
 One concrete deliverable, stated as an instruction — not a topic.
 :::
 
-::: {.cap}
+::: {.cap .fragment}
 [Format]{.caphead}
 
 Structure, length, and the sections you expect back.
 :::
 
-::: {.cap}
+::: {.cap .fragment}
 [Constraints]{.caphead}
 
 What to exclude, which period or region, and what to do when unsure.
@@ -403,8 +393,7 @@ Unspecified
 
 - "Give me some research questions about remote work"
 
-- Result: ten generic questions, none answerable with available data, all of
-  which a hundred other students also received
+- → Ten generic questions, none answerable, all identical to everyone else's
 :::
 
 ::: {.column width="50%"}
@@ -412,11 +401,13 @@ Unspecified
 Specified
 :::
 
-- Role, module, and level stated; **one** deliverable requested; five
-  questions, each with the **data** it would need and **why it is
-  answerable in 15 pages**; sources to be flagged as certain or uncertain
+- Role, module, level stated
 
-- Result: three usable candidates and a clear reason to reject the rest
+    - **One** deliverable; five questions
+
+    - Each with its **data** and **why it fits 15 pages**
+
+- → Three usable candidates, and why the rest fail
 :::
 :::
 
@@ -434,11 +425,11 @@ The first answer is a draft. Treat it the way you treat your own first draft.
 - **Iterate**: say what was wrong with the last answer rather than starting
   again
 
-- **Ask it to flag uncertainty** and to distinguish what it knows from what
-  it is guessing
+- **Ask it to flag uncertainty** — knowledge vs guess
 
-- **Save the prompts that worked** — they are reusable, and they are part of
-  your documentation (→ section 5)
+- **Save what worked** — reusable, and part of your documentation
+
+- Good long-term investment: your own **skill and prompt repo**
 
 - For complex tasks, have the model **draft the prompt** with you first
 
@@ -463,10 +454,9 @@ embarrass you in an examination.
 
 - **Does it say what the answer claims?** Open it and read the relevant page
 
-- **Is it the right source?** A blog post is not a substitute for the study
-  it describes
+- **Is it the right source?** Blog post ≠ the study
 
-- **Could I defend this in an oral examination?** If not, it does not go in
+- **Could I defend this orally?** If not, it does not go in
 
 ::: {.keybox .lg .fragment}
 Never cite what you have not read.
@@ -493,12 +483,15 @@ Find them, and note **how** you established each verdict.
 This is the rule most likely to cause you actual trouble.
 :::
 
-- Interview material contains **personal data**. Consent to be interviewed $\neq$ consent to be processed by a third-party AI service
+- **Personal data**: consent to interview $\neq$ consent to processing
 
-- The same holds for **any personal and copyrighted material** you were given access to
+- Same for **any personal or copyrighted material**
 
-- Practical rules: anonymise **before** any upload; check what the service
-  says about training on your input; when in doubt, ask — before, not after
+- Anonymise **before** upload
+
+    - Check what the service trains on
+
+    - In doubt: ask **before**
 
 ::: {.arrow .xl .fragment}
 If you would not email it to a stranger, do not paste it into a prompt.
@@ -511,14 +504,11 @@ The theory-ladenness of
 observation applies to training data too.
 :::
 
-- There is no view from nowhere — a model's output reflects the **corpus** it
-  was trained on and the **choices** made in training it
+- No view from nowhere: output reflects **corpus** and training **choices**
 
-- Documented consequences: biases along **gender, race, age and educational
-  background** — delicate wherever hiring or promotion is involved
+- Biases: **gender, race, age, education** — delicate in hiring and promotion
 
-- For your work: a model will reproduce the **mainstream** of a literature,
-  which is precisely what a good review has to look past
+- Models reproduce the **mainstream** — you should look beyond that
 
 ::: {.arrow .xl .fragment}
 Ask what a model is likely to under-represent, then go and check.
@@ -531,14 +521,11 @@ Presented as genuinely open, because it is — and because you will be asked
 about it.
 :::
 
-- Training and inference consume **energy and water**; efficiency per query
-  has improved while **total** demand has grown
+- **Energy and water**: efficiency per query up, **total** demand up
 
-- Data-centre projections have been revised repeatedly, and the credible
-  estimates still disagree with each other
+- Projections repeatedly revised; credible estimates still disagree
 
-- Access is **unequally distributed**: better tools cost money, which
-  aggravates existing advantages
+- **Unequal access**: better tools cost money
 
 
 ## Disclosure {.divider background-color="#00395B"}
@@ -556,11 +543,9 @@ work unassessable.
 
 - **Any** use of AI in coursework for this module must be documented
 
-- There are **no binding EUF-wide rules** → clarify with each instructor
-  separately, every time
+- **No binding EUF-wide rules** → ask each instructor, every time
 
-- For me, additionally: a short **paragraph of self-reflection** on how the
-  AI input shaped the work as a whole
+- Here additionally: a **paragraph of self-reflection**
 
 ::: {.arrow .xl .fragment}
 Disclosing costs you nothing. Not disclosing can cost you the module/reputation.
@@ -596,20 +581,17 @@ Template: lecture page → "Documenting and disclosing the use of AI"
 
 ## What to take away
 
-- Evidence on AI and productivity is **real but jagged** — gains on some
-  tasks, losses on others, poor self-assessment throughout
+- Evidence **real but jagged**: gains, losses, poor self-assessment
   
-    - Do not underestimate the **de-skilling** challenge
+    - Be aware: **de-skilling** is a risk and adds dependence
 
-- Think in **four capability classes**, not in products: what can the system
-  do, and can you check it?
+- **Four capability classes**, not products: what it does, can you check it
 
 - A prompt is a **specification**; the first answer is a draft
 
 - **Verification** is the skill: never cite what you have not read
 
-- Confidentiality, bias and environmental cost are **real and central issues**,
-  not minor side issues
+- Confidentiality, bias, environment: **central**, not side issues
 
 - **Disclose** everything, and keep your prompts
 
@@ -620,6 +602,7 @@ confidently wrong.
 
 ## Recap questions
 
+::: {.nonincremental}
 - Name the four capability classes and give one research task for each.
 
 - Why is a citation produced by a conversational assistant a different kind
@@ -637,6 +620,7 @@ confidently wrong.
 
 - What has to appear in an AI disclosure, and why does the self-reflection
   paragraph matter?
+:::
 
 ## References {.smaller .scrollable}
 

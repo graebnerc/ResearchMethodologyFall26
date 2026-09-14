@@ -18,19 +18,7 @@ AI-like tools and advice on how to avoid typos in code.
 
 ## 👨‍🏫 Lecture Slides 
 
-Either click on the slide area below or click 
-[here](/content/material/slides/E9-AICoding.pdf) to download the slides.
-
-```{=html}
-<div class="embed-container">
-  <iframe 
-  src="/content/material/slides/E9-AICoding.pdf" 
-  style="border: 0.5px" 
-  width="80%"
-  height="80%"
-  ></iframe>
-</div>
-```
+[**Download the slides of this session**](/content/material/slides/E9-AICoding.pdf) (PDF)
 
 <!--- The prompts and code examples are made available here after the session.
 ::: {.callout-tip collapse="true"}

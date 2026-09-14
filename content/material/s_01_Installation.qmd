@@ -12,19 +12,7 @@ course. Finally, I explain a bit what R is, how it relates to R Studio and LaTeX
 
 ## 👨‍🏫 Lecture Slides 
 
-Either click on the slide area below or click 
-[here](/content/material/slides/E1-Introduction.pdf) to download the slides.
-
-
-```{=html}
-<div class="embed-container">
-  <iframe 
-  width="370" height="208"
-  src="/content/material/slides/E1-Introduction.pdf" 
-  style="border: 0.5px" 
-  ></iframe>
-</div>
-```
+[**Download the slides of this session**](/content/material/slides/E1-Introduction.pdf) (PDF)
 
 ## 🎥 Accompanying lecture videos 
 
