@@ -1,0 +1,632 @@
+---
+title: "AI tools in practice"
+subtitle: "Theoretical and Empirical Research Methodology, lecture 2"
+author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
+institute: "Department of Pluralist Economics, Europa-Universität Flensburg"
+date: "2026-09-21"
+date-format: "D MMMM YYYY"
+format:
+  revealjs:
+    width: 1600
+    height: 900          # 16:9, matching the modernised Keynote master
+    margin: 0.07
+    center: false        # top-aligned content
+    theme: [default, euf-slides.scss]
+    slide-number: true
+    show-slide-number: all
+    menu: true           # Tools > Print to PDF etc.; the button is moved to
+                         # the top right in euf-slides.scss so that it does
+                         # not sit on top of the EUF logo
+    incremental: true     # lists reveal item by item; wrap a list in
+                          # ::: {.nonincremental} to show it all at once
+    auto-stretch: false
+    footer: " "          # the master shows only the hairline on content slides
+    logo: assets/euf-logo.svg
+    embed-resources: true
+    progress: false
+    transition: none
+    history: false
+---
+
+## Why this lecture {.divider background-color="#00395B"}
+
+::: {.secnum}
+01
+:::
+
+<!-- =========================================================================
+     RM26 L02 — AI tools in practice. Full deck, ~90 minutes.
+
+     Conventions taken from the modernised master:
+       - titles are assertions, not topics ("X is Y", not "About X")
+       - nuance goes in the .dek under the title, keeping bodies to 3-4 bullets
+       - every empirical claim carries a .source line
+       - products, prices and model versions live on the website, never here
+
+     Keep comment blocks INSIDE a slide: content before the first "##"
+     becomes an extra blank slide in reveal.js.
+
+     TO VERIFY BEFORE PUBLISHING — the five entries these slides cite are now
+     in references/references.bib, but were written from memory and have NOT
+     been checked against the published record:
+       @noy2023experimental        @dellacqua2023navigating
+       @brynjolfsson2023generative @metr2025measuring
+       @darvishi2024impact
+     Least certain: the METR author list, and the Darvishi volume/article no.
+     Run the verification prompt, then correct the .bib — nothing here needs
+     to change, since the slides cite by key.
+     ========================================================================= -->
+
+## Learning goals
+
+- Understand how to choose the **right kind of AI system** for a given research task
+
+- Being able to write prompts that are targeted **specifications**
+
+- Know how to **verify** AI output to the standard your term papers are held to
+
+- Being able to **disclose** your use of AI adequately so that it cannot be read as cheating
+
+::: {.keybox .fragment}
+Not a goal: knowing which app is currently best.
+:::
+
+## How do you use AI at the moment?
+
+::: {.dek}
+Two minutes, anonymous. .
+:::
+
+- Live poll: **ADD QR CODE**
+
+::: {.arrow .fragment}
+There are no wrong answers here!
+:::
+
+## The productivity evidence points in both directions
+
+::: {.dek}
+Careful: "AI makes you faster and
+better" is an empirical claim, with a contested evidence base.
+:::
+
+::: {.columns .divided}
+::: {.column width="50%"}
+::: {.colhead}
+Evidence for large gains
+:::
+
+- Writing tasks completed **faster and rated better**
+  [@noy2023experimental]
+
+- Support agents: more cases, **largest gains for the least experienced** [@brynjolfsson2023generative]
+
+- Consultants better **inside** the model's frontier [@dellacqua2023navigating]
+:::
+
+::: {.column width="50%"}
+::: {.colhead}
+Evidence for caution
+:::
+
+- Same study: **worse** outside it — the "jagged frontier" [@dellacqua2023navigating]
+
+- Experienced developers **slower** — while believing they were faster [@metr2025measuring]
+
+- Self-assessed AI skill: **poor predictor** of performance
+:::
+:::
+
+::: {.arrow .fragment}
+Reliance on AI assistance can _substitute_ for rather than build independent skill, and when the assistance is withdrawn, learners perform worse than if they had developed self-regulated strategies on their own [@darvishi2024impact]
+:::
+
+::: {.arrow .fragment}
+Honest self reflection is key! AI should neither be demonized nor glorified by default!
+:::
+
+## You are accountable for every claim you submit
+
+::: {.dek}
+True not only for research; make sure you always check instructor-specific requirements!
+:::
+
+- Your **text** is assessed, not your **prompt**
+
+- "The AI said so" is not a reference
+
+- Research or business: **defend what you claim**
+    - You must be able to do so **without AI**
+    - AI may still generate the claim
+    - The demand is verification
+
+::: {.keybox .fragment}
+The tool may be new. The standard is not.
+:::
+
+## Capabilities, not products {.divider background-color="#00395B"}
+
+::: {.secnum}
+02
+:::
+
+## The tool list from last year is already wrong
+
+::: {.dek}
+Last year, I had sixteen tools mentioned in this lecture. Several no longer
+exist, and most of the single-purpose ones have been absorbed into general
+assistants.
+:::
+
+- AI Tools and products change rapidly
+- **Capabilities** are stable: what it does, how you **check** it
+
+- Here: **four capability classes**
+  - See the webpage for personal recommendations for each class 
+
+- The skill: **which class**, and **why**
+
+::: {.keybox .fragment}
+Learn the classes. Products change.
+:::
+
+## Four capability classes cover almost everything you need
+
+::: {.dek}
+Any one product may combine several of these. Relevant question is never
+"which app is best" but "which class am I using right now".
+:::
+
+::: {.grid2}
+::: {.cap .fragment}
+[A — Conversational assistants]{.caphead}
+
+Generate, restructure, explain and critique text and ideas.
+Ungrounded by default.
+:::
+
+::: {.cap .fragment}
+[B — Grounded search]{.caphead}
+
+Retrieve real sources and cite them. "Deep research" modes chain many
+searches into a report.
+:::
+
+::: {.cap .fragment}
+[C — Document & data analysis]{.caphead}
+
+You supply the material: PDFs, transcripts, datasets. The system reads what
+you give it.
+:::
+
+::: {.cap .fragment}
+[D — Agentic systems]{.caphead}
+
+Plan and execute multi-step work: browse, run code, produce files.
+:::
+:::
+
+## A and B differ in whether you can check the output
+
+::: {.dek}
+Both answer questions in fluent prose. Only one of them leaves you a trail
+you can follow back to a source.
+:::
+
+::: {.columns .divided}
+::: {.column width="50%"}
+::: {.colhead}
+A — Conversational assistants
+:::
+
+- **Good for** brainstorming, structuring an argument, explaining a method,
+  critiquing your own draft
+
+- **Plausible by construction** — fluency ≠ evidence
+
+- No source trail → every claim is **yours to verify**
+:::
+
+::: {.column width="50%"}
+::: {.colhead}
+B — Grounded search
+:::
+
+- **Good for** finding literature, testing whether a claim is established,
+  mapping a debate
+
+- **Citations you can follow** — the entire point
+
+- **Strong**: English, open-access, natural sciences
+
+    - **Weak**: books, German, social sciences
+:::
+:::
+
+::: {.arrow .xl .fragment}
+A citation you have not opened is not a citation.
+:::
+
+## C and D differ in how much judgment you delegate
+
+::: {.dek}
+In class C you supply the material and keep the reasoning. In class D the
+system also decides the steps — which is exactly where it can go wrong
+unobserved.
+:::
+
+::: {.columns .divided}
+::: {.column width="50%"}
+::: {.colhead}
+C — Document & data analysis
+:::
+
+- **Good for** a first pass over a long PDF, extracting variables into a
+  table, exploring a dataset
+
+- Orientation only — **never** a substitute for reading
+
+- Interview transcripts and firm data are **not yours to upload**
+  → section 4 on ethical aspects!
+:::
+
+::: {.column width="50%"}
+::: {.colhead}
+D — Agentic systems
+:::
+
+- **Good for** multi-step mechanical work with a **checkable** result:
+  reformat forty references, run and document an analysis
+
+- You review the **trace**, not only the answer
+
+- Failure mode: confident report, wrong at step three
+:::
+:::
+
+::: {.arrow .xl .fragment}
+Delegate the steps, never the conclusion.
+:::
+
+## Every task has a matching class — and a characteristic failure
+
+::: {.dek}
+Read the third column as the thing to check before you use the output.
+:::
+
+| Task in your term paper | Class | What typically goes wrong |
+|:------------------------|:-----:|:--------------------------|
+| Narrowing a research question | A | Fluent but unoriginal; converges on the obvious |
+| Finding relevant literature | B | Fabricated or mis-attributed references |
+| Testing whether a claim is established | B | Confuses "often cited" with "well supported" |
+| First pass over a long paper | C | The summary omits the caveat that matters |
+| Extracting data from many studies | C | Silent coding errors, spread across the sample |
+| Analysing interview transcripts | C | Confidentiality breach; imposed categories |
+| Writing and polishing | A | Your voice and your argument flattened |
+| R code and data analysis | A / D | The code runs, and answers the wrong question |
+
+: {.tasks}
+
+::: {.source}
+Rows 5, 6 and 8 return in lecture 8 (literature reviews), lecture 6
+(interviews) and the implementation lab respectively.
+:::
+
+## Live demo: one question, two classes {.divider background-color="#00395B"}
+
+::: {.secnum}
+Demo
+:::
+
+## What to watch in the demo
+
+::: {.dek}
+Three questions that apply to any AI output you plan to use in written work.
+:::
+
+- **Where does the claim come from?** A source, or only prose?
+
+- **Does the source say it?** Open it — you'd be surprised how often this fails
+
+- **What was left out?** Summaries are confident about what they kept
+
+::: {.keybox .fragment}
+Fluency is not evidence.
+:::
+
+## Prompting {.divider background-color="#00395B"}
+
+::: {.secnum}
+03
+:::
+
+## A prompt is a specification, not a wish
+
+::: {.dek}
+Most disappointing output is the predictable result of an underspecified
+request. Four elements fix the majority of cases.
+:::
+
+::: {.grid2}
+::: {.cap .fragment}
+[Context]{.caphead}
+
+Who you are, what the work is for, who will read it, what the model should
+act as.
+:::
+
+::: {.cap .fragment}
+[Task]{.caphead}
+
+One concrete deliverable, stated as an instruction — not a topic.
+:::
+
+::: {.cap .fragment}
+[Format]{.caphead}
+
+Structure, length, and the sections you expect back.
+:::
+
+::: {.cap .fragment}
+[Constraints]{.caphead}
+
+What to exclude, which period or region, and what to do when unsure.
+:::
+:::
+
+::: {.arrow .xl .fragment}
+Quality of the prompt → quality of the output.
+:::
+
+## The same request, unspecified and specified
+
+::: {.dek}
+A real task from this module: you need to narrow a term-paper topic on
+remote work.
+:::
+
+::: {.columns .divided}
+::: {.column width="50%"}
+::: {.colhead}
+Unspecified
+:::
+
+- "Give me some research questions about remote work"
+
+- → Ten generic questions, none answerable, all identical to everyone else's
+:::
+
+::: {.column width="50%"}
+::: {.colhead}
+Specified
+:::
+
+- Role, module, level stated
+
+    - **One** deliverable; five questions
+
+    - Each with its **data** and **why it fits 15 pages**
+
+- → Three usable candidates, and why the rest fail
+:::
+:::
+
+::: {.source}
+The full skeleton and a meta-prompt are on the lecture page — do not copy
+them off this slide.
+:::
+
+## Prompting is a conversation, and worth keeping
+
+::: {.dek}
+The first answer is a draft. Treat it the way you treat your own first draft.
+:::
+
+- **Iterate**: say what was wrong with the last answer rather than starting
+  again
+
+- **Ask it to flag uncertainty** — knowledge vs guess
+
+- **Save what worked** — reusable, and part of your documentation
+
+- Good long-term investment: your own **skill and prompt repo**
+
+- For complex tasks, have the model **draft the prompt** with you first
+
+::: {.keybox .fragment}
+A saved prompt is a method. Write it down like one.
+:::
+
+## What can go wrong {.divider background-color="#00395B"}
+
+::: {.secnum}
+04
+:::
+
+## Verification as the key skill
+
+::: {.dek}
+Four checks, in order. The first two catch nearly everything that would
+embarrass you in an examination.
+:::
+
+- **Does the source exist?** Search for it independently, by title
+
+- **Does it say what the answer claims?** Open it and read the relevant page
+
+- **Is it the right source?** Blog post ≠ the study
+
+- **Could I defend this orally?** If not, it does not go in
+
+::: {.keybox .lg .fragment}
+Never cite what you have not read.
+:::
+
+## Exercise: three citations, one of them invented
+
+::: {.dek}
+Groups of three, ten minutes.
+:::
+
+::: {.taskbox .fragment}
+You will get a short AI-written paragraph with three references.
+
+One is real and correctly used. One is real but says something different.
+One does not exist.
+
+Find them, and note **how** you established each verdict.
+:::
+
+## Your interview transcripts are not yours to upload
+
+::: {.dek}
+This is the rule most likely to cause you actual trouble.
+:::
+
+- **Personal data**: consent to interview $\neq$ consent to processing
+
+- Same for **any personal or copyrighted material**
+
+- Anonymise **before** upload
+
+    - Check what the service trains on
+
+    - In doubt: ask **before**
+
+::: {.arrow .xl .fragment}
+If you would not email it to a stranger, do not paste it into a prompt.
+:::
+
+## LLMs are never neutral
+
+::: {.dek}
+The theory-ladenness of
+observation applies to training data too.
+:::
+
+- No view from nowhere: output reflects **corpus** and training **choices**
+
+- Biases: **gender, race, age, education** — delicate in hiring and promotion
+
+- Models reproduce the **mainstream** — you should look beyond that
+
+::: {.arrow .xl .fragment}
+Ask what a model is likely to under-represent, then go and check.
+:::
+
+## The environmental and political-economy questions are unsettled
+
+::: {.dek}
+Presented as genuinely open, because it is — and because you will be asked
+about it.
+:::
+
+- **Energy and water**: efficiency per query up, **total** demand up
+
+- Projections repeatedly revised; credible estimates still disagree
+
+- **Unequal access**: better tools cost money
+
+
+## Disclosure {.divider background-color="#00395B"}
+
+::: {.secnum}
+05
+:::
+
+## Undocumented AI use is cheating
+
+::: {.dek}
+Not a moral position but a procedural one: unreported assistance makes the
+work unassessable.
+:::
+
+- **Any** use of AI in coursework for this module must be documented
+
+- **No binding EUF-wide rules** → ask each instructor, every time
+
+- Here additionally: a **paragraph of self-reflection**
+
+::: {.arrow .xl .fragment}
+Disclosing costs you nothing. Not disclosing can cost you the module/reputation.
+:::
+
+## What a disclosure has to contain
+
+::: {.dek}
+Five elements. The fillable template and a worked example are on the lecture
+page.
+:::
+
+- **Which system**, in which version, accessed when
+
+- **Where** in your work it was used — which sections, which tasks
+
+- **How** you prompted it, in outline
+
+- **How you checked** the output, and what you changed
+
+- **A statement of responsibility**: the text is yours, and you stand behind it
+
+::: {.source}
+Template: lecture page → "Documenting and disclosing the use of AI"
+(PDF, Word and Markdown).
+:::
+
+## Summary & outlook {.divider background-color="#00395B"}
+
+::: {.secnum}
+06
+:::
+
+## What to take away
+
+- Evidence **real but jagged**: gains, losses, poor self-assessment
+  
+    - Be aware: **de-skilling** is a risk and adds dependence
+
+- **Four capability classes**, not products: what it does, can you check it
+
+- A prompt is a **specification**; the first answer is a draft
+
+- **Verification** is the skill: never cite what you have not read
+
+- Confidentiality, bias, environment: **central**, not side issues
+
+- **Disclose** everything, and keep your prompts
+
+::: {.keybox .lg .fragment}
+Used with judgment, these tools make you better. Used without, they make you
+confidently wrong.
+:::
+
+## Recap questions
+
+::: {.nonincremental}
+- Name the four capability classes and give one research task for each.
+
+- Why is a citation produced by a conversational assistant a different kind
+  of object from one produced by a grounded search tool?
+
+- Which four elements make a prompt a specification?
+
+- You are given an AI-written paragraph with three references. Describe how
+  you check them.
+
+- Why may you not upload an interview transcript, even anonymised, without
+  thinking first?
+
+- In what sense is an LLM "theory-laden"? Relate it to lecture 1.
+
+- What has to appear in an AI disclosure, and why does the self-reflection
+  paragraph matter?
+:::
+
+## References {.smaller .scrollable}
+
+::: {#refs}
+:::
+
+<!-- End of deck. Section 2 was drafted first; sections 1 and 3-6 follow the
+     same conventions. Slide count is deliberately below the 2025 version:
+     30 slides became 25, and the product logos are gone. -->

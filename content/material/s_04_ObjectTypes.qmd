@@ -19,21 +19,8 @@ kinds of integers, and data frames are special kinds of lists.
 
 ## 👨‍🏫 Lecture Slides 
 
-For the slides of the first part of this session (*Packages and basic object types*)
-on click on the slide area below or click 
-[here](/content/material/slides/E4a-Objects.pdf) to download the slides.
-
-
-```{=html}
-<div class="embed-container">
-  <iframe 
-  src="/content/material/slides/E4a-Objects.pdf" 
-  style="border: 0.5px" 
-  width="80%"
-  height="80%"
-  ></iframe>
-</div>
-```
+[**Download the slides of the first part of this session**](/content/material/slides/E4a-Objects.pdf)
+(*Packages and basic object types*, PDF)
 
 <!--- Solutions are made available here after the session.
 ::: {.callout-tip collapse="true"}
@@ -42,20 +29,8 @@ on click on the slide area below or click
 :::
 --->
 
-For the slides of the second part of this session (*Advanced object types*) 
-see the slide area below or click 
-[here](/content/material/slides/E4b-AdvObjects.pdf) to download the slides.
-
-```{=html}
-<div class="embed-container">
-  <iframe 
-  src="/content/material/slides/E4b-AdvObjects.pdf" 
-  style="border: 0.5px" 
-  width="80%"
-  height="80%"
-  ></iframe>
-</div>
-```
+[**Download the slides of the second part of this session**](/content/material/slides/E4b-AdvObjects.pdf)
+(*Advanced object types*, PDF)
 
 
 <!--- Notes and solutions are made available here after the session.

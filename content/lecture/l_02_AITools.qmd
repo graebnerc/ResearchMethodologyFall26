@@ -6,37 +6,112 @@ date-modified: last-modified
 
 ## 🎯 Content and goals
 
-- You understand use cases for different kinds of AI models.
-- You know common AI tools for different tasks.
-- You know the basics on how to write good prompts.
-- You are aware of the main caveats and ethical issues of using AI.
-- You can disclose and document the use of AI.
-- You understand the business models of AI companies.
+- You can choose the **right kind of AI system** for a given research task.
+- You can write prompts that are **specifications**, not wishes.
+- You can **verify** AI output to the standard your term paper is held to.
+- You can **disclose** your use of AI so that it cannot be read as cheating.
+
+Explicitly *not* a goal: knowing which app is currently best. The tools change
+faster than a semester; the reasoning does not. The list of tools I currently
+recommend is kept below, where it can be corrected quickly.
 
 ## 🖥️ Lecture Slides
 
-*The slides for this lecture will be made available here.*
-
-<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
-and embed it with the block below (adjust the filename):
-
 ```{=html}
 <div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
-<iframe src="slides/RM26_L02_AITools.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+<iframe src="slides/RM26_L02_AITools.html" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
 </div>
 ```
--->
+
+[Open the slides in a separate tab](slides/RM26_L02_AITools.html){.btn .btn-primary}
 
 ## 🧰 Templates and resources
 
-Two companion resources support this lecture. Each is available on the website and
-as a download (PDF, MS Word, and Markdown source):
+Three companion resources support this lecture. Each is available on the website
+and as a download (PDF, MS Word, and Markdown source):
 
 - [**Documenting and disclosing the use of AI**](ai-disclosure/index.qmd) — a
   fillable template plus a worked example for declaring AI use in your term papers
   and coursework.
 - [**Writing effective AI prompts**](ai-prompting/index.qmd) — a practical guide
   with a quick prompt skeleton and a more advanced meta-prompt.
+- [**Checking AI-generated citations**](ai-citation-check/index.qmd) — the
+  in-class exercise: one paragraph, three references, one of which does not
+  exist.
+
+## 🧭 Tools I currently recommend
+
+::: {.callout-note}
+## This list is deliberately kept here rather than on the slides
+Products change faster than a semester, so the slides teach the four
+**capability classes** and this page names the products. Reorganised from the
+2025 edition of the lecture by class.
+
+**Last reviewed: August 2026.** If you are reading this much later, treat every
+name below as a starting point for your own search, not as an endorsement.
+:::
+
+### A — Conversational assistants
+
+Generating, restructuring, explaining and critiquing text and ideas.
+Ungrounded by default.
+
+- **Claude**, **ChatGPT**, **Gemini** — the general-purpose assistants. Any one
+  of them is enough; there is little point in subscribing to several.
+- **DeepSeek** — an open-weight alternative. Note that where the hosted service
+  runs matters for the data-protection questions discussed in the lecture.
+
+### B — Grounded search
+
+Retrieving real sources and citing them. Always use a proper database
+(Web of Science, Scopus) as the foundation and treat these as complements —
+see [Lecture 08](l_08_LiteratureReviews.qmd).
+
+- *Semantic tools ("finders")* — start from a question or topic description:
+  **Elicit**, **Consensus**, **Undermind**, **SciSpace**.
+- *Citation-based tools ("connectors")* — start from one or more seed
+  publications and follow citation networks: **Connected Papers**,
+  **ResearchRabbit**, **Inciteful**.
+- **Perplexity** — general grounded search rather than an academic tool;
+  useful for orientation, weaker for a systematic review.
+
+A practical order that works: database first, then a semantic tool to widen the
+net, then a citation-based tool once you have identified key publications.
+
+### C — Document and data analysis
+
+You supply the material — PDFs, transcripts, datasets — and the system reads
+what you give it.
+
+- The general assistants in class A now handle uploaded PDFs and datasets well,
+  and have largely absorbed the single-purpose tools of a few years ago.
+- **NotebookLM** — works only from sources you upload, which makes it easier to
+  check what a claim rests on.
+- **MaxQDA** — qualitative content analysis, with AI features added; relevant
+  for [Lecture 06](l_06_Interviews.qmd) if you have access to a licence.
+- Remember the confidentiality rule from the lecture: interview transcripts and
+  unpublished firm data do not go into any of these without thinking first.
+
+### D — Agentic systems
+
+Planning and executing multi-step work — browsing, running code, producing
+files. You review the trace, not only the answer.
+
+- The agent modes of the class-A assistants are the realistic entry point.
+- Useful for mechanical work with a **checkable** result. Not useful for
+  anything where you could not tell a good result from a bad one.
+
+### Not AI, but do not skip it
+
+- **Zotero** — reference manager. Nothing on this page removes the need for
+  one, and it is what keeps a fabricated reference from silently entering your
+  bibliography.
+
+### Also worth knowing
+
+- The *Virtuelles Kompetenzzentrum KI* maintains a
+  [curated list of AI tools](https://www.vkkiwa.de/ki-ressourcen/ki-tools/) that
+  is updated more often than this page.
 
 ## 📚 Mandatory Reading
 
@@ -51,8 +126,13 @@ as a download (PDF, MS Word, and Markdown source):
 
 *Suggested exercises (to help you remember the material; not graded):*
 
-- Try the different tools introduced and decide which one you want to use.
-- Familiarize yourself with the practice of prompting.
+- Work through the [citation-checking exercise](ai-citation-check/index.qmd) if
+  you were not in class, or repeat it on a paragraph you generate yourself.
+- Take a prompt you have actually used and rewrite it as a specification —
+  context, task, format, constraints — then compare the two outputs.
+- Fill in the [disclosure template](ai-disclosure/index.qmd) for a piece of work
+  you have already handed in. It is quicker than you expect, and much quicker
+  than reconstructing it later.
 
 -------
 

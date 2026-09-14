@@ -54,6 +54,10 @@ vignettes/*.pdf
 # `quarto publish netlify`, not from git.
 content/**/index_files/
 
+# Marker touched by Publish-Website.command after each successful publish; it
+# is what "changed since last publish" is measured against, so it is local.
+.quarto-last-publish
+
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
@@ -84,3 +88,8 @@ venv.bak/
 
 
 **/*.quarto_ipynb
+
+# Compiled reveal.js theme byproducts. Quarto writes one content-hashed CSS
+# file per render of a revealjs deck; they accumulate and are rebuilt from
+# content/lecture/slides/euf-slides.scss on every render.
+_freeze/site_libs/revealjs/dist/theme/
