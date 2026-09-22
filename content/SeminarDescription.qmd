@@ -158,6 +158,15 @@ column *Lab (Fri)* also states whether the session is an **on-site lab** or a
 : Combined schedule of lecture and implementation lab. The implementation lab is
 taught by CGR throughout. {tbl-colwidths="[6,10,29,10,14,31]"}
 
+### Take-Home Examinations
+
+- **First take-home** on logic and argumentation: released 04.10.26, due data: 11.10.26, 23:59.
+- **Second take-home** on literature reviews: released 08.11.26, due data: 15.11.26, 23:59.
+- **Second take-home** on statistics: released 15.11.26, due data: 22.11.26, 23:59.
+
+_All take-home examinations are made available by, and must be submitted via Moodle._
+
+
 ### Exam Dates
 
 - **First exam:** 14 December 2026, 13:15–15:15, Room MAD 024
@@ -194,20 +203,13 @@ constantly, not just right before the exams.
 
 The mark for this course is determined by the **final exam** at the end of the
 semester. In order to be admitted to the final exam, you must pass two of the
-three **take-home examinations** assigned during the semester. These take-home
+three **take-home examinations** assigned during the semester (dates see above). These take-home
 examinations are graded on a pass/fail basis only and must be completed at home
 on your own. **Each take-home examination is published on Moodle after the
 lecture it belongs to**, and you have until the Sunday following that lecture to
 submit it. The examination, together with an affidavit (*Eidesstattliche
 Erklärung*), must be uploaded via Moodle. Late submissions are automatically
 graded as fail.
-
-The three take-home examinations are:
-
-1. **Logic and argumentation** — published after the lecture of 5 October 2026
-2. **Systematic literature review** — published after the lecture of
-   9 November 2026
-3. **Statistics** — published after the lecture of 16 November 2026
 
 The final exam is a **120-minute open-book exam** that you take at the
 university on your own laptop. You are free to bring any materials you wish and
