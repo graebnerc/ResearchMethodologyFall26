@@ -12,7 +12,13 @@ course. Finally, I explain a bit what R is, how it relates to R Studio and LaTeX
 
 ## 👨‍🏫 Lecture Slides 
 
-[**Download the slides of this session**](/content/material/slides/E1-Introduction.pdf) (PDF)
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/E1-Introduction.html" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+
+[Open the slides in a separate tab](slides/E1-Introduction.html){.btn .btn-primary}
 
 ## 🎥 Accompanying lecture videos 
 
@@ -27,11 +33,20 @@ All the videos are available via this [playlist](https://www.youtube.com/playlis
 
 ## 📚 Mandatory Reading
 
-Read the following tutorials:
+Work through the following resources on
+[Method and Inquiry](https://euf-methodology-hub.netlify.app/), the methodology
+hub of the Europa-Universität Flensburg:
 
-- [Installation of the necessary software](/content/tutorials/installation/index.qmd)
-- [Installing R packages](/content/tutorials/installing-packages/index.qmd)
-- [Using the exercise package](/content/tutorials/using-exercises/index.qmd)
+- [Getting Started with R: Installing Everything You Need](https://euf-methodology-hub.netlify.app/resources/installing-r-and-rstudio) [@graebner2026-installing-r-and-rstudio]
+- [Installing R Packages](https://euf-methodology-hub.netlify.app/resources/installing-r-packages) [@graebner2026-installing-r-packages]
+  - 📥 The installation script referred to in this tutorial is specific to our
+    course: download it here:
+    [`install_packages_script.R`](install_packages_script.R). Save it in a
+    directory of your choice, open it in R-Studio, adjust the first line to your
+    operating system, and then run the whole script as explained in the tutorial.
+
+In addition, read the course-specific page on
+[using the exercise package](/content/material/UsingExercises.qmd).
 
 ## ✍️ Coursework
 
