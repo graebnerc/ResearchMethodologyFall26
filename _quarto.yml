@@ -7,6 +7,13 @@ project:
     - "content/*.qmd"
     - "content/lecture/*.qmd"
     - "content/lecture/*/*.qmd"
+    # Lecture decks are NOT built into the site: a deck must not reach the
+    # students before its lecture has been held, and everything in _site/ is
+    # uploaded by `quarto publish netlify`. After a lecture, add that deck
+    # back here by name (and uncomment the embed block on its session page).
+    - "!content/lecture/slides/*.qmd"
+    # Embargo lifted after the lecture was held:
+    - "content/lecture/slides/RM26_L02_AITools.qmd"
     - "content/material/*.qmd"
     - "content/material/session*/*.qmd"
     # Only decks that have been reviewed are built. The remaining decks in

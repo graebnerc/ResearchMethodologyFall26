@@ -89,6 +89,12 @@ venv.bak/
 
 **/*.quarto_ipynb
 
+# Lecture decks rendered for presenting. They are excluded from the project
+# render list (see _quarto.yml) so that they are not built into _site/ and
+# cannot reach the students before the lecture; rendering one by hand writes
+# the .html next to its .qmd instead, which is a local build artifact.
+content/lecture/slides/*.html
+
 # Compiled reveal.js theme byproducts. Quarto writes one content-hashed CSS
 # file per render of a revealjs deck; they accumulate and are rebuilt from
 # content/lecture/slides/euf-slides.scss on every render.
