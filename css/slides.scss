@@ -1,0 +1,457 @@
+/*-- scss:defaults --*/
+
+// ===============================================================
+// EUF reveal.js theme for the Implementation Lab slide decks.
+//
+// Companion to css/custom.scss (the website theme): same palette,
+// same fonts, so a deck and the page that hosts it read as one thing.
+// Fonts follow the EUF identity: Open Sans for text, Space Mono for
+// code. FF Dax / Spinoza Pro are print-only faces and not used here.
+// ===============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Space+Mono:ital,wght@0,400;0,700&display=swap');
+
+// --- EUF colour palette (Visuelle Welt der EUF, p.26–27) ---
+$euf-blue:        #00395B;  // Kobaltblau / Hausfarbe
+$euf-gray:        #6F6F6F;  // Staubgrau
+$euf-white:       #FFFFFF;
+$euf-red:         #E65032;  // secondary accent
+$euf-lightblue:   #69AACD;  // secondary accent
+$euf-green:       #5FB46E;  // secondary accent
+$euf-amber:       #E8A33D;  // for .callout-caution
+$euf-blue-wash:   #EAF0F4;  // light surface for boxes and cards
+
+// --- reveal.js defaults ---
+$body-bg:                          $euf-white;
+$body-color:                       #1A1A1A;
+$link-color:                       $euf-blue;
+$link-color-hover:                 $euf-red;
+$selection-bg:                     rgba(105, 170, 205, 0.35);
+
+$font-family-sans-serif: "Open Sans", -apple-system, BlinkMacSystemFont,
+  "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace: "Space Mono", SFMono-Regular, Menlo, Monaco,
+  Consolas, "Liberation Mono", monospace;
+
+$presentation-font-family:          $font-family-sans-serif;
+$presentation-heading-font:         $font-family-sans-serif;
+$presentation-heading-color:        $euf-blue;
+$presentation-heading-font-weight:  700;
+$presentation-h2-font-size:         1.45em;
+$presentation-font-size-root:       30px;
+$presentation-line-height:          1.35;
+
+$code-block-font-size:              0.55em;
+$code-block-border-color:           #DDE4E9;
+
+/*-- scss:rules --*/
+
+:root {
+  --euf-blue:      #{$euf-blue};
+  --euf-gray:      #{$euf-gray};
+  --euf-red:       #{$euf-red};
+  --euf-lightblue: #{$euf-lightblue};
+  --euf-green:     #{$euf-green};
+  --euf-wash:      #{$euf-blue-wash};
+}
+
+// ---------------------------------------------------------------
+// Title slide — white ground, oversized Kobaltblau title
+// (kept light so the EUF logo in the corner stays legible)
+// ---------------------------------------------------------------
+// NB: Quarto gives the deck's own title slide `section#title-slide
+// .quarto-title-block`. The class `.title-slide` is what it puts on
+// *level-1 headings* — i.e. the part dividers — so it must not be used here.
+.reveal section#title-slide,
+.reveal .quarto-title-block {
+  text-align: left;
+
+  h1.title {
+    color: $euf-blue;
+    font-size: 2.0em;
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 0.3em;
+    border-bottom: 4px solid $euf-red;
+    padding-bottom: 0.25em;
+  }
+
+  .subtitle {
+    color: $euf-gray;
+    font-size: 0.8em;
+    font-weight: 400;
+    margin-bottom: 1.6em;
+  }
+
+  .quarto-title-authors,
+  .quarto-title-author-name,
+  .quarto-title-affiliation,
+  .author,
+  .institute,
+  .date,
+  p {
+    color: $euf-gray;
+    font-size: 0.78em;
+    text-align: left;
+    justify-content: flex-start;
+  }
+
+  .quarto-title-author-name {
+    font-weight: 700;
+    color: $euf-blue;
+    font-size: 0.86em;
+  }
+
+  .quarto-title-affiliation { font-size: 0.78em; }
+
+  // the date is supporting information, not part of the by-line
+  .date { font-size: 0.6em; }
+  a { color: $euf-blue; }
+}
+
+// Part dividers sit on the light blue wash: `{background-color="#EAF0F4"}`
+.reveal section[data-background-color="#EAF0F4"],
+.reveal section[data-background-color="#eaf0f4"] {
+  h1, h2 { color: $euf-blue; border-bottom: none; }
+  em { color: $euf-gray; }
+}
+
+// ---------------------------------------------------------------
+// Slide headings — thin steel-blue rule instead of a heavy band
+// ---------------------------------------------------------------
+.reveal h2 {
+  border-bottom: 3px solid $euf-lightblue;
+  padding-bottom: 0.18em;
+  margin-bottom: 0.7em;
+  text-align: left;
+}
+
+.reveal h3 {
+  color: $euf-blue;
+  font-size: 1.0em;
+  font-weight: 600;
+}
+
+// Part dividers: big, centred, no rule
+.reveal .divider h1,
+.reveal .divider h2 {
+  border-bottom: none;
+  text-align: center;
+  font-size: 2.0em;
+  line-height: 1.1;
+}
+
+// ---------------------------------------------------------------
+// Lists — roomier, blue markers, quieter sub-levels
+// ---------------------------------------------------------------
+.reveal ul,
+.reveal ol { margin-left: 0.6em; }
+
+.reveal ul > li {
+  margin-bottom: 0.45em;
+  &::marker { color: $euf-lightblue; }
+}
+
+.reveal ul ul > li {
+  font-size: 0.85em;
+  color: #3A3A3A;
+  margin-bottom: 0.25em;
+  &::marker { color: $euf-gray; }
+}
+
+// Un-emphasise everything not yet revealed, rather than hiding it
+.reveal .fragment.semi-fade-out { opacity: 0.35; }
+
+// ---------------------------------------------------------------
+// Footer and logo
+// ---------------------------------------------------------------
+.reveal .footer {
+  color: $euf-gray;
+  font-size: 0.34em;
+  padding-top: 0.4em;
+
+  // The rule is drawn as a pseudo-element rather than as the footer's own
+  // border: the footer spans the full slide width, so a border-top would run
+  // straight through the EUF logo sitting in the bottom-right corner.
+  border-top: none !important;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 3%;
+    right: 15%;
+    border-top: 1px solid #E3E8EC;
+  }
+}
+
+.reveal .slide-logo {
+  max-height: 2.6rem !important;
+  right: 10px !important;
+  bottom: 6px !important;
+}
+
+.reveal .slide-number {
+  color: $euf-gray;
+  background-color: transparent;
+  font-size: 0.55em;
+}
+
+.reveal .progress span { background-color: $euf-red; }
+
+
+// ---------------------------------------------------------------
+// Boxes and emphasis blocks
+// ---------------------------------------------------------------
+
+// Framed statement — the "goal" box of the original decks
+.boxed {
+  border: 2px solid $euf-blue;
+  border-radius: 6px;
+  padding: 0.5em 0.9em;
+  text-align: center;
+  font-weight: 600;
+  color: $euf-blue;
+  margin: 0.2em 0 0.8em;
+}
+
+// Closing take-away line
+.takeaway {
+  background-color: $euf-blue-wash;
+  border-left: 5px solid $euf-blue;
+  border-radius: 4px;
+  padding: 0.45em 0.8em;
+  color: $euf-blue;
+  font-weight: 600;
+  margin-top: 0.7em;
+}
+
+// Pull quote
+.pullquote {
+  border-left: 4px solid $euf-lightblue;
+  padding-left: 0.7em;
+  color: $euf-blue;
+  font-style: italic;
+  line-height: 1.3;
+
+  .source {
+    display: block;
+    margin-top: 0.35em;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.7em;
+    color: $euf-gray;
+  }
+}
+
+// ---------------------------------------------------------------
+// Callouts — EUF palette on border and header tint
+// ---------------------------------------------------------------
+@mixin callout-colour($accent) {
+  border-left-color: $accent !important;
+
+  .callout-header,
+  .callout-title,
+  > .callout-header {
+    background-color: rgba($accent, 0.13) !important;
+    color: $euf-blue !important;
+  }
+}
+
+.reveal {
+  .callout-note      { @include callout-colour($euf-lightblue); }
+  .callout-tip       { @include callout-colour($euf-green); }
+  .callout-important { @include callout-colour($euf-blue); }
+  .callout-warning   { @include callout-colour($euf-red); }
+  .callout-caution   { @include callout-colour($euf-amber); }
+
+  // Default icons are SVGs with the colour baked in; they cannot be
+  // recoloured from here, so they are hidden — colour plus title
+  // carries the signal on a slide.
+  .callout .callout-icon::before,
+  .callout .callout-title-container + .callout-icon,
+  .callout-icon { display: none !important; }
+
+  .callout {
+    border-left-width: 5px !important;
+    border-radius: 4px;
+    font-size: 0.85em;
+  }
+
+  .callout-title-container { font-weight: 600; }
+}
+
+// ---------------------------------------------------------------
+// Tables
+// ---------------------------------------------------------------
+.reveal table {
+  border-collapse: collapse;
+  font-size: 0.8em;
+
+  thead th {
+    background-color: $euf-blue;
+    color: $euf-white;
+    font-weight: 600;
+    border: none;
+  }
+
+  tbody tr:nth-child(even) { background-color: #F5F8FA; }
+  td, th { padding: 0.15em 0.5em; }
+}
+
+// Rank table of slide "Why R?": compact, and mark the R rows
+.reveal table.rank-table {
+  font-size: 0.55em;
+  line-height: 1.22;
+  width: 100%;
+
+  td, th { padding: 0.09em 0.4em; }
+
+  // cells the source does not report
+  td.na { color: #B9C2C8; }
+
+  .hdr-date {
+    font-weight: 400;
+    opacity: 0.75;
+    font-size: 0.85em;
+  }
+
+  td.r-rank {
+    background-color: $euf-red;
+    color: $euf-white;
+    font-weight: 700;
+  }
+}
+
+// ---------------------------------------------------------------
+// Code
+// ---------------------------------------------------------------
+.reveal pre {
+  box-shadow: none;
+  border: 1px solid #DDE4E9;
+  border-radius: 4px;
+}
+
+.reveal code { color: $euf-blue; }
+
+// ---------------------------------------------------------------
+// Images
+// ---------------------------------------------------------------
+.reveal .slide figure figcaption,
+.reveal figcaption {
+  color: $euf-gray;
+  font-size: 0.5em;
+  text-align: right;
+}
+
+.reveal img.shadow {
+  border-radius: 5px;
+  box-shadow: 0 2px 12px rgba(0, 57, 91, 0.18);
+}
+
+// ---------------------------------------------------------------
+// Utility classes
+// ---------------------------------------------------------------
+.accent    { color: $euf-red;  font-weight: 600; }
+.muted     { color: $euf-gray; }
+.highlight { background-color: rgba(105, 170, 205, 0.22); padding: 0 0.2em; border-radius: 3px; }
+.big       { font-size: 1.25em; }
+.small     { font-size: 0.8em;  }
+.smaller   { font-size: 0.65em; }
+.tiny      { font-size: 0.5em;  }
+.center    { text-align: center; }
+.vcenter   { display: flex; flex-direction: column; justify-content: center; height: 100%; }
+
+// Arrow glyph used between steps of a pipeline
+.step-arrow {
+  color: $euf-blue;
+  font-size: 1.6em;
+  line-height: 1;
+  text-align: center;
+}
+
+// Two images stacked in one column, each capped so the pair still fits
+.img-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  img, p { margin: 0; }
+  img { max-height: 268px; width: auto; max-width: 100%; }
+}
+
+// Code blocks that should shrink-wrap their content instead of
+// stretching across the column
+.code-center {
+  text-align: center;
+
+  div.sourceCode,
+  pre {
+    display: inline-block;
+    width: auto;
+    text-align: left;
+    margin: 0.2em auto;
+  }
+}
+
+// Fixed-height figure cell, so captions in a row of columns line up
+.figcell {
+  height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img, p, pre, div.sourceCode { margin: 0; max-height: 230px; width: auto; max-width: 100%; }
+}
+
+// A block centred as a whole, but with its own text left-aligned
+.center-block {
+  display: table;
+  margin: 0 auto;
+  text-align: left;
+}
+
+// Figure whose height must be capped so a row of them still fits
+.cap-img img {
+  max-height: 215px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
+// A single prominent URL as the content of a slide
+.hero-link {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 1.1em 0 1.3em;
+
+  a {
+    color: $euf-blue;
+    text-decoration: none;
+    border-bottom: 3px solid $euf-red;
+    padding-bottom: 0.08em;
+  }
+}
+
+// Two figures side by side, each capped so the pair stays on the slide
+.img-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 14px;
+
+  // An explicit height keeps both figures at the same scale. A percentage
+  // max-width would resolve against a shrink-to-fit flex item and collapse.
+  p { margin: 0; flex: 0 1 auto; }
+  img { margin: 0; height: 310px; width: auto; max-width: 100%; }
+}
+
+// Logo strip (data providers etc.)
+.logo-strip img {
+  filter: saturate(0.9);
+  max-height: 100%;
+}
