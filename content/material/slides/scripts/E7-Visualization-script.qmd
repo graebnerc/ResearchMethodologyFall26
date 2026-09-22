@@ -1,0 +1,185 @@
+---
+title: "Implementation Lab 8 — Visualisation"
+subtitle: "Accompanying script (draft)"
+author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
+date: "2026-11-13"
+date-modified: last-modified
+---
+
+::: {.callout-important}
+## Draft — not published yet
+Extracted from the speaker notes of `content/material/slides/E7-Visualization.qmd`.
+This file is **not** in the `render:` list of `_quarto.yml`, so it is not built
+and students cannot reach it.
+
+To publish it later: add `content/material/slides/scripts/*.qmd` to
+`project.render` and link it from the matching session page.
+:::
+
+The headings mirror the slides of the deck, so the two can be kept in sync.
+
+## Slide 2 · Goals for today
+
+Three goals today. You understand how plots are created layer-wise via the
+ggplot2 package. You learn how to map variables in data frames to visual aspects
+of a plot. And you figure out how you can re-use code across different
+visualisation tasks.
+
+The third goal is the one that will save you the most time later, and it is the
+one that surprises people: once you can make one plot, you can make most plots,
+because the code barely changes.
+
+## Slide 4 · The role of visualisation in data science
+
+The familiar cycle, this time with the middle box in focus.
+
+Visualisations serve at least three purposes. Exploratory data analysis: you plot
+in order to understand your own data and to refine your models — these plots are
+ugly and nobody else ever sees them. Communication: you plot in order to inform
+others about your results, and now the plot must be readable without you standing
+next to it.
+
+And the third one, which is worth taking seriously: manipulation. Visualisations
+can be used to convince others of things the data does not support — truncated
+axes, misleading aggregations, cherry-picked periods. You learn this partly so
+that you can recognise it when somebody tries it on you.
+
+## Slide 5 · Why `ggplot2`
+
+We use ggplot2, which is an easy-to-read, widely used and powerful visualisation
+engine, with a large ecosystem of extensions — animated GIFs, control charts,
+network plots and much more.
+
+The property that matters pedagogically is the one in the box: the syntax is the
+same for all graphs. Learning a new plot type in ggplot2 means learning one new
+function name, not a new way of thinking.
+
+## Slide 6 · What kind of plot do you want?
+
+Before you write any code, you must decide what kind of plot you want — and that
+is not a technical question.
+
+This classic overview organises plots by what you want to show: comparison,
+relationship, distribution, or composition. Start there rather than at the chart
+type; the chart type follows from the question.
+
+The important sentence: visualisation always involves prior thinking and theory.
+The plot does not reveal what is in the data — it reveals what you decided to
+look at.
+
+During the session we focus on two examples: the scatter/bubble chart from
+session one, and a line chart.
+
+## Slide 7 · A very simple example to begin with
+
+Here is a complete plot in ten lines, and every one of the ideas of this session
+is already in it.
+
+`ggplot()` takes general meta data about the plot: which data set to use, and how
+variables from the data map to aesthetics of the plot. `x = gdpPercap` means "put
+GDP per capita on the horizontal axis". `color = continent` means "give each
+continent its own colour" — note that you never write out the colours or the
+legend; both follow automatically from the variable.
+
+Then `geom_point()` says: represent each data point by a point. And
+`theme_classic()` applies a general visual theme.
+
+Look at the plus signs at the end of the lines. That is how layers are added, and
+it is the one piece of syntax that is peculiar to ggplot2.
+
+## Slide 8 · The general idea
+
+Every plot in ggplot2 is generated in two major steps. First you describe the
+plot in all its details via a list — this is where all the work gets done. Then
+you call the list and R renders the plot for you.
+
+The practical consequence of that split is worth knowing in advance: errors
+become apparent only in the second step. You can write twenty lines of perfectly
+accepted description and get the error only when you print the object. So do not
+be surprised when the error message points at a line that looks innocent.
+
+You always start with an empty plot, then add layers above this empty plot, adjust
+details, and that is it.
+
+## Slide 10 · Where we want to go
+
+Today we produce two plots: the bubble chart, which relates life expectancy to
+income per capita with bubble size representing population, and a line chart
+showing the divergence of income per capita over time, averaged by continent.
+
+They look completely different. As we will see at the end, the code differs by
+only a handful of lines — which is exactly the point of the session.
+
+## Slide 11 · Developing a ggplot — the general workflow
+
+Since we work on the graph development interactively — adding one layer at a time
+and looking at the result — the slides do not reproduce every intermediate step.
+The lecture notes on the course page document them for you afterwards.
+
+The way to follow along is to add exactly one thing at a time and re-render. That
+is slower than typing the whole block, and it is how you learn which line does
+what.
+
+Both data sets come ready-made from the DataScienceExercises package, so we can
+concentrate on the plotting rather than on the wrangling.
+
+## Slide 12 · The anatomy of any ggplot
+
+This is the skeleton of every ggplot you will ever write, and it is worth
+photographing.
+
+The geom functions are the geometric forms used to represent the data: points,
+lines, shades and so on. Inside them, `data` is the data to be visualised and
+`mapping` is the mapping of variables in the data to the plot aesthetics — the
+axes, the size, the shape, the colour.
+
+`stat` and `position` are for more advanced cases and have sensible defaults.
+Then come the coordinate function, the facet function for splitting a plot into
+panels, and the theme adjustments for the look and the labels.
+
+One practical note: data and mapping may be set as defaults within `ggplot()`, in
+which case every geom inherits them, or separately for each geom, which is what
+you need when you combine several data sets in one figure.
+
+## Slide 13 · From the bubble to the line chart
+
+Here are the two plots side by side as code, and this slide is the punchline of
+the session.
+
+What changed? The data set, from one year of countries to continent averages over
+time. The mappings: `size` disappears, `fill` becomes `color`, and the x axis
+becomes the year. One new geom is added, `geom_line()`, because we now want lines
+between the points. The size scale is no longer required. The number formatting
+moves from the x axis to the y axis. And the labels are adjusted.
+
+Everything else is identical. Two visually completely different figures, and
+perhaps eight lines of real difference.
+
+Two details worth noting. `shape = 21` in the bubble chart is the point shape
+that has both a fill and a border, which is why it uses `fill` rather than
+`color`. And `alpha = 0.65` makes the bubbles semi-transparent, so that
+overlapping bubbles remain readable — indispensable for this kind of chart.
+
+## Slide 14 · Summary
+
+To summarise: visualisations serve many purposes, including the exploration of
+your data and the communication of your results. We learned how to visualise data
+stored in data frames via ggplot2. And while there are many different plot
+variants, their syntax is very similar.
+
+Code for different plots differs mainly by the aesthetic mappings and the geoms
+used, which allows you to re-use a lot of code. In practice you will keep a file
+of plots you once made and start from the closest one.
+
+## Slide 15 · How to get better
+
+A great way to learn how to plot is to replicate examples from the internet and
+adjust them to your own data. Two resources are particularly good: "From Data to
+Viz", which helps you choose the plot type and then links to the code, and the R
+Graph Gallery, which has hundreds of worked examples.
+
+And the same caveat as in the import session applies to AI here: once you
+understand the basic functioning, AI can be a very effective assistant for
+creating visualisations. It is good at the tedious parts — legend positioning,
+axis formatting, colour scales. It cannot tell you whether the plot answers your
+question, and it will happily produce a beautiful chart of the wrong thing.

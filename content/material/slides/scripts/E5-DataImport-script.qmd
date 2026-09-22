@@ -1,0 +1,249 @@
+---
+title: "Implementation Lab 6 — Importing data"
+subtitle: "Accompanying script (draft)"
+author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
+date: "2026-10-30"
+date-modified: last-modified
+---
+
+::: {.callout-important}
+## Draft — not published yet
+Extracted from the speaker notes of `content/material/slides/E5-DataImport.qmd`.
+This file is **not** in the `render:` list of `_quarto.yml`, so it is not built
+and students cannot reach it.
+
+To publish it later: add `content/material/slides/scripts/*.qmd` to
+`project.render` and link it from the matching session page.
+:::
+
+The headings mirror the slides of the deck, so the two can be kept in sync.
+
+## Slide 2 · Goals for today
+
+Three goals today. You learn how to handle raw and tidy data in R, how to import
+data into R using `data.table::fread()`, and how to save data again.
+
+One note up front, and it connects to the AI session: importing data is an area
+in which using AI tools becomes particularly helpful — but only once you
+understand the basics of how importing works and what to keep an eye on.
+Otherwise you cannot tell a correct import from a plausible-looking but wrong
+one, and a wrong import silently poisons everything downstream.
+
+## Slide 4 · The role of data preparation
+
+Importing and preparing data is the most fundamental task in data science, and it
+is also largely under-appreciated — it is what you spend most of your time on and
+what nobody writes papers about.
+
+Recall the cycle from the first session: data preparation and processing,
+visualisation, and analysis and modelling feed into each other, and everything
+funnels into the presentation of the insights as one overall story.
+
+Today we deal with the very first step of that cycle: how to get the raw data
+into R, and how to get the result back out into the file system.
+
+## Slide 5 · Focus of this session
+
+We use the directory structure introduced in the session on project management,
+and we learn how to import data using the most widely used file formats,
+especially csv.
+
+The goal is the one you already know: all results must be reproducible from the
+raw data at any time. This implies that you must not manipulate your raw data at
+any cost. Raw data is what you download from the internet, gather through an
+experiment, or code yourself.
+
+This session sits between two others: it builds on the session on project
+management, and it precedes the session on data preparation.
+
+## Slide 6 · Recap: how to keep your work transparent
+
+A quick recap from the project-management session, because everything today rests
+on it.
+
+Raw data must not be changed, but it is usually not in a state we can work with.
+So: gather the data and save it, import it into R, write a script that transforms
+the raw data into tidy data, and use the tidy data for the analysis.
+
+Saving the scripts in steps two and three makes your work fully reproducible. By
+looking into the script you will always know what you did to your raw data, which
+means you can heal basically every mistake you made — no harm done. That is the
+whole payoff of never touching the raw file.
+
+## Slide 8 · Preparation: set up your working environment
+
+Before importing anything, set up the working environment as we discussed.
+
+Raw data should be saved in `data/raw`. If you have very few data sets you might
+get away with a single `data` folder, but the split pays off quickly.
+
+Tidied-up data should be saved in `data/tidy` — keep it strictly separate from
+the raw data, so that you can always tell at a glance which files you may
+overwrite and which you may not.
+
+## Slide 9 · Import functions
+
+The function we use to import a data set depends on the file type.
+
+For csv and tsv files we use `data.table::fread()`. For R's own formats, Rds and
+RData, there are `readRDS()` and `load()`. And for the formats of other
+statistical packages — Stata, SAS, SPSS — the `haven` package provides
+specialised functions, which is what you need when you get data from colleagues
+in economics or the social sciences.
+
+The basic procedure is the same in all cases, so we focus on reading csv files
+here. In the following we assume that your raw data is stored in the folder
+`data/raw`.
+
+## Slide 10 · How to import data
+
+Good practice is to save the path to the file in a vector first, using
+`here::here()`, and then pass that vector to the import function. This keeps the
+path in one place and makes the import call readable.
+
+Since it is a csv file we use `data.table::fread()`. In general I recommend using
+`fread()` — it is fast and it guesses well — but alternatives are available,
+including from the tidyverse.
+
+Written like this, the call uses default options to import the file. That works
+often for clean data files. But for the sake of transparency, and because data
+files are very often not clean, we should specify several optional arguments
+explicitly. That is what the rest of this session is about.
+
+## Slide 11 · Exercise 1
+
+First exercise. Download the zip file from the course homepage, extract it inside
+`data/raw/` in your R project, and write a script that imports
+`fread_expls-1.csv` into your session.
+
+Put the script into the folder `R`, and start it with `here::i_am()` as usual.
+The first file is the clean one, so the default options should get you there.
+
+## Slide 12 · The four arguments that matter
+
+Four arguments carry almost all of the work, and we go through them one by one.
+
+`file` is the relative path to the csv file you want to read — always via
+`here::here()`. `sep` is the symbol that separates the columns. `dec` is the
+symbol used as the decimal sign. And `colClasses` says what object type should be
+used for each of the columns.
+
+For other widely used arguments check the tutorial and do the exercises, and note
+that there are even more specification options — `help(fread)` lists them all.
+
+## Slide 13 · `sep`: the column separator
+
+The first argument is `sep`, the column separator.
+
+Especially in Germany, columns are often separated via a semicolon instead of a
+comma — which is ironic, given that csv stands for comma-separated values. The
+reason is the next slide's topic.
+
+We can pass a string to `sep` indicating how the columns are separated. In the
+case on the slide, `sep = ";"`.
+
+If you get a data frame with exactly one column whose name is a long string
+containing semicolons, this is what went wrong.
+
+## Slide 14 · `dec`: the decimal sign
+
+And here is the reason for the semicolons: in Germany, decimal places are often
+separated via a comma instead of a point. If the decimal sign is already a comma,
+the comma is no longer available as a column separator — hence the semicolon.
+
+We pass a string to `dec` to say which symbol is used as the decimal sign.
+
+The failure mode here is subtler than with `sep` and therefore more dangerous:
+your numbers may be read as character, or — worse — silently truncated. Always
+check the column types after importing.
+
+## Slide 15 · Exercise 2
+
+Second exercise. Import `fread_expls-2.csv` such that exactly this tibble
+results.
+
+Pay attention to the types in the second row of the output: `c_code` is
+character, `year` is integer, and the two remaining columns are double. If your
+`exports` column comes out as character, the decimal sign is the culprit.
+
+## Slide 16 · `colClasses`: the column types
+
+The third argument is `colClasses`, and this is the one that catches real data
+most often.
+
+Whenever numbers should be saved as character, the guessing algorithm of
+`fread()` fails. Look at the product code on the left: `0011`. It is a code, not
+a quantity — the leading zeros are part of its identity. But `fread()` sees
+digits, decides the column is integer, and the code becomes the number eleven.
+The leading zeros are gone and you cannot get them back.
+
+We can specify the column types explicitly by passing a vector to `colClasses`,
+one entry per column. Doing this is usually a good idea anyway, because it makes
+your code more transparent: the reader sees what the data is supposed to look
+like, and the import fails loudly if the file changes.
+
+You can also combine it with `select` and read only selected columns — see the
+tutorial.
+
+## Slide 17 · Exercise 3
+
+Third exercise, and this one is the realistic case: read in `fread_expls-3.csv`
+using all the arguments you consider necessary, and make sure that the column
+`cgroup` is stored as a factor.
+
+The hint matters more than the exercise. Before importing an unknown file, look
+at it in its raw form: click on the file in the Files pane and select "View
+File". You then see the separators, the decimal signs and any header junk with
+your own eyes, instead of guessing.
+
+For very large files that is infeasible, so use `nrows` and `select` to read a
+representative subset first, inspect that, and only then write the real import
+call.
+
+## Slide 19 · And what about saving data?
+
+Saving data is much easier than reading data, because you already know
+everything about the object you are saving — there is nothing to guess.
+
+The only relevant question is the format. If there are no good arguments for
+using a different format, go for csv: it is readable by every tool, it survives
+software changes, and you can open it in a text editor in ten years.
+
+This is achieved with `data.table::fwrite()`, which takes the object as `x` and
+the file name as `file` — again via `here::here()`, and note that the result goes
+into `data/tidy`, not into `data/raw`.
+
+## Slide 20 · The general idea
+
+To put the pieces together, and with a warning: make yourself comfortable before
+reading in data, and expect frustration. Real files are messy, and getting them
+in correctly takes longer than you think it should. That is normal and it is not
+a sign that you are doing it wrong.
+
+The general idea: you import the data and bind it to an R object — usually a
+data.frame, or whatever aligns with your preferred dialect. Then you proceed with
+transforming this object until it satisfies the demands for tidy data. Then you
+save the data under a new name, save the script, and celebrate yourself.
+
+Note "under a new name" once more: the raw file stays untouched.
+
+We will cover the transformation steps in the next session.
+
+## Slide 21 · Summary and conclusion
+
+To summarise: you learned how to import data into R, with the main focus on
+importing csv data files using `data.table::fread()`. Other functions for csv are
+provided, for example via the tidyverse packages, and for other formats
+specialised functions are available, especially in the haven package.
+
+Importing standard data often works well with the default options. In other cases
+the optional arguments must be used — and then you check the function
+documentation rather than guessing.
+
+If speed or memory restrictions are an issue, comparing import functions is
+advisable; they differ considerably on large files.
+
+And to close the loop with the opening note: once you understand the basics,
+using AI to assist with coding becomes very useful in the context of data import.
+You can describe the shape of the file and get a plausible `fread()` call back —
+but you are the one who has to verify that the column types are right.

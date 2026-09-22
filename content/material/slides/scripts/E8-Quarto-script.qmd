@@ -1,0 +1,330 @@
+---
+title: "Implementation Lab 5 — Quarto & R Markdown"
+subtitle: "Accompanying script (draft)"
+author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
+date: "2026-10-23"
+date-modified: last-modified
+---
+
+::: {.callout-important}
+## Draft — not published yet
+Extracted from the speaker notes of `content/material/slides/E8-Quarto.qmd`.
+This file is **not** in the `render:` list of `_quarto.yml`, so it is not built
+and students cannot reach it.
+
+To publish it later: add `content/material/slides/scripts/*.qmd` to
+`project.render` and link it from the matching session page.
+:::
+
+The headings mirror the slides of the deck, so the two can be kept in sync.
+
+## Slide 2 · Goals for today
+
+Four goals today. You understand what Quarto is and how it relates to R Markdown
+and knitr. You write your first Quarto document. You render Quarto documents into
+html and PDF format. And you become aware of the specific challenges for project
+management that arise when using Quarto — that last one connects directly back to
+the session on R projects and the `here` package.
+
+The session is structured in four parts: what Quarto is, Quarto step by step,
+notes on project management, and avoiding common Quarto mistakes.
+
+## Slide 4 · First: what is R Markdown?
+
+Before we get to Quarto itself, a word on R Markdown, because Quarto grew out of
+it.
+
+R Markdown is a document format that allows you to write documents containing
+code of two languages. R code to perform statistical analysis — which we know
+almost completely by now. And Markdown code to create formatted text using a
+plain text editor.
+
+Markdown is readable in its source and, if rendered, allows for formatting such
+as bold or italic fonts, tables, headings and so on. The left side shows the
+source, the right side the rendered result.
+
+Together, R and Markdown allow you to write formatted text and conduct
+statistical analysis within one single file — which is perfect for making
+research accessible and reproducible.
+
+## Slide 5 · We skip the Markdown basics
+
+We will not cover the basics of markdown here, because going through syntax rules
+in a group is quite boring and you learn it far faster by doing.
+
+Please do the interactive Markdown tutorial on the course webpage instead. It
+takes about twenty minutes and it covers emphasis, paragraphs, headings,
+blockquotes, lists, links, images, code and nested lists — everything you need.
+
+## Slide 6 · And what about Quarto?
+
+Quarto is basically a next-generation version of R Markdown.
+
+It allows you to do everything you can do in R Markdown, but it works with more
+languages, including Python and Julia, and it has a number of additional features
+and capabilities.
+
+R Markdown will stay around — a lot of existing material is written in it — but
+there is no need for you to learn it any more. Everything we do from here on is
+Quarto.
+
+## Slide 7 · What is Quarto? The anatomy of a document
+
+Here is a complete Quarto document on the left and what it renders to on the
+right.
+
+Four kinds of element. At the top, framed in blue, the header — it contains the
+meta information. In orange, the markdown: the prose, the headings, the text
+between the code. In red, the chunk options, which control how a given piece of
+code behaves. And in green, the R chunks, which contain the actual code.
+
+Note what happens on the right: the code produced a figure, the headings became
+numbered sections, and a table of contents appeared — all of that came from the
+header. We will go through each of these elements in turn.
+
+## Slide 8 · One source, many output formats
+
+Quarto documents can be rendered to very different formats, and it is worth
+understanding the route they take.
+
+Your qmd file goes to knitr, which executes the code and produces a plain
+markdown file. That markdown file goes to pandoc, which converts it into the
+final output — Word, PDF, or a webpage. Two separate steps, and when something
+goes wrong it is useful to know which of the two failed.
+
+Around this core there are many extensions: bookdown to write books, blogdown to
+create websites, learnr to create interactive exercises, and many more. The basic
+syntax is the same for all of these applications, which is why we focus on the
+syntax here rather than on any one extension.
+
+## Slide 10 · The five steps
+
+The workflow has six steps, and the middle ones form a loop.
+
+First you create the document. Second you fix the major metadata in the header.
+Then you enter the cycle: write text in markdown syntax, embed R code in chunks,
+render your document — and back to writing. Finally you share your work.
+
+The single most important thing on this slide is that steps three to five are a
+loop. Beginners write forty lines and then render once, and then have no idea
+which of the forty lines broke the document. Render early and render often.
+
+## Slide 11 · 1. Creating the document
+
+First create a new Quarto document, and choose a template if an adequate one
+exists. In R Studio that is New, then Quarto document.
+
+There are plenty of templates distributed as packages — for journals, for
+presentations, for reports. For learning purposes it is best to start with a
+blank document, so that you see every line that is there.
+
+After creating the document it is best to save it immediately, and where you save
+it matters: either in the subdirectory `R`, or in a separate top-level directory
+called `quarto`. We come back to why this matters in part three.
+
+## Slide 12 · 2. Specify the header
+
+The header contains the meta data. It starts and ends with three dashes, and
+everything between them is YAML.
+
+Usually you should set at least title, author and date. The output arguments —
+everything under `format` — are usually set later, once you know what you want
+the document to look like.
+
+Two things about YAML that cause endless trouble: indentation is meaningful, and
+the nesting expresses scope. Here `toc: true` is indented under `html`, which
+means it applies only when the document is rendered to html. Get the indentation
+wrong and the option is silently ignored.
+
+There is a nice overview over the major keywords in the Quarto docs; see the
+further readings.
+
+## Slide 13 · 3. Write the main text
+
+Writing the main text is the easy part: just write as you would in any normal
+text editor, and to format it follow the Markdown syntax.
+
+One tip that saves beginners a lot of frustration: R Studio has a Visual editor,
+which you reach with the Source/Visual switch at the top left. It shows you the
+formatted result while you type, much like a word processor. The file on disk is
+still plain markdown — nothing is hidden from you — but you see the headings and
+lists rendered while you work.
+
+## Slide 14 · 4. Embed R code in chunks
+
+R code is written within chunks. The keyboard shortcut on a Mac is Command,
+Option, i — learn it, you will use it constantly.
+
+Each chunk starts with three backticks followed by r in curly braces, and ends
+with three backticks. Within the chunk you write R code just as you already know
+it.
+
+You can refer to variables defined in previous chunks. In principle you can refer
+to all objects defined previously in your session — and that is precisely the
+trap. Your session may contain objects that the document does not create. Make
+sure everything you use was defined in a chunk **above** the one you are working
+on; otherwise the document works for you and fails for everybody else, including
+future-you after a restart.
+
+## Slide 15 · Chunk options
+
+How the R code gets shown and executed in the final document is controlled via
+the chunk options.
+
+Traditionally they were added to the first line of the chunk, inside the curly
+braces. The modern variant puts them on their own lines inside the chunk, each
+prefixed by a hash and a pipe. This is more consistent with the rest of Quarto
+syntax, it reads better when you have several options, and it is what you should
+use.
+
+The most important single option is `echo`. With echo true you see the code and
+the result; with echo false you see only the result. For a report that other
+people read, `echo: false` is usually what you want.
+
+## Slide 16 · Finding and setting chunk options
+
+How do you find out which options exist? You get suggestions when pressing the
+Tab key inside the chunk, and when creating a new chunk the point-and-click
+option menu is available via the little gear icon.
+
+More important for real documents: you can set default options for all chunks in
+the YAML header of the document under the keyword `execute`. Setting `warning:
+false` and `echo: false` once at the top is much better than repeating them in
+twenty chunks — and if you later change your mind, you change one line.
+
+The full list of all chunk options is in the Quarto docs at the link at the
+bottom.
+
+## Slide 17 · 5. Render the document
+
+Rendering should in fact be done regularly during step three — this is the loop
+from earlier. Otherwise it is hard to identify the source of an error, because
+any of the last fifty lines could be responsible.
+
+The format is determined in the header under `format`, and rendering produces the
+output file right next to your qmd file, together with a folder holding its
+figures and dependencies.
+
+On the left you see the output options annotated. Note again the nesting: what is
+indented under `html` applies only to html output. The theme sets fonts and
+general properties; the toc entries control the table of contents; and
+number-sections activates the numbering of sections.
+
+For a complete overview over the output options and the possible themes, check
+the Quarto docs for the format you actually want.
+
+## Slide 18 · What the output options do
+
+To make the effect concrete: the same document, once with a minimal header and
+once with the output options set.
+
+The minimal version gives you title, author and date, and then simply the
+headings. The second version gives you a table of contents at the top, numbered
+sections, and a different visual theme.
+
+Nothing in the body of the document changed between the two. That is the point of
+separating content from presentation — and it is why you should not spend time
+formatting headings by hand.
+
+## Slide 19 · 6. Share your work
+
+There are many different possibilities for sharing your work, and the key
+question is usually the format — a PDF travels by mail, a webpage needs a host.
+
+Here we consider a very straightforward solution for html documents: Netlify
+Drop. You literally drag the folder with your output into the browser window and
+get a link back.
+
+Three prerequisites. You create an html document. All relevant output data is in
+one folder — that includes the figures folder, not only the html file. And your
+output file must be called `index.html`, because that is the name a web server
+looks for by default.
+
+If you register with Netlify you can also choose a custom URL and keep the site
+around; without registering the link still works, it is just anonymous.
+
+## Slide 20 · Practice!
+
+Now write and render a document yourself. The text should include a heading of
+level one and of level two, a text body, and a plot made with ggplot2 — the code
+for the plot is on the slide, so you can concentrate on the document rather than
+on the plotting.
+
+Also add meta data on author, title and date, render the document into html, and
+deploy it via Netlify Drop, posting the link on Moodle.
+
+Remember the naming requirement: the html file must be called index.html, so
+either name your qmd file `index.qmd` or rename the output afterwards.
+
+## Slide 22 · Remarks on project organisation
+
+This is the part that catches nearly everybody at least once.
+
+When rendering a qmd document, your computer is not using your current working
+directory. Rather, the working directory is set to the location of the qmd file
+itself. So if your qmd lives in the folder `R` and your data in `data/raw`, then
+a relative path that worked perfectly in a script — `data/raw/file.csv` — is now
+wrong, because it is interpreted relative to `R`.
+
+This means you cannot simply copy-paste code containing relative paths from your
+R scripts into a Quarto document, except if you use the `here` package. With
+`here::here("data", "raw", "file.csv")` the anchor is the project root in both
+cases, and the code moves between script and document unchanged.
+
+So: `here::i_am()` at the top, and put your qmd files either into the folder `R`
+or into a separate top-level directory called `quarto`.
+
+## Slide 24 · Look at the rendered version
+
+There are some very common mistakes. They screw up your document considerably and
+make it painful to read — but they are actually very easy to avoid.
+
+So after completing a markdown document, always look at the rendered version.
+Check whether any of the problems on the next slide still exists and eliminate
+them where necessary. Reading your own rendered document once, as a reader rather
+than as an author, catches almost all of them.
+
+As a task, download `DesasterMarkdown.pdf` from the course homepage and collect
+the aspects that bother you the most. Then compare with the list on the next
+slide — the overlap is usually large.
+
+## Slide 25 · The black list of markdown turpitudes
+
+The black list, and note that every single solution is a chunk option you already
+know.
+
+Overly long or wide tables: only print what is necessary, and check whether
+`str()` or `dplyr::glimpse()` give a more adequate summary than printing the
+whole data frame.
+
+Uninformative warnings or messages: use the chunk options `warning` and
+`message`, and consider setting the default to false in the header.
+
+Too many or too few code chunks visible, and important output missing: both come
+down to using `echo` and `include` correctly. Note that they are different —
+`echo` controls whether the code is shown, `include` controls whether anything
+from the chunk appears at all.
+
+Figures in inappropriate sizes: adjust out-width and out-height, or fig-width and
+fig-height.
+
+And one upgrade worth knowing: `knitr::kable()` together with `kableExtra` turns
+raw R output into a properly typeset table.
+
+## Slide 26 · Summary and outlook
+
+To summarise: Quarto allows you to write documents that contain R code to perform
+statistical analysis and Markdown code to create formatted text using a plain
+text editor.
+
+This allows you to do and describe your statistical analysis within one
+consistent document, which makes research fully transparent and reproducible —
+the figure in your report cannot get out of sync with the data it came from,
+because it is regenerated every time you render.
+
+We covered the main steps of working with Quarto: create the document, set the
+meta data in the header, write text, embed R code, render the document, and share
+the final result. To learn markdown itself, just do the interactive tutorial.
+
+And remember the last line: there are a few mistakes that might easily screw up
+your document, but they are just as easy to avoid.
