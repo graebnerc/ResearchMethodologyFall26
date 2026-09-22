@@ -9,12 +9,19 @@ project:
     - "content/lecture/*/*.qmd"
     - "content/material/*.qmd"
     - "content/material/session*/*.qmd"
-    - "content/tutorials/*.qmd"
-    - "content/tutorials/*/*.qmd"
+    # Only decks that have been reviewed are built. The remaining decks in
+    # content/material/slides/ stay unrendered (and therefore unreachable)
+    # until they are checked; add them here one by one.
+    - "content/material/slides/E1-Introduction.qmd"
     - "content/exercises/*.qmd"
     - "content/exercises/*/*.qmd"
     - "content/statrecap/*.qmd"
     - "content/statrecap/*/*.qmd"
+  # solution.html in the dataprep-vis exercise is a pre-rendered document that
+  # Quarto does not parse, so its supporting folder has to be declared by hand -
+  # otherwise the page is served unstyled and without figures.
+  resources:
+    - "content/exercises/dataprep-vis/solution/solution_files/**"
 
 website:
   title: "Theoretical and Empirical Research Methodology" # Title of website shown on top left
@@ -91,10 +98,12 @@ website:
            text: "Session 10 · Linear models in R"
          - href: content/material/s_11_Experiments.qmd
            text: "Session 11 · Experimental data in R"
-         - href: content/tutorials.qmd
-           text: "💻 Tutorials"
+         - href: content/material/UsingExercises.qmd
+           text: "📦 Using the exercise package"
          - href: content/exercises.qmd
            text: "👾 Additional exercises"
+         - href: https://euf-methodology-hub.netlify.app/resources/
+           text: "📚 Method and Inquiry"
          - href: https://euf-methodology-hub.netlify.app/tracks/statistics-recap
            text: "📈 Statistics recap"
 

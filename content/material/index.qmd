@@ -40,7 +40,7 @@ work through on your own.
 ::: {.callout-note collapse="true"}
 ## How to use the exercise codes?
 For information on how to use the exercise code, read
-[this tutorial](/content/tutorials/using-exercises/).
+[this page](/content/material/UsingExercises.qmd).
 :::
 
 

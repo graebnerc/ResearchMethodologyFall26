@@ -318,11 +318,8 @@
 
 % ---------------------------------------------------------------------------
 % Added for Lecture 02 (AI tools in practice), August 2026.
-% NOTE: these five entries were written from memory and have NOT yet been
-% checked against the published record. Run the verification prompt on the
-% lecture page before the deck is published, and correct anything that is off.
-% The METR author list and the Darvishi volume/article number are the least
-% certain fields.
+% All five entries verified against the published record on 19 September 2026
+% (DOI / publisher page / arXiv resolved for each).
 % ---------------------------------------------------------------------------
 
 @article{noy2023experimental,
@@ -360,7 +357,9 @@
   title = {Measuring the Impact of Early-2025 {{AI}} on Experienced Open-Source Developer Productivity},
   author = {Becker, Joel and Rush, Nate and Barnes, Elizabeth and Rein, David},
   year = {2025},
-  institution = {METR}
+  institution = {METR},
+  url = {https://arxiv.org/abs/2507.09089},
+  urldate = {2026-09-19}
 }
 
 @article{darvishi2024impact,
@@ -371,4 +370,245 @@
   volume = {210},
   pages = {104967},
   doi = {10.1016/j.compedu.2023.104967}
+}
+
+% ---------------------------------------------------------------------------
+% Added 20 September 2026 to source the bias and environment slides of
+% Lecture 02 (review row 19). Two cautions carried over from the search that
+% produced them, and reflected in the wording on the slides:
+%   - the hiring studies are controlled audits of model *output*; none observes
+%     employer behaviour, callbacks or promotion decisions;
+%   - the energy and water figures are projections and bottom-up estimates with
+%     different system boundaries, not metered totals.
+% Li et al. is a preprint (a shorter version later appeared in CACM); Oviedo
+% et al. is industry-authored and production-informed.
+% ---------------------------------------------------------------------------
+
+@inproceedings{an2024discriminate,
+  title = {Do Large Language Models Discriminate in Hiring Decisions on the Basis of Race, Ethnicity, and Gender?},
+  author = {An, Haozhe and Acquaye, Christabel and Wang, Colin K. and Li, Zongxia and Rudinger, Rachel},
+  year = {2024},
+  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)},
+  pages = {386--397},
+  publisher = {Association for Computational Linguistics},
+  doi = {10.18653/v1/2024.acl-short.37}
+}
+
+@inproceedings{wilson2024gender,
+  title = {Gender, Race, and Intersectional Bias in Resume Screening via Language Model Retrieval},
+  author = {Wilson, Kyra and Caliskan, Aylin},
+  year = {2024},
+  booktitle = {Proceedings of the {{AAAI}}/{{ACM}} Conference on {{AI}}, Ethics, and Society},
+  volume = {7},
+  number = {1},
+  pages = {1578--1590},
+  doi = {10.1609/aies.v7i1.31748}
+}
+
+@inproceedings{armstrong2024silicon,
+  title = {The Silicon Ceiling: Auditing {{GPT}}'s Race and Gender Biases in Hiring},
+  shorttitle = {The Silicon Ceiling},
+  author = {Armstrong, Lena and Liu, Abbey and MacNeil, Stephen and Metaxa, Danaë},
+  year = {2024},
+  booktitle = {Proceedings of the 3rd Annual Meeting of the Symposium on Human-Computer Interaction for Work},
+  publisher = {Association for Computing Machinery},
+  doi = {10.1145/3689904.3694699}
+}
+
+@inproceedings{iso2025evaluating,
+  title = {Evaluating Bias in {{LLMs}} for Job-Resume Matching: Gender, Race, and Education},
+  shorttitle = {Evaluating Bias in {{LLMs}} for Job-Resume Matching},
+  author = {Iso, Hayate and Pezeshkpour, Pouya and Bhutani, Nikita and Hruschka, Estevam},
+  year = {2025},
+  booktitle = {Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Industry Track},
+  pages = {672--683},
+  publisher = {Association for Computational Linguistics},
+  doi = {10.18653/v1/2025.naacl-industry.55}
+}
+
+@article{guilbeault2025age,
+  title = {Age and Gender Distortion in Online Media and Large Language Models},
+  author = {Guilbeault, Douglas and Delecourt, Solène and Desikan, Bhargav Srinivasa},
+  year = {2025},
+  journal = {Nature},
+  volume = {646},
+  pages = {1129--1137},
+  doi = {10.1038/s41586-025-09581-z}
+}
+
+@techreport{iea2025energy,
+  title = {Energy and {{AI}}},
+  author = {{International Energy Agency}},
+  year = {2025},
+  institution = {International Energy Agency},
+  address = {Paris},
+  url = {https://www.iea.org/reports/energy-and-ai},
+  urldate = {2026-09-20}
+}
+
+@article{xiao2025environmental,
+  title = {Environmental Impact and Net-Zero Pathways for Sustainable Artificial Intelligence Servers in the {{USA}}},
+  author = {Xiao, Tianyao and Fuso Nerini, Francesco and Matthews, H. Damon and Tavoni, Massimo and You, Fengqi},
+  year = {2025},
+  journal = {Nature Sustainability},
+  volume = {8},
+  number = {12},
+  pages = {1541--1553},
+  doi = {10.1038/s41893-025-01681-y}
+}
+
+@techreport{li2023thirsty,
+  title = {Making {{AI}} Less ``Thirsty'': Uncovering and Addressing the Secret Water Footprint of {{AI}} Models},
+  shorttitle = {Making {{AI}} Less ``Thirsty''},
+  author = {Li, Pengfei and Yang, Jianyi and Islam, Mohammad A. and Ren, Shaolei},
+  year = {2023},
+  type = {Preprint},
+  institution = {arXiv},
+  doi = {10.48550/arXiv.2304.03271}
+}
+
+@techreport{stanford2025aiindex,
+  title = {Artificial Intelligence Index Report 2025, Chapter 1: Research and Development},
+  shorttitle = {{{AI}} Index Report 2025},
+  author = {{Stanford HAI}},
+  year = {2025},
+  institution = {Stanford Institute for Human-Centered Artificial Intelligence, Stanford University},
+  url = {https://hai.stanford.edu/assets/files/hai_ai-index-report-2025_chapter1_final.pdf},
+  urldate = {2026-09-20}
+}
+
+@article{oviedo2026energy,
+  title = {Energy Use of {{AI}} Inference, Efficiency Pathways, and Test-Time Scaling},
+  author = {Oviedo, Felipe and Kazhamiaka, Fiodar and Choukse, Esha and Kim, Allen and Luers, Amy and Nakagawa, Mariana and Bianchini, Ricardo and Lavista Ferres, Juan M.},
+  year = {2026},
+  journal = {Joule},
+  url = {https://www.microsoft.com/en-us/research/publication/energy-use-of-ai-inference-efficiency-pathways-and-test-time-scaling/},
+  urldate = {2026-09-20}
+}
+
+% ---------------------------------------------------------------------------
+% Resources of the EUF methodology hub "Method and Inquiry"
+% (https://euf-methodology-hub.netlify.app). Entries taken verbatim from the
+% citation block of the respective resource page.
+% ---------------------------------------------------------------------------
+
+@inreference{graebner2026-installing-r-and-rstudio,
+  author = {Gräbner-Radkowitsch, Claudius},
+  editor = {Gräbner-Radkowitsch, Claudius},
+  title = {Getting {Started} with {R:} {Installing} {Everything} {You}
+    {Need}},
+  booktitle = {{Method and Inquiry}},
+  date = {2026-06-16},
+  url = {https://euf-methodology-hub.netlify.app/resources/installing-r-and-rstudio},
+  langid = {en}
+}
+
+@inreference{graebner2026-installing-r-packages,
+  author = {Gräbner-Radkowitsch, Claudius},
+  editor = {Gräbner-Radkowitsch, Claudius},
+  title = {Installing {R} {Packages}},
+  booktitle = {{Method and Inquiry}},
+  date = {2026-06-16},
+  url = {https://euf-methodology-hub.netlify.app/resources/installing-r-packages},
+  langid = {en}
+}
+
+@inreference{graebner2026-first-steps-in-r,
+  author = {Gräbner-Radkowitsch, Claudius},
+  editor = {Gräbner-Radkowitsch, Claudius},
+  title = {First {Steps} in {R}},
+  booktitle = {{Method and Inquiry}},
+  date = {2026-06-16},
+  url = {https://euf-methodology-hub.netlify.app/resources/first-steps-in-r},
+  langid = {en}
+}
+
+@inreference{graebner2026-setting-up-an-r-project,
+  author = {Gräbner-Radkowitsch, Claudius},
+  editor = {Gräbner-Radkowitsch, Claudius},
+  title = {Setting {Up} an {R} {Project}},
+  booktitle = {{Method and Inquiry}},
+  date = {2026-06-16},
+  url = {https://euf-methodology-hub.netlify.app/resources/setting-up-an-r-project},
+  langid = {en}
+}
+
+@inreference{graebner2026-r-object-types-i-functions,
+  author = {Gräbner-Radkowitsch, Claudius},
+  editor = {Gräbner-Radkowitsch, Claudius},
+  title = {Object {Types} in {R} {I:} {Functions}},
+  booktitle = {{Method and Inquiry}},
+  date = {2026-06-16},
+  url = {https://euf-methodology-hub.netlify.app/resources/r-object-types-i-functions},
+  langid = {en}
+}
+
+@inreference{graebner2026-r-object-types-ii-vectors,
+  author = {Gräbner-Radkowitsch, Claudius},
+  editor = {Gräbner-Radkowitsch, Claudius},
+  title = {Object {Types} in {R} {II:} {Vectors}},
+  booktitle = {{Method and Inquiry}},
+  date = {2026-06-16},
+  url = {https://euf-methodology-hub.netlify.app/resources/r-object-types-ii-vectors},
+  langid = {en}
+}
+
+@inreference{graebner2026-r-object-types-iii-factors-dataframes,
+  author = {Gräbner-Radkowitsch, Claudius},
+  editor = {Gräbner-Radkowitsch, Claudius},
+  title = {Object {Types} in {R} {III:} {Factors} and {Data} {Frames}},
+  booktitle = {{Method and Inquiry}},
+  date = {2026-06-16},
+  url = {https://euf-methodology-hub.netlify.app/resources/r-object-types-iii-factors-dataframes},
+  langid = {en}
+}
+
+@inreference{graebner2026-importing-exporting-data,
+  author = {Gräbner-Radkowitsch, Claudius},
+  editor = {Gräbner-Radkowitsch, Claudius},
+  title = {Importing and {Exporting} {Data} in {R}},
+  booktitle = {{Method and Inquiry}},
+  date = {2026-06-16},
+  url = {https://euf-methodology-hub.netlify.app/resources/importing-exporting-data},
+  langid = {en}
+}
+
+@inreference{graebner2026-data-preparation-tidyverse,
+  author = {Gräbner-Radkowitsch, Claudius},
+  editor = {Gräbner-Radkowitsch, Claudius},
+  title = {Data {Preparation} with the {Tidyverse}},
+  booktitle = {{Method and Inquiry}},
+  date = {2026-06-16},
+  url = {https://euf-methodology-hub.netlify.app/resources/data-preparation-tidyverse},
+  langid = {en}
+}
+
+@inreference{graebner2026-visualization-ggplot2,
+  author = {Gräbner-Radkowitsch, Claudius},
+  editor = {Gräbner-Radkowitsch, Claudius},
+  title = {Visualization with Ggplot2},
+  booktitle = {{Method and Inquiry}},
+  date = {2026-06-16},
+  url = {https://euf-methodology-hub.netlify.app/resources/visualization-ggplot2},
+  langid = {en}
+}
+
+@inreference{graebner2026-linear-regression-r,
+  author = {Gräbner-Radkowitsch, Claudius},
+  editor = {Gräbner-Radkowitsch, Claudius},
+  title = {Linear {Regression} in {R}},
+  booktitle = {{Method and Inquiry}},
+  date = {2026-06-16},
+  url = {https://euf-methodology-hub.netlify.app/resources/linear-regression-r},
+  langid = {en}
+}
+
+@inreference{graebner2026-experiments-in-r,
+  author = {Gräbner-Radkowitsch, Claudius},
+  editor = {Gräbner-Radkowitsch, Claudius},
+  title = {Experiments in {R}},
+  booktitle = {{Method and Inquiry}},
+  date = {2026-06-16},
+  url = {https://euf-methodology-hub.netlify.app/resources/experiments-in-r},
+  langid = {en}
 }

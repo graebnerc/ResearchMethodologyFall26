@@ -27,14 +27,13 @@ tons of hours of frustration in the future!
 
 ## 🎥 Lecture videos 
 
-Currently, no videos are available for this session. Check out the tutorial
-on 
-[project setup](/content/tutorials/setting-up-an-r-project/index.qmd) 
-instead.
+Currently, no videos are available for this session. Check out the resource
+[Setting Up an R Project](https://euf-methodology-hub.netlify.app/resources/setting-up-an-r-project)
+on *Method and Inquiry* instead.
 
 ## 📚 Mandatory Reading
 
-- The tutorial [Setting up an R project](/content/tutorials/setting-up-an-r-project/index.qmd)
+- [Setting Up an R Project](https://euf-methodology-hub.netlify.app/resources/setting-up-an-r-project) on *Method and Inquiry* [@graebner2026-setting-up-an-r-project]
 
 ## Further Reading
 
@@ -48,7 +47,7 @@ Personally, I can recommend the following:
 ## ✍️ Coursework
 
 - Do the exercises `ProjectOrga` from the `DataScienceExercises` package that refer to setting up an R project
-- If you still have problems with R Packages, re-read the [respective section](/content/tutorials/first-steps/#r-packages) of the tutorial from session 2
+- If you still have problems with R Packages, re-read the [respective section](https://euf-methodology-hub.netlify.app/resources/first-steps-in-r#r-packages) of the resource from session 2
 
 ::: {.callout-tip collapse="true"}
 ## Quick code for starting the exercises

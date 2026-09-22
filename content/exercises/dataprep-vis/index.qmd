@@ -14,7 +14,7 @@ along with additional explanations can be found
 
 ## Customer Satisfaction Tracking
 
-- [Data for exercise 1](/content/exercises/dataprep-vis/customer_satisfaction.csv)
+- [Data for exercise 1](/content/exercises/dataprep-vis/solution/customer_satisfaction.csv)
 
 > **Background:**
 You work for a company that recently implemented new customer service protocols.

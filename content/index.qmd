@@ -71,7 +71,7 @@ There is an R package with interactive exercises for the implementation lab.
 I strongly recommend to do the exercises for each session since regular
 practice is the most important determinant in your success in learning R.
 You find more information on how to use the exercises in
-[this tutorial](/content/tutorials/using-exercises/index.qmd).
+[this short guide](/content/material/UsingExercises.qmd).
 On top of that, there are some additional exercises on selected topics
 [here](/content/exercises.qmd).
 
@@ -84,11 +84,16 @@ Complete material lists for the single sessions are distributed via the
 respective session pages. Scientific publications that are not available open
 access can be obtained via Moodle.
 
-# 📖 Tutorials
+# 📚 Method and Inquiry
 
-Complementary to the lab sessions there are also short tutorials,
-which explain certain concepts in a more detailed and applied manner.
-You can find an overview over all tutorials [here](/content/tutorials.qmd).
+The tutorials complementing the lab sessions — on installing R, object types,
+data import and preparation, visualization, regression and much more — are
+hosted on [Method and Inquiry](https://euf-methodology-hub.netlify.app/), the
+methodology hub of the Europa-Universität Flensburg. The session pages link the
+relevant resource for each week; you can also browse the full
+[resource library](https://euf-methodology-hub.netlify.app/resources/)
+and the thematic
+[tracks](https://euf-methodology-hub.netlify.app/tracks/) yourself.
 
 # 💌 Contact and discussion
 

@@ -1,11 +1,27 @@
 ---
-title: Using the exercise package
+title: "📦 Using the exercise package"
 date: '2025-09-19'
+date-modified: last-modified
 documentclass: scrartcl
+title-block-banner: false
+execute:
+  freeze: auto
+  message: false
+  warning: false
+  error: true
 format: 
-  html: # Settings set in _metadata.yml
+  html:
+    highlight: tango
     toc: true
+    toc-depth: 2
+    toc-location: right
+    code-fold: true
+    code-summary: "Show R code"
   pdf:
+    papersize: a4
+    toc: true
+    toc-depth: 2
+    number-sections: true
     include-in-header:  
       text: |
         \usepackage{lmodern} 
@@ -65,8 +81,9 @@ the [gradethis](https://github.com/rstudio/gradethis) package,
 and are distributed in the package `DataScienceExercises`.
 
 To use the exercises you must have installed the packages `learnr`, `gradethis`
-and `DataScienceExercises`. If you followed the instructions in the tutorial on 
-[installing R packages](/tutorial/installing-packages/) this should be the case. 
+and `DataScienceExercises`. If you followed the instructions in the resource
+[Installing R Packages](https://euf-methodology-hub.netlify.app/resources/installing-r-packages)
+on *Method and Inquiry* [@graebner2026-installing-r-packages], this should be the case. 
 If for some reasons you need to install them, you can do this via:
 
 ```{r}
@@ -104,7 +121,7 @@ remotes::install_github(
 This should update your package version to the most recent release.
 
 If you want to start an exercise you first need to figure out the name of the
-exercise sheet. This is provided in the [Material section](/material/) 
+exercise sheet. This is provided in the [lab overview](/content/material/index.qmd) 
 of the course webpage. 
 Then you call execute the following code via the console in R Studio,
 replacing 'EX_NAME' with the name of the exercise sheet:
@@ -130,3 +147,8 @@ Lastly, if you encounter a bug or a mistake, or have an idea for a good
 exercise, please let me know via the 
 [issue tracker](https://github.com/graebnerc/DataScienceExercises/issues)
 of the `DataScienceExercises` package or via Moodle. Thank you!
+
+## References
+
+::: {#refs}
+:::

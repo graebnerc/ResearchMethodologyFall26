@@ -102,7 +102,6 @@ if (( ! FULL )); then
   # them alongside the entry.
   for f in $changed; do
     case $f in
-      ./content/tutorials/*) [[ -f ./content/tutorials.qmd ]] && extra+=(./content/tutorials.qmd) ;;
       ./content/exercises/*) [[ -f ./content/exercises.qmd ]] && extra+=(./content/exercises.qmd) ;;
     esac
   done

@@ -36,7 +36,7 @@ All the videos are available via this [playlist](https://youtube.com/playlist?li
 
 ## 📚 Mandatory Reading
 
-- The tutorial [visualization](/content/tutorials/visualization/index.qmd)
+- [Visualization with ggplot2](https://euf-methodology-hub.netlify.app/resources/visualization-ggplot2) on *Method and Inquiry* [@graebner2026-visualization-ggplot2]
 
 ## Further Reading
 

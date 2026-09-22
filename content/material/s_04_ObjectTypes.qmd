@@ -63,14 +63,15 @@ are available via this [playlist](https://www.youtube.com/playlist?list=PLZDawQM
 
 ## 📚 Mandatory Reading
 
-Read the following tutorials for the first part on basic object types:
+Read the following resources on *Method and Inquiry* for the first part on
+basic object types:
 
-- [Fundamental object types in R I: Functions](/content/tutorials/obj-types-i-functions/index.qmd)
-- [Fundamental object types in R II: Vectors](/content/tutorials/obj-types-ii-vectors/index.qmd)
+- [Object Types in R I: Functions](https://euf-methodology-hub.netlify.app/resources/r-object-types-i-functions) [@graebner2026-r-object-types-i-functions]
+- [Object Types in R II: Vectors](https://euf-methodology-hub.netlify.app/resources/r-object-types-ii-vectors) [@graebner2026-r-object-types-ii-vectors]
 
 The topics of the second part on advanced object types are covered here:
 
-- [Fundamental object types in R III: Factors and data frames](/content/tutorials/obj-types-iii-adv/index.qmd)
+- [Object Types in R III: Factors and Data Frames](https://euf-methodology-hub.netlify.app/resources/r-object-types-iii-factors-dataframes) [@graebner2026-r-object-types-iii-factors-dataframes]
 
 ### 🏆 Further readings
 
