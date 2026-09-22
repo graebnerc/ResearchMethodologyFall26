@@ -95,7 +95,8 @@ venv.bak/
 # the .html next to its .qmd instead, which is a local build artifact.
 content/lecture/slides/*.html
 
-# Compiled reveal.js theme byproducts. Quarto writes one content-hashed CSS
-# file per render of a revealjs deck; they accumulate and are rebuilt from
-# content/lecture/slides/euf-slides.scss on every render.
-_freeze/site_libs/revealjs/dist/theme/
+# Quarto's freeze cache. It is a local build artifact: the site is rendered on
+# this machine and uploaded as finished HTML by `quarto publish netlify`, so
+# Netlify never needs it, and renv.lock is what makes a rebuild reproducible.
+# Keeping it out of git avoids the churn it caused in every commit.
+_freeze/
