@@ -42,8 +42,9 @@ hub of the Europa-Universität Flensburg:
   - 📥 The installation script referred to in this tutorial is specific to our
     course: download it here:
     [`install_packages_script.R`](install_packages_script.R). Save it in a
-    directory of your choice, open it in R-Studio, adjust the first line to your
-    operating system, and then run the whole script as explained in the tutorial.
+    directory of your choice, open it in R-Studio, and run the whole script as
+    explained in the tutorial. There is nothing you need to adjust beforehand,
+    and you can re-run the script at any point during the semester.
 
 In addition, read the course-specific page on
 [using the exercise package](/content/material/UsingExercises.qmd).

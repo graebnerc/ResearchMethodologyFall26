@@ -87,20 +87,20 @@ on *Method and Inquiry* [@graebner2026-installing-r-packages], this should be th
 If for some reasons you need to install them, you can do this via:
 
 ```{r}
-pack_names <- c(
-  "rstudio/learnr",
-  "rstudio/gradethis",
-  "graebnerc/DataScienceExercises"
+#| eval: false
+install.packages(
+  c("learnr", "gradethis", "DataScienceExercises"),
+  repos = c(
+    "https://teaching-datascience.r-universe.dev",
+    "https://cloud.r-project.org"
+  )
 )
-remotes::install_github(
-  repo = pack_names, upgrade = "always")
 ```
 
-Note that this requires a previous installation of the package `remotes`:
-
-```{r}
-install.packages("remotes")
-```
+The first of the two addresses is the package repository of this course. It
+provides ready-made versions of `gradethis` and `DataScienceExercises`, which
+are not available on CRAN, so no additional developer tools are required on
+your computer.
 
 Since I update the exercises according to your feedback, and add new 
 exercises over the semester, I strongly recommend you to update the package
@@ -114,8 +114,14 @@ To update the package, simply type the following into the console and press
 `Enter`:
 
 ```{r}
-remotes::install_github(
-  repo = "graebnerc/DataScienceExercises", upgrade = "always")
+#| eval: false
+install.packages(
+  "DataScienceExercises",
+  repos = c(
+    "https://teaching-datascience.r-universe.dev",
+    "https://cloud.r-project.org"
+  )
+)
 ```
 
 This should update your package version to the most recent release.
@@ -127,6 +133,7 @@ Then you call execute the following code via the console in R Studio,
 replacing 'EX_NAME' with the name of the exercise sheet:
 
 ```{r}
+#| eval: false
 learnr::run_tutorial(
   name = "EX_NAME", 
   package = "DataScienceExercises", 
@@ -137,6 +144,7 @@ The first exercise sheet, for instance, is called `Basics`. Thus, to call it
 execute the following:
 
 ```{r}
+#| eval: false
 learnr::run_tutorial(
   name = "Basics", 
   package = "DataScienceExercises", 
@@ -145,7 +153,7 @@ learnr::run_tutorial(
 
 Lastly, if you encounter a bug or a mistake, or have an idea for a good 
 exercise, please let me know via the 
-[issue tracker](https://github.com/graebnerc/DataScienceExercises/issues)
+[issue tracker](https://github.com/teaching-datascience/DataScienceExercises/issues)
 of the `DataScienceExercises` package or via Moodle. Thank you!
 
 ## References
