@@ -16,6 +16,9 @@ jointly by several members of the teaching team (see the individual session
 pages for who teaches what). The goals, rules and workload of the module are
 documented in the [seminar description](/content/SeminarDescription.qmd).
 
+The only exception is **lecture 8 on literature reviews (9 November)**, which
+is a video lecture without an on-site meeting.
+
 ::: {.callout-note collapse="true"}
 ## How does the lecture relate to the lab?
 The two parts run in parallel and are designed to complement each other: a topic
@@ -35,7 +38,7 @@ hands-on in the Friday lab. You find the lab schedule on the
 |     5     | 19 Oct 2026 | [Quantitative and qualitative research](/content/lecture/l_05_QuantQual.qmd) |   Anna-Katharina     |
 |     6     | 26 Oct 2026 | [Interviews](/content/lecture/l_06_Interviews.qmd)                         |    Anna-Katharina     |
 |     7     | 02 Nov 2026 | [Case studies](/content/lecture/l_07_CaseStudies.qmd)                       |    Anna-Katharina     |
-|     8     | 09 Nov 2026 | [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd)           |    Claudius     |
+|     8     | 09 Nov 2026 | [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd) *(video)* |    Claudius     |
 |     9     | 16 Nov 2026 | [Statistics recap](/content/lecture/l_09_StatisticsRecap.qmd)               |    Claudius     |
 |    10     | 23 Nov 2026 | [Regression analysis](/content/lecture/l_10_Regression.qmd)                 |    Claudius     |
 |    11     | 30 Nov 2026 | [Experiments](/content/lecture/l_11_Experiments.qmd)                       |    Claudius     |

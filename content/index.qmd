@@ -52,7 +52,7 @@ authoritative schedule:
 |  5   | [Quantitative and qualitative research](/content/lecture/l_05_QuantQual.qmd) | [Quarto and R Markdown](/content/material/s_05_Quarto.qmd) *(video & on-site)* |
 |  6   | [Interviews](/content/lecture/l_06_Interviews.qmd) | [Importing data](/content/material/s_06_DataImport.qmd) *(video)* |
 |  7   | [Case studies](/content/lecture/l_07_CaseStudies.qmd) | [Data preparation](/content/material/s_07_DataPreparation.qmd) *(video)* |
-|  8   | [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd) | [Data visualization](/content/material/s_08_Visualization.qmd) *(video)* |
+|  8   | [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd) *(video lecture)* | [Data visualization](/content/material/s_08_Visualization.qmd) *(video)* |
 |  9   | [Statistics recap](/content/lecture/l_09_StatisticsRecap.qmd) | [Using AI for coding](/content/material/s_09_AICoding.qmd) *(on-site)* |
 |  10  | [Regression analysis](/content/lecture/l_10_Regression.qmd) | [Linear models in R](/content/material/s_10_LinearModels.qmd) *(on-site)* |
 |  11  | [Experiments](/content/lecture/l_11_Experiments.qmd) | [Experimental data in R](/content/material/s_11_Experiments.qmd) *(on-site)* |

@@ -105,7 +105,8 @@ concepts, which are listed in @sec-priorknowledge.
 
 ### Course Details
 
-- **Main lecture:** Mondays, 11:30–13:00, Room MAD 024 (Madrid Building)
+- **Main lecture:** Mondays, 11:30–13:00, Room MAD 024 (Madrid Building).
+  Exception: lecture 8 on literature reviews (9 November) is a video lecture.
 - **Implementation lab:** Fridays, 11:15–12:45, Room MAD 024 (Madrid Building).
   Note that the lab does *not* meet on site every week: several sessions are
   video labs that you work through on your own. Which Friday is which is
@@ -149,7 +150,7 @@ column *Lab (Fri)* also states whether the session is an **on-site lab** or a
 | 5 | 19.10. | [Quantitative and qualitative research](https://researchmethodology-fall26.netlify.app/content/lecture/l_05_QuantQual.html) | AKK | 23.10. (video & on-site) | [Quarto and R Markdown](https://researchmethodology-fall26.netlify.app/content/material/s_05_Quarto.html) |
 | 6 | 26.10. | [Interviews](https://researchmethodology-fall26.netlify.app/content/lecture/l_06_Interviews.html) | AKK | 30.10. (video) | [Importing data](https://researchmethodology-fall26.netlify.app/content/material/s_06_DataImport.html) |
 | 7 | 02.11. | [Case studies](https://researchmethodology-fall26.netlify.app/content/lecture/l_07_CaseStudies.html) | AKK | 06.11. (video) | [Data preparation](https://researchmethodology-fall26.netlify.app/content/material/s_07_DataPreparation.html) |
-| 8 | 09.11. | [Literature reviews](https://researchmethodology-fall26.netlify.app/content/lecture/l_08_LiteratureReviews.html) — *Take-home examination II* | CGR | 13.11. (video) | [Data visualization](https://researchmethodology-fall26.netlify.app/content/material/s_08_Visualization.html) (plus [recap exercises](https://researchmethodology-fall26.netlify.app/content/material/s_08b_Recap.html)) |
+| 8 | 09.11. | [Literature reviews](https://researchmethodology-fall26.netlify.app/content/lecture/l_08_LiteratureReviews.html) (video lecture) — *Take-home examination II* | CGR | 13.11. (video) | [Data visualization](https://researchmethodology-fall26.netlify.app/content/material/s_08_Visualization.html) (plus [recap exercises](https://researchmethodology-fall26.netlify.app/content/material/s_08b_Recap.html)) |
 | 9 | 16.11. | [Statistics recap](https://researchmethodology-fall26.netlify.app/content/lecture/l_09_StatisticsRecap.html) — *Take-home examination III* | CGR | 20.11. (on-site) | [Using AI for coding](https://researchmethodology-fall26.netlify.app/content/material/s_09_AICoding.html) |
 | 10 | 23.11. | [Regression analysis](https://researchmethodology-fall26.netlify.app/content/lecture/l_10_Regression.html) | CGR | 27.11. (on-site) | [Linear models in R](https://researchmethodology-fall26.netlify.app/content/material/s_10_LinearModels.html) |
 | 11 | 30.11. | [Experiments](https://researchmethodology-fall26.netlify.app/content/lecture/l_11_Experiments.html) | CGR | 04.12. (on-site) | [Experimental data in R](https://researchmethodology-fall26.netlify.app/content/material/s_11_Experiments.html) |

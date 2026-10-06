@@ -4,52 +4,134 @@ date: "2026-11-09"
 date-modified: last-modified
 ---
 
+::: {.callout-important}
+## This lecture is a video lecture
+There is no on-site lecture on 9 November 2026. The lecture is recorded as nine
+short chapters (about 90 minutes in total) that you can watch in your own time.
+Please watch them **before** you start the take-home examination on literature
+reviews, which is published on Moodle on 9 November.
+:::
+
 ## 🎯 Content and goals
 
-- You can describe the different kinds of literature review and can decide which type is adequate for what purpose.
-- You know about the PRISMA guidelines for systematic literature reviews and understand central concepts, such as 'search strategy', 'keywords', or 'citation networks'.
-- You can use Web of Science to conduct a systematic literature review.
-- You know how to document a systematic literature review.
-- You know about various assistance tools for literature reviews; in particular, you understand the difference between citation-based and syntax-based tools and can decide which one is better suited for a given task.
+The lecture uses the systematic literature review as the reference model and
+shows what it means for the literature review section of your term paper or
+thesis. After this session you can …
+
+1. **choose** a type of review (narrative, integrative, scoping, systematic,
+   meta-analysis, bibliometric) that fits a given purpose, and justify the
+   choice;
+2. **explain** what a literature review can establish and what it cannot;
+3. **translate** a topic into a reviewable question and a concept table, and
+   from there into a documented Boolean search string for Web of Science;
+4. **assess** a search in terms of precision and recall, and validate it
+   against known key publications;
+5. **apply** explicit inclusion and exclusion criteria and document the
+   selection in a PRISMA 2020 flow diagram;
+6. **synthesise** literature with a concept matrix instead of summarising it
+   paper by paper;
+7. **identify** the main sources of bias in the literature, in your own search
+   and in your synthesis, and report them as limitations;
+8. **distinguish** keyword-based, semantic (AI) and citation-based search
+   tools, and use AI at each stage without giving up reproducibility (see
+   [Lecture 02](l_02_AITools.qmd)).
+
+The running example is the literature on **capabilities and routines** — from
+Nelson and Winter's evolutionary theory to dynamic capabilities in strategic
+management. Shorter examples come from firm growth, evolutionary economic
+geography, path dependence, and the debate on corporate social and financial
+performance.
+
+## 🎬 Video chapters
+
+| # | Chapter | Length | Video |
+|:-:|:--------|:------:|:-----:|
+| 0 | Introduction and running example | ~4 min | *tba* |
+| 1 | What a review is for — and what it can and cannot do | ~12 min | *tba* |
+| 2 | The workflow and a reviewable question | ~9 min | *tba* |
+| 3 | Searching in Web of Science | ~17 min | *tba* |
+| 4 | Screening and selection | ~9 min | *tba* |
+| 5 | From summary to synthesis | ~12 min | *tba* |
+| 6 | Biases, limitations, and caveats | ~13 min | *tba* |
+| 7 | Reporting, reproducibility, and AI | ~10 min | *tba* |
+| 8 | Wrap-up | ~4 min | *tba* |
+
+: Each chapter ends with a short self-check question. You do not need to watch
+everything in one go, but please keep the order.
 
 ## 🖥️ Lecture Slides
 
-*The slides for this lecture will be made available here.*
-
-<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
-and embed it with the block below (adjust the filename):
-
 ```{=html}
 <div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
-<iframe src="slides/RM26_L08_LiteratureReviews.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+<iframe src="slides/RM26_L08_LiteratureReviews.html" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
 </div>
 ```
--->
+
+[Open the slides in a separate tab](slides/RM26_L08_LiteratureReviews.html){.btn .btn-primary}
+
+## 🧰 Tutorial and templates
+
+- [**A mini systematic review in eight steps**](lit-review-tutorial/index.qmd) —
+  the hands-on companion to the lecture. It walks you through a complete small
+  review in Web of Science, from the concept table to the flow diagram, and
+  includes an optional R part that builds on the implementation lab.
+- The tutorial comes with three templates you can reuse for your term paper:
+  a **search log**, a **screening sheet**, and a **concept matrix**.
+
+Access to Web of Science is provided through the university library; see the
+[ZHB database entry](https://dbis.ur.de/HDFL/resources/3366?lang=de).
 
 ## 📚 Mandatory Reading
 
-- @page2021prisma
-- @page2021prismaexplanation
-- It is also insightful to have a look at the materials at the [PRISMA website](https://www.prisma-statement.org).
+- @snyder2019literature — a short overview of review types and how to choose
+  between them, written for business research.
+- @page2021prisma — the PRISMA 2020 statement. Concentrate on the checklist and
+  the flow diagram; the rest you can skim.
 
 ## 🏆 Further Readings
 
-- The official [PRISMA Website](https://www.prisma-statement.org/) with useful material and templates
-- [Web of Science](https://clarivate.com/academia-government/scientific-and-academic-research/research-discovery-and-referencing/web-of-science/)
-  - Info on how to access it can be found via the [ZHB](https://dbis.ur.de/HDFL/resources/3366?lang=de)
+*On method:*
 
-*As concrete examples for systematic reviews:*
+- @tranfield2003towards — the classic argument for systematic reviews in
+  management, and why they need to differ from the medical template.
+- @webster2002analyzing — the origin of the concept matrix.
+- @grant2009typology — fourteen review types, if you want the full map.
+- @page2021prismaexplanation — the PRISMA explanation and elaboration paper;
+  use it as a reference, not as reading.
+- @rethlefsen2021prismas — PRISMA-S, on how to report the search itself.
+- @gusenbauer2020which — which search systems are suitable for systematic
+  reviews (and why Google Scholar is not one of them).
+- The official [PRISMA website](https://www.prisma-statement.org/) with
+  checklists and flow-diagram templates.
 
-- @aistleitner2021capability
-- @graebner2023degrowth
+*Reviews used as examples in the lecture:*
+
+- @becker2004organizational and @lane2006reification — two reviews that show
+  how a concept drifts as a literature grows.
+- @schilke2018quo — a content-analytic review of dynamic capabilities.
+- @content2016related — a short systematic review in evolutionary economic
+  geography.
+- @aistleitner2021capability and @graebner2023degrowth — two systematic
+  reviews I was involved in, discussed in the lecture as worked examples.
 
 ## ✍️ Exercises and coursework
 
-*Take-home examination (pass/fail; you must pass two of the three take-home
+*Take-home examination II (pass/fail; you must pass two of the three take-home
 examinations to be admitted to the final exam — see the
 [seminar description](/content/SeminarDescription.qmd)):*
 
-- Conduct a small systematic literature review as described in the lecture slides and on [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920) 
+- Conduct a small systematic literature review on a question that will be given
+  to you. The task is published on
+  [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920)
+  on 9 November 2026 and follows the steps of the
+  [tutorial](lit-review-tutorial/index.qmd). Do not forget the
+  [AI disclosure](ai-disclosure/index.qmd).
+
+*Suggested exercise (not graded):*
+
+- Take the literature review section of a paper you have recently read and fill
+  in a concept matrix for the studies it cites. Is the section a synthesis, or a
+  sequence of summaries?
 
 -------
 

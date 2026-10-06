@@ -142,11 +142,26 @@ AI disclosure. Pass/fail.
   types); Rethlefsen et al. 2021, PRISMA-S; Haddaway et al. 2022, PRISMA2020
   R package; own SLRs as examples.
 
-## Running examples (proposal)
+## Running examples (agreed)
 
-- **Lecture:** CSR / ESG and financial performance — large, contested
-  literature with documented meta-analyses and publication-bias debates; good
-  for chapters 1, 5 and 6.
+- **Lecture main thread: capabilities and routines** — Nelson & Winter's
+  routines, absorptive capacity, dynamic capabilities. Sits at the
+  intersection of evolutionary economics and strategic management. Carries
+  ch. 1 (integrative / theory-building review), ch. 2 (concept table),
+  ch. 3 (terminology bias: routines / capabilities / competences / RBV name
+  overlapping ideas in different communities), ch. 5 (concept matrix of
+  definitions) and ch. 6 (citation bias: reification of absorptive capacity).
+- **Lecture spotlights:**
+  - *Firm growth and Gibrat's law* — synthesising conflicting results
+    (ch. 5); survivorship bias (ch. 6); link to the lab's firm growth data.
+  - *Related variety* (evolutionary economic geography) — heterogeneous
+    measures prevent naive aggregation (ch. 5/6).
+  - *Path dependence / QWERTY* — what a review cannot do: map a controversy,
+    not settle the facts (ch. 1 and 8).
+  - *CSR / ESG and financial performance* — publication bias and
+    meta-analysis (ch. 1 typology, ch. 6).
+  - *Own SLRs* (capability accumulation; degrowth and the Global South) —
+    "how it was actually done".
 - **Tutorial:** four-day week / reduced working time — manageable result set,
   strongly varying terminology ("four-day week", "compressed work week",
   "working time reduction"), ideal for showing terminology bias.
