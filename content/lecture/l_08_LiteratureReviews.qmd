@@ -109,8 +109,8 @@ Access to Web of Science is provided through the university library; see the
 - @becker2004organizational and @lane2006reification — two reviews that show
   how a concept drifts as a literature grows.
 - @schilke2018quo — a content-analytic review of dynamic capabilities.
-- @content2016related — a short systematic review in evolutionary economic
-  geography.
+- @content2016related — a short review of 21 empirical studies in
+  evolutionary economic geography.
 - @aistleitner2021capability and @graebner2023degrowth — two systematic
   reviews I was involved in, discussed in the lecture as worked examples.
 
