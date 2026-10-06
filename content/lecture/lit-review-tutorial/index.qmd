@@ -1,0 +1,605 @@
+---
+title: "A mini systematic review in eight steps"
+subtitle: "Tutorial for lecture 8 — with templates and an optional R part"
+date: "2026-11-09"
+date-modified: last-modified
+execute:
+  eval: false
+resources:
+  - L08-review-templates.xlsx
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    code-fold: false
+---
+
+::: {.callout-note}
+## How to use this tutorial
+This tutorial turns the [lecture](../l_08_LiteratureReviews.qmd) into eight
+steps you carry out yourself. Each step points back to the lecture chapter that
+explains the *why*; here we focus on the *how*.
+
+- **Example topic:** the four-day week and other forms of working time
+  reduction. It is deliberately *not* the topic of the take-home examination.
+  Use it to practise, then repeat the steps on your own topic.
+- **Database:** Web of Science Core Collection, accessed via the
+  [ZHB](https://dbis.ur.de/HDFL/resources/3366?lang=de).
+- **Templates:** download the
+  [workbook with all templates](L08-review-templates.xlsx) (search log,
+  screening sheet, concept matrix, limitations). It works in Excel, LibreOffice
+  and Numbers.
+- **Optional R part:** @sec-r shows how to analyse your Web of
+  Science export with the tools from the implementation lab. The code is shown
+  but not run on this page, because it needs your own export.
+:::
+
+::: {.callout-warning}
+## Hit counts will differ
+Web of Science is updated continuously, and the indexes available depend on the
+university's subscription. Your numbers will not match anyone else's exactly —
+which is why you record the **date** of every search.
+:::
+
+# Step 1: From topic to question and concept table
+
+*Lecture chapter 2.*
+
+A topic is not a question. Start by writing a question that tells you what is
+in and what is out:
+
+> **Example question:** *Which effects of reducing working time — in particular
+> through a four-day week — on employees and firms are reported in empirical
+> studies?*
+
+Then split the question into its **concepts** and collect, for each concept,
+the different ways in which authors express it. One column per concept:
+
+| Working time reduction | Outcomes | (Empirical design) |
+|:-----------------------|:---------|:-------------------|
+| four-day week | productivity | trial |
+| 4-day week | well-being / wellbeing | survey |
+| working time reduction | job satisfaction | panel |
+| reduced working hours | burnout, stress | case study |
+| shorter working week | absenteeism | |
+| compressed work week ⚠️ | turnover | |
+
+: Example concept table. The third column is optional: you can capture "empirical" through the string or through your inclusion criteria — but you must document which.
+
+::: {.callout-tip collapse="true"}
+## ⚠️ Same words, different interventions
+A *compressed* work week usually means the **same** number of hours in fewer
+days. A four-day week in the "100-80-100" sense means **fewer** hours for the
+same pay. Both are called "four-day week" in parts of the literature. Decide now
+whether both are in scope — and write it into your criteria. This is the
+terminology problem from lecture chapter 6 in miniature: the same word can name
+different things, and different words can name the same thing.
+:::
+
+**Write down your inclusion and exclusion criteria now**, before you search.
+For the example:
+
+- **Include:** empirical studies (quantitative or qualitative) of a reduction
+  in working time at firm, sector or country level that report at least one
+  outcome for employees or firms.
+- **Exclude:** purely conceptual or normative papers; studies of part-time work
+  chosen by individuals; overtime regulation without reduction of normal hours.
+- **Document type:** journal articles and reviews.
+- **Language:** English (a limitation you will report in Step 8).
+- **Period:** no restriction.
+
+# Step 2: Harvest terms and build a test set
+
+*Lecture chapter 3.*
+
+Your concept table is only as good as your vocabulary. Three sources help:
+
+1. **Key papers you already know.** Look at their titles, abstracts and author
+   keywords. Every term they use belongs in your table.
+2. **A semantic search tool** (see the
+   [tool list in lecture 2](../l_02_AITools.qmd#b-grounded-search)). Ask it your
+   question, then look at the *vocabulary* of the papers it suggests — not at
+   its summary. This is where semantic tools are genuinely useful in a
+   systematic review.
+3. **Neighbouring communities.** Who else works on this? Labour economists,
+   occupational health researchers, management scholars, and degrowth and
+   ecological economists all study working time — with different words
+   ("working time reduction", "work-sharing", "sufficiency").
+
+At the same time, build a **test set**: three to five papers that *must* be
+found by a good search. Note them in the search log. You will use them in
+Step 3 to check recall.
+
+::: {.callout-important}
+## Verify what AI tools suggest
+Any paper a semantic tool suggests must be found in Web of Science or opened
+at the publisher before it enters your test set. A paper that you cannot find
+anywhere does not exist (see the
+[citation-checking exercise](../ai-citation-check/index.qmd)).
+:::
+
+# Step 3: Build and test the search string in Web of Science
+
+*Lecture chapter 3.*
+
+## Translate the table into a string
+
+OR within a concept, AND between concepts. In Web of Science, open
+**Advanced Search** and use field tags:
+
+| Tag | Searches | Use for |
+|:----|:---------|:--------|
+| `TS=` | Topic: title, abstract, author keywords, Keywords Plus | Most searches |
+| `TI=` | Title only | Very precise, low recall |
+| `AB=` | Abstract only | Rarely needed |
+| `AK=` | Author keywords | Checking vocabulary |
+
+: The field tags you need most often.
+
+A first version of the example string:
+
+```text
+TS=("four-day week*" OR "4-day week*" OR "four day week*"
+    OR "working time reduction" OR "work time reduction"
+    OR "reduced working hours" OR "reduction in working hours"
+    OR "shorter working week*" OR "shorter workweek*")
+AND
+TS=(productiv* OR well-being OR wellbeing OR satisfaction
+    OR burnout OR stress OR absentee* OR turnover OR performance)
+```
+
+- **Quotation marks** keep phrases together.
+- `*` stands for any number of characters (`productiv*` → productivity,
+  productive).
+- `?` stands for exactly one character, `$` for zero or one.
+- Check the Web of Science help page on *search rules* for how it handles
+  hyphens and word forms; it changes occasionally.
+
+::: {.callout-tip}
+## Use the search history
+Run each concept as its own search (`#1`, `#2`) and combine them in a third
+search (`#1 AND #2`). You then see how many records each concept contributes —
+very useful when a string returns far too many or far too few results.
+:::
+
+## Test recall with your test set
+
+Search for each test-set paper by title. Is it in your result set? (Combine
+`#3 AND TI=("exact title")`.) If a paper is missing, look at its title,
+abstract and keywords: which term would have caught it? Add it, rerun, and
+**log the new version**.
+
+## Apply filters — and record them
+
+Use *Refine results* for document type, language and years. Filters are part of
+your search: write each one into the search log, together with the number of
+results before and after.
+
+# Step 4: Keep a search log
+
+*Lecture chapter 7.*
+
+The search log is what makes your review reproducible. Use the sheet
+**Search log** in the [template workbook](L08-review-templates.xlsx). For every
+version of your string, record:
+
+| Field | Example |
+|:------|:--------|
+| Date | 2026-11-12 |
+| Database and indexes | Web of Science Core Collection (indexes as listed under *Editions*) |
+| Version | v2 |
+| Full string | `TS=(...) AND TS=(...)` — copied, not paraphrased |
+| Filters | Document types: Article, Review; Language: English |
+| Results | number of records |
+| Test set found | e.g. 4 of 5 |
+| Change from previous version | added "work-sharing" after test paper 3 was missed |
+
+: What goes into the search log.
+
+::: {.callout-note}
+A string you cannot reproduce from your log is a string you cannot report. Fill
+in the log *while* you search, not afterwards.
+:::
+
+# Step 5: Export and screen
+
+*Lecture chapter 4.*
+
+## Export
+
+From the result list, choose **Export → Tab delimited file**, with record
+content **Full Record**. If you plan to snowball in Web of Science, include
+**Cited References**. Large result sets have to be exported in batches; the
+export dialogue shows the maximum per batch. Keep all files in one folder
+(e.g. `data/wos/`) and do not rename the columns.
+
+You can also export to your reference manager (RIS for Zotero) — useful for
+writing, but keep the tab-delimited file as the record of your search.
+
+## Screen titles and abstracts
+
+Use the sheet **Screening** in the template workbook — one row per record — or
+let R build it for you (@sec-r-screening). For each record:
+
+- **decision_ta:** include / exclude / unsure (unsure stays in for round 2)
+- **reason_ta:** optional at this stage
+
+## Screen full texts
+
+For every record that survived round 1, read the full text and decide:
+
+- **decision_ft:** include / exclude / not retrievable
+- **reason_ft:** **required** for every exclusion — use a short, fixed list of
+  reasons (e.g. *not empirical*, *no working-time reduction*, *no outcome
+  reported*)
+
+::: {.callout-tip}
+## Ask someone to screen a sample
+Exchange 20 records with a fellow student and screen each other's sample blind.
+Where you disagree, your criteria are not yet precise enough. Sharpen them, and
+note the change in the search log.
+:::
+
+# Step 6: Snowball from your best papers
+
+*Lecture chapter 3.*
+
+Choose two or three included papers that fit your question best. In Web of
+Science, open each record:
+
+- **Backward:** *Cited References* — the papers it builds on.
+- **Forward:** *Citing articles* (the "Times Cited" count) — papers that build
+  on it.
+
+Screen what you find **with the same criteria**, and count the snowballed
+papers separately; they get their own box in the flow diagram. A citation-based
+tool (lecture 2, "connectors") can speed this up, but note which tool and which
+seed papers you used.
+
+::: {.callout-warning}
+## Snowballing stays inside the community
+Papers that cite each other share a vocabulary and often a perspective.
+Snowballing is good at finding what your keywords missed *within* that
+community, and bad at finding the community next door.
+:::
+
+# Step 7: Fill the concept matrix and synthesise
+
+*Lecture chapter 5.*
+
+Before reading the included papers in depth, fix the **columns** of your
+extraction sheet. Use the sheet **Concept matrix** in the template workbook.
+For the example:
+
+| Column | What you record |
+|:-------|:----------------|
+| Intervention | Reduced hours (e.g. 100-80-100) / compressed week / other |
+| Context | Country, sector, firm size |
+| Design | Trial, survey, panel, case study, … |
+| Selection | How did firms or employees get into the study? |
+| Outcomes | Which outcomes, measured how? |
+| Findings | Direction, size, conditions |
+| Caveats | What makes you trust the study more or less? |
+
+: Example columns of the concept matrix.
+
+Pilot the columns on three papers, adjust them once, then keep them fixed.
+
+Then **read the matrix by column**: Where do studies agree? Where do they
+disagree — and does the disagreement line up with intervention type, design or
+context? That is your synthesis. Write it as a paragraph organised by these
+patterns, not as one summary per paper.
+
+::: {.callout-tip collapse="true"}
+## A bias to watch for in this example
+Firms that volunteer for a four-day-week trial are not a random sample of
+firms. Some of the evidence also comes from organisations that campaign for
+working time reduction, and appears as reports rather than journal articles.
+Both are not reasons to exclude the evidence — they are things to record in
+the *Selection* and *Caveats* columns and to discuss in your limitations.
+:::
+
+# Step 8: Draw the flow diagram and report
+
+*Lecture chapters 4 and 7.*
+
+## The flow diagram
+
+Count what happened to every record:
+
+| Box | From |
+|:----|:-----|
+| Records identified | Search log, final version |
+| Records screened / excluded | Screening sheet, round 1 |
+| Reports sought / not retrievable | Screening sheet, round 2 |
+| Reports assessed / excluded with reasons | Screening sheet, round 2 |
+| Records from other sources | Snowballing |
+| Studies included | Concept matrix |
+
+: Where the numbers for the flow diagram come from.
+
+Draw it with the [PRISMA2020 Shiny app](https://estech.shinyapps.io/prisma_flowdiagram/),
+the templates on the [PRISMA website](https://www.prisma-statement.org/), or in
+R (@sec-r-prisma).
+
+## The methods paragraph
+
+In a term paper, the following fits into one paragraph plus an appendix:
+
+1. Database, indexes and date of the search
+2. The full final string (appendix) and all filters
+3. Inclusion and exclusion criteria
+4. Who screened, and how disagreements were handled
+5. The numbers → flow diagram
+6. How you synthesised (concept matrix, which dimensions)
+
+## The limitations paragraph
+
+Use the sheet **Limitations** in the template workbook. For each limitation,
+name **the bias**, **its likely direction**, and **why you accepted it**.
+
+> *Generic:* "Some relevant studies may have been missed."
+>
+> *Specific:* "Because the search was restricted to English-language journal
+> articles in Web of Science, trial reports published by campaigning
+> organisations and the German-language literature on *Arbeitszeitverkürzung*
+> are not covered. Since the published trial reports tend to report positive
+> outcomes, excluding them may make the review more cautious than the public
+> debate; excluding the German literature likely under-represents
+> sector-level studies of collective working-time agreements."
+
+Do not forget the [AI disclosure](../ai-disclosure/index.qmd) if you used AI at
+any step.
+
+# Optional: analysing your export in R {#sec-r}
+
+This part builds on the implementation lab sessions on
+[importing data](/content/material/s_06_DataImport.qmd),
+[data preparation](/content/material/s_07_DataPreparation.qmd) and
+[visualisation](/content/material/s_08_Visualization.qmd). It does four
+things: import and combine your exports, describe the result set (and its
+biases), compare two search strings, and draw the flow diagram.
+
+Set up an R project as usual, with your Web of Science files in `data/wos/`:
+
+```{r}
+here::i_am("R/review.R")
+library(here)
+library(data.table)
+library(ggplot2)
+```
+
+## Import and combine the exports
+
+Web of Science tab-delimited files use two-letter **field tags** as column
+names. The ones you need most:
+
+| Tag | Content | Tag | Content |
+|:----|:--------|:----|:--------|
+| `UT` | Unique Web of Science ID | `SO` | Journal (source) |
+| `TI` | Title | `PY` | Publication year |
+| `AU` | Authors | `DT` | Document type |
+| `AB` | Abstract | `LA` | Language |
+| `DI` | DOI | `WC` | Web of Science categories |
+| `C1` | Author addresses | `TC` | Times cited |
+
+: The most important Web of Science field tags.
+
+We read every file in the folder and stack them. Reading all columns as text
+(`colClasses = "character"`) avoids surprises; `quote = ""` is needed because
+titles and abstracts can contain quotation marks.
+
+```{r}
+read_wos_folder <- function(folder) {
+  files <- list.files(folder, pattern = "\\.txt$", full.names = TRUE)
+  wos_list <- lapply(
+    files, fread,
+    sep = "\t", quote = "", encoding = "UTF-8",
+    colClasses = "character", fill = TRUE
+  )
+  wos <- rbindlist(wos_list, fill = TRUE)
+  unique(wos, by = "UT") # batches can overlap
+}
+
+wos <- read_wos_folder(here("data", "wos"))
+nrow(wos)
+```
+
+The number of rows must equal the number of results in your search log. If it
+does not, check whether a batch is missing or was exported twice.
+
+## Describe the result set
+
+**Publications per year.** A literature that starts suddenly in one year often
+reflects a change in vocabulary (or in database coverage), not in the
+phenomenon.
+
+```{r}
+wos[, PY := as.integer(PY)]
+
+ggplot(wos[!is.na(PY), .N, by = PY], aes(x = PY, y = N)) +
+  geom_col() +
+  labs(x = "Publication year", y = "Records",
+       title = "Records per year in the Web of Science result set") +
+  theme_minimal()
+```
+
+**Journals and disciplines.** Which communities does your search reach? The
+`WC` field holds the Web of Science categories, separated by semicolons.
+
+```{r}
+head(wos[, .N, by = SO][order(-N)], 15)
+
+categories <- wos[, .(category = trimws(unlist(strsplit(WC, ";")))), by = UT]
+head(categories[, .N, by = category][order(-N)], 15)
+```
+
+If almost everything comes from one or two categories (say, *Management* and
+*Industrial Relations & Labor*), your string may be speaking only one
+community's language.
+
+**Languages and countries.** Two quick checks for coverage bias:
+
+```{r}
+wos[, .N, by = LA][order(-N)]
+
+# Country of each address: the last comma-separated element; US addresses
+# end in "<state> <zip> USA"
+countries <- wos[, .(address = unlist(strsplit(C1, "; (?=\\[)", perl = TRUE))),
+                 by = UT]
+countries[, address := sub("^\\[[^]]*\\] ", "", address)]
+countries[, country := trimws(sub(".*,", "", address))]
+countries[grepl("USA$", country), country := "USA"]
+countries <- unique(countries[country != "", .(UT, country)])
+head(countries[, .N, by = country][order(-N)], 15)
+```
+
+The last table counts records with at least one author from a country. Look at
+which regions are missing — and whether that matters for your question.
+
+## Compare two search strings
+
+Terminology bias becomes visible when you compare strings built from different
+vocabularies. Export the results of two versions into two folders, e.g. a
+string using only "four-day week" terms (`data/wos/string_a/`) and one that adds
+"working time reduction" terms (`data/wos/string_b/`):
+
+```{r}
+string_a <- read_wos_folder(here("data", "wos", "string_a"))
+string_b <- read_wos_folder(here("data", "wos", "string_b"))
+
+only_a <- setdiff(string_a$UT, string_b$UT)
+only_b <- setdiff(string_b$UT, string_a$UT)
+both   <- intersect(string_a$UT, string_b$UT)
+c(only_a = length(only_a), only_b = length(only_b), both = length(both))
+
+# What does the second vocabulary add?
+head(string_b[UT %in% only_b, .(PY, SO, TI)][order(-PY)], 20)
+```
+
+Read the titles that only string B finds. Are they relevant? From which
+journals and disciplines do they come? This is the most direct way to see what
+a single vocabulary would have cost you.
+
+## Build the screening sheet {#sec-r-screening}
+
+Instead of copying records by hand, write the screening sheet directly from the
+export. The empty columns are filled in during screening.
+
+```{r}
+screening <- wos[, .(
+  UT, AU, PY, TI, SO, DI, AB,
+  decision_ta = "", reason_ta = "",
+  decision_ft = "", reason_ft = "", notes = ""
+)]
+
+dir.create(here("output"), showWarnings = FALSE)
+fwrite(screening, here("output", "screening_sheet.csv"), bom = TRUE)
+```
+
+::: {.callout-note collapse="true"}
+## Excel shows everything in one column?
+Excel with German settings expects semicolons as separators. Write the file
+with `fwrite(..., sep = ";", bom = TRUE)` instead, and read it back with
+`fread(..., sep = ";")`.
+:::
+
+Once screening is done, read the completed sheet back in and count:
+
+```{r}
+screened <- fread(here("output", "screening_sheet.csv"), encoding = "UTF-8",
+                  colClasses = "character")
+
+screened[, .N, by = decision_ta]
+screened[decision_ta != "exclude", .N, by = decision_ft]
+screened[decision_ft == "exclude", .N, by = reason_ft][order(-N)]
+```
+
+## Draw the flow diagram {#sec-r-prisma}
+
+The [PRISMA2020](https://cran.r-project.org/package=PRISMA2020) package
+[@haddaway2022prisma2020] draws the diagram from a template that ships with the
+package. Install it once with `install.packages("PRISMA2020")`.
+
+The template is a table in which the column `data` names each box and the
+column `n` holds its number. Print it once to see all box names:
+
+```{r}
+library(PRISMA2020)
+
+template <- read.csv(system.file("extdata", "PRISMA.csv", package = "PRISMA2020"))
+template[, c("data", "description", "n")]
+```
+
+The small helper below sets one number and stops with an error if a box name is
+misspelled — otherwise a typo would silently leave the template value in your
+diagram.
+
+```{r}
+set_n <- function(tab, field, value) {
+  if (!field %in% tab$data) stop("Unknown box in PRISMA template: ", field)
+  tab$n[tab$data == field] <- value
+  tab
+}
+```
+
+Now fill in your numbers. Most of them come straight from the completed
+screening sheet; only the snowballing numbers are entered by hand (the ones
+below are **illustrative**). Exclusion reasons are passed as
+`"reason, n; reason, n"`.
+
+```{r}
+# Database arm: computed from the screening sheet
+sought       <- screened[decision_ta != "exclude", .N]
+not_retrieved <- screened[decision_ft == "not retrievable", .N]
+reasons      <- screened[decision_ft == "exclude", .N, by = reason_ft]
+included_db  <- screened[decision_ft == "include", .N]
+
+# Snowballing arm: entered by hand (illustrative numbers)
+snowball_found    <- 9
+snowball_included <- 6
+
+counts <- list(
+  database_results           = nrow(wos),
+  duplicates                 = 0,
+  records_screened           = nrow(screened),
+  records_excluded           = screened[decision_ta == "exclude", .N],
+  dbr_sought_reports         = sought,
+  dbr_notretrieved_reports   = not_retrieved,
+  dbr_assessed               = sought - not_retrieved,
+  dbr_excluded               = paste0(reasons$reason_ft, ", ", reasons$N,
+                                      collapse = "; "),
+  citations_results          = snowball_found,
+  other_sought_reports       = snowball_found,
+  other_notretrieved_reports = 0,
+  other_assessed             = snowball_found,
+  other_excluded             = paste0("Not eligible, ",
+                                      snowball_found - snowball_included),
+  new_studies                = included_db + snowball_included,
+  new_reports                = included_db + snowball_included
+)
+
+for (box in names(counts)) {
+  template <- set_n(template, box, counts[[box]])
+}
+
+flow <- PRISMA_data(template)
+PRISMA_flowdiagram(flow, previous = FALSE, other = TRUE, fontsize = 12)
+```
+
+`other = TRUE` draws the right-hand arm for snowballing; `previous = FALSE`
+hides the arm for earlier versions of a review, which you do not have.
+
+::: {.callout-tip}
+## For the curious: bibliometrics
+If you want to go further — co-citation networks, keyword maps, author
+collaboration — look at the R package
+[bibliometrix](https://www.bibliometrix.org/), which reads Web of Science
+exports directly. It is not needed for the take-home examination.
+:::
+
+# References
+
+::: {#refs}
+:::

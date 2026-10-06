@@ -1,6 +1,10 @@
 # L08 Literature reviews — content and outline (planning note)
 
-Status: agreed outline, materials not yet developed. Not rendered on the website
+Status: outline agreed; first full draft of materials on branch
+`l08-lit-review-rework` (session page, slides, tutorial, templates).
+Open before recording: the two "[to fill" slides on own reviews; real WoS
+runs of the tutorial string; PRISMA2020 code untested (CRAN unreachable from
+the development environment); add PRISMA2020 to renv if the R part stays. Not rendered on the website
 (`planning/` is outside the render list in `_quarto.yml`).
 
 ## Decisions taken
