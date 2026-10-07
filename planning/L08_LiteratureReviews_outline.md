@@ -2,9 +2,11 @@
 
 Status: outline agreed; first full draft of materials on branch
 `l08-lit-review-rework` (session page, slides, tutorial, templates).
-Open before recording: the two "[to fill" slides on own reviews; real WoS
-runs of the tutorial string; PRISMA2020 code untested (CRAN unreachable from
-the development environment); add PRISMA2020 to renv if the R part stays. Not rendered on the website
+Open before recording: the two "[to fill" slides on own reviews; real
+OpenAlex runs of the tutorial string (hit count, test set, share without
+abstract) and a check of the current web interface (title-and-abstract
+option, export); R part tested against mocked API responses only; add
+openalexR and PRISMA2020 to renv. Not rendered on the website
 (`planning/` is outside the render list in `_quarto.yml`).
 
 ## Decisions taken
@@ -15,13 +17,29 @@ the development environment); add PRISMA2020 to renv if the R part stays. Not re
 - **Format:** video lecture of ~90 min, recorded as separate chapters; one
   Revealjs deck in the L02 EUF style (`content/lecture/slides/RM26_L08_LiteratureReviews.qmd`).
   Old slides are superseded; start from scratch.
-- **Database:** Web of Science only.
+- **Database:** ~~Web of Science only~~ → superseded: OpenAlex baseline (see below).
 - **Tutorial:** includes an R extension.
 - **Examples:** a management running example; the two own SLRs
   (`aistleitner2021capability`, `graebner2023degrowth`) as real-world cases.
 - **Biases, limitations and caveats** and **what a review can and cannot do**
   get dedicated space (not only side remarks).
 - **Take-home II** is still open and is designed to fit the lecture and tutorial.
+
+## Database decision (Oct 2026)
+
+- **Baseline: OpenAlex**, in course and hub alike. Reasons: free and open,
+  same for everyone, broader coverage of social sciences, books, working
+  papers, non-English and Global South work; institutional access to Web
+  of Science is fragile and ends with graduation.
+- **Missing abstracts are taught explicitly:** ch. 3 (consequences and
+  countermeasures: compulsory snowballing, test set with closed-access
+  papers, title terms, measuring and reporting the gap); ch. 6 (political
+  economy: publisher concentration, ownership of indexes, abstract
+  takedowns, open research information). Tutorial: sub-step on filling in
+  missing abstracts.
+- **Web of Science:** one digression in the tutorial ("what it adds, what
+  it costs", comparison exercise); mentioned on slides only as optional
+  add-on.
 
 ## Revised learning goals (draft)
 
@@ -31,7 +49,7 @@ After this session you can …
    meta-analysis, bibliometric) that fits a given purpose, and justify the choice;
 2. **explain** what a literature review can establish and what it cannot;
 3. **translate** a topic into a reviewable question and a concept table, and
-   from there into a documented Boolean search string for Web of Science;
+   from there into a documented Boolean search string for OpenAlex;
 4. **assess** a search in terms of precision and recall, and validate it against
    known key publications;
 5. **apply** explicit inclusion/exclusion criteria and document the selection in
@@ -53,7 +71,7 @@ with L02 (`l_02_AITools.qmd`, "finders" vs. "connectors").
 | 0 | Intro & running example | 4 | Running question; goals; how the chapters connect to tutorial and take-home |
 | 1 | Purpose, types, and what a review can and cannot do | 12 | Functions of reviews; typology and choosing by purpose; review *as method* vs. review *section*; **first pass of can / cannot** |
 | 2 | Workflow & question | 9 | Stages: protocol → search → screening → extraction → synthesis → report; concept table (PCC-type, adapted to management); why the protocol comes first |
-| 3 | Searching in Web of Science | 17 | Concepts → synonyms → Boolean, truncation, phrase search, field tags; **precision vs. recall**; validating against known papers; backward/forward snowballing; three tool families |
+| 3 | Searching (OpenAlex) | 17 | Concepts → synonyms → Boolean, phrase search, stemming; missing abstracts and countermeasures; **precision vs. recall**; validating against known papers; backward/forward snowballing; three tool families |
 | 4 | Screening & selection | 9 | Criteria; title/abstract then full text; second screener and disagreements; PRISMA flow diagram |
 | 5 | From summary to synthesis | 12 | Data extraction; concept matrix (Webster & Watson); thematic synthesis; light-touch quality appraisal; weak vs. strong review paragraph |
 | 6 | Biases, limitations, caveats | 13 | Structured along the pipeline (see below) |

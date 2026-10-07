@@ -23,18 +23,24 @@ thesis. After this session you can …
    choice;
 2. **explain** what a literature review can establish and what it cannot;
 3. **translate** a topic into a reviewable question and a concept table, and
-   from there into a documented Boolean search string for Web of Science;
+   from there into a documented Boolean search string for OpenAlex;
 4. **assess** a search in terms of precision and recall, and validate it
    against known key publications;
 5. **apply** explicit inclusion and exclusion criteria and document the
    selection in a PRISMA 2020 flow diagram;
 6. **synthesise** literature with a concept matrix instead of summarising it
    paper by paper;
-7. **identify** the main sources of bias in the literature, in your own search
-   and in your synthesis, and report them as limitations;
+7. **identify** the main sources of bias in the literature, in databases —
+   including who owns them —, in your own search and in your synthesis, and
+   report them as limitations;
 8. **distinguish** keyword-based, semantic (AI) and citation-based search
    tools, and use AI at each stage without giving up reproducibility (see
    [Lecture 02](l_02_AITools.qmd)).
+
+Everything in the lecture and the tutorial works with **open tools only**: the
+search uses [OpenAlex](https://openalex.org), a free and open database. Its
+main limitation — many records without abstracts — is taught explicitly,
+together with ways to compensate for it.
 
 The running example is the literature on **capabilities and routines** — from
 Nelson and Winter's evolutionary theory to dynamic capabilities in strategic
@@ -49,7 +55,7 @@ performance.
 | 0 | Introduction and running example | ~4 min | *tba* |
 | 1 | What a review is for — and what it can and cannot do | ~12 min | *tba* |
 | 2 | The workflow and a reviewable question | ~9 min | *tba* |
-| 3 | Searching in Web of Science | ~17 min | *tba* |
+| 3 | Searching (OpenAlex) | ~17 min | *tba* |
 | 4 | Screening and selection | ~9 min | *tba* |
 | 5 | From summary to synthesis | ~12 min | *tba* |
 | 6 | Biases, limitations, and caveats | ~13 min | *tba* |
@@ -73,12 +79,16 @@ everything in one go, but please keep the order.
 
 - [**A mini systematic review in eight steps**](lit-review-tutorial/index.qmd) —
   the hands-on companion to the lecture. It walks you through a complete small
-  review in Web of Science, from the concept table to the flow diagram, and
-  includes an optional R part that builds on the implementation lab.
+  review in OpenAlex, from the concept table to the flow diagram, including how
+  to fill in missing abstracts. A digression shows what Web of Science adds, and
+  an optional R part runs the whole search from R.
+
 - The tutorial comes with three templates you can reuse for your term paper:
   a **search log**, a **screening sheet**, and a **concept matrix**.
 
-Access to Web of Science is provided through the university library; see the
+OpenAlex is free; you only need a free account (and API key) for the R part.
+For the optional Web of Science digression, access is provided through the
+university library; see the
 [ZHB database entry](https://dbis.ur.de/HDFL/resources/3366?lang=de).
 
 ## 📚 Mandatory Reading
@@ -101,6 +111,15 @@ Access to Web of Science is provided through the university library; see the
 - @rethlefsen2021prismas — PRISMA-S, on how to report the search itself.
 - @gusenbauer2020which — which search systems are suitable for systematic
   reviews (and why Google Scholar is not one of them).
+
+*On OpenAlex and the political economy of research information:*
+
+- @priem2022openalex — what OpenAlex is and how it was built.
+- @stansfield2025analyzing — a test of OpenAlex for a real systematic review.
+- @borrego2025openalex — features and limitations, including missing
+  abstracts.
+- @lariviere2015oligopoly — the concentration of academic publishing.
+- The [Barcelona Declaration on Open Research Information](https://barcelona-declaration.org).
 - The official [PRISMA website](https://www.prisma-statement.org/) with
   checklists and flow-diagram templates.
 
