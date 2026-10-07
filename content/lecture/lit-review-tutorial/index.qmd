@@ -1,6 +1,6 @@
 ---
 title: "A mini systematic review in eight steps"
-subtitle: "Tutorial for lecture 8 — with templates and an optional R part"
+subtitle: "Tutorial for lecture 8 — open tools only, with templates and an optional R part"
 date: "2026-11-09"
 date-modified: last-modified
 execute:
@@ -24,22 +24,24 @@ explains the *why*; here we focus on the *how*.
 - **Example topic:** the four-day week and other forms of working time
   reduction. It is deliberately *not* the topic of the take-home examination.
   Use it to practise, then repeat the steps on your own topic.
-- **Database:** Web of Science Core Collection, accessed via the
-  [ZHB](https://dbis.ur.de/HDFL/resources/3366?lang=de).
+- **Database:** [OpenAlex](https://openalex.org) — free, open, and the same for
+  everyone. Everything in the main steps works without any paid subscription.
 - **Templates:** download the
   [workbook with all templates](L08-review-templates.xlsx) (search log,
   screening sheet, concept matrix, limitations). It works in Excel, LibreOffice
   and Numbers.
-- **Optional R part:** @sec-r shows how to analyse your Web of
-  Science export with the tools from the implementation lab. The code is shown
-  but not run on this page, because it needs your own export.
+- **Digression:** @sec-wos shows what Web of Science adds if you have access
+  through a university.
+- **Optional R part:** @sec-r runs the whole search from R, which makes it fully
+  reproducible. The code is shown but not run on this page, because it needs
+  your own (free) API key.
 :::
 
 ::: {.callout-warning}
 ## Hit counts will differ
-Web of Science is updated continuously, and the indexes available depend on the
-university's subscription. Your numbers will not match anyone else's exactly —
-which is why you record the **date** of every search.
+OpenAlex is updated continuously. Your numbers will not match anyone else's
+exactly — which is why you record the **date** and the **exact query** of every
+search, and why the R part saves a copy of each result set.
 :::
 
 # Step 1: From topic to question and concept table
@@ -58,14 +60,17 @@ the different ways in which authors express it. One column per concept:
 
 | Working time reduction | Outcomes | (Empirical design) |
 |:-----------------------|:---------|:-------------------|
-| four-day week | productivity | trial |
-| 4-day week | well-being / wellbeing | survey |
-| working time reduction | job satisfaction | panel |
-| reduced working hours | burnout, stress | case study |
-| shorter working week | absenteeism | |
-| compressed work week ⚠️ | turnover | |
+| four-day week, 4-day week | productivity, productive | trial |
+| working time reduction, work time reduction | well-being, wellbeing | survey |
+| reduced working hours | job satisfaction | panel |
+| shorter working week, shorter workweek | burnout, stress | case study |
+| compressed work week ⚠️ | absenteeism, turnover | |
 
 : Example concept table. The third column is optional: you can capture "empirical" through the string or through your inclusion criteria — but you must document which.
+
+OpenAlex finds plural forms automatically (stemming), but not spelling variants
+or related word forms. List them explicitly: *well-being* and *wellbeing*,
+*labor* and *labour*, *productivity* and *productive*.
 
 ::: {.callout-tip collapse="true"}
 ## ⚠️ Same words, different interventions
@@ -100,81 +105,93 @@ Your concept table is only as good as your vocabulary. Three sources help:
 2. **A semantic search tool** (see the
    [tool list in lecture 2](../l_02_AITools.qmd#b-grounded-search)). Ask it your
    question, then look at the *vocabulary* of the papers it suggests — not at
-   its summary. This is where semantic tools are genuinely useful in a
-   systematic review.
+   its summary.
 3. **Neighbouring communities.** Who else works on this? Labour economists,
    occupational health researchers, management scholars, and degrowth and
    ecological economists all study working time — with different words
    ("working time reduction", "work-sharing", "sufficiency").
 
 At the same time, build a **test set**: three to five papers that *must* be
-found by a good search. Note them in the search log. You will use them in
-Step 3 to check recall.
+found by a good search. Note them, with their DOIs, in the search log.
+
+::: {.callout-important}
+## Put closed-access papers into your test set
+Include at least one or two papers from **closed-access journals of large
+publishers** (Elsevier, Springer Nature). Many of these have no abstract in
+OpenAlex (lecture chapter 3). If your string misses them, you know that the
+missing abstracts are costing you recall — and you know to compensate in
+Step 6.
+:::
 
 ::: {.callout-important}
 ## Verify what AI tools suggest
-Any paper a semantic tool suggests must be found in Web of Science or opened
-at the publisher before it enters your test set. A paper that you cannot find
-anywhere does not exist (see the
-[citation-checking exercise](../ai-citation-check/index.qmd)).
+Any paper a semantic tool suggests must be found in OpenAlex or opened at the
+publisher before it enters your test set. A paper that you cannot find anywhere
+does not exist (see the [citation-checking exercise](../ai-citation-check/index.qmd)).
 :::
 
-# Step 3: Build and test the search string in Web of Science
+# Step 3: Build and test the search string in OpenAlex
 
 *Lecture chapter 3.*
 
 ## Translate the table into a string
 
-OR within a concept, AND between concepts. In Web of Science, open
-**Advanced Search** and use field tags:
+OR within a concept, AND between concepts:
 
-| Tag | Searches | Use for |
-|:----|:---------|:--------|
-| `TS=` | Topic: title, abstract, author keywords, Keywords Plus | Most searches |
-| `TI=` | Title only | Very precise, low recall |
-| `AB=` | Abstract only | Rarely needed |
-| `AK=` | Author keywords | Checking vocabulary |
+| Element | Syntax | Note |
+|:--------|:-------|:-----|
+| Operators | `AND`, `OR`, `NOT` | Must be in **capitals** |
+| Phrases | `"working time reduction"` | Double quotation marks |
+| Grouping | `( … ) AND ( … )` | Parentheses set the order |
+| Word forms | — | Plurals are found automatically (stemming); spelling variants and related forms must be listed |
+| Wildcards | — | Not available in the web interface; list the variants instead |
 
-: The field tags you need most often.
+: OpenAlex search syntax in brief. Check the [OpenAlex help pages](https://help.openalex.org) for the current rules.
 
 A first version of the example string:
 
 ```text
-TS=("four-day week*" OR "4-day week*" OR "four day week*"
-    OR "working time reduction" OR "work time reduction"
-    OR "reduced working hours" OR "reduction in working hours"
-    OR "shorter working week*" OR "shorter workweek*")
+("four-day week" OR "four day week" OR "4-day week" OR "four-day workweek"
+ OR "working time reduction" OR "work time reduction"
+ OR "reduced working hours" OR "reduction in working hours"
+ OR "shorter working week" OR "shorter workweek")
 AND
-TS=(productiv* OR well-being OR wellbeing OR satisfaction
-    OR burnout OR stress OR absentee* OR turnover OR performance)
+(productivity OR productive OR "well-being" OR wellbeing OR satisfaction
+ OR burnout OR stress OR absenteeism OR turnover OR performance)
 ```
 
-- **Quotation marks** keep phrases together.
-- `*` stands for any number of characters (`productiv*` → productivity,
-  productive).
-- `?` stands for exactly one character, `$` for zero or one.
-- Check the Web of Science help page on *search rules* for how it handles
-  hyphens and word forms; it changes occasionally.
+## Run it in the web interface
 
-::: {.callout-tip}
-## Use the search history
-Run each concept as its own search (`#1`, `#2`) and combine them in a third
-search (`#1 AND #2`). You then see how many records each concept contributes —
-very useful when a string returns far too many or far too few results.
+1. Go to [openalex.org](https://openalex.org) and paste the string into the
+   search field.
+2. Restrict the search to **title and abstract** if the interface offers this
+   option. The default search also looks into the full text of those works for
+   which OpenAlex has one — which makes the result depend on which papers happen
+   to be open access.
+3. Add filters for **year**, **type** (article, review) and **language**.
+   Language tags in OpenAlex are not always correct; check a sample of what
+   the filter removes.
+4. Note the number of results, and **copy the page address (URL)** into your
+   search log: it contains your full query and all filters.
+
+::: {.callout-note}
+## Interfaces change
+Web interfaces are redesigned regularly. If a button described here has moved,
+the logic stays the same: one query, explicit filters, a documented result. The
+R part (@sec-r) runs exactly the same search through the API and is not affected
+by interface changes.
 :::
 
 ## Test recall with your test set
 
-Search for each test-set paper by title. Is it in your result set? (Combine
-`#3 AND TI=("exact title")`.) If a paper is missing, look at its title,
-abstract and keywords: which term would have caught it? Add it, rerun, and
-**log the new version**.
+Search for each test-set paper by title or DOI. Is it in your result set? If a
+paper is missing, look at it in OpenAlex:
 
-## Apply filters — and record them
-
-Use *Refine results* for document type, language and years. Filters are part of
-your search: write each one into the search log, together with the number of
-results before and after.
+- **It has an abstract** → your string lacks a term. Find the term in its
+  title or abstract, add it, rerun, and **log the new version**.
+- **It has no abstract** → only its title could have matched. Is there a term
+  that authors in this field typically put into *titles*? Add it. Otherwise,
+  note the paper — Step 6 will have to catch papers like it.
 
 # Step 4: Keep a search log
 
@@ -187,11 +204,13 @@ version of your string, record:
 | Field | Example |
 |:------|:--------|
 | Date | 2026-11-12 |
-| Database and indexes | Web of Science Core Collection (indexes as listed under *Editions*) |
+| Database and route | OpenAlex, web interface (or: API via R) |
 | Version | v2 |
-| Full string | `TS=(...) AND TS=(...)` — copied, not paraphrased |
-| Filters | Document types: Article, Review; Language: English |
+| Full string | `( … ) AND ( … )` — copied, not paraphrased |
+| Search field | Title and abstract |
+| Filters | Type: article, review; language: English |
 | Results | number of records |
+| Query URL / script | the page URL, or the name of your R script |
 | Test set found | e.g. 4 of 5 |
 | Change from previous version | added "work-sharing" after test paper 3 was missed |
 
@@ -202,25 +221,41 @@ A string you cannot reproduce from your log is a string you cannot report. Fill
 in the log *while* you search, not afterwards.
 :::
 
-# Step 5: Export and screen
+# Step 5: Export, fill in missing abstracts, and screen
 
 *Lecture chapter 4.*
 
 ## Export
 
-From the result list, choose **Export → Tab delimited file**, with record
-content **Full Record**. If you plan to snowball in Web of Science, include
-**Cited References**. Large result sets have to be exported in batches; the
-export dialogue shows the maximum per batch. Keep all files in one folder
-(e.g. `data/wos/`) and do not rename the columns.
+Use the **export** function of the web interface and choose the spreadsheet
+format (CSV). Keep this file untouched as the record of your search, and work
+on a copy. Alternatively, let R fetch the records and build the screening sheet
+(@sec-r-screening). For writing, you can additionally export in RIS format for
+Zotero.
 
-You can also export to your reference manager (RIS for Zotero) — useful for
-writing, but keep the tab-delimited file as the record of your search.
+## Fill in missing abstracts
+
+Before screening, sort your records by whether they have an abstract. For every
+record without one:
+
+1. **Open the publisher's page through the DOI** (`https://doi.org/` followed by
+   the DOI). Abstracts are free to read there, even for articles behind a
+   paywall — they are only missing from OpenAlex because publishers do not allow
+   their redistribution (lecture chapter 6).
+2. If the publisher page does not help, look for an **open-access version**:
+   OpenAlex links to repository copies where it knows them, and many working
+   papers are on SSRN, RePEc or the authors' websites.
+3. Copy the abstract into the screening sheet and record **where** it came from
+   (column `abstract_source`).
+
+The R part can fill in some abstracts automatically from Crossref
+(@sec-r-abstracts) — but not those of publishers that do not deposit abstracts
+there, which includes Elsevier.
 
 ## Screen titles and abstracts
 
-Use the sheet **Screening** in the template workbook — one row per record — or
-let R build it for you (@sec-r-screening). For each record:
+Use the sheet **Screening** in the template workbook — one row per record. For
+each record:
 
 - **decision_ta:** include / exclude / unsure (unsure stays in for round 2)
 - **reason_ta:** optional at this stage
@@ -241,27 +276,31 @@ Where you disagree, your criteria are not yet precise enough. Sharpen them, and
 note the change in the search log.
 :::
 
-# Step 6: Snowball from your best papers
+# Step 6: Snowball from your best papers — compulsory
 
 *Lecture chapter 3.*
 
-Choose two or three included papers that fit your question best. In Web of
-Science, open each record:
+Snowballing is optional in many review guides. **Here it is compulsory**,
+because it compensates for the missing abstracts: citation links do not depend
+on abstracts, so it finds exactly those papers that a title-and-abstract search
+could not see.
 
-- **Backward:** *Cited References* — the papers it builds on.
-- **Forward:** *Citing articles* (the "Times Cited" count) — papers that build
-  on it.
+Choose two or three included papers that fit your question best — ideally
+including one from a closed-access journal. In OpenAlex, open each record:
+
+- **Backward:** its **references** — the papers it builds on.
+- **Forward:** **cited by** — papers that build on it.
 
 Screen what you find **with the same criteria**, and count the snowballed
-papers separately; they get their own box in the flow diagram. A citation-based
-tool (lecture 2, "connectors") can speed this up, but note which tool and which
-seed papers you used.
+papers separately; they get their own box in the flow diagram. In R,
+`oa_snowball()` does both directions in one call (@sec-r-snowball).
 
 ::: {.callout-warning}
 ## Snowballing stays inside the community
 Papers that cite each other share a vocabulary and often a perspective.
 Snowballing is good at finding what your keywords missed *within* that
-community, and bad at finding the community next door.
+community, and bad at finding the community next door. That is why it
+complements the string search and never replaces it.
 :::
 
 # Step 7: Fill the concept matrix and synthesise
@@ -296,8 +335,8 @@ patterns, not as one summary per paper.
 Firms that volunteer for a four-day-week trial are not a random sample of
 firms. Some of the evidence also comes from organisations that campaign for
 working time reduction, and appears as reports rather than journal articles.
-Both are not reasons to exclude the evidence — they are things to record in
-the *Selection* and *Caveats* columns and to discuss in your limitations.
+Neither is a reason to exclude the evidence — both are things to record in the
+*Selection* and *Caveats* columns and to discuss in your limitations.
 :::
 
 # Step 8: Draw the flow diagram and report
@@ -327,12 +366,13 @@ R (@sec-r-prisma).
 
 In a term paper, the following fits into one paragraph plus an appendix:
 
-1. Database, indexes and date of the search
-2. The full final string (appendix) and all filters
+1. Database, route (web interface or API) and date of the search
+2. The full final string and all filters (appendix), plus the query URL or script
 3. Inclusion and exclusion criteria
-4. Who screened, and how disagreements were handled
-5. The numbers → flow diagram
-6. How you synthesised (concept matrix, which dimensions)
+4. How missing abstracts were handled
+5. Who screened, and how disagreements were handled
+6. The numbers → flow diagram
+7. How you synthesised (concept matrix, which dimensions)
 
 ## The limitations paragraph
 
@@ -341,158 +381,223 @@ name **the bias**, **its likely direction**, and **why you accepted it**.
 
 > *Generic:* "Some relevant studies may have been missed."
 >
-> *Specific:* "Because the search was restricted to English-language journal
-> articles in Web of Science, trial reports published by campaigning
-> organisations and the German-language literature on *Arbeitszeitverkürzung*
-> are not covered. Since the published trial reports tend to report positive
-> outcomes, excluding them may make the review more cautious than the public
-> debate; excluding the German literature likely under-represents
-> sector-level studies of collective working-time agreements."
+> *Specific:* "The search covered titles and abstracts in OpenAlex. About a
+> third of the records had no abstract, mostly closed-access articles from
+> large publishers; for these, only titles could match. Backward and forward
+> snowballing from four seed papers added six studies, two of them from such
+> journals, but some recall loss for recent closed-access articles is likely.
+> Restricting the review to English excludes the German-language literature on
+> *Arbeitszeitverkürzung*, which probably under-represents sector-level
+> studies of collective working-time agreements."
 
 Do not forget the [AI disclosure](../ai-disclosure/index.qmd) if you used AI at
 any step.
 
-# Optional: analysing your export in R {#sec-r}
+# Digression: what Web of Science adds {#sec-wos}
+
+Everything above works without any subscription. If you have access to
+**Web of Science** through a university, it is worth seeing what a curated,
+commercial database does differently — and what that costs.
+
+**What it adds:**
+
+- **Precise search syntax:** field tags (`TS=` for title, abstract and
+  keywords; `TI=` for titles only), truncation (`productiv*`) and wildcards
+  (`organi?ation`), and proximity operators.
+- **Search history:** run each concept as its own search (`#1`, `#2`) and
+  combine them (`#1 AND #2`) — you see how much each concept contributes.
+- **Abstracts** for nearly all indexed journal articles.
+- **Curated journal selection** and consistent metadata.
+
+**What it costs:**
+
+- **Money and access:** an institutional subscription. Access depends on the
+  contract of your university, differs between institutions — which also means
+  that others may not be able to rerun your search — and ends when you leave.
+- **Coverage:** fewer books, working papers, non-English and Global South
+  publications than OpenAlex (lecture chapter 6).
+
+The example string in Web of Science syntax:
+
+```text
+TS=("four-day week*" OR "4-day week*" OR "four day week*"
+    OR "working time reduction" OR "work time reduction"
+    OR "reduced working hours" OR "shorter working week*")
+AND
+TS=(productiv* OR well-being OR wellbeing OR satisfaction
+    OR burnout OR stress OR absentee* OR turnover OR performance)
+```
+
+::: {.callout-tip}
+## Exercise: compare the two databases
+Run the equivalent string in both databases and compare the result sets by DOI
+(@sec-r-wos shows how in R). Which records does only OpenAlex find, and which
+only Web of Science? From which journals, languages and countries do they come?
+This makes the coverage and metadata biases of lecture chapter 6 visible on
+your own topic.
+:::
+
+# Optional: the whole search in R {#sec-r}
 
 This part builds on the implementation lab sessions on
 [importing data](/content/material/s_06_DataImport.qmd),
 [data preparation](/content/material/s_07_DataPreparation.qmd) and
-[visualisation](/content/material/s_08_Visualization.qmd). It does four
-things: import and combine your exports, describe the result set (and its
-biases), compare two search strings, and draw the flow diagram.
+[visualisation](/content/material/s_08_Visualization.qmd). It uses the package
+[openalexR](https://docs.ropensci.org/openalexR/) [@aria2024openalexr] to run
+the search directly against the OpenAlex API. The big advantage: your script
+*is* your search documentation — anyone can rerun it.
 
-Set up an R project as usual, with your Web of Science files in `data/wos/`:
+## Setup and API key
+
+OpenAlex requires a free API key for programmatic access. Create an account at
+[openalex.org](https://openalex.org) and copy your key from the account
+settings. Then store it **outside your scripts**, so that you never share it by
+accident: open your `.Renviron` file with `usethis::edit_r_environ()` and add a
+line
+
+```text
+OPENALEX_KEY=your-key-here
+```
+
+Restart R. In your script:
 
 ```{r}
 here::i_am("R/review.R")
 library(here)
+library(openalexR)
 library(data.table)
 library(ggplot2)
+
+options(openalexR.apikey = Sys.getenv("OPENALEX_KEY"))
 ```
 
-## Import and combine the exports
+## Run the search
 
-Web of Science tab-delimited files use two-letter **field tags** as column
-names. The ones you need most:
-
-| Tag | Content | Tag | Content |
-|:----|:--------|:----|:--------|
-| `UT` | Unique Web of Science ID | `SO` | Journal (source) |
-| `TI` | Title | `PY` | Publication year |
-| `AU` | Authors | `DT` | Document type |
-| `AB` | Abstract | `LA` | Language |
-| `DI` | DOI | `WC` | Web of Science categories |
-| `C1` | Author addresses | `TC` | Times cited |
-
-: The most important Web of Science field tags.
-
-We read every file in the folder and stack them. Reading all columns as text
-(`colClasses = "character"`) avoids surprises; `quote = ""` is needed because
-titles and abstracts can contain quotation marks.
+Write the string exactly as in the web interface. Avoid commas inside the
+string: the API uses commas to separate filters.
 
 ```{r}
-read_wos_folder <- function(folder) {
-  files <- list.files(folder, pattern = "\\.txt$", full.names = TRUE)
-  wos_list <- lapply(
-    files, fread,
-    sep = "\t", quote = "", encoding = "UTF-8",
-    colClasses = "character", fill = TRUE
-  )
-  wos <- rbindlist(wos_list, fill = TRUE)
-  unique(wos, by = "UT") # batches can overlap
-}
+query <- '("four-day week" OR "four day week" OR "4-day week"
+  OR "four-day workweek" OR "working time reduction" OR "work time reduction"
+  OR "reduced working hours" OR "reduction in working hours"
+  OR "shorter working week" OR "shorter workweek")
+  AND (productivity OR productive OR "well-being" OR wellbeing OR satisfaction
+  OR burnout OR stress OR absenteeism OR turnover OR performance)'
+query <- gsub("\\s+", " ", query) # one line, single spaces
 
-wos <- read_wos_folder(here("data", "wos"))
-nrow(wos)
+# First only count the hits: cheap, and good for comparing string versions
+oa_fetch(
+  entity = "works",
+  title_and_abstract.search = query,
+  type = c("article", "review"),
+  language = "en",
+  count_only = TRUE
+)
 ```
 
-The number of rows must equal the number of results in your search log. If it
-does not, check whether a batch is missing or was exported twice.
-
-## Describe the result set
-
-**Publications per year.** A literature that starts suddenly in one year often
-reflects a change in vocabulary (or in database coverage), not in the
-phenomenon.
+When the count is plausible, fetch the records and **save a dated copy**.
+OpenAlex changes over time; your saved copy is the result you report.
 
 ```{r}
-wos[, PY := as.integer(PY)]
+works <- oa_fetch(
+  entity = "works",
+  title_and_abstract.search = query,
+  type = c("article", "review"),
+  language = "en"
+)
+works <- as.data.table(works)
 
-ggplot(wos[!is.na(PY), .N, by = PY], aes(x = PY, y = N)) +
+dir.create(here("data"), showWarnings = FALSE)
+saveRDS(works, here("data", paste0("openalex_", Sys.Date(), ".rds")))
+nrow(works)
+```
+
+## Check the test set
+
+```{r}
+test_dois <- c(
+  "10.xxxx/first-test-paper", # replace with the DOIs of your test set
+  "10.xxxx/second-test-paper"
+)
+clean_doi <- function(x) tolower(sub("^https://doi.org/", "", x))
+
+data.table(doi = test_dois, found = clean_doi(test_dois) %in% clean_doi(works$doi))
+```
+
+## Measure the abstract gap
+
+How many of your hits have no abstract — and where are they concentrated?
+
+```{r}
+works[, no_abstract := is.na(abstract) | abstract == ""]
+works[, mean(no_abstract)] # share without abstract
+
+head(
+  works[, .(records = .N, share_no_abstract = round(mean(no_abstract), 2)),
+        by = host_organization_name][order(-records)],
+  10
+)
+
+ggplot(works[, .(share = mean(no_abstract)), by = publication_year],
+       aes(x = publication_year, y = share)) +
   geom_col() +
-  labs(x = "Publication year", y = "Records",
-       title = "Records per year in the Web of Science result set") +
+  labs(x = "Publication year", y = "Share of records without abstract",
+       title = "Where the title-and-abstract search is effectively title-only") +
   theme_minimal()
 ```
 
-**Journals and disciplines.** Which communities does your search reach? The
-`WC` field holds the Web of Science categories, separated by semicolons.
+These numbers belong in your limitations paragraph.
+
+## Describe the result set
 
 ```{r}
-head(wos[, .N, by = SO][order(-N)], 15)
+# Records per year
+ggplot(works[, .N, by = publication_year], aes(x = publication_year, y = N)) +
+  geom_col() +
+  labs(x = "Publication year", y = "Records") +
+  theme_minimal()
 
-categories <- wos[, .(category = trimws(unlist(strsplit(WC, ";")))), by = UT]
-head(categories[, .N, by = category][order(-N)], 15)
+# Journals and languages
+head(works[, .N, by = source_display_name][order(-N)], 15)
+works[, .N, by = language][order(-N)]
 ```
 
-If almost everything comes from one or two categories (say, *Management* and
-*Industrial Relations & Labor*), your string may be speaking only one
-community's language.
-
-**Languages and countries.** Two quick checks for coverage bias:
-
-```{r}
-wos[, .N, by = LA][order(-N)]
-
-# Country of each address: the last comma-separated element; US addresses
-# end in "<state> <zip> USA"
-countries <- wos[, .(address = unlist(strsplit(C1, "; (?=\\[)", perl = TRUE))),
-                 by = UT]
-countries[, address := sub("^\\[[^]]*\\] ", "", address)]
-countries[, country := trimws(sub(".*,", "", address))]
-countries[grepl("USA$", country), country := "USA"]
-countries <- unique(countries[country != "", .(UT, country)])
-head(countries[, .N, by = country][order(-N)], 15)
-```
-
-The last table counts records with at least one author from a country. Look at
-which regions are missing — and whether that matters for your question.
+If almost everything comes from a handful of journals of one field, your
+string may be speaking only one community's language.
 
 ## Compare two search strings
 
 Terminology bias becomes visible when you compare strings built from different
-vocabularies. Export the results of two versions into two folders, e.g. a
-string using only "four-day week" terms (`data/wos/string_a/`) and one that adds
-"working time reduction" terms (`data/wos/string_b/`):
+vocabularies, e.g. one with only "four-day week" terms and one that adds
+"working time reduction" terms:
 
 ```{r}
-string_a <- read_wos_folder(here("data", "wos", "string_a"))
-string_b <- read_wos_folder(here("data", "wos", "string_b"))
+fetch_ids <- function(q) {
+  res <- oa_fetch(entity = "works", title_and_abstract.search = q,
+                  type = c("article", "review"), language = "en")
+  as.data.table(res)
+}
+string_a <- fetch_ids('"four-day week" OR "four day week" OR "4-day week"')
+string_b <- works # the full string from above
 
-only_a <- setdiff(string_a$UT, string_b$UT)
-only_b <- setdiff(string_b$UT, string_a$UT)
-both   <- intersect(string_a$UT, string_b$UT)
-c(only_a = length(only_a), only_b = length(only_b), both = length(both))
-
-# What does the second vocabulary add?
-head(string_b[UT %in% only_b, .(PY, SO, TI)][order(-PY)], 20)
+only_b <- setdiff(string_b$id, string_a$id)
+length(only_b)
+head(string_b[id %in% only_b, .(publication_year, source_display_name, title)], 20)
 ```
 
-Read the titles that only string B finds. Are they relevant? From which
-journals and disciplines do they come? This is the most direct way to see what
-a single vocabulary would have cost you.
+Read the titles that only string B finds. This is the most direct way to see
+what a single vocabulary would have cost you.
 
 ## Build the screening sheet {#sec-r-screening}
 
-Instead of copying records by hand, write the screening sheet directly from the
-export. The empty columns are filled in during screening.
-
 ```{r}
-screening <- wos[, .(
-  UT, AU, PY, TI, SO, DI, AB,
+screening <- works[, .(
+  id, doi, publication_year, title, source_display_name, abstract,
+  abstract_source = fifelse(no_abstract, "", "OpenAlex"),
   decision_ta = "", reason_ta = "",
   decision_ft = "", reason_ft = "", notes = ""
 )]
+setorder(screening, abstract_source) # records without abstract first
 
 dir.create(here("output"), showWarnings = FALSE)
 fwrite(screening, here("output", "screening_sheet.csv"), bom = TRUE)
@@ -505,7 +610,64 @@ with `fwrite(..., sep = ";", bom = TRUE)` instead, and read it back with
 `fread(..., sep = ";")`.
 :::
 
-Once screening is done, read the completed sheet back in and count:
+## Fill in abstracts from Crossref {#sec-r-abstracts}
+
+Some publishers deposit abstracts with Crossref, the DOI registration agency.
+The function below asks Crossref for each record without an abstract. Elsevier
+does not deposit abstracts there, so for its journals you still need the
+publisher page.
+
+```{r}
+crossref_abstract <- function(doi) {
+  url <- paste0("https://api.crossref.org/works/", clean_doi(doi))
+  res <- tryCatch(suppressWarnings(jsonlite::fromJSON(url)),
+                  error = function(e) NULL) # no record or no access: NULL
+  ab <- res$message$abstract
+  if (is.null(ab)) return(NA_character_)
+  trimws(gsub("<[^>]+>", " ", ab)) # remove the XML tags
+}
+
+missing <- screening[abstract_source == "" & !is.na(doi), id]
+for (i in missing) {
+  ab <- crossref_abstract(screening[id == i, doi])
+  if (!is.na(ab)) {
+    screening[id == i, `:=`(abstract = ab, abstract_source = "Crossref")]
+  }
+  Sys.sleep(0.2) # be polite to the API
+}
+screening[, .N, by = abstract_source]
+fwrite(screening, here("output", "screening_sheet.csv"), bom = TRUE)
+```
+
+Everything still without an abstract: open the DOI link (OpenAlex stores DOIs as
+links) and copy the abstract
+from the publisher page by hand, setting `abstract_source` to "publisher page".
+
+## Snowball {#sec-r-snowball}
+
+`oa_snowball()` collects, for your seed papers, both the papers they cite and
+the papers that cite them:
+
+```{r}
+seeds <- c("W0000000001", "W0000000002") # OpenAlex IDs of your seed papers
+
+snow <- oa_snowball(identifier = seeds)
+candidates <- as.data.table(snow$nodes)[oa_input == FALSE]
+
+# Only what the string search has not already found
+short_id <- function(x) sub(".*/", "", x)
+new <- candidates[!short_id(id) %in% short_id(works$id)]
+nrow(new)
+```
+
+Screen the new records with the same criteria and count them separately for
+the flow diagram. Snowballing from highly cited papers can return thousands of
+records; then restrict it, e.g. to the papers your seeds cite (backward) plus
+recent citing papers.
+
+## Draw the flow diagram {#sec-r-prisma}
+
+Once screening is done, read the completed sheet back in:
 
 ```{r}
 screened <- fread(here("output", "screening_sheet.csv"), encoding = "UTF-8",
@@ -516,14 +678,10 @@ screened[decision_ta != "exclude", .N, by = decision_ft]
 screened[decision_ft == "exclude", .N, by = reason_ft][order(-N)]
 ```
 
-## Draw the flow diagram {#sec-r-prisma}
-
 The [PRISMA2020](https://cran.r-project.org/package=PRISMA2020) package
 [@haddaway2022prisma2020] draws the diagram from a template that ships with the
-package. Install it once with `install.packages("PRISMA2020")`.
-
-The template is a table in which the column `data` names each box and the
-column `n` holds its number. Print it once to see all box names:
+package. Install it once with `install.packages("PRISMA2020")`. The column
+`data` names each box and the column `n` holds its number:
 
 ```{r}
 library(PRISMA2020)
@@ -544,24 +702,23 @@ set_n <- function(tab, field, value) {
 }
 ```
 
-Now fill in your numbers. Most of them come straight from the completed
-screening sheet; only the snowballing numbers are entered by hand (the ones
-below are **illustrative**). Exclusion reasons are passed as
-`"reason, n; reason, n"`.
+Most numbers come straight from the completed screening sheet; only the
+snowballing numbers are entered by hand (the ones below are **illustrative**).
+Exclusion reasons are passed as `"reason, n; reason, n"`.
 
 ```{r}
 # Database arm: computed from the screening sheet
-sought       <- screened[decision_ta != "exclude", .N]
+sought        <- screened[decision_ta != "exclude", .N]
 not_retrieved <- screened[decision_ft == "not retrievable", .N]
-reasons      <- screened[decision_ft == "exclude", .N, by = reason_ft]
-included_db  <- screened[decision_ft == "include", .N]
+reasons       <- screened[decision_ft == "exclude", .N, by = reason_ft]
+included_db   <- screened[decision_ft == "include", .N]
 
 # Snowballing arm: entered by hand (illustrative numbers)
 snowball_found    <- 9
 snowball_included <- 6
 
 counts <- list(
-  database_results           = nrow(wos),
+  database_results           = nrow(screened),
   duplicates                 = 0,
   records_screened           = nrow(screened),
   records_excluded           = screened[decision_ta == "exclude", .N],
@@ -591,12 +748,41 @@ PRISMA_flowdiagram(flow, previous = FALSE, other = TRUE, fontsize = 12)
 `other = TRUE` draws the right-hand arm for snowballing; `previous = FALSE`
 hides the arm for earlier versions of a review, which you do not have.
 
+## Compare with a Web of Science export {#sec-r-wos}
+
+For the exercise in @sec-wos: export the Web of Science results as a
+**tab-delimited file** (record content *Full Record*), save it in
+`data/wos/`, and compare by DOI:
+
+```{r}
+wos_files <- list.files(here("data", "wos"), pattern = "\\.txt$", full.names = TRUE)
+wos <- rbindlist(lapply(
+  wos_files, fread,
+  sep = "\t", quote = "", encoding = "UTF-8", colClasses = "character", fill = TRUE
+), fill = TRUE)
+wos <- unique(wos, by = "UT")
+
+oa_dois  <- setdiff(clean_doi(works$doi), NA)
+wos_dois <- setdiff(clean_doi(wos$DI[wos$DI != ""]), NA)
+
+c(only_openalex = length(setdiff(oa_dois, wos_dois)),
+  only_wos      = length(setdiff(wos_dois, oa_dois)),
+  both          = length(intersect(oa_dois, wos_dois)))
+
+# Where do the OpenAlex-only records come from?
+head(works[clean_doi(doi) %in% setdiff(oa_dois, wos_dois), .N,
+           by = .(source_display_name, language)][order(-N)], 15)
+```
+
+Records without a DOI cannot be matched this way; check a few of them by title.
+
 ::: {.callout-tip}
 ## For the curious: bibliometrics
 If you want to go further — co-citation networks, keyword maps, author
 collaboration — look at the R package
-[bibliometrix](https://www.bibliometrix.org/), which reads Web of Science
-exports directly. It is not needed for the take-home examination.
+[bibliometrix](https://www.bibliometrix.org/), which can read OpenAlex data
+(`oa2bibliometrix()` in openalexR) as well as Web of Science exports. It is not
+needed for the take-home examination.
 :::
 
 # References
