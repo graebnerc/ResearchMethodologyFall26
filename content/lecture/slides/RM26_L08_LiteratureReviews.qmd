@@ -35,22 +35,23 @@ format:
      RM26 L08 — Literature reviews. Video lecture, ~90 minutes, recorded as
      nine chapters (00–08). Each divider below starts a new recording.
 
-     Conventions as in L02:
-       - titles are assertions, not topics
-       - nuance in the .dek, bodies at 3-4 bullets
-       - every empirical claim carries a .source line
-       - products and interface details live on the website / tutorial
+     Reuse: chapters 01–07 are COURSE-NEUTRAL, so that their recordings can
+     be published on the Method and Inquiry hub without re-recording. All
+     references to this module (take-home, other lectures, Moodle, lab) live
+     in chapters 00 and 08 only. Keep it that way when editing.
 
-     Video-specific: no polls or group work. "Pause the video" tasks use
-     .taskbox; every chapter ends with a "Check yourself" slide.
-
-     Running thread: capabilities and routines (evolutionary economics ↔
-     strategic management). Spotlights: Gibrat's law, related variety,
-     QWERTY, CSR–financial performance.
+     Slide conventions:
+       - titles: short assertions
+       - dek, bullets, boxes: fragments, no full sentences
+       - max. 5 bullets per slide
+       - full sentences live in the speaker notes (press "s"), which double
+         as the recording script
+       - quoted specimens (example questions, example paragraphs) are the
+         only full sentences on slides — and are marked as quotes
+       - every empirical claim carries a citation or .source line
 
      All cited works were checked against publisher/RePEc records in
-     October 2026. Numbers marked "illustrative" are invented for teaching
-     and are labelled as such on the slide.
+     October 2026. Numbers marked "illustrative" are invented for teaching.
 
      TO FILL BEFORE RECORDING: the two "behind the scenes" slides on the
      own reviews (search "[to fill"). They need facts from the original
@@ -60,55 +61,67 @@ format:
 ## Learning goals
 
 ::: {.nonincremental}
-- **Choose** a review type that fits your purpose
+- **Choose** a review type that fits the purpose
 - **Explain** what a review can and cannot establish
-- **Translate** a topic into a concept table and a Web of Science search string
+- **Translate** a topic into a concept table and a search string
 - **Assess** a search: precision, recall, validation
-- **Select** studies with explicit criteria; document it in a **PRISMA** flow diagram
-- **Synthesise** with a concept matrix instead of summarising
-- **Identify** biases in the literature, your search and your synthesis
-- **Use** AI at each stage without giving up reproducibility
+- **Select** studies by explicit criteria; document in a **PRISMA** flow diagram
+- **Synthesise** with a concept matrix, not by summarising
+- **Identify** biases in literature, search and synthesis
+- **Use** AI at each stage without losing reproducibility
 :::
 
 ## How this lecture works
 
 ::: {.dek}
-Nine short chapters. Each ends with a question to check yourself; the tutorial
-on the lecture page turns every chapter into a step you do yourself.
+Nine chapters · one self-check each · a tutorial step for every chapter
 :::
 
 - **Reference model:** the *systematic* literature review
 
-- **Payoff:** the literature review section of *your* term paper or thesis
+- **Payoff:** the review section of your term paper or thesis
 
-- **Pause tasks:** when you see one, stop the video and do it
+- **Pause tasks:** stop the video, do the task
 
-- **Take-home II** follows the same steps — watch everything first
+- **Take-home II:** same steps — watch all chapters first
 
 ::: {.keybox .fragment}
-You will rarely publish a systematic review. You will always write a review section.
+Rarely a systematic review — always a review section
 :::
 
-## One literature runs through the whole lecture
+::: {.notes}
+Most of you will never publish a stand-alone systematic review, but every
+term paper and thesis has a literature review section. The systematic review
+is the reference model because its standards make every review section
+better. The tutorial on the lecture page turns each chapter into a step you
+carry out yourself, and the take-home examination follows the same steps.
+:::
+
+## One literature runs through all chapters
 
 ::: {.dek}
-Capabilities and routines: a set of ideas that sits exactly at the intersection
-of evolutionary economics and business studies — and that different
-communities describe with different words.
+Capabilities and routines — evolutionary economics meets business studies
 :::
 
-- **Routines** as the "genes" of the firm [@nelson1982evolutionary]
+- **Routines:** the "genes" of the firm [@nelson1982evolutionary]
 
-- **Absorptive capacity**: recognise, assimilate and apply external knowledge [@cohen1990absorptive]
+- **Absorptive capacity:** recognise, assimilate, apply external knowledge [@cohen1990absorptive]
 
-- **Dynamic capabilities**: integrate, build and reconfigure competences
-  in changing environments [@teece1997dynamic]
+- **Dynamic capabilities:** integrate, build, reconfigure competences [@teece1997dynamic]
 
-- **Routine dynamics**: routines as a source of change, not only of stability [@feldman2003reconceptualizing]
+- **Routine dynamics:** routines as a source of change [@feldman2003reconceptualizing]
 
 ::: {.arrow .fragment}
-Running question: *How do empirical studies conceptualise and measure
-capabilities and routines when they explain firm-level innovation?*
+Running question: "How do empirical studies conceptualise and measure
+capabilities and routines when explaining firm-level innovation?"
+:::
+
+::: {.notes}
+This literature sits at the intersection of evolutionary economics and
+business studies, and different communities describe overlapping ideas with
+different words. That makes it a good example for almost every problem in
+this lecture: choosing a review type, building a search string, synthesising
+inconsistent concepts, and terminology bias.
 :::
 
 ## What a review is for {.divider background-color="#00395B"}
@@ -120,155 +133,166 @@ capabilities and routines when they explain firm-level innovation?*
 ## A review is a study whose data are other studies
 
 ::: {.dek}
-That is what separates a review from "reading around a topic": it has a
-question, a method, and a result that someone else could check.
+Question · method · checkable result
 :::
 
-- **Map** a field: who works on what, with which concepts and methods
+- **Map** a field — actors, concepts, methods
 
-- **Establish** what is known — and how robustly
+- **Establish** what is known, and how robustly
 
-- **Find** gaps, contradictions and under-studied contexts
+- **Find** gaps and contradictions
 
-- **Build** or refine a conceptual framework
+- **Build** or refine a framework
 
-- **Justify** your own research question
+- **Justify** a research question
 
 ::: {.keybox .fragment}
-A review answers a question. If you cannot state the question, you are not
-reviewing yet.
+No question, no review
 :::
 
-## Review as a method and review as a section are not the same thing
+::: {.notes}
+What separates a review from reading around a topic is that it has a
+question, a method, and a result someone else could check. If you cannot
+state your question, you are not reviewing yet.
+:::
+
+## Review as a method ≠ review as a section
 
 ::: {.dek}
-Same logic, different scale. The standards of the first make the second
-better.
+Same logic, different scale
 :::
 
 ::: {.columns .divided}
 ::: {.column width="50%"}
 ::: {.colhead}
-Review as a stand-alone study
+Stand-alone review
 :::
 
-- The review **is** the contribution
+- Review **is** the contribution
 
 - Full protocol, several databases, two screeners
 
-- Reported with **PRISMA** in full
+- Full **PRISMA** report
 
-- Example: @schilke2018quo on dynamic capabilities
+- e.g. @schilke2018quo
 :::
 
 ::: {.column width="50%"}
 ::: {.colhead}
-Review as a section of your paper
+Review section
 :::
 
-- The review **motivates** your contribution
+- Review **motivates** the contribution
 
-- One database, a documented string, explicit criteria
+- One database, documented string, explicit criteria
 
-- Reported in a **paragraph** plus flow diagram
+- One **paragraph** + flow diagram
 
-- Your term paper, your thesis
+- Paper, thesis, report
 :::
 :::
 
 ::: {.arrow .fragment}
-Borrow the discipline of the left column; scale it to the right one.
+Discipline of the left · scale of the right
 :::
 
-## Choose the review type by purpose, not by prestige
+## Choose the review type by purpose
 
 ::: {.dek}
-Simplified from @snyder2019literature and @grant2009typology. Real reviews
-mix types; the label matters less than being explicit about what you did.
+Purpose first, label second
 :::
 
 | Type | Purpose | Search | Synthesis | Example |
 |:-----|:--------|:-------|:----------|:--------|
 | Narrative | Overview, interpretation | Selective, often undocumented | Narrative | Textbook chapters |
 | Integrative | New framework from diverse work | Purposive, documented | Conceptual | @becker2004organizational |
-| Scoping | How big and varied is a field? | Broad, documented | Mapping, counts | @arksey2005scoping (method) |
-| Systematic | Answer a focused question | Exhaustive, reproducible | Structured, often thematic | @lane2006reification |
-| Meta-analysis | Pool effect sizes | Exhaustive | Statistical | @orlitzky2003corporate |
+| Scoping | Size and variety of a field | Broad, documented | Mapping, counts | @arksey2005scoping (method) |
+| Systematic | Focused question | Exhaustive, reproducible | Structured, often thematic | @lane2006reification |
+| Meta-analysis | Pooled effect sizes | Exhaustive | Statistical | @orlitzky2003corporate |
 | Bibliometric | Structure of a field | Database export | Citation networks | — |
 
 : {.tasks}
 
 ::: {.source}
-Lane et al. analyse 289 papers from 14 journals; Becker reviews the routines
-literature since Nelson and Winter; Orlitzky et al. pool studies on corporate
-social and financial performance.
+Simplified from @snyder2019literature and @grant2009typology. Lane et al.:
+289 papers from 14 journals.
 :::
 
-## The capabilities literature has been reviewed in all of these ways
+::: {.notes}
+Real reviews mix types. The label matters less than being explicit about
+what you did. Becker reviews the routines literature since Nelson and Winter;
+Orlitzky et al. pool studies on corporate social and financial performance.
+:::
+
+## One literature, several review types
 
 ::: {.dek}
-Which is useful: you can see what each type of review is able to deliver on
-the same subject matter.
+Capabilities: what each type delivers on the same subject
 :::
 
-- **Integrative**: @becker2004organizational — the routines literature is
-  "riddled with ambiguities" about what routines are
+- **Integrative:** routines literature "riddled with ambiguities"
+  [@becker2004organizational]
 
-- **Critical systematic**: @lane2006reification — absorptive capacity has
-  been *reified*: widely used, rarely examined
+- **Critical systematic:** absorptive capacity *reified* — widely used,
+  rarely examined [@lane2006reification]
 
-- **Content-analytic**: @schilke2018quo — a meta-framework of antecedents,
-  mechanisms and outcomes of dynamic capabilities
+- **Content-analytic:** meta-framework of dynamic capabilities
+  [@schilke2018quo]
 
-- **Meta-analysis**: not meaningful here — the concepts are measured too
-  differently to pool
+- **Meta-analysis:** not meaningful — measures too different to pool
 
 ::: {.keybox .fragment}
-The state of the literature constrains which review type is possible.
+State of the literature → possible review type
 :::
 
 ## What a review can do
 
 ::: {.dek}
-Five things a well-done review can legitimately claim.
+Legitimate claims of a good review
 :::
 
-- **Map** a debate and the positions in it
+- **Map** a debate and its positions
 
 - **Establish** how much evidence exists, and of which kind
 
-- **Show** where results agree, conflict, or depend on context
+- **Show** agreement, conflict, context dependence
 
 - **Locate** gaps — relative to a documented search
 
-- **Clarify** concepts that a literature uses inconsistently
+- **Clarify** inconsistently used concepts
 
 ## What a review cannot do
 
 ::: {.dek}
-These limits hold however carefully you work. Saying so is a sign of
-competence, not of weakness.
+Limits of every review — however careful
 :::
 
-- Produce **better evidence** than the studies it rests on
+- **Better evidence** than its primary studies
 
-- **Prove** that something has not been studied — only that your search did
-  not find it
+- **Proof of absence** — only "not found by this search"
 
-- Be **objective** by being systematic: question, database, terms and
-  criteria are choices
+- **Objectivity** through method — every step a choice
 
-- **Settle** a causal question the primary studies could not settle
+- **Causal answers** the primary studies lack
 
-- Turn **frequency** of a claim into **evidence** for it
+- **Evidence** from the frequency of a claim
 
-- Replace **reading** the key works
+::: {.keybox .fragment}
+No substitute for reading the key works
+:::
 
-## Spotlight: a review can map the QWERTY debate, not settle it
+::: {.notes}
+These limits hold however carefully you work, and naming them is a sign of
+competence, not weakness. A review cannot produce better evidence than the
+studies it rests on. It cannot prove that something has not been studied,
+only that your documented search did not find it. Being systematic does not
+make it objective: question, database, terms and criteria are all choices.
+:::
+
+## Spotlight: QWERTY — mapped, not settled
 
 ::: {.dek}
-Path dependence is a core idea of evolutionary economics. Its most famous
-example has been contested for decades.
+Path dependence · contested for decades
 :::
 
 ::: {.columns .divided}
@@ -277,10 +301,10 @@ example has been contested for decades.
 Lock-in
 :::
 
-- QWERTY persisted through technical interrelatedness, economies of scale
-  and quasi-irreversibility [@david1985clio]
+- Technical interrelatedness, scale economies, quasi-irreversibility
+  [@david1985clio]
 
-- Read as evidence that markets can lock in **inferior** standards
+- → markets can lock in **inferior** standards
 :::
 
 ::: {.column width="50%"}
@@ -288,24 +312,25 @@ Lock-in
 "Fable of the keys"
 :::
 
-- The evidence for Dvorak's superiority is weak and partly from Dvorak
-  himself [@liebowitz1990fable]
+- Weak evidence for Dvorak's superiority, partly from Dvorak himself
+  [@liebowitz1990fable]
 
-- Read as evidence that the lock-in story is **not established**
+- → lock-in claim **not established**
 :::
 :::
 
 ::: {.arrow .fragment}
-A review can show which evidence each side rests on. Whether Dvorak is faster
-is a question for primary research.
+Review: which evidence each side rests on · primary research: who types faster
 :::
 
 ## Check yourself — chapter 1 {.no-dash}
 
-::: {.taskbox}
-A fellow student writes: "My systematic review shows there is no research on
-dynamic capabilities in family firms." Which two things from this chapter
-should make you sceptical — and how should the sentence be rewritten?
+::: {.taskbox .nonincremental}
+Claim: "My systematic review shows there is no research on dynamic
+capabilities in family firms."
+
+- Two reasons for scepticism?
+- A defensible rewording?
 :::
 
 ## Workflow and question {.divider background-color="#00395B"}
@@ -314,51 +339,47 @@ should make you sceptical — and how should the sentence be rewritten?
 02
 :::
 
-## A systematic review has six stages — and the first is decided before you search
+## Six stages — the first before any search
 
 ::: {.dek}
-The order matters because each stage constrains the next. Changing the
-question after seeing the results is the review equivalent of p-hacking.
+Each stage constrains the next · question changed after the results ≈ p-hacking
 :::
 
 ::: {.grid2}
 ::: {.cap .fragment}
 [1 Protocol · 2 Search]{.caphead}
 
-Question, scope and criteria **written down first**; then the documented search.
+Question, scope, criteria **in writing** · then a documented search
 :::
 
 ::: {.cap .fragment}
 [3 Screening · 4 Extraction]{.caphead}
 
-Apply criteria to titles, abstracts and full texts; record what each study
-says in a fixed format.
+Criteria on titles, abstracts, full texts · fixed extraction format
 :::
 
 ::: {.cap .fragment}
 [5 Synthesis]{.caphead}
 
-Organise findings by concept, not by author; explain agreement and
-disagreement.
+By concept, not by author · explain agreement and disagreement
 :::
 
 ::: {.cap .fragment}
 [6 Reporting]{.caphead}
 
-What you did, what you found, and what your choices may have cost you.
+What you did, what you found, what your choices cost
 :::
 :::
 
 ::: {.source}
-Following @tranfield2003towards, who adapt the medical template to
-management research.
+After @tranfield2003towards: the medical template adapted to management
+research.
 :::
 
 ## A topic is not a question
 
 ::: {.dek}
-"Capabilities and innovation" is a topic. A reviewable question names what you
-look at, in which context, and what you want to know about it.
+Reviewable: object · context · what you want to know
 :::
 
 - **Too broad:** "What do we know about capabilities?"
@@ -367,17 +388,16 @@ look at, in which context, and what you want to know about it.
   biotech SMEs in 2015?"
 
 - **Reviewable:** "How do empirical studies conceptualise and measure
-  capabilities and routines when they explain firm-level innovation?"
+  capabilities and routines when explaining firm-level innovation?"
 
 ::: {.arrow .fragment}
-Test: could two people, given your question, agree on whether a paper is in or out?
+Test: two people, same in/out decisions?
 :::
 
-## The concept table turns the question into building blocks
+## The concept table: building blocks of the search
 
 ::: {.dek}
-One column per concept in the question, one row per way of saying it. This
-table becomes your search string in the next chapter.
+One column per concept · one row per wording
 :::
 
 | Capabilities & routines | Innovation | Empirical measurement |
@@ -390,38 +410,36 @@ table becomes your search string in the next chapter.
 | competenc\* | | |
 
 ::: {.source}
-`*` = any ending, `?` = exactly one character (organisation / organization).
-The third column could also be handled by criteria instead of the string — a
-decision you have to document.
+`*` any ending · `?` exactly one character (organisation / organization) ·
+third column: in the string or in the criteria — document the choice
 :::
 
-## Criteria are fixed before you see the results
+## Criteria: fixed before the results
 
 ::: {.dek}
-Inclusion and exclusion criteria are part of the protocol. Write them so
-that a second person would make the same decision.
+Part of the protocol · replicable by a second person
 :::
 
-- **Content:** studies that measure a capability or routine construct and
-  relate it to innovation
+- **Content:** capability or routine construct, related to innovation
 
-- **Design:** empirical — quantitative or qualitative; conceptual papers out
+- **Design:** empirical, quantitative or qualitative; conceptual papers out
 
-- **Type:** peer-reviewed articles and reviews; book chapters out (and say why)
+- **Type:** peer-reviewed articles, reviews; book chapters out — with reason
 
-- **Period and language:** e.g. 1990 onwards, English — **a limitation you will report**
+- **Period, language:** e.g. 1990 onwards, English → **reported limitation**
 
 ::: {.keybox .fragment}
-Every criterion is a decision that someone could disagree with. That is fine
-— as long as it is visible.
+Contestable is fine — invisible is not
 :::
 
 ## Check yourself — chapter 2 {.no-dash}
 
-::: {.taskbox}
-Write down a reviewable question for your own term-paper topic and build a
-concept table with at least two concepts and four terms each. You will need it
-in the tutorial.
+::: {.taskbox .nonincremental}
+Your own topic:
+
+- A reviewable question
+- A concept table: ≥ 2 concepts, ≥ 4 terms each
+- Keep it — needed for the tutorial
 :::
 
 ## Searching {.divider background-color="#00395B"}
@@ -430,69 +448,60 @@ in the tutorial.
 03
 :::
 
-## Not every search system is fit for a systematic review
+## Not every search system fits a systematic review
 
 ::: {.dek}
-A system is suitable only if it searches reliably, lets you formulate a
-precise query, and returns the same results tomorrow.
+Requirements: reliable search · precise query · same results tomorrow
 :::
 
-- **Web of Science**: curated, Boolean, reproducible, exportable — *our*
-  database
+- **Web of Science:** curated, Boolean, reproducible, exportable
 
-- **Google Scholar**: huge coverage, but no full Boolean control, ranked and
-  non-reproducible results
+- **Google Scholar:** huge coverage — limited Boolean control, ranked, not
+  reproducible
 
-- Of 28 systems tested, only **14** met all requirements for systematic
-  reviews [@gusenbauer2020which]
+- Only **14 of 28** systems fit for systematic reviews [@gusenbauer2020which]
 
 ::: {.keybox .fragment}
-Use Google Scholar to find a paper you know exists. Do not use it as your
-search.
+Google Scholar: for finding a known paper, not for the search
 :::
 
-## Three families of search tools work in different ways
+## Three families of search tools
 
 ::: {.dek}
-The same distinction as in lecture 2 — here applied to where each tool fits
-in a review.
+Different logics → different roles in a review
 :::
 
 ::: {.grid2}
 ::: {.cap .fragment}
 [Keyword (Boolean) search]{.caphead}
 
-Web of Science. Finds what matches your terms. Transparent and
-reproducible — and blind to words you did not think of.
+Matches your terms · transparent, reproducible · blind to unknown words
 :::
 
 ::: {.cap .fragment}
 [Semantic (AI) search]{.caphead}
 
-"Finders". Matches meaning, not words. Good for discovering vocabulary;
-opaque ranking, not reproducible.
+Matches meaning · reveals vocabulary · opaque, not reproducible
 :::
 
 ::: {.cap .fragment}
 [Citation-based search]{.caphead}
 
-"Connectors". Follows references from seed papers. Finds what keywords miss
-— within the citing community.
+Follows seed papers' citations · finds what keywords miss — within one community
 :::
 
 ::: {.cap .fragment}
 [In a review]{.caphead}
 
-Boolean search is the **backbone**. Semantic tools **feed** the concept table.
-Citation search **supplements** at the end.
+Boolean: **backbone** · semantic: **input** to the concept table · citation:
+**supplement**
 :::
 :::
 
 ## From concept table to search string
 
 ::: {.dek}
-OR within a concept, AND between concepts. Field tag `TS=` searches title,
-abstract and keywords.
+OR within a concept · AND between concepts · `TS=` title, abstract, keywords
 :::
 
 ```text
@@ -505,22 +514,21 @@ AND
 TS=(measur* OR operationali?ation OR empiric* OR survey*)
 ```
 
-- **Quotation marks** keep phrases together
+- **Quotation marks:** phrases
 
-- **Truncation** and **wildcards** catch spelling and endings
+- **Truncation, wildcards:** endings and spellings
 
-- **Filters** (years, document type, language) are documented separately
+- **Filters:** years, document type, language — documented separately
 
 ::: {.source}
-Interface details and the full syntax are in the tutorial. Check the Web of
-Science help on lemmatisation before relying on exact word forms.
+Web of Science syntax. Full rules, incl. lemmatisation: database help pages
+and tutorial.
 :::
 
 ## Every search trades recall against precision
 
 ::: {.dek}
-You cannot maximise both. Systematic reviews deliberately favour recall and
-pay for it with screening effort.
+Both maximised: impossible · systematic reviews: recall first
 :::
 
 ::: {.columns .divided}
@@ -529,9 +537,9 @@ pay for it with screening effort.
 Recall (sensitivity)
 :::
 
-- Share of all **relevant** papers that your search finds
+- Share of all **relevant** papers found
 
-- Low recall → your review is **incomplete** without you knowing it
+- Low → review **incomplete**, unnoticed
 :::
 
 ::: {.column width="50%"}
@@ -541,92 +549,86 @@ Precision
 
 - Share of **found** papers that are relevant
 
-- Low precision → you screen **thousands** of irrelevant titles
+- Low → **thousands** of irrelevant titles to screen
 :::
 :::
 
 ::: {.arrow .fragment}
-Widening a string raises recall and lowers precision. Narrowing does the
-opposite.
+Wider string: recall ↑ precision ↓ · narrower: the reverse
 :::
 
-## You cannot measure recall directly — so test against known papers
+## Recall: tested against known papers
 
 ::: {.dek}
-You never know all relevant papers. But you know some. If your string misses
-them, it misses others too.
+All relevant papers: unknown · some: known · missed known → missed unknown
 :::
 
-- Before searching: list **5–10 key papers** you know must be found
+- Before searching: **5–10 key papers** that must appear
 
-- Run the string: how many does it retrieve?
+- Run the string → how many retrieved?
 
-- **Missed one?** Look at its title and keywords — which term was missing?
+- **Missed one?** Its title and keywords → the missing term
 
 - Revise, rerun, **log every version**
 
 ::: {.keybox .fragment}
-Illustrative: string v1 finds 5 of 8 known papers → add "competenc\*" and
-"routine\*" variants → v2 finds 8 of 8.
+Illustrative: v1 finds 5/8 → + "competenc\*", "routine\*" → v2 finds 8/8
 :::
 
-## Spotlight: in the capabilities literature, words follow communities
+## Spotlight: words follow communities
 
 ::: {.dek}
-Overlapping ideas carry different names in evolutionary economics, strategic
-management, organisation studies and development economics.
+Capabilities: overlapping ideas, different names
 :::
 
-- Evolutionary economics: **routines**, organisational **capabilities**
+- **Evolutionary economics:** routines, organisational capabilities
   [@nelson1982evolutionary]
 
-- Strategic management: **dynamic capabilities**, resources, core
-  **competences** [@teece1997dynamic]
+- **Strategic management:** dynamic capabilities, resources, core competences
+  [@teece1997dynamic]
 
-- Organisation studies: **routine dynamics** [@feldman2003reconceptualizing]
+- **Organisation studies:** routine dynamics [@feldman2003reconceptualizing]
 
-- Development and innovation studies: **technological capabilities**,
-  **absorptive capacity** [@cohen1990absorptive]
+- **Innovation and development studies:** technological capabilities,
+  absorptive capacity [@cohen1990absorptive]
 
 ::: {.arrow .fragment}
-Search only "dynamic capabilit\*" and your review reports one community's
-view as the state of the field.
+Only "dynamic capabilit\*" → one community's view as "the field"
 :::
 
-## Snowballing finds what your keywords missed
+## Snowballing: what keywords missed
 
 ::: {.dek}
-Start from a few highly relevant included papers and follow citations in both
-directions [@wohlin2014guidelines].
+From a few strong included papers · both directions [@wohlin2014guidelines]
 :::
 
-- **Backward:** the reference lists of your seed papers
+- **Backward:** reference lists of the seed papers
 
-- **Forward:** papers that cite your seed papers (Web of Science: *Citing
-  articles*)
+- **Forward:** papers citing the seeds (Web of Science: *Citing articles*)
 
-- Apply **the same criteria** as for the database results
+- **Same criteria** as for database results
 
-- Report snowballed papers **separately** in the flow diagram
+- **Separate box** in the flow diagram
 
 ::: {.keybox .fragment}
-Snowballing supplements a documented search. It never replaces one.
+Supplement, never substitute
 :::
 
 ## Pause the video {.no-dash}
 
-::: {.taskbox}
-Take your concept table from chapter 2 and write a first Web of Science string
-(OR within, AND between concepts). Then name three papers that your string
-must find. Do not run it yet — the tutorial walks you through that.
+::: {.taskbox .nonincremental}
+- Your concept table → a first string (OR within, AND between)
+- Three papers it must find
+- Not run yet → tutorial
 :::
 
 ## Check yourself — chapter 3 {.no-dash}
 
-::: {.taskbox}
-Your string returns 4,800 records. Your test set of eight key papers is found
-completely. What does this tell you about recall and precision, and what are
-your options?
+::: {.taskbox .nonincremental}
+4,800 records · all 8 test papers found
+
+- What does this say about recall and precision?
+- Your options?
 :::
 
 ## Screening and selection {.divider background-color="#00395B"}
@@ -635,57 +637,57 @@ your options?
 04
 :::
 
-## Screening happens in two rounds
+## Screening in two rounds
 
 ::: {.dek}
-Cheap decisions first, expensive ones later. Each round applies the criteria
-from the protocol — not new ones.
+Cheap decisions first · protocol criteria only
 :::
 
-- **Round 1 — titles and abstracts:** exclude what is clearly out; when in
-  doubt, keep
+- **Round 1 — titles, abstracts:** clearly out → exclude; in doubt → keep
 
-- **Round 2 — full texts:** decide on the remaining papers; **record the
-  reason** for each exclusion
+- **Round 2 — full texts:** decide; **reason** for every exclusion
 
-- **Second screener:** ideally on all records; at least on a sample —
-  compare and discuss disagreements
+- **Second screener:** all records, or at least a sample; disagreements resolved
 
-- **Criteria drift:** if you find yourself changing a criterion, restart
-  the round and document it
+- **Criteria drift:** criterion changed → restart the round, document
 
 ::: {.arrow .fragment}
-A spreadsheet with one row per record and a column for the reason is enough.
-The tutorial provides a template.
+One row per record + reason column → template in the tutorial
 :::
 
-## The PRISMA flow diagram shows what happened to every record
+## The flow diagram: the fate of every record
 
 ::: {.dek}
-Illustrative numbers. The diagram is mandatory in a systematic review and the
-easiest way to make your term paper's review checkable.
+Illustrative numbers · mandatory in a systematic review
 :::
 
 | Stage | What is counted | n |
 |:------|:----------------|--:|
-| Identification | Records from Web of Science | 612 |
+| Identification | Records from the database | 612 |
 | Screening | Excluded on title / abstract | 540 |
 | | Full texts sought / not retrievable | 72 / 3 |
 | Eligibility | Full texts assessed / excluded with reasons | 69 / 41 |
-| | *Reasons: not empirical (15), no innovation outcome (18), other (8)* | |
+| | *Not empirical (15), no innovation outcome (18), other (8)* | |
 | Other sources | Added through snowballing | 6 |
 | Included | Studies in the synthesis | 34 |
 
 ::: {.source}
-Template: @page2021prisma. The R package PRISMA2020 draws the diagram from a
-spreadsheet [@haddaway2022prisma2020] — see the tutorial.
+Template: @page2021prisma. R package PRISMA2020 [@haddaway2022prisma2020]
+→ tutorial.
+:::
+
+::: {.notes}
+The flow diagram is also the easiest way to make the review section of a
+paper checkable: a reader sees immediately how many records you started
+with and why studies dropped out.
 :::
 
 ## Check yourself — chapter 4 {.no-dash}
 
-::: {.taskbox}
-Why should you record a reason for each full-text exclusion, but not for each
-title/abstract exclusion? What could a reader do with those reasons?
+::: {.taskbox .nonincremental}
+- Reasons for every full-text exclusion — but not for title/abstract
+  exclusions: why?
+- What can a reader do with them?
 :::
 
 ## From summary to synthesis {.divider background-color="#00395B"}
@@ -694,11 +696,10 @@ title/abstract exclusion? What could a reader do with those reasons?
 05
 :::
 
-## Most weak reviews are a list of summaries
+## Weak reviews: a list of summaries
 
 ::: {.dek}
-Same three sources, two ways to write about them. The difference is whether
-the paragraph is organised by author or by idea.
+Same sources · organised by author vs. by idea
 :::
 
 ::: {.columns .divided}
@@ -707,11 +708,10 @@ the paragraph is organised by author or by idea.
 Author-centric
 :::
 
-- "Nelson and Winter (1982) describe routines as the genes of the firm.
-  Teece et al. (1997) define dynamic capabilities as … Feldman and Pentland
-  (2003) argue that routines …"
+- "Nelson and Winter (1982) describe … Teece et al. (1997) define …
+  Feldman and Pentland (2003) argue …"
 
-- Reader's question: **so what?**
+- Reader: **so what?**
 :::
 
 ::: {.column width="50%"}
@@ -719,20 +719,26 @@ Author-centric
 Concept-centric
 :::
 
-- "The literature disagrees on whether routines stabilise or change firms.
-  Early evolutionary work stresses stability (Nelson & Winter 1982); later
-  work locates change *inside* routines (Feldman & Pentland 2003). Dynamic
-  capabilities bridge both by …"
+- "The literature disagrees on whether routines stabilise or change firms …"
+
+- Stability (Nelson & Winter) vs. change from within (Feldman & Pentland)
 
 - The disagreement **is** the finding
 :::
 :::
 
-## The concept matrix forces you to synthesise
+::: {.notes}
+A concept-centric paragraph could read: The literature disagrees on whether
+routines stabilise or change firms. Early evolutionary work stresses
+stability; later work locates change inside routines. Dynamic capabilities
+can be read as an attempt to bridge both. The paragraph is organised around
+the disagreement, and the sources are evidence for positions in it.
+:::
+
+## The concept matrix forces synthesis
 
 ::: {.dek}
-Rows are studies, columns are concepts. Simplified illustration for four
-foundational works [@webster2002analyzing].
+Rows: studies · columns: concepts · simplified [@webster2002analyzing]
 :::
 
 | Study | Construct | Level | Main emphasis | Evidence |
@@ -743,96 +749,88 @@ foundational works [@webster2002analyzing].
 | @feldman2003reconceptualizing | Routine dynamics | Routine | Change from within routines | Conceptual, field-based |
 
 ::: {.arrow .fragment}
-Read the matrix by column, not by row: that is your synthesis.
+Read by column → synthesis
 :::
 
-## Data extraction is where the matrix gets filled
+## Data extraction fills the matrix
 
 ::: {.dek}
-Decide the columns before reading the full texts, pilot them on three papers,
-then keep them fixed.
+Columns fixed before reading · piloted on three papers
 :::
 
 - **Bibliographic:** authors, year, outlet
 
 - **Design:** sample, country, period, method
 
-- **Constructs:** how is the capability **defined**? how is it **measured**?
+- **Constructs:** definition and **measurement**
 
 - **Findings:** direction, size, conditions
 
-- **Quality notes:** what makes you trust this study more or less?
+- **Quality:** reasons for more or less trust
 
 ::: {.keybox .fragment}
-Extraction is also where AI tools are tempting — and where silent errors
-spread across the whole sample (chapter 7).
+Tempting for AI — silent errors across the sample (ch. 7)
 :::
 
-## Spotlight: conflicting results on firm growth become informative once sorted
+## Spotlight: firm growth — conflicting results, sorted
 
 ::: {.dek}
-Gibrat's law says growth rates are independent of firm size. Decades of tests
-give no single answer — but the disagreement is structured.
+Gibrat's law: growth independent of size · no single answer · structured disagreement
 :::
 
-- Results depend on **which firms** are in the sample — all, survivors only, or
-  those above a minimum size [@mansfield1962entry]
+- Results depend on the **sample**: all firms, survivors, or above minimum
+  size [@mansfield1962entry]
 
-- … and on **sector, size class, country and period** [@santarelli2006gibrat]
+- … and on **sector, size class, country, period** [@santarelli2006gibrat]
 
-- A vote count (say, "12 for, 15 against") says **nothing**
+- Vote count (say, "12 for, 15 against"): **uninformative**
 
-- A matrix by sample and method shows **when** the law holds
+- Matrix by sample and method: **when** the law holds
 
 ::: {.source}
-For a book-length synthesis see @coad2009growth. The lab's firm growth data
-let you try this yourself.
+Book-length synthesis: @coad2009growth.
 :::
 
-## Spotlight: when the same concept is measured differently
+## Spotlight: same concept, different measures
 
 ::: {.dek}
-Related variety — technologically related industries in a region — has
-become a central idea in evolutionary economic geography.
+Related variety: related industries in a region · evolutionary economic geography
 :::
 
-- Introduced with an **entropy-based** measure [@frenken2007related]
+- Origin: an **entropy-based** measure [@frenken2007related]
 
-- A review of **21** studies: most find that related variety supports
-  employment growth; some only in knowledge-intensive sectors
-  [@content2016related]
+- Review of **21** studies: mostly positive for employment growth; partly only
+  knowledge-intensive sectors [@content2016related]
 
-- Different **measures** and **levels** of relatedness across studies
+- Different **measures** and **levels** of relatedness
 
-- Synthesis has to ask: *same concept, or same word?*
+- Synthesis question: *same concept, or same word?*
 
 ::: {.keybox .fragment}
-Pooling numbers that measure different things produces a precise answer to
-no question.
+Pooling different measures: precise answer, no question
 :::
 
-## Quality appraisal: not all included studies deserve equal weight
+## Quality appraisal: unequal weight
 
 ::: {.dek}
-Formal appraisal tools come from medicine and fit management research only
-partly. A short, explicit set of questions works better than none.
+Medical tools fit management only partly · short explicit questions beat none
 :::
 
-- Is the **construct** clearly defined and measured consistently with it?
+- **Construct:** clearly defined, consistently measured?
 
-- Is the **design** able to support the claim (cross-section vs. panel,
-  case vs. sample)?
+- **Design:** able to support the claim?
 
-- Is the **sample** described — and who is missing from it?
+- **Sample:** described — who is missing?
 
-- Are **limitations** acknowledged by the authors?
+- **Limitations:** acknowledged by the authors?
 
 ## Check yourself — chapter 5 {.no-dash}
 
-::: {.taskbox}
-Take the literature review section of a paper you recently read. Is it
-author-centric or concept-centric? Sketch the concept matrix its authors
-*should* have built.
+::: {.taskbox .nonincremental}
+The review section of a paper you recently read:
+
+- Author- or concept-centric?
+- Sketch the concept matrix it should have used
 :::
 
 ## Biases, limitations, caveats {.divider background-color="#00395B"}
@@ -841,175 +839,156 @@ author-centric or concept-centric? Sketch the concept matrix its authors
 06
 :::
 
-## Bias enters at every stage of a review
+## Bias at every stage
 
 ::: {.dek}
-Some biases are in the literature before you start. Others you introduce
-yourself. A review can reduce the second kind and must report the first.
+Inherited from the literature → report · introduced by you → reduce
 :::
 
 ::: {.grid2}
 ::: {.cap .fragment}
 [The literature]{.caphead}
 
-Publication bias, citation bias, survivorship in the underlying samples.
+Publication bias · citation bias · survivorship in primary samples
 :::
 
 ::: {.cap .fragment}
 [Database and search]{.caphead}
 
-Coverage bias, terminology bias, ranking and tool effects.
+Coverage bias · terminology bias · ranking and tool effects
 :::
 
 ::: {.cap .fragment}
 [Screening]{.caphead}
 
-Confirmation bias, single-screener judgement, criteria drift.
+Confirmation bias · single-screener judgement · criteria drift
 :::
 
 ::: {.cap .fragment}
 [Synthesis and reporting]{.caphead}
 
-Vote counting, apples and oranges, overclaiming from absence.
+Vote counting · apples and oranges · overclaiming from absence
 :::
 :::
 
-## The literature is a filtered sample of the research that was done
+## Publication bias: a filtered literature
 
 ::: {.dek}
-Significant, novel and positive results are more likely to be published. A
-review that only reads what is published inherits this filter.
+Significant, novel, positive → more likely published · reviews inherit the filter
 :::
 
-- Across 159 empirical economics literatures, nearly **80%** of reported
-  effects appear exaggerated, typically by a **factor of two**
-  [@ioannidis2017power]
+- 159 empirical economics literatures: ~**80%** of effects exaggerated,
+  typically **× 2** [@ioannidis2017power]
 
-- CSR and profitability: a meta-regression of 512 studies finds a **small**
-  positive effect and **publication bias** towards significant results
-  [@hirsch2023csr]
+- CSR and profitability, 512 studies: **small** positive effect,
+  **publication bias** [@hirsch2023csr]
 
-- Compare an early meta-analysis reporting a clearly positive link
-  [@orlitzky2003corporate]
+- vs. an earlier meta-analysis: clearly positive link [@orlitzky2003corporate]
 
 ::: {.arrow .fragment}
-A review that counts published results measures the publication process as
-much as the phenomenon.
+Counting published results = measuring the publication process, too
 :::
 
-## Citation bias: often cited is not the same as well supported
+## Citation bias: often cited ≠ well supported
 
 ::: {.dek}
-Highly cited works attract more citations, and are increasingly cited for
-what they are believed to say.
+Citations attract citations · works cited for what they are believed to say
 :::
 
-- Absorptive capacity: Lane et al. analysed 289 papers and found the
-  construct **reified** — used as given, rarely examined
-  [@lane2006reification]
+- Absorptive capacity, 289 papers: construct **reified** — used as given,
+  rarely examined [@lane2006reification]
 
-- Citation-based tools **amplify** this: they find what the community
-  already cites
+- Citation-based tools: **amplify** — they find what is already cited
 
-- AI summaries **amplify** it again: they reproduce the dominant reading
+- AI summaries: **amplify** again — the dominant reading
 
 ::: {.keybox .fragment}
-Read the original. Then check whether the citing paper uses it the way the
-original meant.
+Read the original · check how it is used
 :::
 
-## Survivorship bias: the studies you review may themselves be biased
+## Survivorship bias: inherited from primary studies
 
 ::: {.dek}
-A review inherits the sample problems of its primary studies — and can make
-them invisible by aggregating.
+Aggregation can hide it
 :::
 
-- Firm growth studies restricted to **surviving** firms drop the small firms
-  that exited — so small firms look faster-growing than they are; the issue
-  goes back to @mansfield1962entry
+- Survivors-only growth samples: exited small firms missing → small firms
+  look faster-growing (cf. @mansfield1962entry)
 
-- Similar logic: studies of "successful" capability building rarely observe
-  firms that tried and failed
+- Capability building: failed attempts rarely observed
 
-- Synthesis has to **code** the sample design — otherwise the bias is averaged
-  in
+- **Code** the sample design — or the bias is averaged in
 
-## Your database decides what can be found
+## Coverage bias: the database decides
 
 ::: {.dek}
-Web of Science is curated. Curation is a selection, and the selection is not
-neutral.
+Curation = selection · selection ≠ neutral
 :::
 
-- Web of Science and Scopus over-represent the **natural sciences** and
-  **English-language** journals, and under-represent the **social sciences**
-  and **humanities** [@mongeon2016journal]
+- Web of Science and Scopus: natural sciences and **English** over-, **social
+  sciences** and humanities under-represented [@mongeon2016journal]
 
-- **Books** and **grey literature** are largely missing — a problem for
-  economics and management, where working papers and books matter
+- **Books, working papers, grey literature:** largely missing — central in
+  economics and management
 
-- Research from the **Global South** is under-represented
+- **Global South:** under-represented
 
 ::: {.arrow .fragment}
-You cannot fix coverage with one database. You can test it with known papers
-and report it.
+Not fixable with one database · testable and reportable
 :::
 
-## Terminology bias is the pluralism problem of literature search
+## Terminology bias: the pluralism problem of search
 
 ::: {.dek}
-Your search terms encode a perspective. A string built from one school's
-vocabulary silently excludes the others.
+Search terms encode a perspective
 :::
 
-- "Dynamic capabilities" ≠ "routines" ≠ "technological capabilities" — but
-  overlapping ideas
+- "Dynamic capabilities" ≠ "routines" ≠ "technological capabilities" — yet
+  overlapping
 
-- Heterodox and mainstream work often **name** the same phenomenon
-  differently
+- Heterodox vs. mainstream: different **names**, same phenomenon
 
-- The result looks **systematic** and is still **one-sided**
+- Result: **systematic**, yet **one-sided**
 
-- **Countermeasures:** harvest terms across communities, test alternative
-  strings, compare hit lists
+- **Countermeasures:** terms from several communities, alternative strings,
+  compared hit lists
 
-## You introduce bias yourself when you screen and synthesise
+## Reviewer bias: screening and synthesis
 
 ::: {.dek}
-The reviewer is part of the instrument. The protocol exists to constrain
-the reviewer.
+Reviewer = part of the instrument · protocol = constraint
 :::
 
-- **Confirmation bias:** borderline papers that fit your expectation stay in
+- **Confirmation bias:** fitting borderline papers stay in
 
-- **Criteria drift:** the criteria change as you read
+- **Criteria drift:** criteria change while reading
 
-- **Vote counting:** counting significant results instead of weighing evidence
+- **Vote counting:** significant results counted, evidence not weighed
 
-- **Apples and oranges:** pooling studies with different constructs and designs
+- **Apples and oranges:** different constructs and designs pooled
 
 - **Absence of evidence ≠ evidence of absence**
 
 ::: {.keybox .fragment}
-Fixed criteria, a second screener, a concept matrix, careful wording — each
-is a countermeasure.
+Fixed criteria · second screener · concept matrix · careful wording
 :::
 
 ## Pause the video {.no-dash}
 
-::: {.taskbox}
-For your own planned search: name **one** bias from each of the four groups
-(literature, database & search, screening, synthesis) that is likely to affect
-it, and **one** thing you could do about each.
+::: {.taskbox .nonincremental}
+Your planned search:
+
+- One likely bias per group — literature · database & search · screening · synthesis
+- One countermeasure each
 :::
 
 ## Check yourself — chapter 6 {.no-dash}
 
-::: {.taskbox}
-A review of 40 studies on dynamic capabilities and firm performance finds that
-32 report a significant positive effect. Name three reasons why this does not
-mean that dynamic capabilities improve performance in 80% of firms.
+::: {.taskbox .nonincremental}
+40 studies on dynamic capabilities and performance · 32 significantly positive
+
+- Why not "works in 80% of firms"?
+- Three reasons
 :::
 
 ## Reporting, reproducibility, AI {.divider background-color="#00395B"}
@@ -1018,33 +997,30 @@ mean that dynamic capabilities improve performance in 80% of firms.
 07
 :::
 
-## A review must be reproducible from what you report
+## Reproducible from the report alone
 
 ::: {.dek}
-PRISMA 2020 lists 27 reporting items; PRISMA-S adds 16 items for the search.
-For a term paper, the core fits into one paragraph and an appendix.
+PRISMA 2020: 27 items · PRISMA-S: 16 search items · short form: paragraph + appendix
 :::
 
 - **Database** and date of the search
 
-- The **full string**, including all filters
+- **Full string**, all filters
 
 - **Criteria**, and who screened
 
-- **Numbers** at each stage → flow diagram
+- **Numbers** per stage → flow diagram
 
-- How you **synthesised** — and the **limitations** of all the above
+- **Synthesis** method — and the **limitations** of all the above
 
 ::: {.source}
-@page2021prisma; @rethlefsen2021prismas. The search log in the tutorial
-records all of this as you go.
+@page2021prisma; @rethlefsen2021prismas. Search log template → tutorial.
 :::
 
-## Write the limitations as specific as your method
+## Limitations: as specific as the method
 
 ::: {.dek}
-"This review may not be complete" says nothing. Name the bias, the direction,
-and why you accepted it.
+The bias · its direction · why accepted
 :::
 
 ::: {.columns .divided}
@@ -1053,7 +1029,7 @@ and why you accepted it.
 Generic
 :::
 
-- "As with all reviews, some relevant studies may have been missed."
+- "Some relevant studies may have been missed."
 :::
 
 ::: {.column width="50%"}
@@ -1061,18 +1037,18 @@ Generic
 Specific
 :::
 
-- "Restricting the search to English-language journal articles in Web of
-  Science excludes the book-based and working-paper tradition of evolutionary
-  economics; the review therefore likely over-represents the strategic
-  management strand."
+- English-language Web of Science articles only
+
+- → book and working-paper tradition of evolutionary economics missing
+
+- → strategic-management strand likely over-represented
 :::
 :::
 
-## Behind the scenes: two of my own reviews
+## Behind the scenes: two own reviews
 
 ::: {.dek}
-Published systematic reviews — and the decisions behind them that do not
-appear in the final article.
+Published reviews · decisions not in the article
 :::
 
 - **Capability accumulation** across disciplines, for macroeconomic
@@ -1087,44 +1063,41 @@ appear in the final article.
 ## What I would do differently today
 
 ::: {.dek}
-**[to fill]** One or two decisions per review that, in hindsight, shaped the
-result.
+**[to fill]** One or two decisions per review that shaped the result
 :::
 
-- **[to fill: e.g. a term family that was missing, a database not used, a
-  criterion that turned out to matter]**
+- **[to fill: e.g. a missing term family, an unused database, a decisive
+  criterion]**
 
 - **[to fill]**
 
 <!-- Suggested angle: relate at least one point to chapter 6 (coverage,
-     terminology, citation bias). Students remember an admitted mistake far
-     better than a rule. -->
+     terminology, citation bias). An admitted mistake is remembered far
+     better than a rule. Fragments on the slide, the story in the notes. -->
 
-## AI helps at some stages and is risky at others
+## AI: helpful at some stages, risky at others
 
 ::: {.dek}
-Classes as in lecture 2. The rule: AI may suggest; the documented, reproducible
-step is yours.
+AI suggests · the documented, reproducible step is yours
 :::
 
 | Stage | AI can help with | Typical failure | Rule |
 |:------|:-----------------|:----------------|:-----|
-| Question, concept table | Synonyms, neighbouring vocabularies | Converges on the dominant terms | Check terms against key papers |
-| Search | Discovering papers you missed | Opaque, non-reproducible results | Never the primary search |
+| Question, concept table | Synonyms, neighbouring vocabularies | Converges on dominant terms | Check terms against key papers |
+| Search | Papers you missed | Opaque, non-reproducible | Never the primary search |
 | Screening | First sort of titles | Plausible but wrong exclusions | You decide; log reasons |
 | Extraction | Reading many PDFs | Silent errors across the sample | Verify a sample by hand |
-| Synthesis, writing | Structuring, critique of drafts | Generic, mainstream synthesis | Your matrix, your argument |
+| Synthesis, writing | Structure, critique of drafts | Generic, mainstream synthesis | Your matrix, your argument |
 
 ::: {.arrow .fragment}
-Disclose every use — with the template from lecture 2.
+Disclose every use
 :::
 
 ## Check yourself — chapter 7 {.no-dash}
 
-::: {.taskbox}
-Could someone else rerun your search from what you plan to report? List
-everything they would need, then compare with the list on the first slide of
-this chapter.
+::: {.taskbox .nonincremental}
+- Could someone rerun your search from your report alone?
+- List what they would need · compare with this chapter's first slide
 :::
 
 ## Wrap-up {.divider background-color="#00395B"}
@@ -1135,18 +1108,18 @@ this chapter.
 
 ## What to take away
 
-- A review is a **study** with a question, a method and a checkable result
+- A review = a **study**: question, method, checkable result
 
-- **Concept table → string → test against known papers → log every version**
+- **Concept table → string → test → log every version**
 
-- **Synthesise** by concept; the concept matrix makes you
+- **Synthesis** by concept — via the concept matrix
 
-- Bias enters at **every** stage — reduce what you can, report the rest
+- Bias at **every** stage: reduce, then report
 
-- AI may **suggest**; the documented step is **yours**
+- AI **suggests** — the documented step is **yours**
 
 ::: {.keybox .lg .fragment}
-Systematic does not mean objective. It means that your choices are visible.
+Systematic ≠ objective — choices made visible
 :::
 
 ## Can and cannot, once more
@@ -1159,7 +1132,7 @@ A review can
 
 - Map a debate — QWERTY, routines, Gibrat
 
-- Show where results depend on context
+- Show context dependence
 
 - Locate gaps relative to a documented search
 :::
@@ -1169,9 +1142,9 @@ A review can
 A review cannot
 :::
 
-- Be better than its primary studies
+- Exceed its primary studies
 
-- Prove that something has not been studied
+- Prove absence
 
 - Turn frequency into evidence
 :::
@@ -1181,11 +1154,13 @@ A review cannot
 
 ::: {.nonincremental}
 - **Tutorial** on the lecture page: a mini systematic review in eight steps,
-  with templates and an optional R part
+  templates, optional R part
 
-- **Take-home examination II** on Moodle — follows the same steps
+- **Take-home examination II** on Moodle — same steps
 
-- **Readings:** @snyder2019literature and @page2021prisma
+- **Readings:** @snyder2019literature, @page2021prisma
+
+- **AI use:** disclosure template from lecture 2
 :::
 
 ## Recap questions
@@ -1194,16 +1169,15 @@ A review cannot
 - Which review type fits (a) mapping a new field, (b) pooling effect sizes,
   (c) building a framework from scattered concepts — and why?
 
-- Name three things a review cannot do, with an example for each.
+- Three things a review cannot do — one example each?
 
-- Explain recall and precision. How do you test recall in practice?
+- Recall and precision: definitions? How to test recall in practice?
 
 - Why is terminology bias a particular problem in the capabilities literature?
 
-- Give one example each of publication bias, citation bias and survivorship
-  bias from this lecture.
+- One example each of publication, citation and survivorship bias?
 
-- What must you report so that someone else can rerun your search?
+- What must a report contain so that someone else can rerun the search?
 :::
 
 ## References {.smaller .scrollable}
