@@ -50,6 +50,11 @@ format:
          only full sentences on slides — and are marked as quotes
        - every empirical claim carries a citation or .source line
 
+     Database: OpenAlex is the baseline (free, open, same for everyone).
+     Paid databases (Web of Science, Scopus) appear only as optional
+     add-ons. The missing-abstracts limitation is taught explicitly
+     (ch. 3: consequences and countermeasures; ch. 6: political economy).
+
      All cited works were checked against publisher/RePEc records in
      October 2026. Numbers marked "illustrative" are invented for teaching.
 
@@ -67,7 +72,7 @@ format:
 - **Assess** a search: precision, recall, validation
 - **Select** studies by explicit criteria; document in a **PRISMA** flow diagram
 - **Synthesise** with a concept matrix, not by summarising
-- **Identify** biases in literature, search and synthesis
+- **Identify** biases — in literature, databases, search and synthesis
 - **Use** AI at each stage without losing reproducibility
 :::
 
@@ -402,15 +407,15 @@ One column per concept · one row per wording
 
 | Capabilities & routines | Innovation | Empirical measurement |
 |:------------------------|:-----------|:----------------------|
-| dynamic capabilit\* | innovat\* | measur\* |
-| organi?ational routine\* | "new product\*" | operationali?ation |
-| absorptive capacit\* | patent\* | empiric\* |
-| organi?ational capabilit\* | R&D | survey\* |
-| technological capabilit\* | | "panel data" |
-| competenc\* | | |
+| dynamic capabilities | innovation, innovative | measurement, measure |
+| organizational / organisational routines | "new product" | operationalization / operationalisation |
+| absorptive capacity | patent | empirical |
+| organizational / organisational capabilities | R&D | survey |
+| technological capabilities | | "panel data" |
+| competences, competencies | | |
 
 ::: {.source}
-`*` any ending · `?` exactly one character (organisation / organization) ·
+Spelling variants listed explicitly · plural forms covered by stemming ·
 third column: in the string or in the criteria — document the choice
 :::
 
@@ -451,10 +456,13 @@ Your own topic:
 ## Not every search system fits a systematic review
 
 ::: {.dek}
-Requirements: reliable search · precise query · same results tomorrow
+Requirements: reliable search · precise query · documented, rerunnable
 :::
 
-- **Web of Science:** curated, Boolean, reproducible, exportable
+- **OpenAlex:** free, open, broad coverage, Boolean, scriptable
+  [@priem2022openalex]
+
+- **Web of Science, Scopus:** curated, precise syntax — paid, access fragile
 
 - **Google Scholar:** huge coverage — limited Boolean control, ranked, not
   reproducible
@@ -462,7 +470,17 @@ Requirements: reliable search · precise query · same results tomorrow
 - Only **14 of 28** systems fit for systematic reviews [@gusenbauer2020which]
 
 ::: {.keybox .fragment}
-Google Scholar: for finding a known paper, not for the search
+Baseline: OpenAlex · paid databases: optional add-on
+:::
+
+::: {.notes}
+The baseline taught here does not depend on any subscription. OpenAlex is
+free, open and the same for everyone, so every search in this lecture can be
+rerun by anyone. Web of Science and Scopus remain useful where you have
+access — mainly for their precise search syntax and curated metadata — but
+access through a university is fragile and ends with graduation. Google
+Scholar is fine for finding a paper you already know exists, but not as the
+search of a systematic review.
 :::
 
 ## Three families of search tools
@@ -501,28 +519,28 @@ Boolean: **backbone** · semantic: **input** to the concept table · citation:
 ## From concept table to search string
 
 ::: {.dek}
-OR within a concept · AND between concepts · `TS=` title, abstract, keywords
+OR within a concept · AND between concepts · searched in title and abstract
 :::
 
 ```text
-TS=("dynamic capabilit*" OR "organi?ational routine*"
-    OR "absorptive capacit*" OR "organi?ational capabilit*"
-    OR "technological capabilit*")
-AND
-TS=(innovat* OR "new product*" OR patent*)
-AND
-TS=(measur* OR operationali?ation OR empiric* OR survey*)
+("dynamic capabilities" OR "organizational routines" OR "organisational routines"
+ OR "absorptive capacity" OR "organizational capabilities"
+ OR "organisational capabilities" OR "technological capabilities")
+AND (innovation OR innovative OR "new product" OR patent)
+AND (measurement OR measure OR empirical OR survey)
 ```
+
+- **Operators:** AND, OR, NOT — in capitals
 
 - **Quotation marks:** phrases
 
-- **Truncation, wildcards:** endings and spellings
+- **Stemming:** plurals automatic — derivations and spellings listed
 
-- **Filters:** years, document type, language — documented separately
+- **Filters:** years, type, language — documented separately
 
 ::: {.source}
-Web of Science syntax. Full rules, incl. lemmatisation: database help pages
-and tutorial.
+OpenAlex syntax, field `title_and_abstract.search`. No wildcards in the web
+interface. Current rules: OpenAlex help pages and tutorial.
 :::
 
 ## Every search trades recall against precision
@@ -565,6 +583,8 @@ All relevant papers: unknown · some: known · missed known → missed unknown
 
 - Before searching: **5–10 key papers** that must appear
 
+- Incl. **closed-access** papers from large publishers (next slide)
+
 - Run the string → how many retrieved?
 
 - **Missed one?** Its title and keywords → the missing term
@@ -573,6 +593,50 @@ All relevant papers: unknown · some: known · missed known → missed unknown
 
 ::: {.keybox .fragment}
 Illustrative: v1 finds 5/8 → + "competenc\*", "routine\*" → v2 finds 8/8
+:::
+
+## The blind spot: records without abstract
+
+::: {.dek}
+No abstract → title and keywords only · gap not random
+:::
+
+- ~**40%** of OpenAlex records without abstract [@borrego2025openalex]
+
+- Concentrated: **closed-access** Elsevier and Springer Nature articles — core
+  outlets in business and economics [@kramer2024open]
+
+- Consequence: **recall loss** for exactly these papers
+
+- Adding abstracts later: helps **screening**, not **search**
+
+::: {.notes}
+OpenAlex searches titles and abstracts. For a record without an abstract,
+only the title and OpenAlex's keywords can match. The gap is systematic:
+closed-access articles of the largest publishers lost their abstracts after
+takedown requests. You can always look up the abstract on the publisher's
+page when screening, but a record your string never retrieved will not be
+screened at all. Chapter 6 returns to why this happens.
+:::
+
+## Countermeasures: what the method can compensate
+
+::: {.dek}
+Baseline workflow · no paid tools needed
+:::
+
+- **Snowballing: compulsory** — citation links independent of abstracts
+
+- **Test set** with closed-access papers → gap visible
+
+- **Title terms:** words authors put in titles
+
+- **Measure** the gap: share of hits without abstract, by publisher and year
+
+- **Report** it as a limitation
+
+::: {.keybox .fragment}
+Optional add-on: same string in a paid database — compare hit lists
 :::
 
 ## Spotlight: words follow communities
@@ -604,14 +668,14 @@ From a few strong included papers · both directions [@wohlin2014guidelines]
 
 - **Backward:** reference lists of the seed papers
 
-- **Forward:** papers citing the seeds (Web of Science: *Citing articles*)
+- **Forward:** papers citing the seeds (OpenAlex: *Cited by*)
 
 - **Same criteria** as for database results
 
 - **Separate box** in the flow diagram
 
 ::: {.keybox .fragment}
-Supplement, never substitute
+Supplement, never substitute — with OpenAlex: compulsory
 :::
 
 ## Pause the video {.no-dash}
@@ -645,11 +709,13 @@ Cheap decisions first · protocol criteria only
 
 - **Round 1 — titles, abstracts:** clearly out → exclude; in doubt → keep
 
+- **No abstract?** Publisher page via DOI — abstracts free to read there
+
 - **Round 2 — full texts:** decide; **reason** for every exclusion
 
-- **Second screener:** all records, or at least a sample; disagreements resolved
+- **Second screener:** all records, or a sample; disagreements resolved
 
-- **Criteria drift:** criterion changed → restart the round, document
+- **Criteria drift:** criterion changed → restart, document
 
 ::: {.arrow .fragment}
 One row per record + reason column → template in the tutorial
@@ -925,16 +991,16 @@ Aggregation can hide it
 Curation = selection · selection ≠ neutral
 :::
 
-- Web of Science and Scopus: natural sciences and **English** over-, **social
+- Web of Science, Scopus: natural sciences and **English** over-, **social
   sciences** and humanities under-represented [@mongeon2016journal]
 
-- **Books, working papers, grey literature:** largely missing — central in
-  economics and management
+- **Books, working papers, Global South:** weak in curated databases
 
-- **Global South:** under-represented
+- OpenAlex: broader, less English-centred — but **metadata gaps**: abstracts,
+  language tags [@cespedes2025linguistic]
 
 ::: {.arrow .fragment}
-Not fixable with one database · testable and reportable
+No neutral database · test with known papers, report the gaps
 :::
 
 ## Terminology bias: the pluralism problem of search
@@ -952,6 +1018,40 @@ Search terms encode a perspective
 
 - **Countermeasures:** terms from several communities, alternative strings,
   compared hit lists
+
+## Political economy: who owns the record of science?
+
+::: {.dek}
+What you can find depends on who controls publications and metadata
+:::
+
+- Five publishers: **> 50%** of all papers by 2013 [@lariviere2015oligopoly]
+
+- Owners of the indexes: **Elsevier** → Scopus · **Clarivate** → Web of Science
+
+- Abstracts withdrawn from open indexes: Springer Nature 2022, Elsevier 2024
+  — abstracts as **assets**, e.g. for AI licensing [@kramer2024open]
+
+- Counter-movement: **open research information** — Barcelona Declaration
+  2024; Sorbonne and CNRS leave commercial databases [@barcelona2024declaration]
+
+::: {.arrow .fragment}
+Missing abstracts: a political decision, not a technical accident
+:::
+
+::: {.notes}
+The missing abstracts from chapter 3 are not a technical glitch. A handful
+of commercial publishers control a large share of the scholarly record, and
+the two dominant curated indexes are themselves commercial products — Scopus
+belongs to Elsevier, a publisher. Abstracts are publicly readable on
+publisher pages, but publishers have withdrawn the right to redistribute
+them in open indexes, at a time when abstracts have become valuable, among
+other things, for training and licensing AI systems. Universities are
+responding: the Barcelona Declaration of 2024 commits signatories to open
+research information; Sorbonne University dropped Web of Science in favour
+of OpenAlex in 2024, and the CNRS left Scopus in 2024 and Web of Science in
+2026. Choosing a database is therefore also choosing an infrastructure.
+:::
 
 ## Reviewer bias: screening and synthesis
 
@@ -1005,7 +1105,7 @@ PRISMA 2020: 27 items · PRISMA-S: 16 search items · short form: paragraph + ap
 
 - **Database** and date of the search
 
-- **Full string**, all filters
+- **Full string**, all filters — or the query URL / script
 
 - **Criteria**, and who screened
 
@@ -1037,11 +1137,12 @@ Generic
 Specific
 :::
 
-- English-language Web of Science articles only
+- OpenAlex, title and abstract only; 30% of hits without abstract, mostly
+  closed-access journals (illustrative)
 
-- → book and working-paper tradition of evolutionary economics missing
+- → recall loss for recent closed-access articles
 
-- → strategic-management strand likely over-represented
+- → partly compensated by snowballing; residual gap reported
 :::
 :::
 
@@ -1110,11 +1211,11 @@ Disclose every use
 
 - A review = a **study**: question, method, checkable result
 
-- **Concept table → string → test → log every version**
+- **Open baseline:** concept table → OpenAlex string → test → snowball → log
 
 - **Synthesis** by concept — via the concept matrix
 
-- Bias at **every** stage: reduce, then report
+- Bias at **every** stage, incl. database ownership: reduce, then report
 
 - AI **suggests** — the documented step is **yours**
 
@@ -1174,6 +1275,8 @@ A review cannot
 - Recall and precision: definitions? How to test recall in practice?
 
 - Why is terminology bias a particular problem in the capabilities literature?
+
+- Why does a missing abstract harm the search more than the screening?
 
 - One example each of publication, citation and survivorship bias?
 
