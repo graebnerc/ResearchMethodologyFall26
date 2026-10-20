@@ -1,6 +1,6 @@
 ---
 title: "🗓️ Lecture 06: Interviews"
-date: "2026-10-26"
+date: "2026-11-02"
 author: "Anna-Katharina Kothe"
 date-modified: last-modified
 ---

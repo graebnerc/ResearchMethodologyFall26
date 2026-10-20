@@ -1,0 +1,417 @@
+---
+title: "🛠️ Writing your own functions"
+subtitle: "A step-by-step tutorial from session 3"
+date: "2026-10-02"
+date-modified: last-modified
+execute:
+  freeze: auto
+  message: false
+  warning: false
+  error: true
+format:
+  html:
+    highlight: tango
+    toc: true
+    toc-depth: 3
+    toc-location: right
+    code-copy: true
+    abstract: "In session 3 did a very concise recap on writing functions. 
+    This page is the written documentation of what we did, so that you can go 
+    through it again at your own pace."
+---
+
+```{r}
+#| include: false
+# The error messages below are part of the explanation, so they should be
+# English regardless of the locale of the machine this page is rendered on.
+Sys.setenv(LANGUAGE = "en")
+```
+
+The conceptual background is covered in the resource
+[Object Types in R I: Functions](https://euf-methodology-hub.netlify.app/resources/r-object-types-i-functions)
+on *Method and Inquiry* [@graebner2026-r-object-types-i-functions]. If any term
+below is unfamiliar — argument, environment, routine — read that resource first.
+
+::: {.callout-tip}
+## Where to put the code
+Both functions below belong into a script in the `R` folder of your project,
+e.g. `R/functions.R`, which you then make available in your analysis scripts via
+
+```{r}
+#| eval: false
+here::i_am("R/analysis.R")
+library(here)
+source(here("R", "functions.R"))
+```
+
+This is exactly the directory structure we set up in the main session
+3 — writing functions is one of the reasons why it pays off.
+:::
+
+## The golden rule
+
+You will rarely write a function from scratch. 
+The reliable recipe is usually the following:
+
+1. **Solve the problem once** for one concrete case.
+2. **Wrap** the working code into `function(){...}` and replace the concrete
+   values by argument names.
+3. **Test** the function on the case you already know the answer to.
+4. **Generalise** it: optional arguments, defaults, a check of the input.
+5. **Document** it.
+
+Steps 1 to 3 are the important ones. If you ever find yourself writing a
+function body for code you have never executed, you are doing it the hard way.
+
+## Function 1: Fahrenheit to Celsius
+
+A deliberately simple case: converting a temperature given in degrees Fahrenheit
+into degrees Celsius. The formula is
+$$T_C = \frac{5}{9}\cdot(T_F - 32)$$
+
+### Step 1: solve it once
+
+We pick one concrete value — the boiling point of water, 212°F — because we know
+what the answer has to be:
+
+```{r}
+(5 / 9) * (212 - 32)
+```
+
+100 degrees Celsius. The code works.
+
+### Step 2: wrap it into a function
+
+Now we do two things: first, we put the working line into the body of a function:
+
+```{r}
+#| eval: false
+fahrenheit_to_celsius <- function(){
+  temp_celsius <- (5 / 9) * (212 - 32)
+  return(temp_celsius)
+}
+```
+
+Note that this function already works:
+
+```{r}
+fahrenheit_to_celsius()
+```
+
+But is only repeats the single case you have already covered. Therefore, 
+we then replace the concrete value `212` by a **name**, which becomes the 
+argument (here: `temp_fahrenheit`) and allows us to use the function for
+arbitrary values:
+
+```{r}
+fahrenheit_to_celsius <- function(temp_fahrenheit){
+  temp_celsius <- (5 / 9) * (temp_fahrenheit - 32)
+  return(temp_celsius)
+}
+```
+
+Note the four elements:
+
+- `fahrenheit_to_celsius <-` → the **name** we assign the function to;
+- `function(temp_fahrenheit)` → the **argument**, a mandatory one;
+- the braces `{...}` → the **function body**, i.e. the routine;
+- `return(...)` → the **output** that the function hands back.
+
+### Step 3: test it
+
+First on the case we already know:
+
+```{r}
+fahrenheit_to_celsius(212)
+```
+
+Then on a second one, to be sure — the freezing point, which must come out as 0:
+
+```{r}
+fahrenheit_to_celsius(temp_fahrenheit = 32)
+```
+
+Both calls do the same thing. Writing the argument name out, as in the second
+call, costs a few characters and makes the code much easier to read later on.
+
+And because R works on whole vectors, our function does too, without any extra
+effort:
+
+```{r}
+fahrenheit_to_celsius(c(32, 68, 212))
+```
+
+### Step 4: the environment of the function
+
+Inside the body we created an object called `temp_celsius`. Let us ask for it:
+
+```{r}
+temp_celsius
+```
+
+It does not exist. Every function call opens its **own environment**, and
+everything created in the body lives and dies there. This is intentional: your
+workspace does not fill up with the internal scrap of every function you call.
+
+::: {.callout-note}
+## Consequence for your scripts
+A function can only communicate with the outside world through its
+**arguments** (in) and its **return value** (out). If you want a result, you
+have to return it and assign it to a name:
+
+```{r}
+boiling_point <- fahrenheit_to_celsius(212)
+boiling_point
+```
+:::
+
+### Step 5: document it
+
+The convention in R is the *roxygen* style: comment lines starting with `#'`
+directly above the function. A title, then the arguments via `@param`, then the
+output via `@return`:
+
+```{r}
+#' Convert a temperature from degrees Fahrenheit into degrees Celsius
+#'
+#' @param temp_fahrenheit A number (or numeric vector) with a temperature
+#'  measured in degrees Fahrenheit.
+#' @return The same temperature measured in degrees Celsius.
+fahrenheit_to_celsius <- function(temp_fahrenheit){
+  temp_celsius <- (5 / 9) * (temp_fahrenheit - 32)
+  return(temp_celsius)
+}
+```
+
+This is what makes the difference between code you can reuse in six months and
+code you will rewrite from scratch because you cannot remember what you did. 
+Three lines of documentation per function is already a huge bargain!
+
+## Function 2: a summary for a vector
+
+The second function is a bit more complex. We want a compact overview of a numeric
+variable — the number of observations, the mean, the standard deviation, the
+minimum and the maximum — returned as a `data.frame` so that we can later stack
+the results for several variables, or print them as a table.
+
+We use a small test vector that deliberately contains a missing value:
+
+```{r}
+test_data <- c(4, 8, 15, 16, 23, 42, NA)
+```
+
+### Step 1: solve it once
+
+Again, we first write the code for this one concrete vector:
+
+```{r}
+data.frame(
+  n    = length(test_data),
+  mean = mean(test_data, na.rm = TRUE),
+  sd   = sd(test_data, na.rm = TRUE),
+  min  = min(test_data, na.rm = TRUE),
+  max  = max(test_data, na.rm = TRUE)
+)
+```
+
+It works — but note the inconsistency we just produced: `length()` counts the
+`NA` as an observation, while the other four functions ignore it. We will fix
+that in a moment. This is the normal course of events: you only see such things
+once the code has run.
+
+### Step 2: wrap it into a function
+
+The concrete `test_data` becomes an argument called `x`, and we fix the counting
+of missing values along the way:
+
+```{r}
+describe_vector <- function(x){
+  x_complete <- x |> 
+    tidyr::drop_na()
+  
+  result <- data.frame(
+    n    = length(x_complete),
+    mean = mean(x_complete),
+    sd   = sd(x_complete),
+    min  = min(x_complete),
+    max  = max(x_complete)
+  )
+  return(result)
+}
+
+describe_vector(test_data)
+```
+
+Now `n` reports the six values the statistics are actually computed from. Note
+how the local object `x_complete` lets us state the decision about missing
+values **once**, instead of repeating `na.rm = TRUE` five times — that is the
+*Don't Repeat Yourself* principle at work on a very small scale.
+
+### Step 3: add an optional argument
+
+Silently dropping missing values is a strong assumption. Usually you want to
+*know* that they are there, so we make the behaviour a choice, with a default:
+
+```{r}
+describe_vector <- function(x, na.rm = TRUE){
+  if (na.rm == TRUE) {
+    x <- x[!is.na(x)]
+  }
+  result <- data.frame(
+    n    = length(x),
+    mean = mean(x),
+    sd   = sd(x),
+    min  = min(x),
+    max  = max(x)
+  )
+  return(result)
+}
+```
+
+This is what distinguishes a **mandatory** from an **optional** argument: `x`
+has no default, so it must be supplied; `na.rm` has one, so it need not be:
+
+```{r}
+describe_vector(test_data)
+describe_vector(test_data, na.rm = FALSE)
+```
+
+The second call returning `NA` is not a bug — it is the function telling you
+that your data have holes.
+
+### Step 4: a second optional argument
+
+Twelve decimal places are of no use to anyone, so we add a `digits` argument,
+again with a sensible default:
+
+```{r}
+describe_vector <- function(x, na.rm = TRUE, digits = 2){
+  if (na.rm == TRUE) {
+    x <- x[!is.na(x)]
+  }
+  result <- data.frame(
+    n    = length(x),
+    mean = mean(x),
+    sd   = sd(x),
+    min  = min(x),
+    max  = max(x)
+  )
+  result <- round(result, digits = digits)
+  return(result)
+}
+
+describe_vector(test_data)
+describe_vector(test_data, digits = 0)
+```
+
+### Step 5: check the input
+
+What happens if somebody — most likely future-you — hands the function something
+that is not a number?
+
+```{r}
+describe_vector(c("4", "8", "15"))
+```
+
+The message complains about `Math.data.frame()`, a function that appears nowhere
+in our code, and it blames the columns `min` and `max` — while the actual problem
+is the input we handed over. Such messages are what makes debugging painful. So
+we state our expectation about the input explicitly, right at the top of the
+body:
+
+```{r}
+describe_vector <- function(x, na.rm = TRUE, digits = 2){
+  stopifnot(is.numeric(x))
+  if (na.rm == TRUE) {
+    x <- x[!is.na(x)]
+  }
+  result <- data.frame(
+    n    = length(x),
+    mean = mean(x),
+    sd   = sd(x),
+    min  = min(x),
+    max  = max(x)
+  )
+  result <- round(result, digits = digits)
+  return(result)
+}
+
+describe_vector(c("4", "8", "15"))
+```
+
+Now the complaint names the actual problem. `stopifnot()` takes one or more
+conditions and stops the function as soon as one of them is not `TRUE`.
+
+### Step 6: the finished function
+
+Documented, this is the version that goes into `R/functions.R`:
+
+```{r}
+#' Compute summary statistics for a numeric vector
+#'
+#' Computes the number of observations, the mean, the standard deviation, the
+#'  minimum and the maximum of a numeric vector and returns them as a one-row
+#'  data frame.
+#'
+#' @param x A numeric vector to be described.
+#' @param na.rm Logical. Should missing values be removed before the statistics
+#'  are computed? Default is `TRUE`.
+#' @param digits The number of decimal places to which the results are rounded.
+#'  Default is `2`.
+#' @return A `data.frame` with one row and the columns `n`, `mean`, `sd`, `min`
+#'  and `max`.
+describe_vector <- function(x, na.rm = TRUE, digits = 2){
+  stopifnot(is.numeric(x))
+  if (na.rm == TRUE) {
+    x <- x[!is.na(x)]
+  }
+  result <- data.frame(
+    n    = length(x),
+    mean = mean(x),
+    sd   = sd(x),
+    min  = min(x),
+    max  = max(x)
+  )
+  result <- round(result, digits = digits)
+  return(result)
+}
+```
+
+And this is why it was worth the effort — describing three variables is now
+three lines of readable code:
+
+```{r}
+rbind(
+  Sepal.Length = describe_vector(iris$Sepal.Length),
+  Sepal.Width  = describe_vector(iris$Sepal.Width),
+  Petal.Length = describe_vector(iris$Petal.Length)
+)
+```
+
+## Your turn
+
+Two exercises to make sure the recipe sticks. Use the five steps from above, and
+do not skip step 1.
+
+1. Write a function `celsius_to_fahrenheit()` that reverses function 1, and
+   check that `celsius_to_fahrenheit(fahrenheit_to_celsius(212))` gives you
+   `212` back.
+2. Extend `describe_vector()` by an optional argument `median` (default
+   `FALSE`); if it is set to `TRUE`, the returned data frame contains an
+   additional column with the median of `x`.
+
+If you want more practice, the exercise set `Functions` from the
+`DataScienceExercises` package is exactly about this:
+
+```{r}
+#| eval: false
+learnr::run_tutorial(
+  name = "Functions",
+  package = "DataScienceExercises",
+  shiny_args = list("launch.browser" = TRUE))
+```
+
+## References
+
+::: {#refs}
+:::

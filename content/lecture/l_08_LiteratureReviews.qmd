@@ -1,8 +1,19 @@
 ---
 title: "🗓️ Lecture 08: Literature reviews"
-date: "2026-11-09"
+date: "2026-11-02"
 date-modified: last-modified
 ---
+
+**This is a video lecture.** It is released on **2 November 2026** and has *no*
+on-site session on a Monday — you work through it on your own, at your own pace.
+Please post any questions in the
+[Moodle forum](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920);
+we also take them up in the concluding Q&A session of 11 December.
+
+**Take-home examination II** on literature reviews belongs to this lecture. It
+is published on Moodle on **8 November 2026** and must be submitted there by
+**15 November 2026, 23:59** — so make sure you have worked through the video
+before that week.
 
 ## 🎯 Content and goals
 

@@ -31,17 +31,24 @@ hands-on in the Friday lab. You find the lab schedule on the
 |     1     | 14 Sep 2026 | [General introduction](/content/lecture/l_01_Introduction.qmd)             | Anna-Katharina & Claudius |
 |     2     | 21 Sep 2026 | [AI tools in practice](/content/lecture/l_02_AITools.qmd)                   |    Claudius     |
 |     3     | 28 Sep 2026 | [Basics of logic](/content/lecture/l_03_Logic.qmd)                         |    Anna-Katharina     |
-|     4     | 05 Oct 2026 | [Logic, argumentation, models, and explanation](/content/lecture/l_04_Argumentation.qmd) |    Anna-Katharina     |
-|     5     | 19 Oct 2026 | [Quantitative and qualitative research](/content/lecture/l_05_QuantQual.qmd) |   Anna-Katharina     |
-|     6     | 26 Oct 2026 | [Interviews](/content/lecture/l_06_Interviews.qmd)                         |    Anna-Katharina     |
-|     7     | 02 Nov 2026 | [Case studies](/content/lecture/l_07_CaseStudies.qmd)                       |    Anna-Katharina     |
-|     8     | 09 Nov 2026 | [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd)           |    Claudius     |
+|     —     | 05 Oct 2026 | *Session cancelled — moved to 19 Oct 2026*                                 |    —     |
+|     —     | 12 Oct 2026 | *No class (non-teaching week)*                                             |    —     |
+|     4     | 19 Oct 2026 | [Logic, argumentation, models, and explanation](/content/lecture/l_04_Argumentation.qmd) |    Anna-Katharina     |
+|     5     | 26 Oct 2026 | [Quantitative and qualitative research](/content/lecture/l_05_QuantQual.qmd) |   Anna-Katharina     |
+|     6     | 02 Nov 2026 | [Interviews](/content/lecture/l_06_Interviews.qmd)                         |    Anna-Katharina     |
+|     8     | 02 Nov 2026 | [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd) — *video lecture* |    Claudius     |
+|     7     | 09 Nov 2026 | [Case studies](/content/lecture/l_07_CaseStudies.qmd)                       |    Anna-Katharina     |
 |     9     | 16 Nov 2026 | [Statistics recap](/content/lecture/l_09_StatisticsRecap.qmd)               |    Claudius     |
 |    10     | 23 Nov 2026 | [Regression analysis](/content/lecture/l_10_Regression.qmd)                 |    Claudius     |
 |    11     | 30 Nov 2026 | [Experiments](/content/lecture/l_11_Experiments.qmd)                       |    Claudius     |
-|    12     | 07 Dec 2026 | [Overall questions and open Q&A](/content/lecture/l_12_OverallQuestions.qmd) |    Anna-Katharina & Claudius      |
+|     —     | 07 Dec 2026 | *Reserve slot — no lecture*                                                |    —     |
 
-: There is no class in the week of 12–16 October 2026.
+: The lecture of 5 October had to be cancelled and was moved to 19 October; all
+later sessions shifted accordingly. There is no class in the week of 12–16
+October 2026. Lecture 08 is a **video lecture** released on 2 November and has
+no on-site session, which is why the numbering does not follow the dates. The
+Monday of 7 December is kept in reserve. The concluding open Q&A of the whole
+module is the [lab session on 11 December](/content/material/).
 
 Slides and reading lists are distributed via the individual session pages above
 and via [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920).

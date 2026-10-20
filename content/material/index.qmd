@@ -57,12 +57,15 @@ For information on how to use the exercise code, read
 |     9     | 20 Nov 2026 | [Using AI for coding](/content/material/s_09_AICoding.qmd)              | on-site          |                                          |
 |    10     | 27 Nov 2026 | [Linear models in R](/content/material/s_10_LinearModels.qmd)              | on-site       | `LinearRegression1`, `LinearRegression2` |
 |    11     | 04 Dec 2026 | [Experimental data in R](/content/material/s_11_Experiments.qmd)           | on-site       |                                          |
-|    12     | 11 Dec 2026 | Recap session *(material TBA)*                                      | on-site           |                                          |
+|    12     | 11 Dec 2026 | Recap session & open Q&A *(material TBA)*                           | on-site           |                                          |
 
-: There is no class in the week of 12–16 October 2026. The three **take-home
-examinations** are published after the lectures of weeks 4 (5 Oct, on logic and
-argumentation), 8 (9 Nov, on literature reviews) and 9 (16 Nov, on statistics);
-you must pass two of them to be admitted to the final exam (see the
+: There is no class in the week of 12–16 October 2026. The lab dates are
+**unaffected** by the rescheduling of the lecture that followed the cancelled
+session of 5 October (see the [lecture overview](/content/lecture/)). The three
+**take-home examinations** are published after lecture 04 (19 Oct, on logic and
+argumentation; due 4 Nov), lecture 08 (the video lecture released 2 Nov, on
+literature reviews; due 15 Nov) and lecture 09 (16 Nov, on statistics; due 22
+Nov); you must pass two of them to be admitted to the final exam (see the
 [seminar description](/content/SeminarDescription.qmd)).
 
 There are also complementary recap exercises on data import, preparation and

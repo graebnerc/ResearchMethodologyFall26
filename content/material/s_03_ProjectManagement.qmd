@@ -11,10 +11,45 @@ and how to point the computer to other files on your computer. While this sounds
 boring at first, taking seriously the insights from this session will save you
 tons of hours of frustration in the future!
 
+## 🛠️ Recap: writing your own functions
 
-## 👨‍🏫 Lecture Slides 
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/E3b-WritingFunctions.html" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
 
-[**Download the slides of this session**](/content/material/slides/E3-ProjectSetup.pdf) (PDF)
+[Open the slides in a separate tab](slides/E3b-WritingFunctions.html){.btn .btn-primary}
+
+::: {.callout-tip collapse="true"}
+## Would you rather have a PDF?
+Open the slides, click the ☰ button in the **bottom left** corner, and choose
+**Tools → PDF Export Mode**. Then print the page (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>P</kbd>)
+and save it as a PDF.
+:::
+
+
+In the recap part of the session we discussed the topic of writing
+functions together, alongside two examples.
+
+- [Recap tutorial: Writing your own functions](/content/material/WritingFunctions.qmd)
+
+## 👨‍🏫 Lecture Slides on Project Management
+
+```{=html}
+<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
+<iframe src="slides/E3-ProjectSetup.html" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+
+[Open the slides in a separate tab](slides/E3-ProjectSetup.html){.btn .btn-primary}
+
+::: {.callout-tip collapse="true"}
+## Would you rather have a PDF?
+Open the slides, click the ☰ button in the **bottom left** corner, and choose
+**Tools → PDF Export Mode**. Then print the page (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>P</kbd>)
+and save it as a PDF.
+:::
 
 <!--- The lecture script is made available here after the session.
 ::: {.callout-note collapse="true"}
@@ -31,9 +66,11 @@ Currently, no videos are available for this session. Check out the resource
 [Setting Up an R Project](https://euf-methodology-hub.netlify.app/resources/setting-up-an-r-project)
 on *Method and Inquiry* instead.
 
+
 ## 📚 Mandatory Reading
 
 - [Setting Up an R Project](https://euf-methodology-hub.netlify.app/resources/setting-up-an-r-project) on *Method and Inquiry* [@graebner2026-setting-up-an-r-project]
+- On functions: [Object Types in R I: Functions](https://euf-methodology-hub.netlify.app/resources/r-object-types-i-functions) on *Method and Inquiry* [@graebner2026-r-object-types-i-functions]
 
 ## Further Reading
 

@@ -20,6 +20,14 @@ course. Finally, I explain a bit what R is, how it relates to R Studio and LaTeX
 
 [Open the slides in a separate tab](slides/E1-Introduction.html){.btn .btn-primary}
 
+::: {.callout-tip collapse="true"}
+## Would you rather have a PDF?
+Open the slides, click the ☰ button in the **bottom left** corner, and choose
+**Tools → PDF Export Mode**. Then print the page (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>P</kbd>)
+and save it as a PDF.
+:::
+
+
 ## 🎥 Accompanying lecture videos 
 
 All the videos are available via this [playlist](https://www.youtube.com/playlist?list=PLZDawQMrG1RImURlbldAF773MDRqeARNu).

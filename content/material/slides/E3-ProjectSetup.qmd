@@ -5,9 +5,14 @@ author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
 institute: "Europa-University Flensburg, Department of Pluralist Economics"
 date: "2026-10-02"
 date-format: "D MMMM YYYY"
+# The deck is not in `project.render`, so it is rendered on its own and
+# does not inherit the bibliography from `_quarto.yml` — declare it here.
+bibliography: ../../../references/references.bib
+csl: ../../../references/jepp.csl
 format:
   revealjs:
     theme: [default, ../../../css/slides.scss]
+    embed-resources: true
     width: 1280
     height: 720
     slide-number: c/t
@@ -40,24 +45,23 @@ format:
 
 ## Our goal
 
-- Learn a **default directory structure** and a general way to **document
-  everything** you do in a project
+- Learn a **default directory structure** 
   - → Facilitates the collaboration with **future-you** considerably
 - A general **workflow** that avoids the classic project-management problems
 
 ::: {.takeaway .fragment}
-Central idea: all results must be **reproducible from the raw data** — and the
+Central idea: all results are **reproducible from the raw data** — and the
 raw data must never be manipulated
 :::
 
-- Raw data = what you download from the internet, gather through an experiment,
+- **Raw data** = what you download from the internet, gather through an experiment,
   or code yourself
 
 ## How to keep your work transparent
 
 Raw data must not be changed — but it is usually not in a state we can work with
 
-::: {.nonincremental}
+::: {.incremental}
 1. **Gather** data, save it on your computer
 2. **Import** this data into R
 3. Write a **script that transforms** raw data into *tidy* data
@@ -69,19 +73,31 @@ Saving the scripts in steps 2 & 3 makes your work fully reproducible — they
 always tell you what you did to your raw data
 :::
 
-## Where we are heading
+## Where we are heading {auto-animate=true}
 
-::: {.boxed}
+::: {.boxed data-id="box-setup"}
 **Set up your project environment** · *done only once per project*
 :::
 
-::: {.boxed}
+::: {.boxed data-id="box-loop"}
 **Import data** → **transform raw data into tidy data** → **save data**
 · *may be done several times*
 :::
 
-Today we deal with the **first** box — the one you only ever do once, and which
-determines whether the rest is pleasant or painful
+<!-- Same slide once more: reveal.js matches the two boxes by `data-id` and
+     tweens them into the emphasised state. `visibility="uncounted"` keeps the
+     slide numbering of the deck unchanged. -->
+
+## Where we are heading {auto-animate=true visibility="uncounted"}
+
+::: {.boxed .box-focus data-id="box-setup"}
+**Set up your project environment** · *done only once per project*
+:::
+
+::: {.boxed .box-dimmed data-id="box-loop"}
+**Import data** → **transform raw data into tidy data** → **save data**
+· *may be done several times*
+:::
 
 # Part II: Setting up your R project {.divider background-color="#EAF0F4"}
 
@@ -90,14 +106,31 @@ determines whether the rest is pleasant or painful
 ::: {.columns}
 ::: {.column width="58%"}
 - **Where** you save your data and files matters
-- The right **directory structure** is a prerequisite for a transparent,
-  reproducible and easy-to-work-with project
+- Right **directory structure** as prerequisite for a transparent and
+  reproducible project
 - For **every** task in R you should set up your project like this →
-- All relevant steps and the rationale are described in the **tutorial**
+- All relevant steps and the rationale described in @graebner2026-setting-up-an-r-project
 :::
 
 ::: {.column width="42%"}
-![](figures/E3/project-tree.png){width="72%" fig-align="center"}
+<div class="filetree">
+<ul>
+ <li class="dir root"><span class="nm">ProjectName</span>
+  <ul>
+   <li class="file rproj"><span class="nm">ProjectName.Rproj</span></li>
+   <li class="dir"><span class="nm">data</span>
+    <ul>
+     <li class="dir"><span class="nm">raw</span><span class="note">never changed</span></li>
+     <li class="dir"><span class="nm">tidy</span><span class="note">script output</span></li>
+    </ul>
+   </li>
+   <li class="dir"><span class="nm">R</span><span class="note">your scripts</span></li>
+   <li class="dir"><span class="nm">output</span><span class="note">figures, tables</span></li>
+   <li class="dir"><span class="nm">misc</span><span class="note">everything else</span></li>
+  </ul>
+ </li>
+</ul>
+</div>
 :::
 :::
 
@@ -125,6 +158,8 @@ Two ways to tell your computer where a file is located:
 
 ## The same file, two descriptions
 
+![](figures/E3/working-directory.png){.shadow width="100%" fig-align="center"}
+
 Assuming we are located in `DataScienceExercises` and want to point to
 `nycflights21_small.rda`:
 
@@ -145,41 +180,59 @@ Assuming we are located in `DataScienceExercises` and want to point to
 
 ::: {.columns}
 ::: {.column width="62%"}
-- Problem: how do we set our location to `DataScienceExercises`?
-- One option: give `setwd()` the absolute path as an argument:
+<!-- The bullets are written out in HTML so that each one can carry its own
+     `data-fragment-index`: reveal.js plays *all* indexed fragments before the
+     unindexed ones, so the picture and the blue box (both on index 5) can only
+     come last if everything before them is indexed too. -->
 
-::: {.smaller}
+<ul>
+<li class="fragment" data-fragment-index="1">Problem: how do we set our location to `DataScienceExercises`?</li>
+<li class="fragment" data-fragment-index="2">One option: give `setwd()` the absolute path:</li>
+</ul>
+
+::: {.fragment fragment-index=3}
 ```r
 setwd("/Volumes/develop/teaching/DataScience/DataScienceExercises")
 ```
 :::
 
-- Then we can use `"data/nycflights21_small.rda"`
-- Many people put `setwd()` at the top of their scripts
+<ul>
+<li class="fragment" data-fragment-index="3">Then we can use `"data/nycflights21_small.rda"`</li>
+<li class="fragment" data-fragment-index="4">Many people put `setwd()` at the top of their scripts</li>
+</ul>
 :::
 
 ::: {.column width="38%"}
-![](figures/E3/dont-do-it.png){width="86%" fig-align="center"}
+<!-- Picture and blue box share index 5: they come in together, on the click
+     after the last bullet. -->
+::: {.fragment fragment-index=5}
+![](figures/E3/dont-do-it.gif){width="86%" fig-align="center"}
+:::
 :::
 :::
 
-::: {.takeaway .center .fragment}
+::: {.takeaway .center .fragment fragment-index=5}
 **But you must never ever do this!**
 :::
 
 ## Why `setwd()` is evil
 
-- **First**: it does not help avoid absolute paths — you still have to *provide*
+- It does not avoid absolute paths — you still have to *provide*
   an absolute path to `setwd()` 🤯
-- **Second**: it makes others hate you
+- It makes others hate you
+  - Abby writes `amazing_script.R`
 
-::: {.smaller}
+::: {.fragment}
 ```r
-# Abby writes amazing_script.R …
 setwd("/Volumes/Macintosh HD/Users/AbbysUserName/PathToFolderThatOnlyExistsHere/ProjectName")
 data_file <- data.table::fread("data/file.csv")
+```
+:::
 
-# … sends it to Ellie, who executes it:
+  - Sends it to Ellie who gets:
+
+::: {.fragment}
+```r
 Error in setwd("/Volumes/Macintosh HD/Users/AbbysUserName/PathToFolderThatOnlyExistsHere/ProjectName") :
   cannot change working directory
 ```
@@ -195,8 +248,13 @@ Error in setwd("/Volumes/Macintosh HD/Users/AbbysUserName/PathToFolderThatOnlyEx
   - Works on **every machine**
 - Always put `here::i_am()` into the **first line** of your scripts:
 
-::: {.smaller}
-```r
+::: {.fragment}
+<!-- `code-line-numbers="|1"` adds one more click at the end of the slide:
+     it dims the other lines and marks line 1, which `.code-circle` then
+     draws a red ring around. -->
+
+::: {.smaller .code-circle}
+```{.r code-line-numbers="|1"}
 here::i_am("R/my_script.R")
 library(here)
 library(ggplot2)
@@ -204,9 +262,25 @@ library(ggplot2)
 ```
 :::
 :::
-
+:::
 ::: {.column width="42%"}
-![](figures/E3/project-tree-script.png){width="70%" fig-align="center"}
+<div class="filetree">
+<ul>
+ <li class="dir root"><span class="nm">ProjectName</span>
+  <ul>
+   <li class="file rproj"><span class="nm">ProjectName.Rproj</span><span class="note">the anchor ⚓</span></li>
+   <li class="dir"><span class="nm">data</span></li>
+   <li class="dir"><span class="nm">R</span>
+    <ul>
+     <li class="file hl"><span class="nm">my_script.R</span></li>
+    </ul>
+   </li>
+   <li class="dir"><span class="nm">output</span></li>
+   <li class="dir"><span class="nm">misc</span></li>
+  </ul>
+ </li>
+</ul>
+</div>
 :::
 :::
 
@@ -224,27 +298,68 @@ library(ggplot2)
 :::
 
 ::: {.column width="42%"}
-![](figures/E3/project-tree.png){width="66%" fig-align="center"}
+<div class="filetree compact">
+<ul>
+ <li class="dir root"><span class="nm">ProjectName</span>
+  <ul>
+   <li class="file rproj"><span class="nm">ProjectName.Rproj</span></li>
+   <li class="dir"><span class="nm">data</span>
+    <ul>
+     <li class="dir"><span class="nm">raw</span></li>
+     <li class="dir"><span class="nm">tidy</span></li>
+    </ul>
+   </li>
+   <li class="dir"><span class="nm">R</span></li>
+   <li class="dir"><span class="nm">output</span></li>
+   <li class="dir"><span class="nm">misc</span></li>
+  </ul>
+ </li>
+</ul>
+</div>
 :::
 :::
-
 ## Summary and outlook
 
 ::: {.columns}
 ::: {.column width="62%"}
 - We now know how to organise our **working directory**
 - Important difference between **absolute and relative paths**
-- Using code on different machines is solved by the **`here` package** — the
-  better alternative to `setwd()`
+- The **`here` package** makes code transferable across machines
+  — The better alternative to `setwd()`
+:::
+
+::: {.column width="38%"}
+<div class="filetree compact">
+<ul>
+ <li class="dir root"><span class="nm">ProjectName</span>
+  <ul>
+   <li class="file rproj"><span class="nm">ProjectName.Rproj</span></li>
+   <li class="dir"><span class="nm">data</span>
+    <ul>
+     <li class="dir"><span class="nm">raw</span></li>
+     <li class="dir"><span class="nm">tidy</span></li>
+    </ul>
+   </li>
+   <li class="dir"><span class="nm">R</span></li>
+   <li class="dir"><span class="nm">output</span></li>
+   <li class="dir"><span class="nm">misc</span></li>
+  </ul>
+ </li>
+</ul>
+</div>
+:::
+:::
 
 ::: {.takeaway .fragment}
 Project management is essential, and chronically under-appreciated
 :::
+
+::: {.fragment}
+**Further topics**: version control (**Git**) · virtual environments
+(**`renv`**)
 :::
 
-::: {.column width="38%"}
-![](figures/E3/project-tree.png){width="64%" fig-align="center"}
-:::
-:::
+## References {.smaller}
 
-Further topics: version control (**Git**) · virtual environments (**`renv`**)
+::: {#refs}
+:::

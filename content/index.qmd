@@ -34,7 +34,11 @@ the semester. It is also available there as a PDF for printing.
   24 February 2027, 09:15–11:15, both in Room MAD 024.
 
 The lecture period runs from **14 September to 11 December 2026**. There is no
-class in the week of 12–16 October. Please always check the most recent version
+class in the week of 12–16 October. Since the lecture of 5 October had to be
+cancelled, all later lectures moved by one week; the lecture on *Literature
+reviews* is delivered as a video lecture released on 2 November, and the Monday
+of 7 December is kept in reserve. **The dates of the implementation lab did not
+change.** Please always check the most recent version
 of the seminar timetable, since dates and rooms can differ from one week to
 another. The authoritative timetable, rooms and times are provided _on this page_.
 For all kinds of official announcement please watch the
@@ -48,17 +52,21 @@ authoritative schedule:
 |  1   | [General introduction](/content/lecture/l_01_Introduction.qmd) | [General introduction & installation](/content/material/s_01_Installation.qmd) *(on-site)* |
 |  2   | [AI tools in practice](/content/lecture/l_02_AITools.qmd) | [Basics of R and R Studio](/content/material/s_02_Basics.qmd) *(video)* |
 |  3   | [Basics of logic](/content/lecture/l_03_Logic.qmd) | [Project management & recap](/content/material/s_03_ProjectManagement.qmd) *(on-site)* |
-|  4   | [Logic, argumentation, models, and explanation](/content/lecture/l_04_Argumentation.qmd) | [Object types](/content/material/s_04_ObjectTypes.qmd) *(video)* |
-|  5   | [Quantitative and qualitative research](/content/lecture/l_05_QuantQual.qmd) | [Quarto and R Markdown](/content/material/s_05_Quarto.qmd) *(video & on-site)* |
-|  6   | [Interviews](/content/lecture/l_06_Interviews.qmd) | [Importing data](/content/material/s_06_DataImport.qmd) *(video)* |
-|  7   | [Case studies](/content/lecture/l_07_CaseStudies.qmd) | [Data preparation](/content/material/s_07_DataPreparation.qmd) *(video)* |
-|  8   | [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd) | [Data visualization](/content/material/s_08_Visualization.qmd) *(video)* |
+|  4   | *Lecture cancelled (5 Oct) — moved to week 5* | [Object types](/content/material/s_04_ObjectTypes.qmd) *(video)* |
+|  5   | [Logic, argumentation, models, and explanation](/content/lecture/l_04_Argumentation.qmd) | [Quarto and R Markdown](/content/material/s_05_Quarto.qmd) *(video & on-site)* |
+|  6   | [Quantitative and qualitative research](/content/lecture/l_05_QuantQual.qmd) | [Importing data](/content/material/s_06_DataImport.qmd) *(video)* |
+|  7   | [Interviews](/content/lecture/l_06_Interviews.qmd) · [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd) *(video lecture)* | [Data preparation](/content/material/s_07_DataPreparation.qmd) *(video)* |
+|  8   | [Case studies](/content/lecture/l_07_CaseStudies.qmd) | [Data visualization](/content/material/s_08_Visualization.qmd) *(video)* |
 |  9   | [Statistics recap](/content/lecture/l_09_StatisticsRecap.qmd) | [Using AI for coding](/content/material/s_09_AICoding.qmd) *(on-site)* |
 |  10  | [Regression analysis](/content/lecture/l_10_Regression.qmd) | [Linear models in R](/content/material/s_10_LinearModels.qmd) *(on-site)* |
 |  11  | [Experiments](/content/lecture/l_11_Experiments.qmd) | [Experimental data in R](/content/material/s_11_Experiments.qmd) *(on-site)* |
-|  12  | [Overall questions and open Q&A](/content/lecture/l_12_OverallQuestions.qmd) | Recap session *(on-site; material TBA)* |
+|  12  | *No lecture (reserve slot)* | Recap session & open Q&A *(on-site; material TBA)* |
 
-: There is no class in the week of 12–16 October 2026.
+: Week 4 lost its lecture (5 October) but kept its video lab; the lecture
+schedule shifted by one week from week 5 onwards, while the lab schedule did
+not. There is no class in the week of 12–16 October 2026. The exact dates are
+listed on the [lecture overview](/content/lecture/index.qmd) and the
+[lab overview](/content/material/index.qmd).
 
 You find the full schedule with further information on each session on the
 [lecture overview](/content/lecture/index.qmd) and the

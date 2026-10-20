@@ -75,8 +75,6 @@ website:
            text: "L10 · Regression analysis"
          - href: content/lecture/l_11_Experiments.qmd
            text: "L11 · Experiments"
-         - href: content/lecture/l_12_OverallQuestions.qmd
-           text: "L12 · Overall questions"
       - section: "💻 Implementation Lab"
         contents:
          - href: content/material/index.qmd
@@ -105,6 +103,8 @@ website:
            text: "Session 10 · Linear models in R"
          - href: content/material/s_11_Experiments.qmd
            text: "Session 11 · Experimental data in R"
+         - href: content/material/WritingFunctions.qmd
+           text: "🛠️ Writing your own functions"
          - href: content/material/UsingExercises.qmd
            text: "📦 Using the exercise package"
          - href: content/exercises.qmd
