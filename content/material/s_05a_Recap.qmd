@@ -1,0 +1,113 @@
+---
+title: "🗓️ Session 5a: Recap session"
+date: "2026-10-23"
+date-modified: last-modified
+---
+
+This on-site session was a **pure recap session**: no new material was
+introduced. Instead, we discussed the topics from the previous sessions that
+you wanted to go through again. We focused on two of them: how to tell R where
+your files are (absolute vs. relative paths and the `here` package), and the
+different object types in R and how they relate to each other.
+
+The new material of this week, Quarto and R Markdown, is covered in the
+[videos of session 5](/content/material/s_05_Quarto.qmd).
+
+## 📂 Absolute and relative paths, and the `here` package
+
+We discussed the difference between **absolute paths** (starting at the root of
+one specific computer) and **relative paths** (starting at the current working
+directory), and why only paths built with the **`here` package** keep working
+when your code moves to another computer, another folder, or another working
+directory.
+
+We went through parts of a small hands-on exercise. The repository contains
+three scripts that read the same data file with an absolute path, a hard-coded
+relative path, and `here`, respectively. Download it as a ZIP file and work
+through the experiments described in its README:
+
+[**Go to the exercise repository**](https://github.com/teaching-datascience/here-paths-demo){.btn .btn-primary}
+
+The background is covered in Part III of the
+[slides on project management](/content/material/s_03_ProjectManagement.qmd)
+from session 3, and in the following reading:
+
+- [Setting Up an R Project](https://euf-methodology-hub.netlify.app/resources/setting-up-an-r-project) on *Method and Inquiry* [@graebner2026-setting-up-an-r-project]
+
+## 🧱 Object types and their hierarchy
+
+We then discussed the most important object types in R and how they build
+on each other. Here is the script we used in the session, but very much 
+expanded to give you more details and examples:
+
+::: {.callout-tip collapse="true"}
+## Script from the session
+
+<script src="https://gist.github.com/graebnerc/9a27eb5d2f3e3d2ad4b36a817f87e9a4.js"></script>
+
+:::
+
+::: {.callout-note collapse="true"}
+## Summary: the most important transformations
+
+The table summarises section 8 of `ObjectHierarchy.R`. Read it row by row:
+to transform an object of the type in the first column into the type in the
+header, use the function in the cell.
+
+| from ↓ \\ to → | logical | integer | double | character | list | factor | data.frame |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **logical** | — | `as.integer()` | `as.double()` | `as.character()` | `as.list()` | `factor()` | — |
+| **integer** | `as.logical()` | — | `as.double()` | `as.character()` | `as.list()` | `factor()` | — |
+| **double** | `as.logical()` | `as.integer()` | — | `as.character()` | `as.list()` | `factor()` | — |
+| **character** | `as.logical()` | `as.integer()` | `as.double()` | — | `as.list()` | `factor()` | — |
+| **list** | `unlist()` | `unlist()` | `unlist()` | `unlist()` | — | — | `as.data.frame()` |
+| **factor** | — | `as.integer()`\* | — | `as.character()` | `as.list()` | — | — |
+| **data.frame** | — | — | — | — | `as.list()` | — | — |
+
+: \* gives the internal codes, not the labels; use `as.numeric(as.character(x))`
+to get the values.
+
+- **Upwards** in the atomic hierarchy (logical → integer → double →
+  character) nothing gets lost.
+- **Downwards**, values can be truncated (`as.integer(2.99)` is `2`) or become
+  `NA` (`as.numeric("two")`).
+- Always check the result with `typeof()` or `class()` after transforming an
+  object.
+:::
+
+::: {.callout-important collapse="true"}
+## Checklist: object types in practice
+
+The checklist at the end of `ObjectTypesInPractice.R`; go through it every
+time you work with a new data set.
+
+- [ ] After reading in data, check the types with `typeof()`, `class()` or
+  `str()`.
+- [ ] Variables you calculate with should be **numeric** (integer or double).
+- [ ] Identifiers (IDs, postal codes, phone numbers) should stay
+  **character**.
+- [ ] Yes/no variables are most convenient as **logical**: `sum()` gives you
+  a count, `mean()` a share.
+- [ ] Categories with a fixed set of values should be **factors**; ordered
+  categories should be **ordered factors** with the levels in the right order.
+- [ ] If `as.*()` returns `NA`s with a warning, find out which values caused
+  them.
+- [ ] Never transform a factor directly into a number; go via
+  `as.character()` first.
+:::
+
+The slides, videos and exercises are on the page of
+[session 4](/content/material/s_04_ObjectTypes.qmd). The relevant readings are:
+
+- [Object Types in R I: Functions](https://euf-methodology-hub.netlify.app/resources/r-object-types-i-functions) on *Method and Inquiry* [@graebner2026-r-object-types-i-functions]
+- [Object Types in R II: Vectors](https://euf-methodology-hub.netlify.app/resources/r-object-types-ii-vectors) on *Method and Inquiry* [@graebner2026-r-object-types-ii-vectors]
+- [Object Types in R III: Factors and Data Frames](https://euf-methodology-hub.netlify.app/resources/r-object-types-iii-factors-dataframes) on *Method and Inquiry* [@graebner2026-r-object-types-iii-factors-dataframes]
+
+## ✍️ Coursework
+
+- Finish the experiments in the
+  [`here-paths-demo` repository](https://github.com/teaching-datascience/here-paths-demo)
+- If you have not done so yet, do the `ObjectTypes1` and `ObjectTypes2`
+  exercises of the package `DataScienceExercises` (see
+  [session 4](/content/material/s_04_ObjectTypes.qmd))
+- If you have questions or problems, please post them in the Moodle forum

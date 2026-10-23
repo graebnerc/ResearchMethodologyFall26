@@ -89,6 +89,8 @@ website:
            text: "Session 04 · Object types"
          - href: content/material/s_05_Quarto.qmd
            text: "Session 05 · Quarto and R Markdown"
+         - href: content/material/s_05a_Recap.qmd
+           text: "Session 05a · Recap session"
          - href: content/material/s_06_DataImport.qmd
            text: "Session 06 · Importing data"
          - href: content/material/s_07_DataPreparation.qmd
