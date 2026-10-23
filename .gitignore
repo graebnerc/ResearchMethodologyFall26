@@ -17,6 +17,8 @@ content/material/session07-QuartoExamples
 2023
 MISC
 INBOX
+# Local working copies of GitHub gists embedded in session pages
+gists/
 
 # History files
 .Rhistory
