@@ -93,6 +93,8 @@ website:
            text: "Session 05a · Recap session"
          - href: content/material/s_06_DataImport.qmd
            text: "Session 06 · Importing data"
+         - href: content/material/s_06a_Recap.qmd
+           text: "Session 06a · Recap session (optional)"
          - href: content/material/s_07_DataPreparation.qmd
            text: "Session 07 · Data preparation"
          - href: content/material/s_08_Visualization.qmd

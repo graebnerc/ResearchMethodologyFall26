@@ -53,6 +53,7 @@ For information on how to use the exercise code, read
 |     5     | 23 Oct 2026 | [Quarto and R Markdown](/content/material/s_05_Quarto.qmd)            | video             | `Quarto`                                 |
 |    5a     | 23 Oct 2026 | [Recap session: paths & object types](/content/material/s_05a_Recap.qmd) | on-site       |                                          |
 |     6     | 30 Oct 2026 | [Importing data](/content/material/s_06_DataImport.qmd)                   | video         | `Wrangling1`, `Wrangling2`               |
+|    6a     | 30 Oct 2026 | [Recap session *(optional)*](/content/material/s_06a_Recap.qmd)      | on-site           |                                          |
 |     7     | 06 Nov 2026 | [Data preparation](/content/material/s_07_DataPreparation.qmd)                 | video   | `Wrangling1`, `Wrangling2`               |
 |     8     | 13 Nov 2026 | [Data visualization](/content/material/s_08_Visualization.qmd)              | video        | `Visualization1`                         |
 |     9     | 20 Nov 2026 | [Using AI for coding](/content/material/s_09_AICoding.qmd)              | on-site          |                                          |
