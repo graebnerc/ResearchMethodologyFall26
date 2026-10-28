@@ -422,8 +422,9 @@ papers and further sources. It is free and needs no account.
 **What it lacks:**
 
 - **No abstracts in the results.** Abstracts are *searched*, but the results
-  do not show them. For screening, open the record in the portal, follow the
-  link to EconStor or the publisher, or look up the DOI in OpenAlex.
+  do not show them. For screening, follow the link to EconStor, which shows the
+  abstract (in R: @sec-r-second), or to the publisher, or look up the DOI in
+  OpenAlex.
 - **No citation data:** backward and forward snowballing (step 6) stays in
   OpenAlex.
 - **Fewer DOIs:** in our example, fewer than half of the records have one, so
@@ -836,13 +837,22 @@ can change:
 |-----------|---------|---------|
 | `q` | the search, in the same syntax as in @sec-econbiz | `title:"four-day week"` |
 | `size` | how many records to return in one answer | `3`, `500` |
-| `from` | where to start: skip this many records (for paging) | `0`, `500`, `1000` |
+| `from` | number of the first record to return, counting from 1 (for paging) | `1`, `501`, `1001` |
+| `sort` | order of the records; the default is relevance | `id asc` |
 
 The answer has two parts that matter: `hits` → `total`, the number of hits,
 and `hits` → `hits`, the list of records. Each record has fields such as `id`,
 `title`, `creator`, `date`, `type` (article, book, …), `source` (ECONIS,
 EconStor, RePEc, …), `subject` and `identifier_url` (links, including the DOI
-if there is one). The abstract text is **not** included (@sec-econbiz).
+if there is one). The abstract text is **not** included (@sec-econbiz). The
+list of fields that can appear in an answer
+(<https://api.econbiz.de/v1/fields?scope=display>) does name an `abstract`
+field, but in our tests (October 2026) it was empty for every record — in the
+single-record answers, too.
+
+Which fields you can search is listed under
+<https://api.econbiz.de/v1/fields?scope=search>. The list is incomplete:
+`abstract` and `description` are missing from it, yet both work in searches.
 
 A single record, with a few more fields such as `language`, has its own
 address; the fields come wrapped in an element called `record`:
@@ -871,7 +881,10 @@ names(res$hits$hits[[1]])  # all fields of the first record
 
 The API is a free public service, so use it considerately: count the hits
 first, fetch the records once, and save them (as below) instead of sending
-the same search again and again. To count without
+the same search again and again. Its terms of use exclude copying the index
+at large scale; a review-sized result set is fine. The
+[documentation](https://api.econbiz.de/) explains all methods and
+parameters. To count without
 fetching, ask for `size = 0`: the answer then contains only `total`.
 
 #### The search in R
@@ -894,30 +907,33 @@ eb_query <- paste(in_fields(work_terms), "AND", in_fields(outcome_terms))
 eb_query <- gsub("\\s+", " ", eb_query) # one line, single spaces
 ```
 
-The API returns at most 500 records per request, so the function below asks
-again until it has all of them, and keeps the fields needed for the
-comparison. Dates come in mixed formats ("2023", "Oktober 2023",
+The function below fetches 500 records per request and asks again until it
+has all of them. Two details matter: `from` counts from 1, and a fixed sort
+order (`id asc`) makes sure that the pages fit together and that a rerun
+returns the records in the same order. The function keeps the fields needed
+for the comparison, plus the EconStor handle for fetching abstracts. Dates come in mixed formats ("2023", "Oktober 2023",
 "26.03.2025"); only the year is kept.
 
 ```{r}
 econbiz_search <- function(q, page_size = 500) {
   fetch <- function(from) {
     request("https://api.econbiz.de/v1/search") |>
-      req_url_query(q = q, size = page_size, from = from) |>
+      req_url_query(q = q, size = page_size, from = from, sort = "id asc") |>
       req_perform() |>
       resp_body_json()
   }
-  first <- fetch(0)
+  first <- fetch(1)
   hits  <- first$hits$hits
   while (length(hits) < first$hits$total) {
-    page <- fetch(length(hits))$hits$hits
+    page <- fetch(length(hits) + 1)$hits$hits
     if (length(page) == 0) break
     hits <- c(hits, page)
   }
   first_or_na <- function(x) if (length(x)) as.character(x[[1]]) else NA_character_
   rbindlist(lapply(hits, function(x) {
-    urls <- unlist(x$identifier_url)
-    doi  <- grep("doi.org/", urls, value = TRUE)
+    urls   <- unlist(x$identifier_url)
+    doi    <- grep("doi.org/", urls, value = TRUE)
+    handle <- regmatches(urls, regexpr("10419/[0-9]+", urls)) # EconStor
     data.table(
       id     = x$id,
       source = first_or_na(x$source),
@@ -925,7 +941,8 @@ econbiz_search <- function(q, page_size = 500) {
       year   = as.integer(regmatches(first_or_na(x$date),
                                      regexpr("[0-9]{4}", first_or_na(x$date)))[1]),
       title  = first_or_na(x$title),
-      doi    = if (length(doi)) tolower(sub(".*doi.org/", "", doi[1])) else NA_character_
+      doi    = if (length(doi)) tolower(sub(".*doi.org/", "", doi[1])) else NA_character_,
+      handle = if (length(handle)) handle[1] else NA_character_
     )
   }))
 }
@@ -947,6 +964,36 @@ eb <- eb[is.na(doi) | !duplicated(doi)]
 eb <- eb[!duplicated(eb, by = c("title_key", "year"))]
 nrow(eb)
 ```
+
+For screening you need the abstracts. Records that link to EconStor get
+theirs from EconStor's harvesting interface
+(OAI-PMH, a standard way for repositories to share metadata). The answer is
+XML, which the package xml2 reads:
+
+```{r}
+library(xml2)
+
+econstor_abstract <- function(handle) {
+  oai <- request("https://www.econstor.eu/oai/request") |>
+    req_url_query(verb = "GetRecord", metadataPrefix = "oai_dc",
+                  identifier = paste0("oai:econstor.eu:", handle)) |>
+    req_perform() |>
+    resp_body_xml()
+  abstract <- xml_find_first(oai, ".//dc:description", xml_ns(oai))
+  if (inherits(abstract, "xml_missing")) NA_character_ else xml_text(abstract)
+}
+
+eb[, abstract := NA_character_]
+for (h in eb[!is.na(handle), handle]) {
+  eb[handle == h, abstract := econstor_abstract(h)]
+  Sys.sleep(0.5) # be polite
+}
+eb[, .(with_abstract = sum(!is.na(abstract)), records = .N)]
+```
+
+In our example (28 October 2026), this filled in 24 of the 74 abstracts. For
+the other records, use the DOI as in @sec-r-abstracts, or the steps for
+filling in missing abstracts by hand from step 5.
 
 Now compare with OpenAlex. Records without a DOI cannot be matched this way,
 so they are counted separately:

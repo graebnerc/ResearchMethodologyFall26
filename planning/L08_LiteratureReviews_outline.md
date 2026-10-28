@@ -8,7 +8,8 @@ abstract) and a check of the current web interface (title-and-abstract
 option, export); R part tested against mocked API responses only (the
 EconBiz part was run against the live API on 28 Oct 2026); add openalexR
 and PRISMA2020 to renv. EconBiz: check in a browser whether the portal
-shows abstracts, and its export formats and limits. Not rendered on the website
+shows abstracts (the API does not return them), and its export formats and
+limits. Not rendered on the website
 (`planning/` is outside the render list in `_quarto.yml`).
 
 ## Decisions taken
@@ -52,7 +53,13 @@ shows abstracts, and its export formats and limits. Not rendered on the website
     half of the records; duplicates within EconBiz across sources; events
     in the results;
   - tutorial string: 98 records, 74 after events and duplicates removed;
-    German string: 812 records, nearly all in German (sample of 20).
+    German string: 811 records, nearly all in German (sample of 20);
+  - the documented `abstract` display field (`/v1/fields?scope=display`) was
+    empty in all 85 single records tested, incl. EconStor records matched
+    via `abstract:`; abstracts come instead from EconStor's OAI-PMH
+    interface (tutorial: 24 of 74 records);
+  - `from` counts from 1 (`from=0` is treated as 1); the tutorial pages with
+    `sort = "id asc"`. API docs: https://api.econbiz.de/ (v1, 2017).
 - **Web of Science:** second option in the tutorial's database digression
   ("what it adds, what it costs"); mentioned on slides only as optional
   add-on.
