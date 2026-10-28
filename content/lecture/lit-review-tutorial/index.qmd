@@ -30,8 +30,9 @@ explains the *why*; here we focus on the *how*.
   [workbook with all templates](L08-review-templates.xlsx) (search log,
   screening sheet, concept matrix, limitations). It works in Excel, LibreOffice
   and Numbers.
-- **Digression:** @sec-wos shows what Web of Science adds if you have access
-  through a university.
+- **Digression:** @sec-second adds a second database: @sec-econbiz shows
+  EconBiz, the free subject portal for economics, and @sec-wos what Web of
+  Science adds if you have access through a university.
 - **Optional R part:** @sec-r runs the whole search from R, which makes it fully
   reproducible. The code is shown but not run on this page, because it needs
   your own (free) API key.
@@ -393,11 +394,74 @@ name **the bias**, **its likely direction**, and **why you accepted it**.
 Do not forget the [AI disclosure](../ai-disclosure/index.qmd) if you used AI at
 any step.
 
-# Digression: what Web of Science adds {#sec-wos}
+# Digression: a second database {#sec-second}
 
-Everything above works without any subscription. If you have access to
-**Web of Science** through a university, it is worth seeing what a curated,
-commercial database does differently — and what that costs.
+No database covers everything (lecture chapter 6), so many reviews search a
+second one. This digression shows two options: **EconBiz**, which is free and
+open like OpenAlex, and **Web of Science**, which needs a subscription.
+
+## EconBiz: the subject portal for economics {#sec-econbiz}
+
+[EconBiz](https://www.econbiz.de) [@zbw2026econbiz] is the search portal of the
+ZBW, the Leibniz Information Centre for Economics. A single search covers the
+ZBW catalogue ECONIS, the open-access repository EconStor, RePEc working
+papers and further sources. It is free and needs no account.
+
+**What it adds:**
+
+- **Books, edited volumes and working papers:** in our example, about half of
+  the records are books or reports rather than journal articles.
+- **German-language literature:** the search
+  `Arbeitszeitverkürzung OR "Vier-Tage-Woche" OR "4-Tage-Woche"` returned
+  about 800 records on 28 October 2026, most of them in German — exactly the
+  literature our example limitations paragraph had to exclude.
+- **Subject terms:** records carry ZBW subject terms in German and English, so
+  a search can also match records via their subject terms (`subject:`), not
+  only via the words their authors chose.
+
+**What it lacks:**
+
+- **No abstracts in the results.** Abstracts are *searched*, but the results
+  do not show them. For screening, open the record in the portal, follow the
+  link to EconStor or the publisher, or look up the DOI in OpenAlex.
+- **No citation data:** backward and forward snowballing (step 6) stays in
+  OpenAlex.
+- **Fewer DOIs:** in our example, fewer than half of the records have one, so
+  you cannot match records with OpenAlex by DOI alone.
+- **Duplicates within EconBiz:** the same work often comes from two sources
+  (e.g. ECONIS and EconStor), with slightly different titles. Remove duplicates
+  before you screen.
+- **Economics and business only:** for neighbouring disciplines, such as
+  psychology or sociology, its coverage is thin.
+
+**Search syntax:** fields are addressed as `field:(terms)`. Abstracts sit in
+**two different fields**, depending on the source: `abstract` (mainly
+EconStor) and `description` (mainly the ZBW catalogue). Search both: either
+field alone finds only about half of the records with a matching abstract. Phrase search (`"four-day week"`), truncation
+(`productiv*`) and `AND`/`OR`/`NOT` with brackets work as in OpenAlex. The
+example string, searching titles, abstracts and descriptions:
+
+```text
+(title:(W) OR abstract:(W) OR description:(W))
+AND
+(title:(O) OR abstract:(O) OR description:(O))
+
+W = "four-day week" OR "4-day week" OR "four day week"
+    OR "working time reduction" OR "work time reduction"
+    OR "reduced working hours" OR "shorter working week"
+O = productiv* OR well-being OR wellbeing OR satisfaction
+    OR burnout OR stress OR absentee* OR turnover OR performance
+```
+
+Write out `W` and `O` in full when you search; @sec-r-second builds the string
+in R. On 28 October 2026 it returned 98 records, and 74 after events and duplicates
+were removed.
+
+## Web of Science: what a paid database adds {#sec-wos}
+
+If you have access to **Web of Science** through a university, it is worth
+seeing what a curated, commercial database does differently — and what that
+costs.
 
 **What it adds:**
 
@@ -429,12 +493,12 @@ TS=(productiv* OR well-being OR wellbeing OR satisfaction
 ```
 
 ::: {.callout-tip}
-## Exercise: compare the two databases
-Run the equivalent string in both databases and compare the result sets by DOI
-(@sec-r-wos shows how in R). Which records does only OpenAlex find, and which
-only Web of Science? From which journals, languages and countries do they come?
-This makes the coverage and metadata biases of lecture chapter 6 visible on
-your own topic.
+## Exercise: compare two databases
+Run the equivalent string in OpenAlex and in EconBiz — or in Web of Science, if
+you have access — and compare the result sets (@sec-r-second shows how in R).
+Which records does only one of them find? What kinds of publication, which
+languages, which journals or series are they? This makes the coverage and
+metadata biases of lecture chapter 6 visible on your own topic.
 :::
 
 # Optional: the whole search in R {#sec-r}
@@ -748,9 +812,169 @@ PRISMA_flowdiagram(flow, previous = FALSE, other = TRUE, fontsize = 12)
 `other = TRUE` draws the right-hand arm for snowballing; `previous = FALSE`
 hides the arm for earlier versions of a review, which you do not have.
 
-## Compare with a Web of Science export {#sec-r-wos}
+## Compare with a second database {#sec-r-second}
 
-For the exercise in @sec-wos: export the Web of Science results as a
+For the exercise in @sec-second.
+
+### EconBiz
+
+#### How the EconBiz API works
+
+An API (*application programming interface*) is a web address that returns
+data instead of a web page. EconBiz has one that is free and needs no key or
+account. A search is a single URL:
+
+```text
+https://api.econbiz.de/v1/search?q=title:"four-day week"&size=3
+```
+
+Paste it into your browser and you see the answer: plain text in the JSON
+format, a nested list of fields and values. The URL has three parts that you
+can change:
+
+| Parameter | Meaning | Example |
+|-----------|---------|---------|
+| `q` | the search, in the same syntax as in @sec-econbiz | `title:"four-day week"` |
+| `size` | how many records to return in one answer | `3`, `500` |
+| `from` | where to start: skip this many records (for paging) | `0`, `500`, `1000` |
+
+The answer has two parts that matter: `hits` → `total`, the number of hits,
+and `hits` → `hits`, the list of records. Each record has fields such as `id`,
+`title`, `creator`, `date`, `type` (article, book, …), `source` (ECONIS,
+EconStor, RePEc, …), `subject` and `identifier_url` (links, including the DOI
+if there is one). The abstract text is **not** included (@sec-econbiz).
+
+A single record, with a few more fields such as `language`, has its own
+address; the fields come wrapped in an element called `record`:
+
+```text
+https://api.econbiz.de/v1/record/10014518487
+```
+
+In R, the package [httr2](https://httr2.r-lib.org/) sends the same request.
+`req_url_query()` builds the URL for you, including the encoding of spaces and
+quotation marks, and `resp_body_json()` turns the answer into an R list:
+
+```{r}
+library(httr2)
+
+res <- request("https://api.econbiz.de/v1/search") |>
+  req_url_query(q = 'title:"four-day week"', size = 3) |>
+  req_perform() |>
+  resp_body_json()
+
+res$hits$total             # number of hits
+length(res$hits$hits)      # records in this answer
+res$hits$hits[[1]]$title   # title of the first record
+names(res$hits$hits[[1]])  # all fields of the first record
+```
+
+The API is a free public service, so use it considerately: count the hits
+first, fetch the records once, and save them (as below) instead of sending
+the same search again and again. To count without
+fetching, ask for `size = 0`: the answer then contains only `total`.
+
+#### The search in R
+
+A small helper puts the same terms into the title, abstract and description
+fields (@sec-econbiz explains why all three):
+
+```{r}
+in_fields <- function(terms, fields = c("title", "abstract", "description")) {
+  paste0("(", paste0(fields, ":(", terms, ")", collapse = " OR "), ")")
+}
+
+work_terms <- '"four-day week" OR "4-day week" OR "four day week"
+  OR "working time reduction" OR "work time reduction"
+  OR "reduced working hours" OR "shorter working week"'
+outcome_terms <- 'productiv* OR well-being OR wellbeing OR satisfaction
+  OR burnout OR stress OR absentee* OR turnover OR performance'
+
+eb_query <- paste(in_fields(work_terms), "AND", in_fields(outcome_terms))
+eb_query <- gsub("\\s+", " ", eb_query) # one line, single spaces
+```
+
+The API returns at most 500 records per request, so the function below asks
+again until it has all of them, and keeps the fields needed for the
+comparison. Dates come in mixed formats ("2023", "Oktober 2023",
+"26.03.2025"); only the year is kept.
+
+```{r}
+econbiz_search <- function(q, page_size = 500) {
+  fetch <- function(from) {
+    request("https://api.econbiz.de/v1/search") |>
+      req_url_query(q = q, size = page_size, from = from) |>
+      req_perform() |>
+      resp_body_json()
+  }
+  first <- fetch(0)
+  hits  <- first$hits$hits
+  while (length(hits) < first$hits$total) {
+    page <- fetch(length(hits))$hits$hits
+    if (length(page) == 0) break
+    hits <- c(hits, page)
+  }
+  first_or_na <- function(x) if (length(x)) as.character(x[[1]]) else NA_character_
+  rbindlist(lapply(hits, function(x) {
+    urls <- unlist(x$identifier_url)
+    doi  <- grep("doi.org/", urls, value = TRUE)
+    data.table(
+      id     = x$id,
+      source = first_or_na(x$source),
+      type   = first_or_na(x$type),
+      year   = as.integer(regmatches(first_or_na(x$date),
+                                     regexpr("[0-9]{4}", first_or_na(x$date)))[1]),
+      title  = first_or_na(x$title),
+      doi    = if (length(doi)) tolower(sub(".*doi.org/", "", doi[1])) else NA_character_
+    )
+  }))
+}
+
+eb <- econbiz_search(eb_query)
+saveRDS(eb, here("data", paste0("econbiz_", Sys.Date(), ".rds")))
+nrow(eb)
+```
+
+EconBiz also lists events such as conferences; drop them. Then remove the
+duplicates within EconBiz — first by DOI, then by title and year, with the
+titles reduced to lower-case letters and digits, because the same work often
+comes with slightly different punctuation:
+
+```{r}
+eb <- eb[type != "event"]
+eb[, title_key := tolower(gsub("[^[:alnum:]]", "", title))]
+eb <- eb[is.na(doi) | !duplicated(doi)]
+eb <- eb[!duplicated(eb, by = c("title_key", "year"))]
+nrow(eb)
+```
+
+Now compare with OpenAlex. Records without a DOI cannot be matched this way,
+so they are counted separately:
+
+```{r}
+oa_dois <- setdiff(clean_doi(works$doi), NA)
+eb_dois <- setdiff(eb$doi, NA)
+
+c(only_openalex       = length(setdiff(oa_dois, eb_dois)),
+  only_econbiz        = length(setdiff(eb_dois, oa_dois)),
+  both                = length(intersect(oa_dois, eb_dois)),
+  econbiz_without_doi = eb[is.na(doi), .N])
+
+# What does OpenAlex not find (by DOI)? Kind of publication and source
+eb[!doi %in% oa_dois, .N, by = .(type, source)][order(-N)]
+```
+
+The same function runs the German-language search from @sec-econbiz:
+
+```{r}
+de_terms <- 'Arbeitszeitverkürzung OR "Vier-Tage-Woche" OR "4-Tage-Woche"'
+eb_de <- econbiz_search(in_fields(de_terms))
+nrow(eb_de)
+```
+
+### Web of Science
+
+If you have access to Web of Science (@sec-wos), export the results as a
 **tab-delimited file** (record content *Full Record*), save it in
 `data/wos/`, and compare by DOI:
 

@@ -5,8 +5,10 @@ Status: outline agreed; first full draft of materials on branch
 Open before recording: the two "[to fill" slides on own reviews; real
 OpenAlex runs of the tutorial string (hit count, test set, share without
 abstract) and a check of the current web interface (title-and-abstract
-option, export); R part tested against mocked API responses only; add
-openalexR and PRISMA2020 to renv. Not rendered on the website
+option, export); R part tested against mocked API responses only (the
+EconBiz part was run against the live API on 28 Oct 2026); add openalexR
+and PRISMA2020 to renv. EconBiz: check in a browser whether the portal
+shows abstracts, and its export formats and limits. Not rendered on the website
 (`planning/` is outside the render list in `_quarto.yml`).
 
 ## Decisions taken
@@ -37,8 +39,22 @@ openalexR and PRISMA2020 to renv. Not rendered on the website
   economy: publisher concentration, ownership of indexes, abstract
   takedowns, open research information). Tutorial: sub-step on filling in
   missing abstracts.
-- **Web of Science:** one digression in the tutorial ("what it adds, what
-  it costs", comparison exercise); mentioned on slides only as optional
+- **EconBiz as open second source** (added 28 Oct 2026) for economics and
+  business topics: strong on books, working papers and German-language
+  literature. Slides: one bullet in ch. 3 (search systems) and ch. 6
+  (coverage). Tutorial: the digression became "a second database", with
+  EconBiz first, an introduction to its API, and the comparison in R.
+  Findings from API tests on 28 Oct 2026 that the material relies on:
+  - abstracts are *searched* but not *returned*; they sit in two fields,
+    `abstract` (mainly EconStor) and `description` (mainly ECONIS) — a
+    search must use both;
+  - no citation data (snowballing stays in OpenAlex); DOIs for fewer than
+    half of the records; duplicates within EconBiz across sources; events
+    in the results;
+  - tutorial string: 98 records, 74 after events and duplicates removed;
+    German string: 812 records, nearly all in German (sample of 20).
+- **Web of Science:** second option in the tutorial's database digression
+  ("what it adds, what it costs"); mentioned on slides only as optional
   add-on.
 
 ## Revised learning goals (draft)

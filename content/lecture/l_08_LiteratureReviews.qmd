@@ -90,13 +90,16 @@ everything in one go, but please keep the order.
 - [**A mini systematic review in eight steps**](lit-review-tutorial/index.qmd) —
   the hands-on companion to the lecture. It walks you through a complete small
   review in OpenAlex, from the concept table to the flow diagram, including how
-  to fill in missing abstracts. A digression shows what Web of Science adds, and
-  an optional R part runs the whole search from R.
+  to fill in missing abstracts. A digression adds a second database —
+  [EconBiz](https://www.econbiz.de), the free subject portal for economics,
+  or Web of Science — and an optional R part runs the whole search from R,
+  including the EconBiz API.
 
 - The tutorial comes with three templates you can reuse for your term paper:
   a **search log**, a **screening sheet**, and a **concept matrix**.
 
 OpenAlex is free; you only need a free account (and API key) for the R part.
+EconBiz is free and needs no account at all.
 For the optional Web of Science digression, access is provided through the
 university library; see the
 [ZHB database entry](https://dbis.ur.de/HDFL/resources/3366?lang=de).
@@ -125,6 +128,8 @@ university library; see the
 *On OpenAlex and the political economy of research information:*
 
 - @priem2022openalex — what OpenAlex is and how it was built.
+- @zbw2026econbiz — the subject portal for economics and business studies,
+  strong on books, working papers and German-language literature.
 - @stansfield2025analyzing — a test of OpenAlex for a real systematic review.
 - @borrego2025openalex — features and limitations, including missing
   abstracts.

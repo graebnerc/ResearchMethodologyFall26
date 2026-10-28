@@ -5,6 +5,12 @@ author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
 institute: "Department of Pluralist Economics, Europa-Universität Flensburg"
 date: "2026-11-02"
 date-format: "D MMMM YYYY"
+# Declared here, not inherited from _quarto.yml: the deck is excluded from the
+# project render list (it must not reach the students before the lecture), so
+# it is rendered standalone and would otherwise print raw @keys and an empty
+# reference list. Paths are relative to this file and work either way.
+bibliography: ../../../references/references.bib
+csl: ../../../references/jepp.csl
 format:
   revealjs:
     width: 1600
@@ -51,8 +57,9 @@ format:
        - every empirical claim carries a citation or .source line
 
      Database: OpenAlex is the baseline (free, open, same for everyone).
-     Paid databases (Web of Science, Scopus) appear only as optional
-     add-ons. The missing-abstracts limitation is taught explicitly
+     EconBiz is the open second source for economics topics (books,
+     working papers, German-language literature). Paid databases (Web of
+     Science, Scopus) appear only as optional add-ons. The missing-abstracts limitation is taught explicitly
      (ch. 3: consequences and countermeasures; ch. 6: political economy).
 
      All cited works were checked against publisher/RePEc records in
@@ -462,6 +469,9 @@ Requirements: reliable search · precise query · documented, rerunnable
 - **OpenAlex:** free, open, broad coverage, Boolean, scriptable
   [@priem2022openalex]
 
+- **EconBiz:** free subject portal for economics — books, working papers,
+  German [@zbw2026econbiz]
+
 - **Web of Science, Scopus:** curated, precise syntax — paid, access fragile
 
 - **Google Scholar:** huge coverage — limited Boolean control, ranked, not
@@ -470,15 +480,20 @@ Requirements: reliable search · precise query · documented, rerunnable
 - Only **14 of 28** systems fit for systematic reviews [@gusenbauer2020which]
 
 ::: {.keybox .fragment}
-Baseline: OpenAlex · paid databases: optional add-on
+Baseline: OpenAlex · economics: + EconBiz · paid databases: optional
 :::
 
 ::: {.notes}
 The baseline taught here does not depend on any subscription. OpenAlex is
 free, open and the same for everyone, so every search in this lecture can be
-rerun by anyone. Web of Science and Scopus remain useful where you have
-access — mainly for their precise search syntax and curated metadata — but
-access through a university is fragile and ends with graduation. Google
+rerun by anyone. For economics and business topics, EconBiz, the free
+search portal of the ZBW, is a good second source: it is strong where
+OpenAlex is weak — books, working papers and German-language literature.
+It searches abstracts but does not show them, and it has no citation data,
+so screening and snowballing still need OpenAlex. Web of Science and Scopus
+remain useful where you have access — mainly for their precise search syntax
+and curated metadata — but access through a university is fragile and ends
+with graduation. Google
 Scholar is fine for finding a paper you already know exists, but not as the
 search of a systematic review.
 :::
@@ -998,6 +1013,9 @@ Curation = selection · selection ≠ neutral
 
 - OpenAlex: broader, less English-centred — but **metadata gaps**: abstracts,
   language tags [@cespedes2025linguistic]
+
+- Subject portals (EconBiz): books, **German** — but one discipline only
+  [@zbw2026econbiz]
 
 ::: {.arrow .fragment}
 No neutral database · test with known papers, report the gaps
