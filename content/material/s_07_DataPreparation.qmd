@@ -47,7 +47,7 @@ All the videos are available via this [playlist](https://www.youtube.com/playlis
 
 ## 📚 Mandatory Reading
 
-- The tutorial [Data preparation](/content/tutorials/data-wrangling/index.qmd) 
+- [Data Preparation with the Tidyverse](https://euf-methodology-hub.netlify.app/resources/data-preparation-tidyverse) on *Method and Inquiry* [@graebner2026-data-preparation-tidyverse]
 - [Chapter 5](https://r4ds.hadley.nz/data-tidy.html) in @r4ds.
 
 ## Further Reading

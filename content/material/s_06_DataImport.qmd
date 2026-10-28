@@ -31,7 +31,7 @@ All the videos are available via this [playlist](https://www.youtube.com/playlis
 
 ## 📚 Mandatory Reading
 
-- The tutorial [Importing and exporting data using data.table](/content/tutorials/importing-exporting-data/index.qmd) 
+- [Importing and Exporting Data in R](https://euf-methodology-hub.netlify.app/resources/importing-exporting-data) on *Method and Inquiry* [@graebner2026-importing-exporting-data]
 
 
 ## ✍️ Coursework

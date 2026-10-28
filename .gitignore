@@ -17,6 +17,8 @@ content/material/session07-QuartoExamples
 2023
 MISC
 INBOX
+# Local working copies of GitHub gists embedded in session pages
+gists/
 
 # History files
 .Rhistory
@@ -89,7 +91,14 @@ venv.bak/
 
 **/*.quarto_ipynb
 
-# Compiled reveal.js theme byproducts. Quarto writes one content-hashed CSS
-# file per render of a revealjs deck; they accumulate and are rebuilt from
-# content/lecture/slides/euf-slides.scss on every render.
-_freeze/site_libs/revealjs/dist/theme/
+# Lecture decks rendered for presenting. They are excluded from the project
+# render list (see _quarto.yml) so that they are not built into _site/ and
+# cannot reach the students before the lecture; rendering one by hand writes
+# the .html next to its .qmd instead, which is a local build artifact.
+content/lecture/slides/*.html
+
+# Quarto's freeze cache. It is a local build artifact: the site is rendered on
+# this machine and uploaded as finished HTML by `quarto publish netlify`, so
+# Netlify never needs it, and renv.lock is what makes a rebuild reproducible.
+# Keeping it out of git avoids the churn it caused in every commit.
+_freeze/

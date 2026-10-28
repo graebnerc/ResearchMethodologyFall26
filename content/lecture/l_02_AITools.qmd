@@ -2,6 +2,10 @@
 title: "🗓️ Lecture 02: AI tools in practice"
 date: "2026-09-21"
 date-modified: last-modified
+# Keeps the commented-out slide embed below out of the published HTML source:
+# the deck is not served before the lecture, so its URL should not be readable
+# in the page source either.
+strip-comments: true
 ---
 
 ## 🎯 Content and goals

@@ -1,6 +1,6 @@
 ---
 title: "🗓️ Lecture 05: Quantitative and qualitative research"
-date: "2026-10-19"
+date: "2026-10-26"
 author: "Anna-Katharina Kothe"
 date-modified: last-modified
 ---

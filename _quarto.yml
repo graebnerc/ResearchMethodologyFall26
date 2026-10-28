@@ -7,14 +7,28 @@ project:
     - "content/*.qmd"
     - "content/lecture/*.qmd"
     - "content/lecture/*/*.qmd"
+    # Lecture decks are NOT built into the site: a deck must not reach the
+    # students before its lecture has been held, and everything in _site/ is
+    # uploaded by `quarto publish netlify`. After a lecture, add that deck
+    # back here by name (and uncomment the embed block on its session page).
+    - "!content/lecture/slides/*.qmd"
+    # Embargo lifted after the lecture was held:
+    - "content/lecture/slides/RM26_L02_AITools.qmd"
     - "content/material/*.qmd"
     - "content/material/session*/*.qmd"
-    - "content/tutorials/*.qmd"
-    - "content/tutorials/*/*.qmd"
+    # Only decks that have been reviewed are built. The remaining decks in
+    # content/material/slides/ stay unrendered (and therefore unreachable)
+    # until they are checked; add them here one by one.
+    - "content/material/slides/E1-Introduction.qmd"
     - "content/exercises/*.qmd"
     - "content/exercises/*/*.qmd"
     - "content/statrecap/*.qmd"
     - "content/statrecap/*/*.qmd"
+  # solution.html in the dataprep-vis exercise is a pre-rendered document that
+  # Quarto does not parse, so its supporting folder has to be declared by hand -
+  # otherwise the page is served unstyled and without figures.
+  resources:
+    - "content/exercises/dataprep-vis/solution/solution_files/**"
 
 website:
   title: "Theoretical and Empirical Research Methodology" # Title of website shown on top left
@@ -61,8 +75,6 @@ website:
            text: "L10 · Regression analysis"
          - href: content/lecture/l_11_Experiments.qmd
            text: "L11 · Experiments"
-         - href: content/lecture/l_12_OverallQuestions.qmd
-           text: "L12 · Overall questions"
       - section: "💻 Implementation Lab"
         contents:
          - href: content/material/index.qmd
@@ -77,8 +89,12 @@ website:
            text: "Session 04 · Object types"
          - href: content/material/s_05_Quarto.qmd
            text: "Session 05 · Quarto and R Markdown"
+         - href: content/material/s_05a_Recap.qmd
+           text: "Session 05a · Recap session"
          - href: content/material/s_06_DataImport.qmd
            text: "Session 06 · Importing data"
+         - href: content/material/s_06a_Recap.qmd
+           text: "Session 06a · Recap session (optional)"
          - href: content/material/s_07_DataPreparation.qmd
            text: "Session 07 · Data preparation"
          - href: content/material/s_08_Visualization.qmd
@@ -91,10 +107,14 @@ website:
            text: "Session 10 · Linear models in R"
          - href: content/material/s_11_Experiments.qmd
            text: "Session 11 · Experimental data in R"
-         - href: content/tutorials.qmd
-           text: "💻 Tutorials"
+         - href: content/material/WritingFunctions.qmd
+           text: "🛠️ Writing your own functions"
+         - href: content/material/UsingExercises.qmd
+           text: "📦 Using the exercise package"
          - href: content/exercises.qmd
            text: "👾 Additional exercises"
+         - href: https://euf-methodology-hub.netlify.app/resources/
+           text: "📚 Method and Inquiry"
          - href: https://euf-methodology-hub.netlify.app/tracks/statistics-recap
            text: "📈 Statistics recap"
 

@@ -1,7 +1,7 @@
 ---
 title: "A mini systematic review in eight steps"
 subtitle: "Tutorial for lecture 8 — open tools only, with templates and an optional R part"
-date: "2026-11-09"
+date: "2026-11-02"
 date-modified: last-modified
 execute:
   eval: false

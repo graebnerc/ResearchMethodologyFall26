@@ -1,0 +1,362 @@
+---
+title: "Implementation Lab 2 — Basics of R and R Studio"
+subtitle: "Accompanying script (draft)"
+author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
+date: "2026-09-25"
+date-modified: last-modified
+---
+
+::: {.callout-important}
+## Draft — not published yet
+Extracted from the speaker notes of `content/material/slides/E2-Basics-Functions.qmd`.
+This file is **not** in the `render:` list of `_quarto.yml`, so it is not built
+and students cannot reach it.
+
+To publish it later: add `content/material/slides/scripts/*.qmd` to
+`project.render` and link it from the matching session page.
+:::
+
+The headings mirror the slides of the deck, so the two can be kept in sync.
+
+## Slide 2 · Goals for today
+
+Three goals for today. First, you learn how to navigate the R Studio interface
+and how to issue basic commands to R. Second, we explore the three concepts that
+everything else in R builds on: objects, functions, and assignments. Third, we
+learn how to use existing functions and how to write our own.
+
+As in the first session, the slides are deliberately lean — the full wording
+lives here in the speaker notes and can be read separately as a script.
+
+## Slide 4 · After starting R Studio
+
+When you start R Studio for the first time, you will see something like this.
+Two panes: on the left the console, where R greets you with its version number
+and a `>` prompt, and on the right the environment pane at the top and the
+files pane at the bottom.
+
+Do not worry about the details yet — we will go through the individual elements
+in a moment.
+
+## Slide 5 · Some general settings
+
+As a first step I recommend you adjust some general settings. Go to R Studio,
+then Settings, then General, and make sure that the box "Restore .RData into
+workspace at startup" is unchecked, and that "Save workspace to .RData on exit"
+is set to "Never".
+
+Why does this matter so much? If R restores your old workspace, you keep working
+with objects that are no longer created by your current script. Your analysis
+then appears to work on your machine, but nowhere else — and not even on your
+own machine after a restart. The whole point of scripting is that the script
+reproduces the result from scratch. Leftover objects in the workspace are the
+single most common reason why that silently stops being true.
+
+## Slide 6 · Working with a script
+
+Create a new script, and you will see R Studio in the way you will work with it
+most of the time: now there are four panes rather than two, because the script
+editor has opened in the upper left.
+
+This is the layout you should get used to. You write your commands in the
+script, not in the console — the script is the thing that is saved, versioned
+and handed in.
+
+## Slide 7 · The most important elements
+
+The four panes, and what they are for.
+
+The script editor, upper left: a 'fancy' text editor to write and modify R
+files. The run button at the top of it executes the marked part of the script in
+the console.
+
+The console, lower left: used to issue commands to the computer directly.
+
+The environment, upper right: an overview of all objects you have defined so
+far.
+
+The files pane, lower right: the files in your current project, that is, your
+working directory.
+
+We will learn about environments, projects and working directories in more
+detail later — for today, just remember where things are.
+
+## Slide 9 · Issuing commands
+
+Now let us practise how to issue commands to R. The simplest commands are
+arithmetic ones — R works as a calculator out of the box.
+
+All the practical steps, and quite a bit of additional information, are
+summarised in the section "Issue commands to your computer" of the tutorial
+"First Steps in R" on the course page. Read it after the session; everything we
+do here is written up there in more detail.
+
+## Slide 10 · Intermediate task
+
+Sit together in groups of two or three and execute these four computations via
+the console.
+
+The point of the last one is the bracketing: you need to write
+`(8**2 + 5**4) / 3`. If you forget the brackets, R divides only the second
+summand by three and returns a different — but perfectly valid-looking — number.
+That is the first lesson about programming: the computer does what you write,
+not what you mean.
+
+## Slide 12 · Two slogans
+
+John Chambers, one of the creators of the S language from which R descends, put
+it in two slogans: everything that exists is an object, and everything that
+happens is a function call.
+
+Every number, every function, every letter — whatever there is — is an object
+that is stored somewhere in the physical memory of your computer. And whenever
+we tell our computer to do something via R, we are effectively calling a
+function.
+
+## Slide 13 · `2 + 3` refers to three objects
+
+Take the operation `2 + 3`. It already refers to three objects: the numbers 2
+and 3, and the function `+`, which performs the addition. Executing it produces
+yet another object, the number 5.
+
+This sounds pedantic, but it pays off: once you accept that the plus sign is a
+function and the result is an object, nothing in R will surprise you
+structurally later on.
+
+## Slide 14 · Assignments
+
+What if we wanted to keep the result of a computation for further use?
+
+When you type `2 + 3`, the result is created after the addition has been
+executed and stored somewhere in your computer memory. Since it is impossible to
+remember that precise location, the way to go is to give the result a name, and
+then later call it by this name.
+
+This process of binding an object to a name is called an assignment. It is done
+by the function `assign()`: the name `int_results` is now bound to the result of
+`2 + 3`.
+
+## Slide 15 · The environment shows your names
+
+You can now call the result by its name: typing `int_results` returns 5.
+
+And you see all the names currently given in the upper right pane of R Studio.
+Before the assignment the environment is empty; afterwards it lists
+`int_results` with the value 5. Whenever you are unsure whether an object really
+exists, or what it currently contains, this is the pane to look at.
+
+## Slide 16 · Shortcuts, names, and removal
+
+Since assignments happen frequently, there is a shortcut to using `assign()`:
+the arrow operator. `int_result <- 2 + 3` does exactly the same as
+`assign("int_result", 2 + 3)`, and it is what you will see in practically all R
+code. Do learn the keyboard shortcut for it — on a Mac, Option and minus.
+
+Not all names are allowed; the tutorial reading lists the rules.
+
+You can remove an assignment by calling the function `rm()` on the name. After
+`rm(x)`, calling `x` gives you an error: the name no longer points to anything.
+
+## Slide 17 · What about many assignments?
+
+One object can have many names, but each name can only point to one single
+object. If you assign 2 to `a` and then assign 4 to `a`, the name `a` now refers
+to 4 — the previous binding is simply gone, without any warning.
+
+Be aware not to overwrite important pre-defined assignments. If you name your
+own object `mean`, you have a problem the next time you want to compute a mean.
+
+In the worst case, remove all assignments and restart R — on a Mac with Shift,
+Command and zero. This is not a failure; restarting a session frequently is a
+good habit, because it proves your script still works from a clean slate.
+
+## Slide 18 · Tasks
+
+Get together again in groups of two or three and compute this chain problem,
+assigning a name to each intermediate result. The point is that you can use a
+name on the right-hand side of the next assignment: `b <- 5 * a / 2` works
+because `a` already exists.
+
+The second question is deliberate: find out what happens if you call a name that
+has not been assigned to an object before. You will get the "object not found"
+error from the previous slide — and recognising that error message quickly is
+genuinely useful.
+
+## Slide 20 · What a function is
+
+A function is an algorithm which takes an input, applies a routine, and returns
+an output.
+
+The function `log()`, for instance, computes the logarithm of a number: you give
+it the number 2, it applies the logarithm routine, and returns 0.6931472.
+
+Functions usually have names that we can use to call them, and there are two
+main ways to call a function: the prefix and the infix form.
+
+## Slide 21 · Calling functions: prefix and infix
+
+The most common form is the prefix form: first the name of the function, then
+open brackets, then the arguments separated by commas, then closed brackets. The
+arguments usually include the input.
+
+Alternatively we might use the infix form, where the function name is written
+between the arguments — as in `2 + 3`. This is most common for mathematical
+operations. The further readings say more about it.
+
+## Slide 22 · Two types of arguments
+
+There are two different types of arguments: mandatory arguments and optional
+arguments.
+
+Mandatory arguments usually represent the function input. Optional arguments
+allow you to specify details on how the function routine should be executed.
+
+The practical difference: while mandatory arguments can be specified via their
+name, optional arguments usually must be specified via their name. Let us look
+at this with the example of `mean()`.
+
+## Slide 23 · Mandatory arguments
+
+We first use the function `c()` — which stands for concatenate — to create a
+vector of numbers, and assign it the name `t_vec`.
+
+We then want to use `mean()` to compute the mean of this set of numbers, so we
+write `mean(t_vec)`.
+
+The first, mandatory argument of `mean()` is called `x` and means the set of
+which the mean should be computed. Being a mandatory argument, we can specify it
+by name — `mean(x = t_vec)` — but we do not need to. Both calls do exactly the
+same thing.
+
+## Slide 24 · Optional arguments
+
+Among others, `mean()` also accepts an optional argument called `na.rm`. It
+specifies how `mean()` should deal with missing values in the original input. If
+`na.rm` equals TRUE, then missing values — written `NA` in R — are removed
+before the mean gets computed. If it equals FALSE, they are not.
+
+We set this value by writing the name of the optional argument followed by an
+equals sign and the value.
+
+Now add a missing value to our original vector and test how the three
+applications of `mean()` differ. Two of them return `NA`, one returns 2.5 — and
+you should be able to say which and why before you run it.
+
+## Slide 25 · Defaults, Tab, and `help()`
+
+As all optional arguments, `na.rm` has a default value that is chosen if you do
+not set another value explicitly. For `mean()` that default is FALSE — which
+explains the result of the plain `mean(t_vec)` call on the previous slide.
+
+How do you know whether there are optional arguments, what their defaults are,
+or what the names of the arguments are? Two ways. Press the Tab key after having
+written the open bracket, and R Studio shows you the arguments. Or call the
+function `help()` — here, `help(mean)` — which opens the documentation in the
+lower right pane.
+
+Getting comfortable with the help pages early pays off enormously. They are
+terse, but they are complete.
+
+## Slide 26 · Function calls — practice
+
+Define a vector with the elements minus two, two, four, six, nine and NA, then
+apply these four functions and work out what each of them is doing.
+
+`is.na()` and `anyNA()` differ in an instructive way: one returns a vector of
+TRUE/FALSE values, the other a single TRUE or FALSE.
+
+The last question is the interesting one. `var()` computes the sample variance,
+dividing by n minus one. To get the population variance you have to multiply by
+(n-1)/n yourself. The lesson is that you must always check what a statistical
+function actually computes — the name alone does not tell you.
+
+## Slide 27 · Defining your own functions
+
+Knowing how to define your own functions is important for two reasons. First,
+defining own functions is super useful and often recommendable. Second, it
+allows us to better understand how functions work in general.
+
+And there is a nice circularity to it: we define a new function via the function
+`function()`.
+
+## Slide 28 · The anatomy of a function
+
+Let us go through the anatomy of a function definition.
+
+First the name of the new function and the assignment operator — a function
+definition is an assignment like any other, which is why the arrow appears here.
+
+Then `function()` with the arguments of the new function in brackets: here two
+catheti.
+
+Then the function body in curly braces: the routine the function should apply to
+the input. Here we square both catheti, add them, and take the square root.
+
+Finally `return()`, specifying what the function returns as its output.
+
+The crucial point is the last one: all associations inside the body only exist
+within the function. After calling `pythagoras(3, 4)`, there is no object called
+`hypo_squared` in your environment. That is a feature, not a limitation — it is
+what keeps functions from interfering with the rest of your code.
+
+## Slide 29 · Short practice
+
+Write a function that takes two mandatory arguments, x1 and x2, and returns the
+result of this equation. Use the pythagoras function from the previous slide as
+your template.
+
+If someone finishes early: ask them what the function returns if you call it
+with a vector instead of a single number, and why.
+
+## Slide 30 · Final remarks about functions
+
+There are many reasons to use functions. Code becomes more concise and
+transparent. Functions help to structure your code. And they facilitate
+debugging and help avoid incidental mistakes — if a computation exists exactly
+once, it can also be wrong only in exactly one place.
+
+Before writing a function in daily life, check via a search engine whether it
+has not already been written. For anything more complicated, it is usually a
+good idea to sketch your ideas with pen and paper and then implement them.
+
+And always document your functions. The readings contain a manual on how to do
+that.
+
+## Slide 31 · Let's practice!
+
+Go together in pairs; one of you is the driver, the other the navigator. Only
+the driver writes code, the navigator tells them what to do. Swap roles halfway
+if you like.
+
+After fifteen minutes, sit together with another team, explain your solutions
+and discuss common problems. Then we have a short general feedback round in the
+plenum.
+
+The task is to write a function that takes a set of numbers as an input and
+normalises them into the range of zero and one. The functions `min()` and
+`max()` come in handy.
+
+Watch for the case where all values are identical — then the denominator is
+zero. Nobody needs to solve that today, but it is a good thing to notice.
+
+## Slide 32 · Summary
+
+So, you made your first big steps into the R programming world.
+
+We checked out the main elements of the R Studio interface. We learned about how
+to issue commands to the computer. We learned that everything in R that exists
+is an object, and everything that happens is a function call. We learned how to
+associate objects with names. And we learned how to call and define functions.
+
+This was a lot for one session. It is a good idea to take your time to digest
+and repeat these topics rather than rushing ahead.
+
+## Slide 33 · Outlook
+
+Next session we will learn about the different types of objects you can
+encounter in R, and how to automate tasks with loops and conditionals. Then we
+are finished with the general introduction and move on to data visualisation.
+
+Three tasks until next week: fill in the quick feedback survey on Moodle, read
+the tutorials posted on the course page, and do the exercises — discussing
+problems and difficulties via the Moodle forum, not via my inbox.

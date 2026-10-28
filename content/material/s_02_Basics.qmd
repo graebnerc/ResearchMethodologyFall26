@@ -33,7 +33,7 @@ All the videos are available via this [playlist](https://www.youtube.com/playlis
 
 ## 📚 Mandatory Reading
 
-- Tutorial [First steps in R](/content/tutorials/first-steps/index.qmd)
+- [First Steps in R](https://euf-methodology-hub.netlify.app/resources/first-steps-in-r) on *Method and Inquiry* [@graebner2026-first-steps-in-r]
 - [Chapter 2](https://r4ds.hadley.nz/workflow-basics) in @r4ds.
 
 ### 🏆 Further readings

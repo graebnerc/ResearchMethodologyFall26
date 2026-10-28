@@ -1,0 +1,298 @@
+---
+title: "Implementation Lab 9 — Using AI for coding"
+subtitle: "Accompanying script (draft)"
+author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
+date: "2026-11-20"
+date-modified: last-modified
+---
+
+::: {.callout-important}
+## Draft — not published yet
+Extracted from the speaker notes of `content/material/slides/E9-AICoding.qmd`.
+This file is **not** in the `render:` list of `_quarto.yml`, so it is not built
+and students cannot reach it.
+
+To publish it later: add `content/material/slides/scripts/*.qmd` to
+`project.render` and link it from the matching session page.
+:::
+
+The headings mirror the slides of the deck, so the two can be kept in sync.
+
+## Slide 2 · Goals for today
+
+Three goals today. You understand when, how and which AI tools you can use to
+assist with coding. You know about AI-like tools that are useful in practice —
+formatters in particular. And you know some tips to avoid typos in your code,
+especially when you are in a hurry, which is when they happen.
+
+Note that this session comes late in the semester on purpose. The reason is on
+the very last slide, and it is the single most important message of the session.
+
+## Slide 4 · Common AI tools
+
+Two families of tools.
+
+General AI tools that can help you to code: Claude, ChatGPT, Gemini Code Assist.
+You use them in a browser window, you paste code in and copy code out.
+
+And specific coding tools that offer advanced code completion and chat interfaces
+directly inside the editor, usually built on top of the same basic models:
+Windsurf, Cursor, GitHub Copilot.
+
+Two practical remarks. The free plans are usually sufficient for what you do in
+this course — do not pay for anything. And IDE integration is great when it
+exists, but be aware that R Studio is considerably less supported than, for
+example, VS Code. GitHub Copilot is currently the one with the best R Studio
+integration.
+
+## Slide 6 · 1. Code generation
+
+The first and most obvious use case: you know what you want to achieve, but you
+have no clue as to how to program it.
+
+Note what the prompt does beyond stating the task. It names the dialect —
+tidyverse — and it asks for inline comments. Both make the answer far more
+useful, and the second one makes it checkable.
+
+Two warnings. The code might include silent errors: code that runs, produces a
+number, and computes the wrong thing. That is far more dangerous than code that
+crashes.
+
+And a small detail from the answer in the original slides: the AI suggested
+`library(tidyverse)`, which is not good practice by our conventions — we use
+explicit `::` calls. The tool does not know your house style unless you tell it.
+
+## Slide 7 · 2. Development & syntax support
+
+The second use case: you know what to do on the content level, and you also know
+which steps to take in R, but you are unsure about the implementation.
+
+Notice the sentence "my background is in management studies, not programming".
+Telling the model your skill level genuinely changes the answer — it affects how
+much is explained and how exotic the suggested functions are.
+
+The result of such a prompt is typically far from perfect, but now you can
+improve the specifics of the code yourself. That is the realistic expectation:
+not a finished solution, but a draft you are competent to fix.
+
+## Slide 8 · 3. Code optimisation
+
+The third use case: you have code that does what you want, but it is very slow.
+
+This is one of the areas where AI is genuinely strong, because recognising that a
+nested loop computes a sum of squares and can be replaced by a closed-form
+formula is pattern matching of exactly the kind these models are good at. The
+speed-ups in the example are dramatic.
+
+But note the instruction in the prompt: "do not change the functioning of the
+code, only improve speed", and "mark changes using comments". Both exist so that
+you can verify the result.
+
+And then actually verify it. Run the old and the new version on the same input
+and compare the outputs. A faster function that returns something slightly
+different is not an optimisation.
+
+## Slide 9 · 4. Code explanation
+
+The fourth use case is code explanation: you found code — on Stack Overflow, in a
+package vignette, in a colleague's script — and you do not understand it.
+
+I would argue this is the use case with the lowest risk and often the highest
+learning value. You are not delegating the work; you are asking for a tutorial on
+something specific, at exactly your level, at the moment you need it.
+
+And if the explanation is wrong, you usually notice, because the code is in front
+of you and you can test the claims.
+
+## Slide 10 · 5. Code documentation
+
+The fifth use case: you have written code that works, but you need to document
+it. Documentation is the task everybody postpones, and it is one where the
+assistance is genuinely good, because the information is all there in the code.
+
+Be specific regarding the kind of documentation you want — here, roxygen2 format
+with an example. Otherwise you get a paragraph of prose where you wanted a
+structured header.
+
+And still check it. The typical failure is an `@param` description that sounds
+right but describes the wrong unit, or an example that was never run.
+
+## Slide 11 · 6. Code debugging
+
+The sixth use case: debugging. Here the data frame comes back empty and the
+warning says that the greater-than operator is not meaningful for factors.
+
+This is a real example of something you now understand from the object-types
+session: `group` is a factor, so its levels look like numbers but are categories,
+and comparing them with greater-than does not do what you expect.
+
+The prompting advice on this slide is the operative one. Paste the code, the data
+structure — via `str()` — and the exact error message. And ask the model to
+explain what is going wrong *before* suggesting a solution. Otherwise you get
+three fixes and no understanding, and you will make the same mistake next week.
+
+## Slide 12 · The six use cases at a glance
+
+The six use cases together, and four rules that apply to all of them.
+
+Always cross-check proposed code and beware of blind alleys — the danger is not
+only wrong code but a wrong approach that costs you two days.
+
+Follow the guidelines for prompt engineering; the appendix of these slides has a
+framework and several blueprints.
+
+Be cautious with sensitive data. This connects directly to the lecture on AI:
+interview transcripts, personal data and unpublished data from partners do not go
+into a chat window.
+
+And properly acknowledge and document the use of AI tools — the disclosure rules
+of the module apply to code exactly as they apply to text.
+
+## Slide 13 · Verification strategies
+
+This slide is the practical core of the session, so do not skip it.
+
+The three-check method. Does it run without errors or warnings? Does it produce
+sensible output — check the dimensions, the data types, the NAs, and whether the
+values lie in a viable range? And does it match your understanding: can you
+explain the code to somebody else?
+
+The second and third strategies are the ones people neglect. Test with an example
+where you know the answer: ROI with revenue 150 and cost 100 must be 50 per cent.
+And test with a trivial subset of three to ten rows where you can do the
+calculation by hand.
+
+The fourth: ask the AI for an explanation and a code review of its own answer, and
+paste the result into a different tool or a fresh chat. A second model frequently
+catches what the first one missed, because it does not share the first one's
+commitment to its own answer.
+
+## Slide 14 · Application exercise
+
+Now try it. Groups of two or three, choose one of the four tasks, and the material
+is on the course homepage.
+
+Three minutes to write the prompt, two minutes to generate, ten minutes to
+evaluate and improve. Note the proportions: writing and evaluating take five times
+as long as generating. That ratio is the lesson.
+
+The three questions afterwards are what we discuss in the plenum: what worked well
+in the AI's solution, what needed improvement, and how would you modify your
+prompt next time.
+
+## Slide 16 · Formatter tools
+
+Now to the non-AI tools, which are underrated.
+
+Writing code in good style is more than a matter of style. Well-styled code is
+easier to read, which facilitates collaboration and improves transparency. And it
+is easier to understand, which facilitates debugging and finding mistakes — a
+misplaced bracket is visible in indented code and invisible in a wall of text.
+
+There are good style guidelines, especially the Tidyverse Style Guide. But
+re-writing code by hand in good style is time consuming, so use a formatter.
+
+`styler` is easy to use, established, and has great R Studio integration — the
+best option for casual users, which means you. `air` is a modern formatter,
+extremely fast and powerful, but harder to set up.
+
+## Slide 17 · Intermediate task
+
+Take some code that you have produced so far this semester and style it using
+styler. After installing the package it appears in the Addins menu of R Studio,
+with entries for styling the selection, the active file, or a whole package.
+
+Then compare the styled and the original version — and the question is
+deliberately open: do you always like the styled version better? Usually you do,
+but not always, and the cases where you do not are interesting. A formatter
+optimises for consistency, not for the one place where your manual line break
+carried meaning.
+
+## Slide 19 · Tips to avoid typos
+
+Typos are not a sign of incompetence; they are a constant of programming life, and
+the goal is to make them cheap rather than to avoid them by willpower.
+
+Develop code step by step and test regularly — then a new typo is always in the
+three lines you just wrote.
+
+Copy-paste code that has worked, and copy-paste variable names rather than
+retyping them. Most "object not found" errors are a retyped name.
+
+Use auto-completion, shown in the upper screenshot: it also shows you the argument
+names, so it prevents a second class of mistakes.
+
+Make use of the linting tool of R Studio, shown below: the red cross in the margin
+flags the unmatched bracket before you ever run the code.
+
+And if you suspect a typo but cannot find it, ask your coding AI. That is a
+perfect small use case: no judgement required, instantly verifiable.
+
+## Slide 20 · Summary and outlook
+
+And here is why this session comes in November rather than in September.
+
+Use AI for coding assistance if you feel comfortable using the language on your
+own. Only then can AI boost your productivity enormously — and only then can you
+tell a good answer from a plausible one. Somebody who cannot read R cannot
+supervise an AI writing R, and they end up with a script they cannot defend and
+cannot repair.
+
+You now can read R. That is what the last eight sessions were for.
+
+Many tools exist and the free tiers are often sufficient. Use AI especially for
+generation, debugging, optimisation, documentation and explanation — and do not
+expect the final solution, but useful hints and drafts.
+
+And do not forget the non-AI tools, which are boring, reliable, and free.
+
+## Slide 22 · The SPEC framework
+
+The SPEC framework, and the left column is what everybody writes the first time.
+
+Specify the context: name the object, the columns and their types. Provide
+constraints: which packages, which dialect, which output format. Explain the goal,
+not only the operation — "identify outliers" tells the model something that
+"filter my data" does not. And call for an explanation, which costs nothing and
+makes the answer checkable.
+
+Compare the two columns line by line. The right-hand prompts are longer, and they
+are the reason the answers are usable.
+
+## Slide 23 · A general blueprint
+
+A general blueprint on the left and a filled-in example on the right. Copy the
+left one into a note somewhere — you will reuse it constantly.
+
+The part that does the heavy lifting is the column list with types and
+descriptions. It costs you thirty seconds and it removes almost all of the
+guessing.
+
+## Slide 24 · More specific blueprints
+
+Three specific blueprints, for the three use cases you will hit most often.
+
+Note what recurs in all of them: the goal, the code, the data structure, and a
+request for explanation rather than only a result.
+
+And note the last line of the optimisation blueprint — "ensure the output remains
+identical" — and the fourth question of the explanation blueprint, "is it a good
+implementation?". That last one frequently produces the most useful answer of the
+whole conversation, because it invites criticism rather than agreement.
+
+## Slide 25 · What to include, and iterating
+
+The left column is the checklist of what to include by default. The one people
+omit and should not is the skill level, because it changes the register of the
+whole answer.
+
+The right column is about iteration. Start broad, test, follow up with specific
+problems. Do not expect perfection on the first try, and equally do not accept
+unsatisfactory responses — push back, the way you would with a colleague.
+
+But also, and this is the counterweight: ask critically whether it is easier to
+finalise the code yourself. There is a point where a fourth round of prompting
+costs more than fixing the two lines by hand, and recognising that point is part
+of the skill.
+
+Treat it as a conversation, not a magic spell.

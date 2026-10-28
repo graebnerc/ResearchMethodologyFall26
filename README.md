@@ -10,7 +10,7 @@ Inspired by [this template](https://github.com/jonjoncardoso/quarto-template-for
 
 - Most lecture pages are still skeletons
 - **Slides:** no `content/lecture/slides/` directory exists yet. All 12 pages
-  (`l_01`–`l_12`) show *"The slides for this lecture will be made available
+  (`l_01`–`l_11`) show *"The slides for this lecture will be made available
   here."* For each session: add the slide PDF to `content/lecture/slides/` and
   uncomment the `<iframe>` block in the corresponding page.
 - **Mandatory & Further Reading still "To be announced":** 

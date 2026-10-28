@@ -1,0 +1,187 @@
+---
+title: "Implementation Lab 3 — Setting up R projects"
+subtitle: "Accompanying script (draft)"
+author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
+date: "2026-10-02"
+date-modified: last-modified
+---
+
+::: {.callout-important}
+## Draft — not published yet
+Extracted from the speaker notes of `content/material/slides/E3-ProjectSetup.qmd`.
+This file is **not** in the `render:` list of `_quarto.yml`, so it is not built
+and students cannot reach it.
+
+To publish it later: add `content/material/slides/scripts/*.qmd` to
+`project.render` and link it from the matching session page.
+:::
+
+The headings mirror the slides of the deck, so the two can be kept in sync.
+
+## Slide 2 · Goals for today
+
+Three goals today. You learn how to set up an R project, you learn about the
+difference between absolute and relative paths, and you learn how to use the
+`here` package.
+
+This session looks like the least exciting of the semester and is in fact one of
+the most consequential: almost every "it works on my machine" problem you will
+have later traces back to what we discuss today.
+
+## Slide 4 · Our goal
+
+The goal of this session is that you learn about a default directory structure
+and a general way to document everything you do in your project. This
+facilitates the collaboration with future-you considerably — and nothing is
+worse than hating your past-you for not documenting correctly where data came
+from, or how it has been prepared.
+
+We also want a general workflow to avoid problems in the context of project
+management.
+
+The central idea behind all of it: all results must be reproducible from the raw
+data. That has one immediate consequence — you must not manipulate your raw
+data. Raw data is what you download from the internet, gather through an
+experiment, or code yourself, and it stays exactly as it arrived.
+
+## Slide 5 · How to keep your work transparent
+
+Raw data must not be changed, but it is usually not in a state we can work with.
+The way out is a four-step loop.
+
+First, gather the data and save it on your computer. Second, import this data
+into R. Third, write a script that transforms the raw data into tidy data.
+Fourth, use the tidy data for the actual analysis: visualisation, modelling and
+so on.
+
+Saving the scripts in steps two and three makes your work fully reproducible.
+The scripts always tell you what you did to your raw data — which means you can
+heal basically every mistake you made. If you had instead edited the raw file in
+Excel, the mistake would be permanent and invisible.
+
+## Slide 6 · Where we are heading
+
+Here is the map for the next few sessions. Setting up your project environment
+is done only once per project. Importing data, transforming raw data into tidy
+data and saving data may be done several times, in a loop.
+
+Today we deal with the first box only. It is the box that everybody is tempted
+to skip, and the one that decides whether the following weeks are pleasant or
+painful.
+
+## Slide 8 · Setting up your working environment
+
+Where you save your data and your files is important — much more important than
+it looks at first.
+
+The right directory structure is a prerequisite for a transparent, reproducible
+and easy-to-work-with project. For every task in R you should set up your
+project like the tree on the right: a project folder containing the `.Rproj`
+file, a `data` folder split into `raw` and `tidy`, an `R` folder for the
+scripts, an `output` folder for results, and `misc` for everything else.
+
+The split between `data/raw` and `data/tidy` is the structural expression of the
+rule from the previous slide: raw data goes into `raw` and is never touched
+again; everything your scripts produce goes into `tidy`.
+
+All relevant steps to set this up, and the rationale for this structure, are
+described in the respective tutorial.
+
+## Slide 9 · Creating an R project
+
+The concrete click-by-click steps for creating an R project are documented in
+the associated tutorial and video, so we do not spend session time on them. The
+slides focus on selected background concepts only — the things that are worth
+discussing together because they are conceptually tricky rather than mechanical.
+
+## Slide 11 · Absolute and relative paths
+
+There are two ways to tell your computer where a certain file is located.
+
+Via an absolute path, where the description starts at the root directory of your
+file system — the very top. Or via a relative path, where the description starts
+at your current position in the file system, the working directory.
+
+The screenshot shows the situation: we are located in the folder
+DataScienceExercises, framed in red, and we want to point to the file
+`nycflights21_small.rda` inside its `data` folder.
+
+## Slide 12 · The same file, two descriptions
+
+Here are the two descriptions of one and the same file. The absolute path starts
+at Volumes and spells out every level. The relative path is simply
+`data/nycflights21_small.rda`.
+
+The relative path seems nicer for two reasons. It is shorter. And, much more
+importantly, you can share your code without forcing others to adjust the path —
+because on their machine the project sits somewhere else entirely, but the
+`data` folder is still inside it.
+
+## Slide 13 · Relative paths and `setwd()`
+
+So the relative path is nicer — but it raises a problem: how do we set our
+location to the directory DataScienceExercises in the first place?
+
+One option is to use `setwd()` and provide the absolute path to
+DataScienceExercises as an argument. Then we can use the short relative path
+afterwards. And indeed, many people put `setwd()` at the top of their scripts.
+
+You must never ever do this. The next slide explains why.
+
+## Slide 14 · Why `setwd()` is evil
+
+Why is `setwd()` evil?
+
+First, it does not even solve the problem it appears to solve. You wanted to
+avoid absolute paths — and to use `setwd()` you have to write an absolute path.
+The absolute path has not disappeared, it has only moved to line one.
+
+Second, it makes others hate you. Abby writes a script with `setwd()` at the top
+and sends it to Ellie. Ellie opens the file and executes it, and gets an error:
+cannot change working directory. The folder in Abby's path exists on Abby's
+machine and nowhere else in the universe.
+
+And note that "others" includes future-you on a new laptop.
+
+## Slide 15 · The better alternative: `here`
+
+The simple solution is the package `here`.
+
+It sets an anchor in your project directory. You then create all paths relative
+to this anchor using `here::here()` — and because the anchor is found by looking
+for the project file rather than by hard-coding a location, this will always work
+on every machine.
+
+The way to set the anchor is to put `here::i_am()` into the very first line of
+your script, telling it where this script sits inside the project. From then on,
+`here::here("data", "raw", "file.csv")` gives you a correct absolute path on any
+computer, without you ever writing one.
+
+So: `here::i_am()` in line one, always. It costs you one line and saves you the
+entire class of problems from the previous slide.
+
+## Slide 16 · Your turn
+
+Your turn. Create a new R project on your computer and create all the required
+folders from the tree. Then write an R script, put it into the right directory —
+that is, into `R` — and make it usable for the `here` package by adding the
+`i_am()` line.
+
+Then check out what the function `here::here()` actually returns when you call
+it with and without arguments, and experiment with its use. Seeing the absolute
+path it builds for you is what makes the concept click.
+
+## Slide 17 · Summary and outlook
+
+To summarise: we now know how to organise our working directory. We know the
+important difference between absolute and relative paths. And we know that the
+challenge of using code on different machines can be addressed with the `here`
+package, which is the better alternative to `setwd()`.
+
+Project management is essential but often under-appreciated — it is invisible
+when it works and catastrophic when it does not.
+
+Two further topics point beyond this session: using a version control system
+such as Git, and using virtual programming environments, for example via the
+package `renv`. Both are covered in the tutorials for those who want to go
+further.

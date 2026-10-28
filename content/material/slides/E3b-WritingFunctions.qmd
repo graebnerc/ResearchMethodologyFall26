@@ -1,0 +1,135 @@
+---
+title: "Writing your own functions"
+subtitle: "Theoretical and Empirical Research Methodology · Implementation Lab 3"
+author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
+institute: "Europa-University Flensburg, Department of Pluralist Economics"
+date: "2026-10-02"
+date-format: "D MMMM YYYY"
+# The deck is not in `project.render`, so it is rendered on its own and
+# does not inherit the bibliography from `_quarto.yml` — declare it here.
+bibliography: ../../../references/references.bib
+csl: ../../../references/jepp.csl
+format:
+  revealjs:
+    theme: [default, ../../../css/slides.scss]
+    embed-resources: true
+    width: 1280
+    height: 720
+    slide-number: c/t
+    show-slide-number: all
+    footer: "Implementation Lab 3 · Writing your own functions · Claudius Gräbner-Radkowitsch"
+    logo: figures/E3/euf-logo.png
+    incremental: true
+    transition: fade
+    transition-speed: fast
+    center-title-slide: true
+    hash: true
+    history: true
+    preview-links: auto
+    fig-align: center
+    auto-stretch: false
+    menu:
+      side: right
+      numbers: true
+---
+
+# Writing our own functions {.divider background-color="#EAF0F4"}
+
+::: {.center-block .big}
+By your request: a short recap
+:::
+
+::: {.center .muted}
+The conceptual background: @graebner2026-r-object-types-i-functions
+:::
+
+## A function is an object that can be called
+
+- In R, **everything that exists is an object** — functions included
+- A function can be **called**: takes an **input**, applies a **routine**, and returns an **output**
+
+::: {.fragment}
+::: {.boxed}
+`2` → **`log()`** → `0.6931472`
+:::
+:::
+
+::: {.fragment}
+- Calling it means: its **name**, then **brackets** with the **arguments** inside
+:::
+
+::: {.fragment}
+```r
+log(2)       # prefix form: the name first, arguments in brackets
+```
+:::
+
+## Mandatory and optional arguments
+
+- **Mandatory** arguments usually the **input** 
+- **Optional** arguments:  *how* the routine is executed
+  - Always come with a **default**
+
+::: {.fragment}
+```r
+sum(1, 2, 3, 4, NA)                 # NA
+sum(1, 2, 3, 4, NA, na.rm = TRUE)   # 10
+```
+:::
+
+- `na.rm` defaults to `FALSE` → a missing value leads to `NA` as output
+- `help(sum)`: tells which arguments exist, and their defaults
+
+::: {.takeaway .fragment}
+Optional arguments are passed **by their name** — which is also what makes a
+function call readable
+:::
+
+## How to define a function
+
+::: {.columns}
+::: {.column width="58%"}
+::: {.small}
+```r
+pythagoras <- function(cathetus_1, cathetus_2){
+  hypo_squared <- cathetus_1**2 + cathetus_2**2
+  hypotenuse <- sqrt(hypo_squared)
+  return(hypotenuse)
+}
+
+pythagoras(2, 4)  # 4.472136
+```
+:::
+:::
+
+::: {.column width="42%"}
+::: {.smaller}
+- the **name** and `<-`
+- `function(...)` with the **arguments**
+- the braces: the **function body**
+- `return()`: the **output**
+:::
+:::
+:::
+
+- Objects created in the body live in the **function's own environment**
+  - `hypo_squared` does not exist outside
+
+::: {.takeaway .fragment}
+A feature, not a bug: it keeps your workspace clean
+:::
+
+## Let's write two functions {.divider background-color="#EAF0F4"}
+
+::: {.center-block .big}
+We build them **live**, step by step — the written documentation is 
+on the **session page**
+:::
+
+::: {.center .muted}
+① Fahrenheit → Celsius  ·  ② a summary function for a vector
+:::
+## References {.smaller}
+
+::: {#refs}
+:::

@@ -45,6 +45,29 @@ productivity". It reads well. It is properly formatted. It cites three sources.
 You will need nothing but a browser. Do not ask an AI assistant whether its own
 citations are real; ask it where they came from, then go and look.
 
+::: {.callout-important}
+## You will hit a paywall, and it does not stop you
+
+At least one of these references is behind one. **A paywall is not evidence of
+anything**: a fabricated reference and a subscription-only article look
+identical from the outside if you stop at "I cannot open it". All three
+verdicts below are reachable without paying for anything:
+
+- **Existence** never needs the full text. A real article has a landing page at
+  the publisher, an entry in Google Scholar and Crossref, and a DOI that
+  resolves. A fabricated one has none of these: the DOI returns an error, and
+  the title in quotation marks returns nothing.
+- **What it claims** is usually settled by the **abstract**, which is free even
+  for closed-access articles. For this exercise, the abstracts are enough.
+- **If you want the full text anyway**: economics papers almost always exist as
+  a free working paper (NBER, SSRN, or the author's own page) — Google
+  Scholar's "All versions" link is the fastest route. Failing that, use the
+  EUF library, which is what your enrolment is for.
+
+Record *which* of these routes you used. "Could not access it" is not a verdict;
+"the DOI does not resolve and the title returns nothing" is.
+:::
+
 ## The paragraph
 
 > Recent research has established that remote work raises rather than lowers
@@ -123,6 +146,22 @@ One sheet per group, with three lines:
       If neither returns anything, it does not exist, however confident the
       assistant was.
 
+      **A note on access — worth making explicitly in the debrief.**
+      The QJE article is closed access, and some groups will have stopped
+      there. Draw the distinction out loud: Bloom et al. is *paywalled*,
+      Reinhardt & Osei is *absent*. From the outside these feel the same — "I
+      could not get to it" — but the evidence is completely different. The
+      paywalled article has a publisher landing page, a Scholar entry, a
+      resolving DOI and a free abstract (and, in this case, a working-paper
+      version); the fabricated one has nothing at all. A student who treats a
+      paywall as a dead end will eventually do the reverse of this exercise and
+      dismiss a real source — or, worse, keep a fake one because they assumed
+      the library simply did not subscribe.
+
+      Both real papers can be judged from their abstracts alone, which is the
+      practical point: the check that catches the Levitt & List inversion is
+      free, takes a minute, and needs no subscription.
+
       ## Debrief questions
 
       - Which of the three took you longest, and why?
@@ -136,7 +175,8 @@ One sheet per group, with three lines:
 ## Why this exercise exists
 
 A fabricated reference is the easiest of the three problems to catch and the
-least interesting. The dangerous case is the middle one: a real source, cited in
+least interesting — provided you do not confuse *cannot open* with *does not
+exist*. The dangerous case is the middle one: a real source, cited in
 good faith, saying something other than what your sentence claims. No tool
 catches that. Reading the abstract does.
 

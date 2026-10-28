@@ -1,0 +1,355 @@
+---
+title: "Implementation Lab 4 — Packages & object types"
+subtitle: "Accompanying script (draft)"
+author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
+date: "2026-10-09"
+date-modified: last-modified
+---
+
+::: {.callout-important}
+## Draft — not published yet
+Extracted from the speaker notes of `content/material/slides/E4a-Objects.qmd`.
+This file is **not** in the `render:` list of `_quarto.yml`, so it is not built
+and students cannot reach it.
+
+To publish it later: add `content/material/slides/scripts/*.qmd` to
+`project.render` and link it from the matching session page.
+:::
+
+The headings mirror the slides of the deck, so the two can be kept in sync.
+
+## Slide 2 · Goals for today
+
+Four goals today. We learn about the use of R packages. We understand the main
+object types in R and their practical relevance. We learn how to transform
+object types into each other. And we hear about some useful helper functions and
+about the concept of vectorisation.
+
+This is the last session of the general introduction — after this we turn to
+working with real data.
+
+## Slide 4 · R packages
+
+One cool thing about R is that there is a great community of R users that write
+objects and functions which perform useful purposes, and make them available to
+all. This process of making objects available to others is done via R packages.
+
+You can think of an R package as a collection of assignments and documentations
+that people pass around.
+
+If you install R, you can use all objects that you defined for yourself and all
+objects that are pre-defined in R. If you want to use objects defined by someone
+else in their package, you need to install this package first.
+
+## Slide 5 · Installing packages
+
+The official way to distribute packages is via CRAN, the Comprehensive R Archive
+Network. To install a package that was deployed on CRAN you execute
+`install.packages()` with the name of the package as a string.
+
+To install the package `ineq`, for instance, you write `install.packages("ineq")`.
+
+For packages that were not yet released on CRAN — for example development
+versions on GitHub — other functions are available; the tutorials cover that.
+
+Note that installing happens once per machine, not once per script.
+
+## Slide 6 · Calling objects defined in packages
+
+One object defined in `ineq` is the function `Gini()`, which computes the Gini
+coefficient. Simply calling `Gini()` does not work — R does not know where to
+look for it.
+
+You need to tell R that `Gini()` is defined by the package `ineq`, and you do
+that with the double colon. You may think of `::` as building a bridge between
+your R session and all objects defined in a package.
+
+A sometimes more convenient way is to use `library()` at the beginning of your
+script. This attaches the package and makes available all objects of `ineq` in
+your current R session, so you can then write `Gini()` directly.
+
+## Slide 7 · Packages and masking
+
+Packages are written by many different people, so it is not unlikely that two
+packages assign the same name to different objects. If you then attach both
+packages, the assignment of the earlier package will be masked by the later one.
+
+You can try this by attaching the two packages `dplyr` and `plm`. In such cases
+you must use the double colon to access the masked object of the first package.
+
+As a general rule: always use `::` whenever masking is a potential problem. It
+makes your code much easier to understand for you and for others, because the
+reader can see immediately where a function comes from. The function
+`conflicts()` shows you all names for which conflicts currently exist.
+
+## Slide 8 · Recap questions
+
+Six recap questions. Work through them in pairs — they are exactly the kind of
+conceptual question that separates "I can copy the code" from "I understand what
+the code does".
+
+The fourth one is the one worth spending time on: `::` is explicit and local but
+verbose; `library()` is convenient but changes the meaning of every later name in
+the script.
+
+## Slide 10 · Why types matter
+
+Back to the Chambers quote from session two, but this time we focus on the first
+half. We have learned quite a bit about functions; now we turn to objects.
+
+We must distinguish different object types because functions operate differently
+depending on the type of object we are processing. Adding up numbers is
+something different from adding up words — and R has to know which of the two
+you mean.
+
+Fortunately, there are only a few basic types you must know about; more complex
+types are natural modifications of these. The most general type of object in R
+is a vector.
+
+## Slide 11 · The basic type hierarchy
+
+This is the map for the rest of the session, and it is worth memorising.
+
+At the very top sit objects. They split into vectors and NULL. Vectors split
+into atomic vectors and lists, which are sometimes called generic vectors.
+
+Atomic vectors come in four types that matter for us: logical, integer, double
+and character.
+
+Today we deal with atomic vectors first, in dark blue, and then with lists, in
+red. Among the more specific vector types we will meet factors and data frames
+next time — and both of them are built on top of what we do today.
+
+## Slide 12 · Atomic vectors
+
+Atomic vectors are composed only of objects of the same type. We say that an
+atomic vector is of the same type as its elements, and we can test for this type
+using the function `typeof()`.
+
+Four main types matter. Logical: only two options, TRUE or FALSE, often the
+result of logical operations such as four greater than two. Integer: a whole
+number followed by a capital L, often the result of counting. Double: a number
+with a decimal sign — this is the standard number you will use throughout.
+Character: might contain all kinds of tokens and starts and ends with quotation
+marks.
+
+Note the trap in the last column: `"2"` in quotation marks is a character, not a
+number. You cannot do arithmetic with it, and that is a very common source of
+confusion later when data is imported.
+
+## Slide 13 · Creating atomic vectors
+
+The easiest way to create atomic vectors is the function `c()`, which stands for
+concatenate.
+
+The number of elements that are part of a vector is its length, and you can test
+for the length of a vector using `length()`.
+
+And `c()` can also be used to merge atomic vectors of arbitrary length — note
+that this gives you one flat vector of length six, not a nested structure. That
+is a genuine difference to lists, which we come to later.
+
+## Slide 14 · Coercion
+
+Sometimes we might want to change the type of an atomic vector. In this context
+the functions starting with `as.` and `is.` are useful: substitute the star for
+the type of vector, and you can test and transform them.
+
+Here we start with the character `"2"`, check that it is not a double, transform
+it into a double, and check again.
+
+But beware of some counter-intuitive transformation behaviour. What does
+`as.integer(22.9)` return? It returns 22 — it truncates rather than rounds. And
+`as.logical(99)` returns TRUE, because in R every non-zero number counts as
+TRUE. Try both before you assume.
+
+## Slide 15 · Intermediate exercises
+
+Four exercises. The second one already contains a surprise: although three of
+the four numbers are whole numbers, the vector is of type double, because 2.4
+forces all of them to be doubles.
+
+The fourth question is the important one and anticipates the next concept: you
+*can* create that vector, but R will silently coerce everything to character,
+because character is the only type that can hold all of them. Check with
+`typeof()`.
+
+## Slide 17 · Sequences: `seq()`
+
+There are some types of atomic vectors that you create frequently: sequences of
+numbers, concatenated words, or repetitions.
+
+For sequences you use `seq()`. `from` and `to` are the starting and end values.
+`by` gives the increment steps and must be numeric. `length.out` gives the
+desired length of the final sequence. And `along.with` creates a sequence of the
+same length as another object — which is very useful for index vectors.
+
+Note that only one of the last three can be used at a time: you either specify
+the step size or the length, not both, because together they would over-determine
+the sequence.
+
+## Slide 18 · Pasting and repeating
+
+For case two, concatenated words, you may use the function `paste()` with the
+argument `sep`, which says how the input vectors should be separated.
+
+This is useful, for instance, if you want to create file names: pasting
+`"file_"`, the sequence one to four and `".pdf"` with an empty separator gives
+you four file names in one line. Note how `paste()` is vectorised here — one call
+produces four strings, because `seq(1,4)` has four elements.
+
+And finally, if you want to repeat something, use `rep()`.
+
+## Slide 19 · Indexing
+
+Indexing means referencing a particular position of a vector. You do this by
+adding the position in square brackets to the end of the vector name. So
+`v_c[3]` returns the third element of the vector `v_c`.
+
+You can also use this logic to replace elements: assigning to `v_c[3]` overwrites
+the third element.
+
+Now try the last line yourself and watch what actually happens when you assign to
+a position beyond the current length. Discuss in pairs whether the result is what
+you expected — and what would happen if you assigned to position ten instead.
+
+## Slide 20 · Vectorisation
+
+One reason why atomic vectors are so popular is that they allow for very fast
+computations. For the computer it is much easier to work with sets of objects
+that all behave the same way — which is exactly what "all elements have the same
+type" buys us.
+
+Vectorisation means that an operation is applied to each element of a vector.
+Squaring `v_2` squares every element, without you writing any loop.
+
+To vectorise a task means to write it in a way that operations are applied to
+atomic vectors. In R you should do that whenever possible. The slower
+alternative are loops, which we learn about later and which are unavoidable in
+certain situations.
+
+## Slide 21 · Intermediate exercises
+
+Four exercises again.
+
+For the index vector, `seq(along.with = ...)` from two slides ago is the elegant
+route.
+
+The third one contains the pedagogical point: the log of a negative number is
+not defined, so R returns NaN and issues a warning — but it does not stop. Your
+vector now silently contains NaNs. That is exactly the kind of thing you must
+learn to notice.
+
+The fourth question asks you to discover the coercion hierarchy yourself:
+logical becomes integer becomes double becomes character. R always coerces to
+the most general type present.
+
+## Slide 23 · Lists
+
+Lists are the second major type of vectors, sometimes called generic vectors.
+
+The difference to atomic vectors is that lists may contain objects of different
+types — here a numeric vector, a character vector and a logical vector, all in
+one object. The type of a list is therefore always just "list".
+
+Lists can become complex quickly, so use `str()` to get an overview. Read the
+output carefully: "List of 3" is the number of list elements. The abbreviations
+num, chr and logi are the types of the elements. The bracket expressions are the
+lengths of the individual elements. And the rest is a preview of the content.
+
+Note that the three elements have different lengths — two, two and three. That
+is perfectly fine for a list and impossible for an atomic vector.
+
+## Slide 24 · Naming and indexing of lists
+
+The different elements of lists can be named, which makes them far more readable
+than position numbers.
+
+You can retrieve the names using `names()`. You can subset the list using the
+names with single square brackets — and this gives you back a list containing
+that one element. And you can access the elements of the sublists with double
+square brackets, which gives you the content itself, here a character vector.
+
+That distinction between single and double brackets is the single most confusing
+thing about lists for beginners, so test both and compare the results with
+`typeof()`.
+
+Alternatively, use the dollar shortcut, which does the same as double brackets.
+
+## Slide 25 · Practical differences to atomic vectors
+
+There are two very important practical differences to atomic vectors:
+vectorisation does not work for lists, and indexing works differently.
+
+To illustrate the first: multiplying an atomic vector by two works elementwise,
+multiplying a list by two throws an error. The list does not guarantee that its
+elements are numbers, so R refuses.
+
+To illustrate the second, compare the two `typeof()` calls: single brackets give
+you a list, double brackets give you the double inside it.
+
+Lists are fundamental to more complex data structures we will encounter later —
+in particular data frames, which are nothing but lists of equally long vectors.
+
+## Slide 26 · `NA` — absent elements
+
+There are two "strange" data types worth knowing: `NA` and `NULL`.
+
+`NA` is used to represent absent elements of vectors. This happens frequently
+when vectors contain observations — no real data set is complete.
+
+Many functions behave differently when NAs are present; remember the `na.rm`
+argument from session two.
+
+You test for NA using `is.na()`, which returns a logical vector of the same
+length. To check whether a vector contains any missing values at all, use
+`anyNA()`, which returns one TRUE or FALSE.
+
+## Slide 27 · `NULL` — the absent vector
+
+`NULL` is in fact a data type in itself, but in practice it is best thought of as
+a vector of length zero. Calling `c()` without arguments returns NULL, its length
+is zero, and `is.null()` tests for it.
+
+You might use NULL mainly in two instances: to represent an empty vector of
+arbitrary type, and to represent an absent vector.
+
+Keep the distinction from NA clear: NA is an absent element inside a vector, NULL
+is an absent vector. A vector of three NAs has length three; NULL has length
+zero.
+
+## Slide 28 · Intermediate exercises
+
+Create a list with three named elements.
+
+Element A asks for the square root of numbers from minus two to eight — and
+again the negative values will produce NaN with a warning. That is intentional:
+you should see it a second time and recognise it immediately.
+
+Element B combines `seq()` with step size and `log()`.
+
+Element C combines the pre-defined vector `letters` with `paste()` and a
+sequence, producing a1, b2, c3 and so on up to g7.
+
+## Slide 29 · Wrap up
+
+To wrap up the object types: remember the hierarchy — objects split into vectors
+and NULL, vectors split into atomic vectors and lists, and atomic vectors come in
+four flavours.
+
+The central take-aways concern three practical abilities: how to test for and
+transform these types, how to index them, and how to create typical instances.
+
+Beyond that we learned about vectorisation and why it is so attractive in R, and
+we encountered the strange types NA, NULL, and NaN — the last one turning up
+whenever a numerical operation is undefined.
+
+## Slide 30 · Summary and outlook
+
+Next time we will learn about two more advanced object types: factors and data
+frames. And we will see how our knowledge about the basic object types helps us
+to deal with the more advanced ones, and how they relate to each other — a data
+frame, as mentioned, is a list of equally long vectors.
+
+The usual three tasks until next session: the feedback survey, the tutorials, and
+the exercises with discussion in the Moodle forum.

@@ -3,7 +3,7 @@ title: "Literature reviews"
 subtitle: "Theoretical and Empirical Research Methodology, lecture 8"
 author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
 institute: "Department of Pluralist Economics, Europa-Universität Flensburg"
-date: "2026-11-09"
+date: "2026-11-02"
 date-format: "D MMMM YYYY"
 format:
   revealjs:

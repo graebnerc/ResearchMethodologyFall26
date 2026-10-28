@@ -1,0 +1,242 @@
+---
+title: "Implementation Lab 1 — Introduction & overview"
+subtitle: "Accompanying script (draft)"
+author: "Claudius Gräbner-Radkowitsch"
+date: "2026-09-18"
+date-modified: last-modified
+---
+
+::: {.callout-important}
+## Draft — not published yet
+This text was extracted from the first version of the slide deck
+`content/material/slides/E1-Introduction.qmd`. It is the prose that used to be
+printed on the slides themselves. It is **not** in the `render:` list of
+`_quarto.yml`, so it is not built and students cannot reach it.
+
+To turn it into a real script: work through the sections below, then add
+`content/material/slides/scripts/*.qmd` to `project.render` and link it from
+`content/material/s_01_Installation.qmd`.
+:::
+
+The headings mirror the slides of the deck, so the two can be kept in sync.
+
+## Slide 2 · Part I: Organization & outlook
+
+Presenter note: say a word about how to use these slides. They are deliberately
+kept lean — every slide carries only the keywords, the elaboration happens in
+the session itself, in the accompanying videos and in the written tutorials on
+the course website. Students should not treat the slide deck alone as a
+complete script.
+
+## Slide 3 · The goal of the implementation lab
+
+The goal of the implementation lab is that you learn how to prepare, analyse and
+present quantitative data using R, and that you implement all the tools covered
+in the main lecture practically.
+
+These three activities are not a sequence you walk through once. Data
+preparation, visualisation and modelling feed back into each other constantly:
+a first plot shows you that the data are still messy, a model result sends you
+back to the preparation step, and so on. Everything then funnels into the last
+step — presenting the insights as one coherent story.
+
+## Slide 4 · Why R?
+
+R allows you to conduct all steps of this data science pipeline within one
+consistent framework, in a transparent and reproducible manner.
+
+R is free, OS-independent and open source, which makes it an inclusive,
+transparent and vibrant tool.
+
+For statistical analysis, R is among the most widely used and demanded
+programming languages. The table on the right is worth a minute, because it
+makes a methodological point as well as a substantive one: R is #4, #9 and #13
+at the same time, depending on the index.
+
+The three indices count different things. PYPL counts how often people search
+for *tutorials*, so it captures who is currently **learning** a language — and
+there R is #4 worldwide. TIOBE counts search-result volume, i.e. general
+visibility, and puts R at #9. RedMonk combines GitHub code with Stack Overflow
+discussion, i.e. general engineering activity, where web and systems languages
+dominate the traffic — there R is #13. R is a specialised statistical language,
+so it sits near the top of the learning-oriented index and further down the
+engineering-oriented one. A metric's sampling frame determines its result; that
+is a lesson worth carrying into the rest of the course.
+
+The trend matters too: in TIOBE, R climbed from #15 in early 2025 to #9, which
+TIOBE attributes to specialised languages reclaiming ground from Python.
+
+R is demanded in almost every industry, learning R makes it easier to learn
+other widely used programming languages afterwards, and there is a great and
+friendly R community that you can turn to when you get stuck.
+
+## Slide 5 · What you will be able to do — read & tidy data
+
+Concretely, by the end of the semester you will be able to read in data sets
+from various sources — from the European Commission, the OECD, the World Bank,
+the IMF or the German Federal Statistical Office, among many others. Each of
+them publishes data in its own format and its own logic.
+
+You will then be able to prepare such 'messy' data and turn them into 'tidy'
+data: the raw comma-separated file at the top becomes the structured table at
+the bottom, where every column is a variable and every row an observation. That
+tidy form is the precondition for everything that follows.
+
+## Slide 6 · What you will be able to do — visualise & model
+
+You will also be able to create illustrative visualisations on a
+publication-ready level. The bubble chart here relates GDP per capita to life
+expectancy; the size of each bubble is the population of the country and the
+colour its continent. It is produced in a handful of lines of R code, and it is
+fully reproducible — re-running the script with updated data gives you an
+updated figure.
+
+Beyond describing the data, you will use models to identify patterns that are
+not visible to the naked eye and to make predictions.
+
+## Slide 7 · What you will be able to do — report & publish
+
+A third block concerns communication. You will write reproducible research
+reports in Quarto: code, results and text live in one single file, so a figure
+in your report can never get out of sync with the data it came from.
+
+You will publish visually appealing reports on the web via Netlify — literally
+by dragging the output folder into the browser.
+
+And all of this is not specific to this course: you learn tools and methods that
+will be required in subsequent seminars, and in your thesis.
+
+## Slide 8 · But can't ChatGPT just do this for us…?
+
+A question that comes up every year: can't ChatGPT just do all of this for us?
+The answer is yes and no.
+
+LLMs such as ChatGPT can be very useful when developing code. But the benefit
+depends entirely on your own level. If you know a programming language well,
+LLMs boost your productivity considerably. If you do not know the language well,
+LLMs will mostly confuse you: they often return slightly misbehaving code, so
+you always need to work on the output; they do not know the most recent
+developments in the language; and their code is not always easy to read.
+
+We will learn the basics of using LLMs for coding, and you can always use them,
+including during the exam — but be wary of their limitations.
+
+## Slide 9 · Organization of the lab sessions
+
+Each on-site session comprises theory and practice, so always bring your
+laptops. Some topics are presented better by instructional videos; for those
+sessions, watch the videos, do the exercises, and pose your questions.
+
+Questions should always be posted online in the Moodle forum. They should
+primarily be answered by fellow students — helping one another with problems
+greatly enhances your own understanding. The forum also ensures that answers to
+questions are, first, recorded, and second, available to everybody. Particularly
+intriguing questions can be discussed at the beginning of a session.
+
+## Slide 10 · A short tour through the website
+
+The course website has two main areas: Material, where the slides, videos and
+session pages live, and Tutorials, which explain single concepts in more detail
+and in a more applied manner.
+
+Do not forget about the exercises — they are the single most important
+determinant of your success in this course.
+
+One technical note: always reload the website to make sure you are on the most
+recent version. The page is updated during the semester, and browsers like to
+serve you a cached copy.
+
+## Slide 11 · Our 'learning agreement'
+
+Why do I expect regular activities from you?
+
+Learning a programming language is a consecutive activity: if you miss the
+basics in the beginning, you will quickly become frustrated and get lost. This
+is a demanding course, and catching up later on what you missed earlier will be
+difficult.
+
+Learning a programming language works mainly through practice and doing, so the
+practical exercises have a huge benefit. It is also difficult and at times
+frustrating, which is why we need an amicable environment and must support each
+other. And few things have a bigger learning effect than helping others with
+their problems.
+
+## Slide 14 · R and R-Studio — language vs. IDE
+
+Two pieces of software, and they are often confused.
+
+R is a programming language. It is a language that allows you to issue commands
+to your computer: you write `fib_n(4)`, R translates that into something the
+machine actually understands, and hands you back the result — here, the number 3.
+
+R Studio is an integrated development environment, an IDE. It is basically a
+fancy text editor with a lot of additional features that make programming easy:
+a script editor, a console, an overview of the objects in your environment, and
+a pane for plots and help files.
+
+## Slide 15 · R and R-Studio — engine & dashboard
+
+Ismay and Kim have a nice analogy for the relationship between the two. R is the
+engine of the car, R Studio is the dashboard. The engine does the actual work,
+but you would not want to sit on it while driving — you interact with the car
+through the dashboard.
+
+Two practical consequences: you need to install R first, and only then can you
+install R Studio. And after that you basically only use R Studio; it calls R
+whenever necessary, without you having to think about it.
+
+## Slide 16 · R and R packages — the idea
+
+If you install R, you can issue a lot of commands that your computer immediately
+understands. However, there might be some routines that R "doesn't understand".
+
+You might "teach" R those by defining, for instance, certain functions that
+perform these operations. You might then even "save" these functions and pass
+them on to others, so that they can use them as well.
+
+This is exactly the idea of R packages: a collection of variables and functions
+written by others that you can install on your computer and then use. Once an R
+package is installed, you can use all the functions and variables defined by the
+creator of the package.
+
+## Slide 17 · R and R packages — phone & apps
+
+Again, Ismay and Kim have a nice analogy. R is a new phone: useful out of the
+box, but most of what you actually do with it comes from the apps you download
+from the App Store or Google Play. R packages are those apps.
+
+I wrote a small script that installs all the packages we will use throughout the
+semester, so that we can already resolve all installation issues now, in the
+first week, rather than in the middle of the term.
+
+## Slide 18 · And what about LaTeX?
+
+In this course we learn how to write nice reports in Quarto: you put R code and
+text into one file and get either a webpage in HTML or a nice PDF out of it.
+
+Creating HTML code is easy. Creating a PDF is nothing trivial. To do this we
+need a piece of software called LaTeX — a typesetting system that turns plain
+text into nicely set text within a PDF document.
+
+You will not have to write LaTeX yourself. But it has to be installed on your
+machine, because it is the invisible middle step between your Quarto file and
+the finished PDF.
+
+## Slide 19 · Installation procedure
+
+It is absolutely essential that you install all the necessary software as soon
+as possible. The installation guidelines are on the course homepage.
+
+Until next session you should have tried to install R, R Studio and Git,
+following my tutorials, and you should have posted all problems, with a
+screenshot, in the Moodle forum.
+
+Be prepared beforehand: trying to install R just before the session starts is
+the fastest way to ruin your day. We need to solve all installation problems by
+the end of next week, so post your problems on Moodle and help each other out.
+
+## Slide 20 · Problems with the installation?
+
+If you run into trouble: first check the tutorials again, then post your problem
+in Moodle, and always accompany it with a screenshot. Without a screenshot,
+nobody can tell what actually went wrong.

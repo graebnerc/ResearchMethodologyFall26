@@ -1,0 +1,322 @@
+---
+title: "Implementation Lab 7 — Data preparation"
+subtitle: "Accompanying script (draft)"
+author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
+date: "2026-11-06"
+date-modified: last-modified
+---
+
+::: {.callout-important}
+## Draft — not published yet
+Extracted from the speaker notes of `content/material/slides/E6-DataPreparation.qmd`.
+This file is **not** in the `render:` list of `_quarto.yml`, so it is not built
+and students cannot reach it.
+
+To publish it later: add `content/material/slides/scripts/*.qmd` to
+`project.render` and link it from the matching session page.
+:::
+
+The headings mirror the slides of the deck, so the two can be kept in sync.
+
+## Slide 2 · Goals for today
+
+Three goals today. You understand the concept of tidy data. You get an overview
+over the most common transformation routines. And you master a number of
+functions from the tidyr and dplyr packages to address some of these challenges.
+
+This session is the direct continuation of the data-import session: there we got
+the data into R, here we bring it into the shape we actually want.
+
+## Slide 4 · The role of data preparation
+
+The same picture as last time: data preparation and processing, visualisation,
+and analysis and modelling feed into each other, and everything funnels into the
+presentation of the insights as one overall story.
+
+Last time we dealt with the import step. Today we deal with what happens
+immediately afterwards, and where — realistically — you will spend most of your
+time in any empirical project.
+
+## Slide 5 · The goal: tidy data
+
+Hadley Wickham, who wrote most of the packages we use today, opened his paper on
+tidy data with this sentence, and it is a good summary of the situation.
+
+Translated into plain English: we find data sets in all kinds of messed-up forms
+in the world, and we must turn them into a form that is a good starting point for
+any further task.
+
+The good thing is that this target form is unique. There are infinitely many ways
+for a data set to be messy, but only one way for it to be tidy — so you always
+know what you are aiming at, even when you have no idea yet how to get there.
+
+## Slide 6 · Three demands
+
+Three demands define tidy data, and they are worth memorising literally.
+
+Every row corresponds to one and only one observation. Every column corresponds
+to one and only one variable. And every cell corresponds to one and only one
+value.
+
+Every data set that satisfies these three demands is called tidy. It is an
+excellent start for basically every further task — but note the caveat: it is
+maybe not the best way to represent data to humans. A tidy table is often long
+and repetitive, and for a printed table in a paper you will frequently convert it
+back into something wider.
+
+## Slide 7 · Three ways to be untidy
+
+Each of the three demands can be violated separately, and it is worth being able
+to name which one is broken.
+
+On the left, a row holds two observations, because the years sit in separate
+columns. In the middle, there is a column called `variable` whose entries are
+variable names rather than values. On the right, a single cell contains several
+values — industry names and percentages mixed into one string.
+
+The third one is the nastiest in practice, because you cannot compute with it at
+all until you have split it apart, and splitting text reliably is genuinely hard.
+
+The goal of data wrangling is to turn such untidy data into tidy data.
+
+## Slide 8 · Recap questions
+
+Four recap questions. The third one is the interesting one and the answer is yes:
+for presentation. A table in a paper, or a table you hand to a colleague, is
+usually more readable in wide format. The rule is that tidy is the working
+format, not necessarily the publication format.
+
+## Slide 10 · The way to tidy data
+
+Since the starting point to tidy data is always different but the goal is always
+the same, the steps are also always the same: six main routines, which you
+combine in whatever order the particular mess requires.
+
+Two main packages are relevant. tidyr provides functions for reshaping data into
+tidy format, which is what people usually mean by wrangling. And dplyr provides
+functions for manipulating data in order to extract the information you want.
+
+Keep that division in mind — it tells you which package's documentation to open.
+
+## Slide 11 · 1. Reshaping: long ⇄ wide
+
+The first routine is reshaping data from wide to long format and back.
+
+On the left the wide version: one column per variable. On the right the long
+version: one column holding the variable names and one holding the values.
+
+Note that neither is inherently tidy — it depends on what an observation is
+supposed to be in your analysis. If your unit of observation is a
+country-year-indicator triple, the long form is tidy; if it is a country-year,
+the wide form is.
+
+The two functions are `pivot_longer()` and `pivot_wider()` from tidyr.
+
+## Slide 12 · 2. Filter rows · 3. Select columns
+
+Routines two and three, and they are the pair that beginners mix up most often.
+
+`filter()` keeps rows that satisfy a condition — here only the German
+observations. `select()` keeps columns — here we drop unemployment.
+
+The mnemonic that helps: filter answers "which observations?", select answers
+"which variables?". Note also the double equals sign in the filter condition: a
+single equals sign would be an assignment and gives you an error.
+
+## Slide 13 · 4. Mutate · 5. Group and summarise
+
+Routine four is mutating: adding a new variable that is computed from existing
+ones. The number of rows stays the same.
+
+Routine five is grouping and summarising: you declare which variable defines the
+groups and then compute one number per group. Here the four country-year rows
+collapse into two country rows.
+
+The crucial difference, and this comes back as an exam question: `mutate()` keeps
+the number of rows and adds a column; `summarise()` reduces the number of rows to
+the number of groups.
+
+## Slide 14 · 6. Merge several data sets
+
+The sixth routine is merging several data sets, which in practice you need
+constantly: GDP comes from one source, emissions from another.
+
+The joining functions differ only in which rows survive when the two data sets do
+not match perfectly. `left_join()` keeps all rows of the left data set,
+`right_join()` all of the right, `full_join()` all of both, and `inner_join()`
+only those present in both.
+
+Two practical warnings. First, always join on *all* the columns that identify an
+observation — here country and year, not only country. Second, check the number
+of rows before and after: an unexpected increase means your join keys were not
+unique.
+
+## Slide 15 · The six routines at a glance
+
+Here they are together. After having imported your data into R, you can usually
+make it tidy using a sequential combination of these six routines.
+
+That is a genuinely encouraging claim: the space of things you have to learn is
+small and closed. What varies is the order and the number of steps, not the
+vocabulary.
+
+This way you produce the inputs we used for visualisation, and the inputs we will
+use for modelling.
+
+## Slide 16 · Recap questions
+
+Four recap questions on part two. Work through them in pairs before we move to
+the practical part — if you cannot name the six routines from memory, the
+practice afterwards will be much harder than it needs to be.
+
+## Slide 18 · Short recap on reshaping
+
+We go through the routines via direct demonstration, starting with reshaping.
+
+Take `data_raw_long.csv`, which has a variable column and a value column, and
+make it wider so that Germany and Greece each get their own column. Then take
+`data_raw_wide.csv`, which has the years as columns, and make it longer so that
+you get a year column and a gini column.
+
+Watch the type of the `year` column after pivoting longer: it comes out as
+character, because it used to be a column *name*. You will usually want to
+convert it back to integer.
+
+## Slide 19 · Short recap on manipulation basics
+
+Five steps on the wine data set, and they exercise filter, select and mutate in
+combination.
+
+Step two is worth a comment: after filtering to white wines only, the column
+`kind` contains the same value in every row and therefore carries no information
+any more — which is exactly why you remove it.
+
+Step five needs a little thought: "the highest quality score" is not a fixed
+number, so you need something like `filter(quality == max(quality))`.
+
+## Slide 20 · Short recap on summarising and grouping
+
+The opening question is the conceptual one from earlier: mutate keeps all rows
+and adds a column, summarise collapses rows into groups.
+
+Task one needs `group_by(kind)` followed by `summarise()`. Task two is
+deliberately the other case: you want one value per wine, so it is a `mutate()`,
+and inside it you compare each wine's quality to `mean(quality)` over the whole
+data set.
+
+Doing both back to back is the fastest way to internalise the difference.
+
+## Slide 21 · Short recap on joining data sets
+
+Three joining tasks. Run the same join with all four functions and compare the
+number of rows and the pattern of NAs — that comparison teaches the concept
+faster than any explanation.
+
+The last question is the important one in practice. Joining only on `id` when the
+data also varies over time produces every combination of matching rows, so your
+data set can grow dramatically and silently. If a join unexpectedly multiplies
+your rows, this is almost always the reason.
+
+## Slide 23 · Pipes
+
+While not strictly necessary, you can improve the usability and readability of
+your code using so-called pipes.
+
+Pipes take the result from their left and throw it to the right. The thrown
+result can be referred to via a dot, and by default it is used as the first
+argument of the function in the next line — which is why you can usually leave
+the dot out entirely.
+
+Compare the two versions on the slide: they do exactly the same thing. The right
+one reads as "take data_raw, then select these columns", which is much closer to
+how you think about the operation.
+
+## Slide 24 · Pipes: a practical example
+
+A more practical example: two reshaping steps, once with named intermediate
+objects and once as one pipe chain.
+
+The piped version is shorter and it puts the desired stage at the end, so you
+read it as a recipe.
+
+But note the advice at the bottom, which is the genuinely useful part: while
+developing code it is usually easier to make the intermediate steps explicit. If
+a chain of six piped steps produces the wrong result, you cannot inspect the
+middle of it. Write it with intermediate objects first, check each one, and pipe
+it together afterwards if you like.
+
+## Slide 25 · Recap on piping
+
+Four questions on pipes. The second one has no single right answer, and that is
+the point — argue for your position. My own answer is on the previous slide:
+explicit first, piped afterwards.
+
+For the last point, note that R now also has a native pipe written `|>`, which
+does not require any package. You will meet both in code you find online; they
+behave the same way for our purposes.
+
+## Slide 26 · Tidy selection helpers
+
+It can become tedious to select many columns using explicit reference to their
+names — imagine a data set with forty indicator columns.
+
+The tidy selection helpers let you select columns based on common criteria:
+`starts_with()`, `ends_with()`, `contains()`, `all_of()` and several others.
+
+And they combine: wrap several selectors in `c()` and you get their union, as in
+the example on the right.
+
+One note on `all_of()`: it errors if a named column does not exist, which is a
+feature — it means a typo or a renamed column fails loudly instead of silently
+selecting nothing.
+
+## Slide 27 · Exercise 1: filtering and reshaping
+
+The first real exercise. Import `exercise_1.csv`, keep only Greece and Germany
+between 1995 and 2015, make it wider so that gdp and co2 become their own
+columns, and save the result in `data/tidy/`.
+
+Note the target output: 42 rows — two countries times twenty-one years. Checking
+that number is a good habit; if you get 84, your filter did not work, and if you
+get 21, you lost a country.
+
+And remember from the import session: save into `data/tidy`, never back into
+`data/raw`.
+
+## Slide 28 · Exercise 2: mutating, selecting & summarising
+
+The second exercise combines select, mutate, filter and summarise in one chain —
+which is what a real preparation script looks like.
+
+Work out the order for yourself: does it matter whether you filter the years
+before or after computing the averages? It does, and getting that wrong is the
+classic mistake. Filtering after summarising would average over all years first
+and then throw rows away.
+
+The bonus asks for a bar plot of the CO2 averages, which connects back to the
+visualisation session and gives you a visual check on whether the numbers are
+plausible.
+
+## Slide 29 · Summary
+
+To summarise: after importing raw data you usually must prepare them, which means
+making them tidy. Tidy data is the input to any visualisation or modelling task,
+and it is defined by the three demands we have now seen several times.
+
+The practical advice in the middle is the one to take away: write one script that
+imports raw data and saves tidy data. That single script is what makes the
+distance between `data/raw` and `data/tidy` reproducible — and it is what you
+hand to anybody who wants to check your work.
+
+## Slide 30 · The functions, and what they are for
+
+And here are the six routines mapped onto the actual function names. This slide
+is the one to keep open while doing the exercises.
+
+In later sessions we will also learn about some convenience shortcuts that
+combine several of these steps.
+
+The last line is not a platitude: data preparation is mainly about practice.
+Nobody learns wrangling by reading about wrangling — you learn it by being stuck
+on a specific messy file and getting unstuck. So do the exercises, and bring the
+problems you hit to the Moodle forum.

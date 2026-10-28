@@ -1,0 +1,268 @@
+---
+title: "Advanced object types"
+subtitle: "Theoretical and Empirical Research Methodology · Implementation Lab 4 · Part II"
+author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
+institute: "Europa-University Flensburg, Department of Pluralist Economics"
+date: "2026-10-09"
+date-format: "D MMMM YYYY"
+format:
+  revealjs:
+    theme: [default, ../../../css/slides.scss]
+    width: 1280
+    height: 720
+    slide-number: c/t
+    show-slide-number: all
+    footer: "Implementation Lab 4 · Advanced object types · Claudius Gräbner-Radkowitsch"
+    logo: figures/E4/euf-logo.png
+    incremental: true
+    transition: fade
+    transition-speed: fast
+    center-title-slide: true
+    hash: true
+    history: true
+    preview-links: auto
+    fig-align: center
+    auto-stretch: false
+    menu:
+      side: right
+      numbers: true
+---
+
+## Goals for today
+
+::: {.nonincremental}
+1. Learn about three advanced object types: **`factor`**, **`data.frame`** and
+   **`tibble`**
+2. Understand their **relation to the basic types** discussed previously
+:::
+
+# Part I: Where the advanced types fit {.divider background-color="#EAF0F4"}
+
+## The picture, extended
+
+::: {.mermaid-tight}
+```{mermaid}
+flowchart TD
+  V["Vectors"] --> A["Atomic vectors"]
+  V --> L["Lists ('generic vectors')"]
+  A --> lo["logical"]
+  A --> in1["integer"]
+  A --> db["double"]
+  A --> ch["character"]
+  in1 -.-> fa["factor"]
+  L -.-> df["data.frame"]
+  style A fill:#00395B,color:#ffffff,stroke:#00395B
+  style L fill:#E2553C,color:#ffffff,stroke:#E2553C
+  style V fill:#6E6E6E,color:#ffffff,stroke:#6E6E6E
+  style fa fill:#63A0C4,color:#ffffff,stroke:#63A0C4
+  style df fill:#63A0C4,color:#ffffff,stroke:#63A0C4
+```
+:::
+
+::: {.smaller}
+The dotted arrows are the point of this session: a **factor** is built on an
+*integer*, a **data.frame** is built on a *list*
+:::
+
+## On more advanced object types
+
+- There are many object types in R, but **understanding the basics is key**
+  - They are by far the most common ones
+  - All other object types are somehow *built upon* the basic types by adding
+    **attributes**
+
+::: {.columns .smaller}
+::: {.column width="48%"}
+**Categorical data: `factor`**
+
+- Takes one out of a pre-specified number of values: **levels**
+- Classical example: male, female, diverse
+- Created with `factor()`
+:::
+
+::: {.column width="52%"}
+**Data frames: `data.frame` & `tibble`**
+
+- A kind of *table* in which different variables are stored as vectors
+- `tibble`s are a modern variant that "do less and complain more"
+- Created with `data.frame()` / `tibble::tibble()`
+:::
+:::
+
+::: {.tiny .muted}
+Others we will not cover: matrices, durations, dates
+:::
+
+## Digression: attributes
+
+- To turn basic types into something fancier we give them **attributes**, one of
+  which is called **`class`**
+  - This changes their behaviour when functions are applied to them
+  - Technically, adding a class attribute changes the **class**, not the **type**:
+
+::: {.small}
+```r
+ff <- factor(c("F", "M", "M"), levels = c("F", "M", "D"))
+typeof(ff)   # integer
+class(ff)    # factor
+attributes(ff)
+```
+:::
+
+::: {.takeaway .fragment}
+The class `factor` is an **integer** with two attributes: `levels` and `class`
+:::
+
+# Part II: Factors {.divider background-color="#EAF0F4"}
+
+## Factors
+
+- Factors represent **ordinal or categorical data**
+  - Elements can take one out of several pre-specified values: **levels**
+  - Factors are integers with the attributes `levels` and `class`
+- Created with `factor()`, which takes a vector and an optional argument `levels`:
+
+::: {.small}
+```r
+f_1 <- factor(c(rep("F", 4), rep("D", 5), rep("M", 3)),
+              levels = c("D", "F", "M"))
+```
+:::
+
+::: {.callout-tip appearance="default"}
+## Your turn
+- What happens if we do **not** specify `levels` explicitly?
+- What happens if the vector contains elements **not** pre-specified as levels?
+:::
+
+## Ordered factors and `table()`
+
+- Usually levels are **not ordered** — for ordinal data use the argument
+  `ordered`:
+
+::: {.small}
+```r
+f_2 <- factor(c("high", "high", "low"),
+              levels = c("low", "mid", "high"),
+              ordered = TRUE)
+```
+:::
+
+::: {.callout-tip appearance="default"}
+## What does `table()` do?
+Try it on the factors you defined so far. How can you make sure that the
+frequency of elements which do not show up in the vector is displayed as zero?
+:::
+
+::: {.callout-warning appearance="default"}
+## A remark on using factors in practice
+In my experience it is usually better to store categorical data as **character**,
+and only transform them into factors if necessary
+:::
+
+# Part III: Data frames and tibbles {.divider background-color="#EAF0F4"}
+
+## Data frames
+
+::: {.takeaway}
+Data frames are **special lists of vectors** where the length of each vector is
+equal — so most list operations also work for data frames
+:::
+
+::: {.columns}
+::: {.column width="42%"}
+::: {.small}
+```
+  gender height
+1   male    189
+2   male    175
+3   male    180
+4 female    166
+5 female    150
+```
+:::
+
+::: {.tiny .muted}
+column names = names of the vectors · each column = one vector
+:::
+:::
+
+::: {.column width="58%"}
+::: {.small}
+```r
+df_1 <- data.frame(
+  "gender" = c(rep("male", 3), rep("female", 2)),
+  "height" = c(189, 175, 180, 166, 150)
+)
+```
+:::
+
+To create a data frame from a list, use `as.data.frame()`
+:::
+:::
+
+::: {.smaller}
+Data read into R almost always starts off as a `data.frame` → transforming them
+is the subject of the **data wrangling** sessions
+:::
+
+## Data frames and tibbles
+
+- A modern version of the `data.frame` is the **`tibble`** (package *tibble*)
+  - We mostly use tibbles, but familiarise yourself with the differences to the
+    `data.frame`, which remains widespread → tutorial reading
+- Transform a `data.frame` (or a `list`) into a tibble:
+
+::: {.small}
+```r
+tb_1 <- tibble::as_tibble(df_1)
+```
+:::
+
+- To extract single columns use `[` or `[[`
+  - What is the difference between the two?
+  - How do you test for the type of a column vector?
+
+## Getting an overview, and R dialects
+
+- Quick overview of the content: `dplyr::glimpse()` or `head()`
+- Complete overview: `View()`
+- Data frames are among the **most widely used** data types
+  - Different approaches to handling them, each associated with an R **dialect**
+  - We mainly use the **tidyverse** dialect — easiest to learn and comprehend,
+    built upon **tibbles**
+  - Alternatives: **base** (classical) and **data.table** (fastest), which mainly
+    use `data.frame`s and `data.table`s
+
+::: {.takeaway .fragment}
+Useful to keep in mind when searching for help on the internet
+:::
+
+## Final exercises {.divider background-color="#EAF0F4"}
+
+::: {.nonincremental}
+- Create a **factor** with the levels `"still"`, `"medium"`, `"sparkling"` and
+  arbitrary instances of the three levels
+- Get the **relative frequencies** for `"medium"` of this factor
+- Create a **data frame** with two columns: `"nb"` containing the numbers `1` to
+  `5` as *double*, and `"char"` containing the numbers `6` to `10` as *character*
+- Transform this data frame into a **tibble**
+- Extract the second column of this tibble such that you obtain a **vector**
+:::
+
+## Summary and outlook
+
+- This was the **last session on the fundamentals of R**
+- We learned about the most important object types in R
+- Functions do different things when applied to different objects → understanding
+  object types is **absolutely fundamental**
+
+Next session is dedicated to **recap and practising**: open questions from the
+Moodle forum, and exercises done together in class
+
+::: {.callout-note appearance="default"}
+## Tasks until next time
+1. Fill in the **quick feedback survey** on Moodle
+2. Read the **tutorials** posted on the course page
+3. Do the **exercises** and discuss problems via the Moodle forum
+:::

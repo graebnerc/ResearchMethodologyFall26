@@ -1,0 +1,550 @@
+---
+title: "Packages & object types"
+subtitle: "Theoretical and Empirical Research Methodology · Implementation Lab 4 · Part I"
+author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
+institute: "Europa-University Flensburg, Department of Pluralist Economics"
+date: "2026-10-09"
+date-format: "D MMMM YYYY"
+format:
+  revealjs:
+    theme: [default, ../../../css/slides.scss]
+    width: 1280
+    height: 720
+    slide-number: c/t
+    show-slide-number: all
+    footer: "Implementation Lab 4 · Packages & object types · Claudius Gräbner-Radkowitsch"
+    logo: figures/E4/euf-logo.png
+    incremental: true
+    transition: fade
+    transition-speed: fast
+    center-title-slide: true
+    hash: true
+    history: true
+    preview-links: auto
+    fig-align: center
+    auto-stretch: false
+    menu:
+      side: right
+      numbers: true
+---
+
+## Goals for today
+
+::: {.nonincremental}
+1. Learn about the use of **R packages**
+2. Understand the **main object types** in R and their practical relevance
+3. Learn how to **transform object types** into each other
+4. Hear about some useful **helper functions** and the concept of **vectorisation**
+:::
+
+# Part I: Packages {.divider background-color="#EAF0F4"}
+
+## R packages
+
+- One good thing about R: a large community writes objects and functions that
+  serve useful purposes and **makes them available to all**
+- This is done via **R packages**
+
+::: {.takeaway .fragment}
+An R package = a collection of assignments and documentation that people pass
+around
+:::
+
+- If you install R you can use all objects that you defined yourself, and all
+  objects pre-defined in R
+- To use objects defined by **someone else**, you must install their package
+
+## Installing packages
+
+- The official way to distribute packages is via **CRAN**, the *Comprehensive R
+  Archive Network*
+- To install a package deployed on CRAN:
+
+::: {.small}
+```r
+install.packages("NAME OF PACKAGE")
+
+install.packages("ineq")
+```
+:::
+
+- For packages not yet released on CRAN, other functions are available
+- After installing `ineq`, you can use all objects defined by it
+
+## Calling objects defined in packages
+
+- One object defined in `ineq` is the function `Gini()`
+  - Simply calling `Gini()` does **not** work
+- You must tell R that `Gini()` is defined by the package `ineq`, using `::`
+
+::: {.small}
+```r
+ineq::Gini(c(1, 2, 3, 4))
+```
+:::
+
+- Think of `::` as building a **bridge** between your session and the objects of
+  a package
+- A sometimes more convenient way is `library()` at the beginning of the script:
+
+::: {.small}
+```r
+library(ineq)
+```
+:::
+
+## Packages and masking
+
+- Packages are written by many different people
+- It is not unlikely that two packages assign the **same name** to different
+  objects
+- If you attach both, the assignment of the earlier package gets **masked**
+  - Try it: attach `dplyr` and `plm`
+  - In these cases you must use `::` to reach the masked object
+
+::: {.takeaway .fragment}
+Always use `::` whenever masking is a potential problem — it makes your code far
+easier to understand, for you and for others
+:::
+
+::: {.smaller}
+`conflicts()` shows all names for which conflicts exist
+:::
+
+## Recap questions {.divider background-color="#EAF0F4"}
+
+::: {.nonincremental .smaller}
+- What is the main rationale for the use of R packages?
+- What is an R package in the most basic sense?
+- How can you install R packages from CRAN? Illustrate this using `dplyr`
+- How can you access objects from a package you installed previously? What are
+  the advantages and disadvantages of the different ways?
+- What does it mean to *attach* a package?
+- What do we mean by *masking* in the context of using R packages?
+:::
+
+# Part II: Basic object types in R {.divider background-color="#EAF0F4"}
+
+## Why types matter
+
+::: {.pullquote}
+To understand computations in R, two slogans are helpful:
+Everything that exists is an **object**.
+Everything that happens is a function call.
+[John Chambers]{.source}
+:::
+
+- We have learned a lot about functions — now we turn to **objects**
+- We must distinguish object types because **functions operate differently**
+  depending on the type
+  - 'Adding up' numbers is different from 'adding up' words
+- Fortunately there are only a **few basic types**; the most general one is a
+  **vector**
+
+## The basic type hierarchy
+
+::: {.mermaid-tight}
+```{mermaid}
+flowchart TD
+  O["Objects"] --> V["Vectors"]
+  O --> N["NULL"]
+  V --> A["Atomic vectors"]
+  V --> L["Lists ('generic vectors')"]
+  A --> lo["logical<br/><small>TRUE, FALSE</small>"]
+  A --> in1["integer<br/><small>1, 2, 3, …</small>"]
+  A --> db["double<br/><small>0.1, 1.0, 2.9, …</small>"]
+  A --> ch["character<br/><small>'One', 'Hello', …</small>"]
+  style A fill:#00395B,color:#ffffff,stroke:#00395B
+  style L fill:#E2553C,color:#ffffff,stroke:#E2553C
+  style V fill:#6E6E6E,color:#ffffff,stroke:#6E6E6E
+  style O fill:#D9D9D9,color:#333333,stroke:#D9D9D9
+  style N fill:#D9D9D9,color:#333333,stroke:#D9D9D9
+```
+:::
+
+::: {.smaller}
+Among the more specific vector types we will meet **factors** and **data frames**
+later
+:::
+
+## Atomic vectors
+
+- Atomic vectors are composed **only of objects of the same type**
+  - An atomic vector is of the same type as its elements
+  - Test it with `typeof()`
+
+::: {.columns .smaller}
+::: {.column width="25%"}
+**`logical`**
+
+Only two options: `TRUE` or `FALSE` — often the result of logical operations
+(e.g. `4 > 2`)
+:::
+
+::: {.column width="25%"}
+**`integer`**
+
+A whole number followed by `L`: `1L`, `2L`, `100L` — often the result of counting
+:::
+
+::: {.column width="25%"}
+**`double`**
+
+A number with a decimal sign: `2.0`, `0.8`, `-7.5` — the 'standard' number you
+will use
+:::
+
+::: {.column width="25%"}
+**`character`**
+
+All kinds of tokens, starting and ending with `"`: `"2"`, `"Hello!"`, `"vec_1"`
+:::
+:::
+
+::: {.tiny .muted}
+Missing values are also considered logical in some instances — basically
+irrelevant for now
+:::
+
+## Creating atomic vectors
+
+- The easiest way is the function `c()` ('concatenate'):
+
+::: {.small}
+```r
+t_vec <- c(1, 2, 3)
+```
+:::
+
+- The number of elements in a vector is its **length**, tested with `length()`:
+
+::: {.small}
+```r
+length(t_vec)
+```
+:::
+
+- `c()` can also **merge** atomic vectors of arbitrary length:
+
+::: {.small}
+```r
+t_vec_2  <- c(4, 5, 6)
+t_vec_full <- c(t_vec, t_vec_2)
+```
+:::
+
+## Coercion
+
+- Sometimes we want to **change the type** of an atomic vector
+- The functions `as.*()` and `is.*()` are useful — substitute `*` by the type:
+
+::: {.small}
+```r
+xx <- "2"
+is.double(xx)
+yy <- as.double(xx)
+is.double(yy)
+```
+:::
+
+- But beware of counter-intuitive transformation behaviour:
+
+::: {.small}
+```r
+as.integer(22.9)
+as.logical(99)
+```
+:::
+
+## Intermediate exercises {.divider background-color="#EAF0F4"}
+
+::: {.nonincremental}
+1. Create a vector containing the numbers `2`, `5`, `2.4` and `11`
+2. What is the **type** of this vector?
+3. Transform this vector into the type `integer`. What happens?
+4. Do you think you can create a vector containing `"2"`, `"Hallo"`, `4.0` and
+   `TRUE`? Why, or why not?
+:::
+
+# Part III: Helper functions, indexing, vectorisation {.divider background-color="#EAF0F4"}
+
+## Sequences: `seq()`
+
+Some vector types you create frequently: sequences, concatenated words,
+repetitions
+
+For sequences, use `seq()`:
+
+::: {.smaller}
+- `from`, `to` — starting and end values of the sequence
+- `by` — increment steps (must be numeric)
+- `length.out` — desired length of the final sequence
+- `along.with` — creates a sequence of the same length as an object
+:::
+
+Only **one** of `by`, `length.out`, `along.with` can be used:
+
+::: {.small}
+```r
+seq(-5, 5, by = 2.5)
+seq(1, 4, length.out = 10)
+```
+:::
+
+## Pasting and repeating
+
+For concatenated words, use `paste()` with the argument `sep`:
+
+::: {.small}
+```r
+paste("file_", seq(1, 4), ".pdf", sep = "")
+```
+:::
+
+::: {.smaller}
+`sep` specifies how the input vectors should be separated
+:::
+
+For repetitions, use `rep()`:
+
+::: {.small}
+```r
+rep("Cool!", 5)
+```
+:::
+
+## Indexing
+
+- Indexing means **referencing a particular position** of a vector
+- You do this by adding the position in square brackets:
+
+::: {.small}
+```r
+v_c <- c("First", "Second", "Second", "Fourth")
+v_c[3]              # returns the third element
+v_c[3] <- "Third!"  # replaces it
+```
+:::
+
+- But you **cannot** use this to add new elements beyond the current length in
+  an arbitrary way:
+
+::: {.small}
+```r
+v_c[5] <- "Fifth…"
+```
+:::
+
+- Add a fifth element to `v_c`!
+
+## Vectorisation
+
+- One reason atomic vectors are so popular: they allow for **very fast
+  computations**
+  - For the computer it is much easier to work with sets of objects that all
+    behave the same
+- **Vectorisation** means an operation is applied to *each element* of a vector:
+
+::: {.small}
+```r
+v_2 <- seq(1, 5)
+v_2**2
+```
+:::
+
+::: {.takeaway .fragment}
+'To vectorise' a task means writing it so operations apply to atomic vectors —
+in R you should do that whenever possible
+:::
+
+::: {.smaller}
+The slower alternative are **loops**, which we learn about later and which are
+unavoidable in certain situations
+:::
+
+## Intermediate exercises {.divider background-color="#EAF0F4"}
+
+::: {.nonincremental}
+1. Create a vector with the numbers from `-2` to `19`, step size `0.75`
+2. Create an **index vector** for this vector (a vector with all possible indices
+   of the original vector)
+3. Compute the **log** of each element using vectorisation. Anything that draws
+   your attention?
+4. What happens if you concatenate vectors of **different types** using `c()`?
+   Can you derive a systematisation?
+:::
+
+::: {.smaller}
+Remember: check the type of an atomic vector with `typeof()`
+:::
+
+# Part IV: Lists {.divider background-color="#EAF0F4"}
+
+## Lists
+
+- The **second major type of vectors** → sometimes called *generic vectors*
+- Difference to atomic vectors: lists may contain **objects of different types**
+
+::: {.small}
+```r
+l_1 <- list(c(1, 2), c("a", "b"), c(TRUE, FALSE, FALSE))
+typeof(l_1)
+```
+:::
+
+- Lists can be complex → get an overview using `str()`:
+
+::: {.small}
+```r
+> str(l_1)
+List of 3
+ $ : num  [1:2] 1 2
+ $ : chr  [1:2] "a" "b"
+ $ : logi [1:3] TRUE FALSE FALSE
+```
+:::
+
+::: {.smaller}
+`List of 3` = number of elements · `num`/`chr`/`logi` = types · `[1:2]` = lengths
+· the rest = a preview
+:::
+
+## Naming and indexing of lists
+
+- The elements of lists can be **named**:
+
+::: {.small}
+```r
+l_2 <- list("numbers" = c(1, 2),
+            "letters" = c("a", "b"),
+            "logics"  = c(TRUE, FALSE, FALSE))
+```
+:::
+
+- Retrieve the names with `names(l_2)`
+- **Subset** the list using the names → returns a *list*:
+
+::: {.small}
+```r
+l_2["letters"]
+```
+:::
+
+- **Access the elements** of the sublists with `[[` → returns the *content*:
+
+::: {.small}
+```r
+l_2[["letters"]]
+l_2$letters        # shortcut
+```
+:::
+
+## Practical differences to atomic vectors
+
+Two very important differences:
+
+- **Vectorisation does not work** for lists
+- **Indexing works differently** for lists
+
+::: {.columns .small}
+::: {.column width="50%"}
+```r
+v_ <- c(1, 2, 3); 2 * v_
+l_ <- list(1, 2, 3); 2 * l_
+```
+:::
+
+::: {.column width="50%"}
+```r
+typeof(l_[1])
+typeof(l_[[1]])
+```
+:::
+:::
+
+::: {.takeaway .fragment}
+Lists are fundamental to the more complex data structures we will encounter
+later — including data frames
+:::
+
+## `NA` — absent elements
+
+- `NA` represents **absent elements** of vectors
+  - Happens frequently when vectors contain observations
+  - Many functions behave differently when `NA`s are present — remember `na.rm`:
+
+::: {.small}
+```r
+mean(c(1, 2, NA))
+mean(c(1, 2, NA), na.rm = TRUE)
+```
+:::
+
+- Test for `NA` with `is.na()`, check a whole vector with `anyNA()`:
+
+::: {.small}
+```r
+is.na(c(1, 2, NA))
+anyNA(c(1, 2, NA))
+```
+:::
+
+## `NULL` — the absent vector
+
+- `NULL` is a data type in itself, but in practice best thought of as a
+  **vector of length zero**:
+
+::: {.small}
+```r
+c()
+typeof(NULL)
+length(NULL)
+is.null(NULL)
+```
+:::
+
+- You use `NULL` mainly in two situations:
+  - Represent an **empty vector** of arbitrary type
+  - Represent an **absent vector** — as opposed to `NA`, which represents absent
+    *elements* of a vector
+
+## Intermediate exercises {.divider background-color="#EAF0F4"}
+
+::: {.nonincremental}
+- Create a list with three **named** elements: `"A"`, `"B"` and `"C"`
+- `"A"` should contain the **square root** of the numbers from `-2` to `8`
+  (step size `1`)
+- `"B"` should contain the **log** of the numbers between `2` and `4`
+  (step size `0.5`)
+- `"C"` should contain letters from `a1` to `g7`
+:::
+
+::: {.smaller}
+Hint for C: use the pre-defined vector `letters` and the function `paste()`
+:::
+
+## Wrap up
+
+::: {.nonincremental}
+The central take-aways concern:
+
+- How to **test for and transform** these types: `typeof()`, `is.*()`, `as.*()`
+- How to **index** them: `[`, `[[`, `$`
+- How to **create typical instances**: `rep()`, `paste()`, `seq()`
+:::
+
+- We learned about **vectorisation** and its attractiveness in R
+- We encountered the 'strange' types `NA`, `NULL` and `NaN`
+
+## Summary and outlook {.divider background-color="#EAF0F4"}
+
+Next time we learn about two more advanced object types: **factors** and
+**data frames** — and how our knowledge about the basic types helps us deal with
+them
+
+::: {.callout-note appearance="default"}
+## Tasks until next session
+1. Fill in the **quick feedback survey** on Moodle
+2. Read the **tutorials** posted on the course page
+3. Do the **exercises** and discuss problems via the Moodle forum
+:::
