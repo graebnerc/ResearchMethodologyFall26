@@ -56,6 +56,14 @@ in and what is out:
 > through a four-day week — on employees and firms are reported in empirical
 > studies?*
 
+This is an effects question, so it follows the **PICO** format (lecture
+chapter 2): **p**opulation — employees and firms; **i**ntervention — working
+time reduction; **c**omparison — regular working hours; **o**utcome —
+productivity, well-being and the like. A question that maps what is known
+about a topic rather than an effect follows **PCC** instead: population,
+concept, context. Population and comparison usually end up in your inclusion
+criteria; intervention and outcome become the concepts of your search.
+
 Then split the question into its **concepts** and collect, for each concept,
 the different ways in which authors express it. One column per concept:
 
@@ -535,6 +543,12 @@ library(ggplot2)
 
 options(openalexR.apikey = Sys.getenv("OPENALEX_KEY"))
 ```
+
+Without a key, all requests from your network share a small daily budget, and
+longer Boolean strings such as the one below are often refused with "Rate
+limit exceeded … Your query uses … boolean operators"; if you see this error,
+check that `nzchar(Sys.getenv("OPENALEX_KEY"))` returns `TRUE` (this does not
+print the key itself).
 
 ## Run the search
 

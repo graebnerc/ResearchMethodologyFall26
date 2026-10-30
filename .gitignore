@@ -102,3 +102,7 @@ content/lecture/slides/*.html
 # Netlify never needs it, and renv.lock is what makes a rebuild reproducible.
 # Keeping it out of git avoids the churn it caused in every commit.
 _freeze/
+
+# Take-home examinations and grading keys. The GitHub repository is public;
+# take-homes are released and submitted via Moodle only, so they stay local.
+take-homes/

@@ -406,6 +406,65 @@ Reviewable: object · context · what you want to know
 Test: two people, same in/out decisions?
 :::
 
+## Two frameworks for a reviewable question
+
+::: {.dek}
+Effects → PICO · mapping a field → PCC
+:::
+
+::: {.columns .divided}
+::: {.column width="50%"}
+::: {.colhead}
+PICO: *does X affect Y?*
+:::
+
+- **P**opulation: employees, firms
+
+- **I**ntervention: working time reduction
+
+- **C**omparison: regular working hours
+
+- **O**utcome: productivity, well-being
+
+*Tutorial: the four-day week*
+:::
+
+::: {.column width="50%"}
+::: {.colhead}
+PCC: *what is known about X?*
+:::
+
+- **P**opulation: firms
+
+- **C**oncept: capabilities and routines — defined and measured how?
+
+- **C**ontext: empirical innovation research
+
+*Lecture: the running example*
+:::
+:::
+
+::: {.arrow .fragment}
+Elements → criteria · usually only I and O (or the concept) → search string
+:::
+
+::: {.source}
+PICO: @richardson1995wellbuilt, from clinical medicine. PCC: @peters2015guidance,
+for scoping reviews.
+:::
+
+::: {.notes}
+Both frameworks come from the health sciences, and both are checklists, not
+theories: they make sure the question names everything that later decides
+whether a study is in or out. PICO fits questions about effects, so it needs
+a comparison; in management research the "intervention" is often a practice
+or an institution rather than a treatment. PCC fits broader questions that map
+what is known, which is why the running example on capabilities is a PCC
+question. Not every element becomes a column of the concept table: population
+and comparison are usually handled by the inclusion criteria, and only the
+intervention and the outcome, or the concept, go into the search string.
+:::
+
 ## The concept table: building blocks of the search
 
 ::: {.dek}
@@ -449,7 +508,7 @@ Contestable is fine — invisible is not
 ::: {.taskbox .nonincremental}
 Your own topic:
 
-- A reviewable question
+- A reviewable question, in PICO or PCC form
 - A concept table: ≥ 2 concepts, ≥ 4 terms each
 - Keep it — needed for the tutorial
 :::
