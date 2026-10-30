@@ -5,7 +5,7 @@ date-modified: last-modified
 ---
 
 This is an **optional on-site recap session** in MAD 024 (Friday, 30 October,
-11:15–12:45). No new material is introduced: we go through the topics from the
+11:00–12:30). No new material is introduced: we go through the topics from the
 previous sessions that you want to discuss again. If you have specific
 questions or topics, bring them along or post them in the Moodle forum
 beforehand.
@@ -13,8 +13,9 @@ beforehand.
 The new material of this week, importing data, is covered in the
 [videos of session 6](/content/material/s_06_DataImport.qmd).
 
-<!--- The topics and material of the session are added here after the session.
-## Topics discussed
 
-## ✍️ Coursework
---->
+## ✍️ Documentation
+
+The code we have developed during the session can be found
+[here](https://github.com/teaching-datascience/Recap-02).
+
