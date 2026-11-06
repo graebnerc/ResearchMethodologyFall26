@@ -141,7 +141,7 @@ column *Lab (Fri)* also states whether the session is an **on-site lab** or a
 
 The lecture of 5 October had to be cancelled. All later lectures were therefore
 moved by one week, the lecture on *Literature reviews* is delivered as a **video
-lecture** released on 2 November, and the Monday of 7 December is kept in
+lecture** released on 9 November, and the Monday of 7 December is kept in
 reserve. **The dates of the implementation lab did not change.** The concluding
 open Q&A for the whole module is the lab session on 11 December.
 
@@ -155,8 +155,8 @@ open Q&A for the whole module is the lab session on 11 December.
 | 5 | 19.10. | [Logic, argumentation, models, and explanation](https://researchmethodology-fall26.netlify.app/content/lecture/l_04_Argumentation.html) — *Take-home examination I* | AKK | 23.10. (video & on-site) | [Quarto and R Markdown](https://researchmethodology-fall26.netlify.app/content/material/s_05_Quarto.html) (plus on-site [recap session](https://researchmethodology-fall26.netlify.app/content/material/s_05a_Recap.html)) |
 | 6 | 26.10. | [Quantitative and qualitative research](https://researchmethodology-fall26.netlify.app/content/lecture/l_05_QuantQual.html) | AKK | 30.10. (video & optional on-site) | [Importing data](https://researchmethodology-fall26.netlify.app/content/material/s_06_DataImport.html) (plus optional on-site [recap session](https://researchmethodology-fall26.netlify.app/content/material/s_06a_Recap.html)) |
 | 7 | 02.11. | [Interviews](https://researchmethodology-fall26.netlify.app/content/lecture/l_06_Interviews.html) | AKK | 06.11. (video) | [Data preparation](https://researchmethodology-fall26.netlify.app/content/material/s_07_DataPreparation.html) |
-| 7 | *rel. 02.11.* | [Literature reviews](https://researchmethodology-fall26.netlify.app/content/lecture/l_08_LiteratureReviews.html) — *video lecture; Take-home examination II* | CGR |  |  |
 | 8 | 09.11. | [Case studies](https://researchmethodology-fall26.netlify.app/content/lecture/l_07_CaseStudies.html) | AKK | 13.11. (video) | [Data visualization](https://researchmethodology-fall26.netlify.app/content/material/s_08_Visualization.html) (plus [recap exercises](https://researchmethodology-fall26.netlify.app/content/material/s_08b_Recap.html)) |
+| 8 | *rel. 09.11.* | [Literature reviews](https://researchmethodology-fall26.netlify.app/content/lecture/l_08_LiteratureReviews.html) — *video lecture; Take-home examination II* | CGR |  |  |
 | 9 | 16.11. | [Statistics recap](https://researchmethodology-fall26.netlify.app/content/lecture/l_09_StatisticsRecap.html) — *Take-home examination III* | CGR | 20.11. (on-site) | [Using AI for coding](https://researchmethodology-fall26.netlify.app/content/material/s_09_AICoding.html) |
 | 10 | 23.11. | [Regression analysis](https://researchmethodology-fall26.netlify.app/content/lecture/l_10_Regression.html) | CGR | 27.11. (on-site) | [Linear models in R](https://researchmethodology-fall26.netlify.app/content/material/s_10_LinearModels.html) |
 | 11 | 30.11. | [Experiments](https://researchmethodology-fall26.netlify.app/content/lecture/l_11_Experiments.html) | CGR | 04.12. (on-site) | [Experimental data in R](https://researchmethodology-fall26.netlify.app/content/material/s_11_Experiments.html) |
@@ -168,7 +168,7 @@ taught by CGR throughout. {tbl-colwidths="[6,10,29,10,14,31]"}
 ### Take-Home Examinations
 
 - **First take-home** on logic and argumentation: released 21.10.26, due date: 04.11.26, 23:59.
-- **Second take-home** on literature reviews: released 08.11.26, due date: 15.11.26, 23:59.
+- **Second take-home** on literature reviews: released 10.11.26, due date: 22.11.26, 23:59.
 - **Third take-home** on statistics: released 15.11.26, due date: 22.11.26, 23:59.
 
 _All take-home examinations are made available by, and must be submitted via Moodle._

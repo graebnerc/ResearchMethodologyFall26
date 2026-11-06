@@ -36,7 +36,7 @@ the semester. It is also available there as a PDF for printing.
 The lecture period runs from **14 September to 11 December 2026**. There is no
 class in the week of 12–16 October. Since the lecture of 5 October had to be
 cancelled, all later lectures moved by one week; the lecture on *Literature
-reviews* is delivered as a video lecture released on 2 November, and the Monday
+reviews* is delivered as a video lecture released on 9 November, and the Monday
 of 7 December is kept in reserve. **The dates of the implementation lab did not
 change.** Please always check the most recent version
 of the seminar timetable, since dates and rooms can differ from one week to
@@ -55,8 +55,8 @@ authoritative schedule:
 |  4   | *Lecture cancelled (5 Oct) — moved to week 5* | [Object types](/content/material/s_04_ObjectTypes.qmd) *(video)* |
 |  5   | [Logic, argumentation, models, and explanation](/content/lecture/l_04_Argumentation.qmd) | [Quarto and R Markdown](/content/material/s_05_Quarto.qmd) *(video & on-site)* |
 |  6   | [Quantitative and qualitative research](/content/lecture/l_05_QuantQual.qmd) | [Importing data](/content/material/s_06_DataImport.qmd) *(video)* |
-|  7   | [Interviews](/content/lecture/l_06_Interviews.qmd) · [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd) *(video lecture)* | [Data preparation](/content/material/s_07_DataPreparation.qmd) *(video)* |
-|  8   | [Case studies](/content/lecture/l_07_CaseStudies.qmd) | [Data visualization](/content/material/s_08_Visualization.qmd) *(video)* |
+|  7   | [Interviews](/content/lecture/l_06_Interviews.qmd) | [Data preparation](/content/material/s_07_DataPreparation.qmd) *(video)* |
+|  8   | [Case studies](/content/lecture/l_07_CaseStudies.qmd) · [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd) *(video lecture)* | [Data visualization](/content/material/s_08_Visualization.qmd) *(video)* |
 |  9   | [Statistics recap](/content/lecture/l_09_StatisticsRecap.qmd) | [Using AI for coding](/content/material/s_09_AICoding.qmd) *(on-site)* |
 |  10  | [Regression analysis](/content/lecture/l_10_Regression.qmd) | [Linear models in R](/content/material/s_10_LinearModels.qmd) *(on-site)* |
 |  11  | [Experiments](/content/lecture/l_11_Experiments.qmd) | [Experimental data in R](/content/material/s_11_Experiments.qmd) *(on-site)* |

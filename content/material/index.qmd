@@ -65,8 +65,8 @@ For information on how to use the exercise code, read
 **unaffected** by the rescheduling of the lecture that followed the cancelled
 session of 5 October (see the [lecture overview](/content/lecture/)). The three
 **take-home examinations** are published after lecture 04 (19 Oct, on logic and
-argumentation; due 4 Nov), lecture 08 (the video lecture released 2 Nov, on
-literature reviews; due 15 Nov) and lecture 09 (16 Nov, on statistics; due 22
+argumentation; due 4 Nov), lecture 08 (the video lecture released 9 Nov, on
+literature reviews; due 22 Nov) and lecture 09 (16 Nov, on statistics; due 22
 Nov); you must pass two of them to be admitted to the final exam (see the
 [seminar description](/content/SeminarDescription.qmd)).
 
