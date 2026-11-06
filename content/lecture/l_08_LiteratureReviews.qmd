@@ -1,11 +1,11 @@
 ---
 title: "🗓️ Lecture 08: Literature reviews"
-date: "2026-11-02"
+date: "2026-11-09"
 date-modified: last-modified
 strip-comments: true
 ---
 
-**This is a video lecture.** It is released on **2 November 2026** and has *no*
+**This is a video lecture.** It is released on **9 November 2026** and has *no*
 on-site session on a Monday — you work through it on your own, at your own pace.
 It is recorded as nine short chapters (about 90 minutes in total).
 Please post any questions in the
@@ -13,9 +13,9 @@ Please post any questions in the
 we also take them up in the concluding Q&A session of 11 December.
 
 **Take-home examination II** on literature reviews belongs to this lecture. It
-is published on Moodle on **8 November 2026** and must be submitted there by
-**15 November 2026, 23:59** — so make sure you have worked through the video
-before that week.
+is published on Moodle on **10 November 2026** and must be submitted there by
+**22 November 2026, 23:59** — so make sure you have worked through the video
+before you start on it.
 
 ## 🎯 Content and goals
 
@@ -72,7 +72,7 @@ everything in one go, but please keep the order.
 
 ## 🖥️ Lecture Slides
 
-*The slides are made available here when the video lecture is released on 2 November.*
+*The slides are made available here when the video lecture is released on 9 November.*
 
 <!-- Uncomment on release (and add the deck to the render list in _quarto.yml):
 
@@ -157,7 +157,7 @@ examinations to be admitted to the final exam — see the
 - Conduct a small systematic literature review on a question that will be given
   to you. The task is published on
   [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920)
-  on 8 November 2026 (due 15 November, 23:59) and follows the steps of the
+  on 10 November 2026 (due 22 November, 23:59) and follows the steps of the
   [tutorial](lit-review-tutorial/index.qmd). Do not forget the
   [AI disclosure](ai-disclosure/index.qmd).
 
