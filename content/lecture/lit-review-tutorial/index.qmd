@@ -7,7 +7,7 @@ execute:
   eval: false
 resources:
   - L08-review-templates.xlsx
-  - prisma-example.svg
+  - prisma-tutorial.svg
 format:
   html:
     toc: true
@@ -410,10 +410,17 @@ Count what happened to every record:
 
 : Where the numbers for the flow diagram come from.
 
-![A PRISMA 2020 flow diagram for the example — illustrative numbers. The main
-column follows the records from the database to the included studies; the
-boxes on the right show what dropped out at each stage; the arm at the top
-right adds the studies found by snowballing.](prisma-example.svg){fig-alt="PRISMA 2020 flow diagram: 380 records identified and screened, 300 excluded; 80 reports sought, 4 not retrieved; 76 assessed, 52 excluded with reasons (not empirical 21, no working-time reduction 18, no outcome reported 13); 7 studies from snowballing; 31 studies included."}
+![The PRISMA 2020 flow diagram of the example review, drawn in R with the
+PRISMA2020 package from the companion project (search of 7 November 2026). The
+left column follows the records from OpenAlex to the included studies; the
+boxes next to it show what dropped out at each stage, with reasons; the right
+arm adds the studies found by snowballing — of the 205 new records, only the
+44 whose title mentions working time were sought. Click to enlarge.](prisma-tutorial.svg){.lightbox fig-alt="PRISMA 2020 flow diagram: 411 records identified from OpenAlex, 11 duplicates removed, 400 screened, 323 excluded; 77 reports sought, 6 not retrieved; 71 assessed, 35 excluded (no reduction in working time 29, no outcome for employees or firms 3, not in English 2, not empirical 1). Snowballing: 205 records identified, 44 sought, 2 not retrieved, 42 assessed, 29 excluded. 49 studies included."}
+
+The screening behind this diagram was done by an AI assistant as a
+demonstration, on titles and abstracts only, and was not checked by a person
+— a limitation that the example paragraphs below have to report, and that
+your own review should avoid.
 
 Draw it with the [PRISMA2020 Shiny app](https://estech.shinyapps.io/prisma_flowdiagram/),
 the templates on the [PRISMA website](https://www.prisma-statement.org/), or
@@ -433,23 +440,28 @@ In a term paper, the following fits into one paragraph plus an appendix:
 
 ::: {.callout-tip collapse="true"}
 ## Example: a methods paragraph
-*(Numbers as in the illustrative flow diagram above.)*
+*(The numbers are those of the flow diagram above.)*
 
-> We searched OpenAlex on 12 November 2026 through its web interface, in
-> titles and abstracts, for articles and reviews in English (full string and
-> query URL in Appendix A). We included empirical studies, quantitative or
-> qualitative, of a reduction in working time at firm, sector or country
-> level that report at least one outcome for employees or firms; conceptual
-> papers and studies of individually chosen part-time work were excluded.
-> Of the 380 records, 22 % had no abstract in OpenAlex; for these, we took
-> the abstract from the publisher's page. One person screened all titles and
-> abstracts and then the full texts; a second person screened a random 20 %
-> of the records, and disagreements (6 of 76) were resolved by discussion
-> and led to a sharper definition of "working time reduction". Backward and
-> forward snowballing from three included studies added seven studies. Of
-> the 31 included studies, we extracted intervention, context, design,
-> selection, outcomes and findings into a concept matrix (Appendix B) and
-> synthesised them by intervention type and design (Figure 1).
+> We searched OpenAlex on 7 November 2026 through its API (R package
+> openalexR), in titles and abstracts, for articles and reviews in English
+> (full string and script in Appendix A). We included empirical studies,
+> quantitative or qualitative, of an actual reduction in working time at
+> firm, sector or country level that report at least one outcome for
+> employees or firms; conceptual papers, models, reviews, compressed work
+> weeks and individually chosen part-time work were excluded. Of the 411
+> records, 41 (10 %) had no abstract in OpenAlex, most of them closed-access
+> articles from Elsevier and Springer Nature; Crossref provided none of these
+> abstracts. After removing 11 duplicates, the titles and abstracts of 400
+> records were screened, and 77 were assessed against the criteria. Screening
+> was carried out by an AI assistant (Claude) as a demonstration, on titles
+> and abstracts only, and was not checked by a person; six records could not
+> be assessed without their full text. Backward and forward snowballing from
+> two included studies identified 205 further records, of which the 44 whose
+> titles mention working time were screened with the same criteria. Of the
+> 49 included studies (36 from the search, 13 from snowballing), we would
+> extract intervention, context, design, selection, outcomes and findings
+> into a concept matrix (Appendix B) and synthesise them by intervention type
+> and design (Figure 1).
 :::
 
 ## The limitations paragraph
@@ -459,14 +471,19 @@ name **the bias**, **its likely direction**, and **why you accepted it**.
 
 > *Generic:* "Some relevant studies may have been missed."
 >
-> *Specific:* "The search covered titles and abstracts in OpenAlex. About a
-> third of the records had no abstract, mostly closed-access articles from
-> large publishers; for these, only titles could match. Backward and forward
-> snowballing from four seed papers added six studies, two of them from such
-> journals, but some recall loss for recent closed-access articles is likely.
-> Restricting the review to English excludes the German-language literature on
-> *Arbeitszeitverkürzung*, which probably under-represents sector-level
-> studies of collective working-time agreements."
+> *Specific:* "The search covered titles and abstracts in OpenAlex. Of the
+> 411 records, 41 had no abstract, most of them closed-access articles from
+> Elsevier and Springer Nature; for such records only titles can match, so
+> the true gap is larger. One of our four test papers — a 1973 study without
+> an abstract whose title contains no outcome term — was found neither by
+> the string nor by snowballing. Snowballing from two included studies added
+> 13 studies, among them a closed-access test paper the string had missed,
+> but some recall loss for closed-access articles remains likely. Screening
+> was done by an AI assistant on titles and abstracts only and was not
+> checked by a person, so misclassifications in both directions are likely.
+> Restricting the review to English excludes the German-language literature
+> on *Arbeitszeitverkürzung* — EconBiz alone lists 811 records — which
+> probably under-represents studies of collective working-time agreements."
 
 Do not forget the [AI disclosure](../ai-disclosure/index.qmd) if you used AI at
 any step.

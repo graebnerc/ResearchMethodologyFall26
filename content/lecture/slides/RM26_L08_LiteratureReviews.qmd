@@ -65,10 +65,6 @@ format:
 
      All cited works were checked against publisher/RePEc records in
      October 2026. Numbers marked "illustrative" are invented for teaching.
-
-     TO FILL BEFORE RECORDING: the two "behind the scenes" slides on the
-     own reviews (search "[to fill"). They need facts from the original
-     protocols that are not in this repository.
      ========================================================================= -->
 
 ## Learning goals
