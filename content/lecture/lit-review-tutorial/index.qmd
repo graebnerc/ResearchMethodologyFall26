@@ -36,7 +36,8 @@ explains the *why*; here we focus on the *how*.
   [Web of Science](#sec-wos) adds if you have access through a university.
 - **Optional R part:** [the R part](#sec-r) runs the whole search from R, which makes it fully
   reproducible. The code is shown but not run on this page, because it needs
-  your own (free) API key.
+  your own (free) API key. The complete example, with all results, is the
+  project [RM-LitReviewTutorial](https://github.com/graebnerc/RM-LitReviewTutorial) on GitHub.
 :::
 
 ::: {.callout-warning}
@@ -125,7 +126,8 @@ Your concept table is only as good as your vocabulary. Three sources help:
    ecological economists all study working time — with different words
    ("working time reduction", "work-sharing", "sufficiency").
 
-At the same time, build a **test set**: three to five papers that *must* be
+At the same time, build a **test set**: three to five papers (a stand-alone
+review uses five to ten) that *must* be
 found by a good search. Note them, with their DOIs, in the search log.
 
 ::: {.callout-important}
@@ -325,13 +327,21 @@ on abstracts, so it finds exactly those papers that a title-and-abstract search
 could not see.
 
 Choose two or three included papers that fit your question best — ideally
-including one from a closed-access journal. In OpenAlex, open each record:
+including one from a closed-access journal. Choose them for their fit, not for
+their citation counts: in the [companion project](https://github.com/graebnerc/RM-LitReviewTutorial), the
+most-cited hit of the example search was a paper on the economic burden of
+dementia, and snowballing from it returned hundreds of medical papers and none
+of the test papers. Two included papers on working time, by contrast, reached
+a test paper that the string had missed. In OpenAlex, open each record:
 
 - **Backward:** its **references** — the papers it builds on.
 - **Forward:** **cited by** — papers that build on it.
 
 Screen what you find **with the same criteria**, and count the snowballed
-papers separately; they get their own box in the flow diagram. In R,
+papers separately; they get their own box in the flow diagram. If there are
+more records than you can screen, narrow them down in a documented way — for
+example with a title filter that keeps only records whose title mentions your
+intervention — and report it. In R,
 `oa_snowball()` does both directions in one call ([in R](#sec-r-snowball)).
 
 ::: {.callout-warning}
@@ -609,12 +619,13 @@ the search directly against the OpenAlex API. The big advantage: your script
 ::: {.callout-note}
 ## The complete project
 All code of this part, for the example search, is also available as one
-complete project, **RM-LitReviewTutorial**: a Quarto report that runs every
-step and saves every search result in its `data/` folder. Rendering it again
-reads the saved results instead of searching again — so it reproduces exactly,
-without an API key. Use it to see what the code below produces, or as a
-starting point for your own project.
-<!-- TODO before release: link the published repository here -->
+complete project, [**RM-LitReviewTutorial**](https://github.com/graebnerc/RM-LitReviewTutorial) on GitHub: a Quarto
+report that runs every step and saves every search result in its `data/`
+folder. Rendering it again reads the saved results instead of searching again
+— so it reproduces exactly, without an API key. Use it to see what the code
+below produces, or as a starting point for your own project: download it with
+*Code → Download ZIP* on GitHub, open `RM-LitReviewTutorial.Rproj`, run
+`renv::restore()` once, and render `report.qmd`.
 :::
 
 ## Setup and API key
@@ -883,8 +894,9 @@ nrow(new)
 
 Screen the new records with the same criteria and count them separately for
 the flow diagram. Snowballing from highly cited papers can return thousands of
-records; then restrict it, e.g. to the papers your seeds cite (backward) plus
-recent citing papers.
+records; then narrow them down in a documented way, e.g. with a title filter
+(as in the companion project) or by restricting it to the papers your seeds
+cite (backward) plus recent citing papers.
 
 ## Draw the flow diagram {#sec-r-prisma}
 

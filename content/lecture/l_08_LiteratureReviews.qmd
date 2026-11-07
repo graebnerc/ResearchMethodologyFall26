@@ -94,6 +94,10 @@ everything in one go, but please keep the order.
   or Web of Science — and an optional R part runs the whole search from R,
   including the EconBiz API.
 
+- [**RM-LitReviewTutorial**](https://github.com/graebnerc/RM-LitReviewTutorial) — the tutorial's example review as a
+  complete, reproducible R project on GitHub: one Quarto report with all
+  code, all saved search results and the flow diagram.
+
 - [**Workbook with all templates**](lit-review-tutorial/L08-review-templates.xlsx)
   (download) — a **search log**, a **screening sheet**, a **concept matrix**
   and a sheet for **limitations**, which you can reuse for your term paper. It

@@ -832,7 +832,7 @@ Wider string: recall ↑ precision ↓ · narrower: the reverse
 All relevant papers: unknown · some: known · missed known → missed unknown
 :::
 
-- Before searching: **5–10 key papers** that must appear
+- Before searching: **key papers** that must appear — 5–10 in a review, 3–5 for a term paper
 
 - Incl. **closed-access** papers from large publishers (next slide)
 
@@ -848,7 +848,7 @@ Illustrative: v1 finds 5/8 → + "competenc\*", "routine\*" → v2 finds 8/8
 
 ::: {.notes}
 - All relevant papers unknown → known ones as a sample
-- 5–10 key papers, chosen before searching
+- Key papers chosen before searching — 5–10 in a review, 3–5 in a term paper
 - Include closed-access papers → abstract gap visible (next slide)
 - Run the string → how many found?
 - Missed one → its title and keywords → the missing term
@@ -1835,22 +1835,23 @@ Generic
 Specific
 :::
 
-- OpenAlex, title and abstract only; 30% of hits without abstract, mostly
-  closed-access journals (illustrative)
+- OpenAlex, titles and abstracts; 41 of 411 hits without abstract, mostly
+  Elsevier and Springer Nature (tutorial example)
 
-- → recall loss for recent closed-access articles
+- → recall loss for closed-access articles: one test paper found by no route
 
-- → partly compensated by snowballing; residual gap reported
+- → snowballing added 13 studies; residual gap reported
 :::
 :::
 
 ::: {.notes}
 - Formula: the bias · its direction · why accepted
 - Generic: true of every review — says nothing
-- Specific: OpenAlex, titles and abstracts, 30% without abstract
-  (illustrative)
-- Direction: recall loss for recent closed-access articles
-- Response: snowballing compensates partly · rest reported
+- Specific: the tutorial's example review — 41 of 411 hits without abstract,
+  mostly Elsevier and Springer Nature
+- Direction: recall loss for closed-access articles · a 1973 test paper
+  found neither by the string nor by snowballing
+- Response: snowballing added 13 studies · residual gap reported
 :::
 
 ## AI: helpful at some stages, risky at others
@@ -1987,12 +1988,17 @@ A review cannot
 
 - **Readings:** @snyder2019literature, @page2021prisma
 
+- **R project:** the tutorial's example review, complete and reproducible —
+  [RM-LitReviewTutorial](https://github.com/graebnerc/RM-LitReviewTutorial) on GitHub
+
 - **AI use:** disclosure template
 :::
 
 ::: {.notes}
 - Tutorial: eight steps, templates, optional R part
 - Readings: Snyder 2019 — overview · Page et al. 2021 — PRISMA 2020
+- R project: whole example in one Quarto report, all results saved — reruns
+  without API key
 - AI use: disclose with the template
 :::
 
