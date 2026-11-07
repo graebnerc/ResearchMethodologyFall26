@@ -289,7 +289,7 @@ record without one:
 
 The R part can fill in some abstracts automatically from Crossref
 ([in R](#sec-r-abstracts)) — but not those of publishers that do not deposit abstracts
-there, which includes Elsevier.
+there, which includes Elsevier and Springer Nature.
 
 ## Screen titles and abstracts
 
@@ -618,17 +618,23 @@ Restart R. In your script:
 here::i_am("R/review.R")
 library(here)
 library(openalexR)
-library(data.table)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(purrr)
+library(stringr)
 library(ggplot2)
+library(httr2)
 
 options(openalexR.apikey = Sys.getenv("OPENALEX_KEY"))
 ```
 
-Without a key, all requests from your network share a small daily budget, and
+Without a key, all requests from your network share a small daily budget,
 longer Boolean strings such as the one below are often refused with "Rate
-limit exceeded … Your query uses … boolean operators"; if you see this error,
-check that `nzchar(Sys.getenv("OPENALEX_KEY"))` returns `TRUE` (this does not
-print the key itself).
+limit exceeded … Your query uses … boolean operators", and fetching more than
+one page of results is refused altogether. If you see such an error, check
+that `nzchar(Sys.getenv("OPENALEX_KEY"))` returns `TRUE` (this does not print
+the key itself).
 
 ## Run the search
 
@@ -642,17 +648,21 @@ query <- '("four-day week" OR "four day week" OR "4-day week"
   OR "shorter working week" OR "shorter workweek")
   AND (productivity OR productive OR "well-being" OR wellbeing OR satisfaction
   OR burnout OR stress OR absenteeism OR turnover OR performance)'
-query <- gsub("\\s+", " ", query) # one line, single spaces
+query <- str_squish(query) # one line, single spaces
 
 # First only count the hits: cheap, and good for comparing string versions
-oa_fetch(
+n_hits <- oa_fetch(
   entity = "works",
   title_and_abstract.search = query,
   type = c("article", "review"),
   language = "en",
   count_only = TRUE
 )
+n_hits$count
 ```
+
+The answer also shows how OpenAlex read your string: `n_hits$x_query$oql`
+puts `stemmed` before every term — stemming is switched on automatically.
 
 When the count is plausible, fetch the records and **save a dated copy**.
 OpenAlex changes over time; your saved copy is the result you report.
@@ -664,23 +674,31 @@ works <- oa_fetch(
   type = c("article", "review"),
   language = "en"
 )
-works <- as.data.table(works)
 
 dir.create(here("data"), showWarnings = FALSE)
-saveRDS(works, here("data", paste0("openalex_", Sys.Date(), ".rds")))
+write_rds(works, here("data", str_c("openalex_", Sys.Date(), ".rds")))
 nrow(works)
 ```
 
 ## Check the test set
 
-```{r}
-test_dois <- c(
-  "10.xxxx/first-test-paper", # replace with the DOIs of your test set
-  "10.xxxx/second-test-paper"
-)
-clean_doi <- function(x) tolower(sub("^https://doi.org/", "", x))
+The four papers of the example's test set; replace them with your own.
 
-data.table(doi = test_dois, found = clean_doi(test_dois) %in% clean_doi(works$doi))
+```{r}
+test_set <- tibble(
+  paper = c("Lepinteur, Labour Economics",
+            "Mullens & Laurijssen, BMC Public Health",
+            "Raposo & van Ours, Economics Letters",
+            "Nord & Costigan, Journal of Applied Psychology"),
+  doi = c("10.1016/j.labeco.2018.05.010",
+          "10.1186/s12889-024-19161-x",
+          "10.1016/j.econlet.2009.10.001",
+          "10.1037/h0035419")
+)
+clean_doi <- function(x) str_to_lower(str_remove(x, "^https://doi.org/"))
+
+test_set |>
+  mutate(found = doi %in% clean_doi(works$doi))
 ```
 
 ## Measure the abstract gap
@@ -688,17 +706,22 @@ data.table(doi = test_dois, found = clean_doi(test_dois) %in% clean_doi(works$do
 How many of your hits have no abstract — and where are they concentrated?
 
 ```{r}
-works[, no_abstract := is.na(abstract) | abstract == ""]
-works[, mean(no_abstract)] # share without abstract
+works <- works |>
+  mutate(no_abstract = is.na(abstract) | abstract == "")
 
-head(
-  works[, .(records = .N, share_no_abstract = round(mean(no_abstract), 2)),
-        by = host_organization_name][order(-records)],
-  10
-)
+works |>
+  summarise(records = n(), share_no_abstract = mean(no_abstract))
 
-ggplot(works[, .(share = mean(no_abstract)), by = publication_year],
-       aes(x = publication_year, y = share)) +
+works |>
+  group_by(host_organization_name) |>
+  summarise(records = n(), share_no_abstract = round(mean(no_abstract), 2)) |>
+  arrange(desc(records)) |>
+  head(10)
+
+works |>
+  group_by(publication_year) |>
+  summarise(share = mean(no_abstract)) |>
+  ggplot(aes(x = publication_year, y = share)) +
   geom_col() +
   labs(x = "Publication year", y = "Share of records without abstract",
        title = "Where the title-and-abstract search is effectively title-only") +
@@ -711,14 +734,16 @@ These numbers belong in your limitations paragraph.
 
 ```{r}
 # Records per year
-ggplot(works[, .N, by = publication_year], aes(x = publication_year, y = N)) +
+works |>
+  count(publication_year) |>
+  ggplot(aes(x = publication_year, y = n)) +
   geom_col() +
   labs(x = "Publication year", y = "Records") +
   theme_minimal()
 
 # Journals and languages
-head(works[, .N, by = source_display_name][order(-N)], 15)
-works[, .N, by = language][order(-N)]
+works |> count(source_display_name, sort = TRUE) |> head(15)
+works |> count(language, sort = TRUE)
 ```
 
 If almost everything comes from a handful of journals of one field, your
@@ -727,80 +752,100 @@ string may be speaking only one community's language.
 ## Compare two search strings
 
 Terminology bias becomes visible when you compare strings built from different
-vocabularies, e.g. one with only "four-day week" terms and one that adds
-"working time reduction" terms:
+vocabularies, e.g. one with only "four-day week" terms and the full string,
+which adds "working time reduction" terms:
 
 ```{r}
-fetch_ids <- function(q) {
-  res <- oa_fetch(entity = "works", title_and_abstract.search = q,
-                  type = c("article", "review"), language = "en")
-  as.data.table(res)
-}
-string_a <- fetch_ids('"four-day week" OR "four day week" OR "4-day week"')
-string_b <- works # the full string from above
+string_a <- '("four-day week" OR "four day week" OR "4-day week")
+  AND (productivity OR productive OR "well-being" OR wellbeing OR satisfaction
+  OR burnout OR stress OR absenteeism OR turnover OR performance)'
 
-only_b <- setdiff(string_b$id, string_a$id)
-length(only_b)
-head(string_b[id %in% only_b, .(publication_year, source_display_name, title)], 20)
+works_a <- oa_fetch(
+  entity = "works",
+  title_and_abstract.search = str_squish(string_a),
+  type = c("article", "review"),
+  language = "en"
+)
+
+only_full <- setdiff(works$id, works_a$id)
+length(only_full)
+
+works |>
+  filter(id %in% only_full) |>
+  select(publication_year, source_display_name, title) |>
+  head(20)
 ```
 
-Read the titles that only string B finds. This is the most direct way to see
-what a single vocabulary would have cost you.
+Read the titles that only the full string finds. This is the most direct way
+to see what a single vocabulary would have cost you.
 
 ## Build the screening sheet {#sec-r-screening}
 
 ```{r}
-screening <- works[, .(
-  id, doi, publication_year, title, source_display_name, abstract,
-  abstract_source = fifelse(no_abstract, "", "OpenAlex"),
-  decision_ta = "", reason_ta = "",
-  decision_ft = "", reason_ft = "", notes = ""
-)]
-setorder(screening, abstract_source) # records without abstract first
+screening <- works |>
+  transmute(
+    id, doi, publication_year, title, source_display_name, abstract,
+    abstract_source = if_else(no_abstract, "", "OpenAlex"),
+    decision_ta = "", reason_ta = "",
+    decision_ft = "", reason_ft = "", notes = ""
+  ) |>
+  arrange(abstract_source) # records without abstract first
 
 dir.create(here("output"), showWarnings = FALSE)
-fwrite(screening, here("output", "screening_sheet.csv"), bom = TRUE)
+write_excel_csv(screening, here("output", "screening_sheet.csv"))
 ```
+
+`write_excel_csv()` writes a CSV file that Excel opens with the right
+encoding, so that umlauts and dashes survive.
 
 ::: {.callout-note collapse="true"}
 ## Excel shows everything in one column?
 Excel with German settings expects semicolons as separators. Write the file
-with `fwrite(..., sep = ";", bom = TRUE)` instead, and read it back with
-`fread(..., sep = ";")`.
+with `write_excel_csv2()` instead, and read it back with `read_csv2()`.
 :::
 
 ## Fill in abstracts from Crossref {#sec-r-abstracts}
 
 Some publishers deposit abstracts with Crossref, the DOI registration agency.
-The function below asks Crossref for each record without an abstract. Elsevier
-does not deposit abstracts there, so for its journals you still need the
-publisher page.
+The function below asks Crossref for each record without an abstract.
+Elsevier and Springer Nature do not deposit abstracts there — and their
+journals are where most abstracts are missing — so for them you still need
+the publisher page.
 
 ```{r}
 crossref_abstract <- function(doi) {
-  url <- paste0("https://api.crossref.org/works/", clean_doi(doi))
-  res <- tryCatch(suppressWarnings(jsonlite::fromJSON(url)),
-                  error = function(e) NULL) # no record or no access: NULL
+  res <- tryCatch(
+    request(str_c("https://api.crossref.org/works/", clean_doi(doi))) |>
+      req_perform() |>
+      resp_body_json(),
+    error = function(e) NULL # no record or no access: NULL
+  )
   ab <- res$message$abstract
-  if (is.null(ab)) return(NA_character_)
-  trimws(gsub("<[^>]+>", " ", ab)) # remove the XML tags
+  if (is.null(ab)) NA_character_ else str_squish(str_remove_all(ab, "<[^>]+>"))
 }
 
-missing <- screening[abstract_source == "" & !is.na(doi), id]
-for (i in missing) {
-  ab <- crossref_abstract(screening[id == i, doi])
-  if (!is.na(ab)) {
-    screening[id == i, `:=`(abstract = ab, abstract_source = "Crossref")]
-  }
-  Sys.sleep(0.2) # be polite to the API
-}
-screening[, .N, by = abstract_source]
-fwrite(screening, here("output", "screening_sheet.csv"), bom = TRUE)
+crossref <- screening |>
+  filter(abstract_source == "", !is.na(doi)) |>
+  transmute(id, crossref = map_chr(doi, \(d) {
+    Sys.sleep(0.2) # be polite to the API
+    crossref_abstract(d)
+  }))
+
+screening <- screening |>
+  left_join(crossref, by = "id") |>
+  mutate(
+    abstract_source = if_else(!is.na(crossref), "Crossref", abstract_source),
+    abstract = coalesce(crossref, abstract)
+  ) |>
+  select(-crossref)
+
+screening |> count(abstract_source)
+write_excel_csv(screening, here("output", "screening_sheet.csv"))
 ```
 
 Everything still without an abstract: open the DOI link (OpenAlex stores DOIs as
-links) and copy the abstract
-from the publisher page by hand, setting `abstract_source` to "publisher page".
+links) and copy the abstract from the publisher page by hand, setting
+`abstract_source` to "publisher page".
 
 ## Snowball {#sec-r-snowball}
 
@@ -811,11 +856,11 @@ the papers that cite them:
 seeds <- c("W0000000001", "W0000000002") # OpenAlex IDs of your seed papers
 
 snow <- oa_snowball(identifier = seeds)
-candidates <- as.data.table(snow$nodes)[oa_input == FALSE]
 
 # Only what the string search has not already found
-short_id <- function(x) sub(".*/", "", x)
-new <- candidates[!short_id(id) %in% short_id(works$id)]
+short_id <- function(x) str_remove(x, ".*/")
+new <- snow$nodes |>
+  filter(!oa_input, !short_id(id) %in% short_id(works$id))
 nrow(new)
 ```
 
@@ -829,12 +874,12 @@ recent citing papers.
 Once screening is done, read the completed sheet back in:
 
 ```{r}
-screened <- fread(here("output", "screening_sheet.csv"), encoding = "UTF-8",
-                  colClasses = "character")
+screened <- read_csv(here("output", "screening_sheet.csv"),
+                     col_types = cols(.default = col_character()))
 
-screened[, .N, by = decision_ta]
-screened[decision_ta != "exclude", .N, by = decision_ft]
-screened[decision_ft == "exclude", .N, by = reason_ft][order(-N)]
+screened |> count(decision_ta)
+screened |> filter(decision_ta != "exclude") |> count(decision_ft)
+screened |> filter(decision_ft == "exclude") |> count(reason_ft, sort = TRUE)
 ```
 
 The [PRISMA2020](https://cran.r-project.org/package=PRISMA2020) package
@@ -845,8 +890,9 @@ package. Install it once with `install.packages("PRISMA2020")`. The column
 ```{r}
 library(PRISMA2020)
 
-template <- read.csv(system.file("extdata", "PRISMA.csv", package = "PRISMA2020"))
-template[, c("data", "description", "n")]
+template <- read_csv(system.file("extdata", "PRISMA.csv", package = "PRISMA2020"),
+                     col_types = cols(.default = col_character()))
+template |> select(data, description, n)
 ```
 
 The small helper below sets one number and stops with an error if a box name is
@@ -856,8 +902,7 @@ diagram.
 ```{r}
 set_n <- function(tab, field, value) {
   if (!field %in% tab$data) stop("Unknown box in PRISMA template: ", field)
-  tab$n[tab$data == field] <- value
-  tab
+  tab |> mutate(n = if_else(data == field, as.character(value), n))
 }
 ```
 
@@ -867,10 +912,10 @@ Exclusion reasons are passed as `"reason, n; reason, n"`.
 
 ```{r}
 # Database arm: computed from the screening sheet
-sought        <- screened[decision_ta != "exclude", .N]
-not_retrieved <- screened[decision_ft == "not retrievable", .N]
-reasons       <- screened[decision_ft == "exclude", .N, by = reason_ft]
-included_db   <- screened[decision_ft == "include", .N]
+sought        <- screened |> filter(decision_ta != "exclude") |> nrow()
+not_retrieved <- screened |> filter(decision_ft == "not retrievable") |> nrow()
+reasons       <- screened |> filter(decision_ft == "exclude") |> count(reason_ft)
+included_db   <- screened |> filter(decision_ft == "include") |> nrow()
 
 # Snowballing arm: entered by hand (illustrative numbers)
 snowball_found    <- 9
@@ -880,18 +925,18 @@ counts <- list(
   database_results           = nrow(screened),
   duplicates                 = 0,
   records_screened           = nrow(screened),
-  records_excluded           = screened[decision_ta == "exclude", .N],
+  records_excluded           = screened |> filter(decision_ta == "exclude") |> nrow(),
   dbr_sought_reports         = sought,
   dbr_notretrieved_reports   = not_retrieved,
   dbr_assessed               = sought - not_retrieved,
-  dbr_excluded               = paste0(reasons$reason_ft, ", ", reasons$N,
-                                      collapse = "; "),
+  dbr_excluded               = str_c(reasons$reason_ft, ", ", reasons$n,
+                                     collapse = "; "),
   citations_results          = snowball_found,
   other_sought_reports       = snowball_found,
   other_notretrieved_reports = 0,
   other_assessed             = snowball_found,
-  other_excluded             = paste0("Not eligible, ",
-                                      snowball_found - snowball_included),
+  other_excluded             = str_c("Not eligible, ",
+                                     snowball_found - snowball_included),
   new_studies                = included_db + snowball_included,
   new_reports                = included_db + snowball_included
 )
@@ -900,7 +945,7 @@ for (box in names(counts)) {
   template <- set_n(template, box, counts[[box]])
 }
 
-flow <- PRISMA_data(template)
+flow <- PRISMA_data(as.data.frame(template))
 PRISMA_flowdiagram(flow, previous = FALSE, other = TRUE, fontsize = 12)
 ```
 
@@ -960,8 +1005,6 @@ In R, the package [httr2](https://httr2.r-lib.org/) sends the same request.
 quotation marks, and `resp_body_json()` turns the answer into an R list:
 
 ```{r}
-library(httr2)
-
 res <- request("https://api.econbiz.de/v1/search") |>
   req_url_query(q = 'title:"four-day week"', size = 3) |>
   req_perform() |>
@@ -988,7 +1031,7 @@ fields ([the EconBiz section](#sec-econbiz) explains why all three):
 
 ```{r}
 in_fields <- function(terms, fields = c("title", "abstract", "description")) {
-  paste0("(", paste0(fields, ":(", terms, ")", collapse = " OR "), ")")
+  str_c("(", str_c(fields, ":(", terms, ")", collapse = " OR "), ")")
 }
 
 work_terms <- '"four-day week" OR "4-day week" OR "four day week"
@@ -997,8 +1040,9 @@ work_terms <- '"four-day week" OR "4-day week" OR "four day week"
 outcome_terms <- 'productiv* OR well-being OR wellbeing OR satisfaction
   OR burnout OR stress OR absentee* OR turnover OR performance'
 
-eb_query <- paste(in_fields(work_terms), "AND", in_fields(outcome_terms))
-eb_query <- gsub("\\s+", " ", eb_query) # one line, single spaces
+eb_query <- str_squish(
+  str_c(in_fields(work_terms), " AND ", in_fields(outcome_terms))
+)
 ```
 
 The function below fetches 500 records per request and asks again until it
@@ -1024,25 +1068,24 @@ econbiz_search <- function(q, page_size = 500) {
     hits <- c(hits, page)
   }
   first_or_na <- function(x) if (length(x)) as.character(x[[1]]) else NA_character_
-  rbindlist(lapply(hits, function(x) {
-    urls   <- unlist(x$identifier_url)
-    doi    <- grep("doi.org/", urls, value = TRUE)
-    handle <- regmatches(urls, regexpr("10419/[0-9]+", urls)) # EconStor
-    data.table(
+  map(hits, \(x) {
+    urls <- unlist(x$identifier_url)
+    tibble(
       id     = x$id,
       source = first_or_na(x$source),
       type   = first_or_na(x$type),
-      year   = as.integer(regmatches(first_or_na(x$date),
-                                     regexpr("[0-9]{4}", first_or_na(x$date)))[1]),
+      year   = as.integer(str_extract(first_or_na(x$date), "[0-9]{4}")),
       title  = first_or_na(x$title),
-      doi    = if (length(doi)) tolower(sub(".*doi.org/", "", doi[1])) else NA_character_,
-      handle = if (length(handle)) handle[1] else NA_character_
+      doi    = first_or_na(str_to_lower(str_remove(
+                 str_subset(urls, "doi.org/"), ".*doi.org/"))),
+      handle = first_or_na(str_extract(urls, "10419/[0-9]+") |> discard(is.na))
     )
-  }))
+  }) |>
+    list_rbind()
 }
 
 eb <- econbiz_search(eb_query)
-saveRDS(eb, here("data", paste0("econbiz_", Sys.Date(), ".rds")))
+write_rds(eb, here("data", str_c("econbiz_", Sys.Date(), ".rds")))
 nrow(eb)
 ```
 
@@ -1052,10 +1095,11 @@ titles reduced to lower-case letters and digits, because the same work often
 comes with slightly different punctuation:
 
 ```{r}
-eb <- eb[type != "event"]
-eb[, title_key := tolower(gsub("[^[:alnum:]]", "", title))]
-eb <- eb[is.na(doi) | !duplicated(doi)]
-eb <- eb[!duplicated(eb, by = c("title_key", "year"))]
+eb <- eb |>
+  filter(type != "event") |>
+  mutate(title_key = str_to_lower(str_remove_all(title, "[^[:alnum:]]"))) |>
+  filter(is.na(doi) | !duplicated(doi)) |>
+  distinct(title_key, year, .keep_all = TRUE)
 nrow(eb)
 ```
 
@@ -1070,19 +1114,23 @@ library(xml2)
 econstor_abstract <- function(handle) {
   oai <- request("https://www.econstor.eu/oai/request") |>
     req_url_query(verb = "GetRecord", metadataPrefix = "oai_dc",
-                  identifier = paste0("oai:econstor.eu:", handle)) |>
+                  identifier = str_c("oai:econstor.eu:", handle)) |>
     req_perform() |>
     resp_body_xml()
   abstract <- xml_find_first(oai, ".//dc:description", xml_ns(oai))
   if (inherits(abstract, "xml_missing")) NA_character_ else xml_text(abstract)
 }
 
-eb[, abstract := NA_character_]
-for (h in eb[!is.na(handle), handle]) {
-  eb[handle == h, abstract := econstor_abstract(h)]
-  Sys.sleep(0.5) # be polite
-}
-eb[, .(with_abstract = sum(!is.na(abstract)), records = .N)]
+econstor <- eb |>
+  filter(!is.na(handle)) |>
+  distinct(handle) |>
+  mutate(abstract = map_chr(handle, \(h) {
+    Sys.sleep(0.5) # be polite
+    econstor_abstract(h)
+  }))
+
+eb <- eb |> left_join(econstor, by = "handle")
+eb |> summarise(records = n(), with_abstract = sum(!is.na(abstract)))
 ```
 
 In our example (28 October 2026), this filled in 24 of the 74 abstracts. For
@@ -1093,16 +1141,16 @@ Now compare with OpenAlex. Records without a DOI cannot be matched this way,
 so they are counted separately:
 
 ```{r}
-oa_dois <- setdiff(clean_doi(works$doi), NA)
-eb_dois <- setdiff(eb$doi, NA)
+oa_dois <- works |> filter(!is.na(doi)) |> pull(doi) |> clean_doi() |> unique()
+eb_dois <- eb |> filter(!is.na(doi)) |> pull(doi) |> unique()
 
 c(only_openalex       = length(setdiff(oa_dois, eb_dois)),
   only_econbiz        = length(setdiff(eb_dois, oa_dois)),
   both                = length(intersect(oa_dois, eb_dois)),
-  econbiz_without_doi = eb[is.na(doi), .N])
+  econbiz_without_doi = sum(is.na(eb$doi)))
 
 # What does OpenAlex not find (by DOI)? Kind of publication and source
-eb[!doi %in% oa_dois, .N, by = .(type, source)][order(-N)]
+eb |> filter(!doi %in% oa_dois) |> count(type, source, sort = TRUE)
 ```
 
 The same function runs the German-language search from [the EconBiz section](#sec-econbiz).
@@ -1124,23 +1172,22 @@ If you have access to Web of Science ([see above](#sec-wos)), export the results
 `data/wos/`, and compare by DOI:
 
 ```{r}
-wos_files <- list.files(here("data", "wos"), pattern = "\\.txt$", full.names = TRUE)
-wos <- rbindlist(lapply(
-  wos_files, fread,
-  sep = "\t", quote = "", encoding = "UTF-8", colClasses = "character", fill = TRUE
-), fill = TRUE)
-wos <- unique(wos, by = "UT")
+wos <- list.files(here("data", "wos"), pattern = "\\.txt$", full.names = TRUE) |>
+  map(\(f) read_tsv(f, quote = "", col_types = cols(.default = col_character()))) |>
+  list_rbind() |>
+  distinct(UT, .keep_all = TRUE)
 
-oa_dois  <- setdiff(clean_doi(works$doi), NA)
-wos_dois <- setdiff(clean_doi(wos$DI[wos$DI != ""]), NA)
+wos_dois <- wos |> filter(!is.na(DI), DI != "") |> pull(DI) |> clean_doi() |> unique()
 
 c(only_openalex = length(setdiff(oa_dois, wos_dois)),
   only_wos      = length(setdiff(wos_dois, oa_dois)),
   both          = length(intersect(oa_dois, wos_dois)))
 
 # Where do the OpenAlex-only records come from?
-head(works[clean_doi(doi) %in% setdiff(oa_dois, wos_dois), .N,
-           by = .(source_display_name, language)][order(-N)], 15)
+works |>
+  filter(clean_doi(doi) %in% setdiff(oa_dois, wos_dois)) |>
+  count(source_display_name, language, sort = TRUE) |>
+  head(15)
 ```
 
 Records without a DOI cannot be matched this way; check a few of them by title.
