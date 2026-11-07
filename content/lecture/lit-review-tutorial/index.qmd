@@ -56,13 +56,17 @@ in and what is out:
 > through a four-day week — on employees and firms are reported in empirical
 > studies?*
 
-This is an effects question, so it follows the **PICO** format (lecture
-chapter 2): **p**opulation — employees and firms; **i**ntervention — working
-time reduction; **c**omparison — regular working hours; **o**utcome —
-productivity, well-being and the like. A question that maps what is known
-about a topic rather than an effect follows **PCC** instead: population,
+This is an effects question, so it follows the **PICO** format: 
+
+- **p**opulation — employees and firms; 
+- **i**ntervention — working time reduction; 
+- **c**omparison — regular working hours; 
+- **o**utcome — productivity, well-being and the like. 
+
+A question that maps what is known
+about a topic rather than an effect should follow **PCC** instead: population,
 concept, context. Population and comparison usually end up in your inclusion
-criteria; intervention and outcome become the concepts of your search.
+criteria, intervention and outcome become the concepts of your search.
 
 Then split the question into its **concepts** and collect, for each concept,
 the different ways in which authors express it. One column per concept:
@@ -128,8 +132,8 @@ found by a good search. Note them, with their DOIs, in the search log.
 Include at least one or two papers from **closed-access journals of large
 publishers** (Elsevier, Springer Nature). Many of these have no abstract in
 OpenAlex (lecture chapter 3). If your string misses them, you know that the
-missing abstracts are costing you recall — and you know to compensate in
-Step 6.
+missing abstracts are costing you recall — and you might need to compensate 
+for that in Step 6.
 :::
 
 ::: {.callout-important}

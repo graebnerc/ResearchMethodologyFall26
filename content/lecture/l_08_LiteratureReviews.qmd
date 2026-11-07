@@ -49,9 +49,8 @@ together with ways to compensate for it.
 
 The running example is the literature on **capabilities and routines** — from
 Nelson and Winter's evolutionary theory to dynamic capabilities in strategic
-management. Shorter examples come from firm growth, evolutionary economic
-geography, path dependence, and the debate on corporate social and financial
-performance.
+management. Shorter examples come from firm growth, path dependence, and the
+debate on corporate social and financial performance.
 
 ## 🎬 Video chapters
 
@@ -143,10 +142,9 @@ university library; see the
 - @becker2004organizational and @lane2006reification — two reviews that show
   how a concept drifts as a literature grows.
 - @schilke2018quo — a content-analytic review of dynamic capabilities.
-- @content2016related — a short review of 21 empirical studies in
-  evolutionary economic geography.
-- @aistleitner2021capability and @graebner2023degrowth — two systematic
-  reviews I was involved in, discussed in the lecture as worked examples.
+
+*Two systematic reviews I was involved in:* @aistleitner2021capability and
+@graebner2023degrowth.
 
 ## ✍️ Exercises and coursework
 
