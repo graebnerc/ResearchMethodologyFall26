@@ -94,8 +94,10 @@ everything in one go, but please keep the order.
   or Web of Science — and an optional R part runs the whole search from R,
   including the EconBiz API.
 
-- The tutorial comes with three templates you can reuse for your term paper:
-  a **search log**, a **screening sheet**, and a **concept matrix**.
+- [**Workbook with all templates**](lit-review-tutorial/L08-review-templates.xlsx)
+  (download) — a **search log**, a **screening sheet**, a **concept matrix**
+  and a sheet for **limitations**, which you can reuse for your term paper. It
+  works in Excel, LibreOffice and Numbers.
 
 OpenAlex is free; you only need a free account (and API key) for the R part.
 EconBiz is free and needs no account at all.

@@ -7,11 +7,12 @@ execute:
   eval: false
 resources:
   - L08-review-templates.xlsx
+  - prisma-example.svg
 format:
   html:
     toc: true
     toc-depth: 2
-    number-sections: true
+    number-sections: false
     code-fold: false
 ---
 
@@ -30,10 +31,10 @@ explains the *why*; here we focus on the *how*.
   [workbook with all templates](L08-review-templates.xlsx) (search log,
   screening sheet, concept matrix, limitations). It works in Excel, LibreOffice
   and Numbers.
-- **Digression:** @sec-second adds a second database: @sec-econbiz shows
-  EconBiz, the free subject portal for economics, and @sec-wos what Web of
-  Science adds if you have access through a university.
-- **Optional R part:** @sec-r runs the whole search from R, which makes it fully
+- **Digression:** [a second database](#sec-second) —
+  [EconBiz](#sec-econbiz), the free subject portal for economics, and what
+  [Web of Science](#sec-wos) adds if you have access through a university.
+- **Optional R part:** [the R part](#sec-r) runs the whole search from R, which makes it fully
   reproducible. The code is shown but not run on this page, because it needs
   your own (free) API key.
 :::
@@ -175,6 +176,25 @@ AND
 
 ## Run it in the web interface
 
+::: {.callout-note}
+## Other ways to run the same search
+The web interface is the easiest route, and the one this step describes. The
+same string also works in other ways:
+
+- **R**, with the package openalexR: [the R part](#sec-r) below, and a
+  complete project that reproduces the whole example (see there). Your script
+  then *is* your search documentation.
+- **Python**, with the package [pyalex](https://github.com/J535D165/pyalex).
+- **The API directly**: a search is a web address, e.g.
+  `https://api.openalex.org/works?filter=title_and_abstract.search:"four-day week"`
+  — paste it into your browser and you get the answer as data (JSON).
+- **Another database** with the same concepts: EconBiz or Web of Science —
+  see [the digression](#sec-second).
+
+Routes through the API (R, Python, web address) need a free OpenAlex API key
+for anything beyond the first page of results.
+:::
+
 1. Go to [openalex.org](https://openalex.org) and paste the string into the
    search field.
 2. Restrict the search to **title and abstract** if the interface offers this
@@ -191,7 +211,7 @@ AND
 ## Interfaces change
 Web interfaces are redesigned regularly. If a button described here has moved,
 the logic stays the same: one query, explicit filters, a documented result. The
-R part (@sec-r) runs exactly the same search through the API and is not affected
+[R part](#sec-r) runs exactly the same search through the API and is not affected
 by interface changes.
 :::
 
@@ -218,16 +238,22 @@ version of your string, record:
 |:------|:--------|
 | Date | 2026-11-12 |
 | Database and route | OpenAlex, web interface (or: API via R) |
-| Version | v2 |
+| Version of your string | v2 — you number your string versions yourself |
 | Full string | `( … ) AND ( … )` — copied, not paraphrased |
 | Search field | Title and abstract |
 | Filters | Type: article, review; language: English |
 | Results | number of records |
 | Query URL / script | the page URL, or the name of your R script |
 | Test set found | e.g. 4 of 5 |
+| Share without abstract | e.g. 0.18 — share of the results without abstract |
 | Change from previous version | added "work-sharing" after test paper 3 was missed |
 
 : What goes into the search log.
+
+The **version** is that of *your search string*, not of OpenAlex: every time
+you change the string, give it a new number (v1, v2, …), so that you can say
+which version found what. OpenAlex itself has no version number you could
+cite; the **date** of the search takes its place.
 
 ::: {.callout-note}
 A string you cannot reproduce from your log is a string you cannot report. Fill
@@ -243,7 +269,7 @@ in the log *while* you search, not afterwards.
 Use the **export** function of the web interface and choose the spreadsheet
 format (CSV). Keep this file untouched as the record of your search, and work
 on a copy. Alternatively, let R fetch the records and build the screening sheet
-(@sec-r-screening). For writing, you can additionally export in RIS format for
+([in R](#sec-r-screening)). For writing, you can additionally export in RIS format for
 Zotero.
 
 ## Fill in missing abstracts
@@ -262,7 +288,7 @@ record without one:
    (column `abstract_source`).
 
 The R part can fill in some abstracts automatically from Crossref
-(@sec-r-abstracts) — but not those of publishers that do not deposit abstracts
+([in R](#sec-r-abstracts)) — but not those of publishers that do not deposit abstracts
 there, which includes Elsevier.
 
 ## Screen titles and abstracts
@@ -306,7 +332,7 @@ including one from a closed-access journal. In OpenAlex, open each record:
 
 Screen what you find **with the same criteria**, and count the snowballed
 papers separately; they get their own box in the flow diagram. In R,
-`oa_snowball()` does both directions in one call (@sec-r-snowball).
+`oa_snowball()` does both directions in one call ([in R](#sec-r-snowball)).
 
 ::: {.callout-warning}
 ## Snowballing stays inside the community
@@ -337,6 +363,19 @@ For the example:
 : Example columns of the concept matrix.
 
 Pilot the columns on three papers, adjust them once, then keep them fixed.
+A filled matrix could look like this:
+
+| Study | Intervention | Context | Design | Selection | Outcomes | Findings | Caveats |
+|:------|:-------------|:--------|:-------|:----------|:---------|:---------|:--------|
+| A | Reduced hours, 100-80-100 | UK, mixed sectors, small firms | Pilot, survey before and after | Firms volunteered | Burnout, job satisfaction (self-reported) | Burnout down, satisfaction up | No control group; self-selected firms |
+| B | Shorter legal workweek | One country, all sectors | Panel, before and after a law | Everyone covered by the law | Job and leisure satisfaction | Small rise in satisfaction | A policy change, not a four-day week |
+| C | Compressed week: same hours in four days | US, one manufacturing plant | Case study over a year | One plant | Fatigue, satisfaction | Early enthusiasm, fatigue later | One firm; long working days |
+
+: Example concept matrix (illustrative studies, not real ones).
+
+Reading the column *Intervention* already changes the picture: A and C are
+both called a "four-day week", but A cuts hours and C only rearranges them —
+so their different findings on fatigue are no contradiction.
 
 Then **read the matrix by column**: Where do studies agree? Where do they
 disagree — and does the disagreement line up with intervention type, design or
@@ -371,9 +410,14 @@ Count what happened to every record:
 
 : Where the numbers for the flow diagram come from.
 
+![A PRISMA 2020 flow diagram for the example — illustrative numbers. The main
+column follows the records from the database to the included studies; the
+boxes on the right show what dropped out at each stage; the arm at the top
+right adds the studies found by snowballing.](prisma-example.svg){fig-alt="PRISMA 2020 flow diagram: 380 records identified and screened, 300 excluded; 80 reports sought, 4 not retrieved; 76 assessed, 52 excluded with reasons (not empirical 21, no working-time reduction 18, no outcome reported 13); 7 studies from snowballing; 31 studies included."}
+
 Draw it with the [PRISMA2020 Shiny app](https://estech.shinyapps.io/prisma_flowdiagram/),
-the templates on the [PRISMA website](https://www.prisma-statement.org/), or in
-R (@sec-r-prisma).
+the templates on the [PRISMA website](https://www.prisma-statement.org/), or
+[in R](#sec-r-prisma).
 
 ## The methods paragraph
 
@@ -386,6 +430,27 @@ In a term paper, the following fits into one paragraph plus an appendix:
 5. Who screened, and how disagreements were handled
 6. The numbers → flow diagram
 7. How you synthesised (concept matrix, which dimensions)
+
+::: {.callout-tip collapse="true"}
+## Example: a methods paragraph
+*(Numbers as in the illustrative flow diagram above.)*
+
+> We searched OpenAlex on 12 November 2026 through its web interface, in
+> titles and abstracts, for articles and reviews in English (full string and
+> query URL in Appendix A). We included empirical studies, quantitative or
+> qualitative, of a reduction in working time at firm, sector or country
+> level that report at least one outcome for employees or firms; conceptual
+> papers and studies of individually chosen part-time work were excluded.
+> Of the 380 records, 22 % had no abstract in OpenAlex; for these, we took
+> the abstract from the publisher's page. One person screened all titles and
+> abstracts and then the full texts; a second person screened a random 20 %
+> of the records, and disagreements (6 of 76) were resolved by discussion
+> and led to a sharper definition of "working time reduction". Backward and
+> forward snowballing from three included studies added seven studies. Of
+> the 31 included studies, we extracted intervention, context, design,
+> selection, outcomes and findings into a concept matrix (Appendix B) and
+> synthesised them by intervention type and design (Figure 1).
+:::
 
 ## The limitations paragraph
 
@@ -435,7 +500,7 @@ papers and further sources. It is free and needs no account.
 
 - **No abstracts in the results.** Abstracts are *searched*, but the results
   do not show them. For screening, follow the link to EconStor, which shows the
-  abstract (in R: @sec-r-second), or to the publisher, or look up the DOI in
+  abstract ([in R](#sec-r-second)), or to the publisher, or look up the DOI in
   OpenAlex.
 - **No citation data:** backward and forward snowballing (step 6) stays in
   OpenAlex.
@@ -466,7 +531,7 @@ O = productiv* OR well-being OR wellbeing OR satisfaction
     OR burnout OR stress OR absentee* OR turnover OR performance
 ```
 
-Write out `W` and `O` in full when you search; @sec-r-second builds the string
+Write out `W` and `O` in full when you search; [the R part](#sec-r-second) builds the string
 in R. On 28 October 2026 it returned 98 records, and 74 after events and duplicates
 were removed.
 
@@ -508,7 +573,7 @@ TS=(productiv* OR well-being OR wellbeing OR satisfaction
 ::: {.callout-tip}
 ## Exercise: compare two databases
 Run the equivalent string in OpenAlex and in EconBiz — or in Web of Science, if
-you have access — and compare the result sets (@sec-r-second shows how in R).
+you have access — and compare the result sets ([in R](#sec-r-second)).
 Which records does only one of them find? What kinds of publication, which
 languages, which journals or series are they? This makes the coverage and
 metadata biases of lecture chapter 6 visible on your own topic.
@@ -523,6 +588,17 @@ This part builds on the implementation lab sessions on
 [openalexR](https://docs.ropensci.org/openalexR/) [@aria2024openalexr] to run
 the search directly against the OpenAlex API. The big advantage: your script
 *is* your search documentation — anyone can rerun it.
+
+::: {.callout-note}
+## The complete project
+All code of this part, for the example search, is also available as one
+complete project, **RM-LitReviewTutorial**: a Quarto report that runs every
+step and saves every search result in its `data/` folder. Rendering it again
+reads the saved results instead of searching again — so it reproduces exactly,
+without an API key. Use it to see what the code below produces, or as a
+starting point for your own project.
+<!-- TODO before release: link the published repository here -->
+:::
 
 ## Setup and API key
 
@@ -833,7 +909,7 @@ hides the arm for earlier versions of a review, which you do not have.
 
 ## Compare with a second database {#sec-r-second}
 
-For the exercise in @sec-second.
+For the exercise in [the digression](#sec-second).
 
 ### EconBiz
 
@@ -853,7 +929,7 @@ can change:
 
 | Parameter | Meaning | Example |
 |-----------|---------|---------|
-| `q` | the search, in the same syntax as in @sec-econbiz | `title:"four-day week"` |
+| `q` | the search, in the same syntax as in [the EconBiz section](#sec-econbiz) | `title:"four-day week"` |
 | `size` | how many records to return in one answer | `3`, `500` |
 | `from` | number of the first record to return, counting from 1 (for paging) | `1`, `501`, `1001` |
 | `sort` | order of the records; the default is relevance | `id asc` |
@@ -862,7 +938,7 @@ The answer has two parts that matter: `hits` → `total`, the number of hits,
 and `hits` → `hits`, the list of records. Each record has fields such as `id`,
 `title`, `creator`, `date`, `type` (article, book, …), `source` (ECONIS,
 EconStor, RePEc, …), `subject` and `identifier_url` (links, including the DOI
-if there is one). The abstract text is **not** included (@sec-econbiz). The
+if there is one). The abstract text is **not** included ([see above](#sec-econbiz)). The
 list of fields that can appear in an answer
 (<https://api.econbiz.de/v1/fields?scope=display>) does name an `abstract`
 field, but in our tests (October 2026) it was empty for every record — in the
@@ -908,7 +984,7 @@ fetching, ask for `size = 0`: the answer then contains only `total`.
 #### The search in R
 
 A small helper puts the same terms into the title, abstract and description
-fields (@sec-econbiz explains why all three):
+fields ([the EconBiz section](#sec-econbiz) explains why all three):
 
 ```{r}
 in_fields <- function(terms, fields = c("title", "abstract", "description")) {
@@ -1010,7 +1086,7 @@ eb[, .(with_abstract = sum(!is.na(abstract)), records = .N)]
 ```
 
 In our example (28 October 2026), this filled in 24 of the 74 abstracts. For
-the other records, use the DOI as in @sec-r-abstracts, or the steps for
+the other records, use the DOI as [with Crossref](#sec-r-abstracts), or the steps for
 filling in missing abstracts by hand from step 5.
 
 Now compare with OpenAlex. Records without a DOI cannot be matched this way,
@@ -1029,7 +1105,11 @@ c(only_openalex       = length(setdiff(oa_dois, eb_dois)),
 eb[!doi %in% oa_dois, .N, by = .(type, source)][order(-N)]
 ```
 
-The same function runs the German-language search from @sec-econbiz:
+The same function runs the German-language search from [the EconBiz section](#sec-econbiz).
+The umlaut in *Arbeitszeitverkürzung* needs an R session in UTF-8. RStudio and
+Windows use UTF-8 anyway; if you run R from a terminal and the search returns
+far fewer records than expected, check ``l10n_info()$`UTF-8` `` — if it is `FALSE`,
+run `Sys.setlocale("LC_CTYPE", "en_US.UTF-8")` first.
 
 ```{r}
 de_terms <- 'Arbeitszeitverkürzung OR "Vier-Tage-Woche" OR "4-Tage-Woche"'
@@ -1039,7 +1119,7 @@ nrow(eb_de)
 
 ### Web of Science
 
-If you have access to Web of Science (@sec-wos), export the results as a
+If you have access to Web of Science ([see above](#sec-wos)), export the results as a
 **tab-delimited file** (record content *Full Record*), save it in
 `data/wos/`, and compare by DOI:
 
