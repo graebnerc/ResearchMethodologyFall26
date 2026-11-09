@@ -311,7 +311,7 @@ body:has(section.divider.present) .slide-logo { display: none !important; }
 .reveal .colhead {
   color: $euf-blue;
   font-weight: 700;
-  font-size: 0.84em;
+  font-size: 1.12em;   // the column topic outranks its bullets
   margin: 0 0 0.75em 0;
 }
 
@@ -467,3 +467,189 @@ body:has(section.divider.present) .slide-logo { display: none !important; }
   transition: opacity 0.15s ease;
 }
 .reveal .slide-menu-button a:hover { opacity: 1; }
+
+// ---- task topic, solutions -------------------------------------------------
+// The first paragraph of a taskbox names the topic of the task (a claim, a
+// scenario, "Your own topic:"): bold, in EUF blue, with air before the list.
+.reveal .taskbox > p:first-child:not(:only-child) {
+  font-weight: 700;
+  color: $euf-blue;
+  margin-bottom: 0.9em;
+}
+
+// Solution revealed after a click: ::: {.answer .fragment .nonincremental}
+// (not .solution: Quarto reserves that class for its proof environment and
+// prints a "Solution." label)
+// Starts with [Solution]{.solhead}. When a slide carries one, the taskbox
+// moves up so that both fit.
+.reveal section:has(.answer) .taskbox {
+  margin-top: 0.4em;
+  padding: 1.0em 1.6em;
+}
+.reveal .answer {
+  border-left: 4px solid $euf-teal;
+  padding: 0.5em 0 0.5em 1.1em;
+  margin: 1.2em auto 0 auto;
+  width: 80%;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+.reveal .answer .solhead {
+  display: block;
+  color: $euf-teal;
+  font-weight: 700;
+  margin-bottom: 0.4em;
+}
+.reveal .answer p { margin: 0 0 0.4em 0; }
+.reveal .slides section .answer ul > li { margin-bottom: 0.35em; }
+
+// ---- tables revealed row by row --------------------------------------------
+// : {.stepped} on a table: assets/stepped-rows.html turns every body row into
+// a fragment; the row just revealed is highlighted until the next click.
+.reveal table.stepped tbody tr.fragment.current-fragment td {
+  background: rgba($euf-blue, 0.08);
+  color: $euf-navy;
+  font-weight: 600;
+}
+
+// Larger table variant for slides that are read from the back of the room.
+.reveal table.lg {
+  font-size: 0.82em;
+  line-height: 1.3;
+}
+
+// Larger code: wrap the block in ::: {.code-lg}
+// (the size goes on <pre>: reveal sets <pre> to $code-block-font-size, and
+// an em size on <code> would be relative to that, i.e. smaller still)
+.reveal .code-lg pre.sourceCode,
+.reveal .code-lg pre {
+  font-size: 0.78em;
+  line-height: 1.4;
+  margin: 0 0 0.9em 0;
+}
+.reveal .code-lg pre code { font-size: 1em; }
+
+// ---- continuum: two extremes on a line, the target zone in between --------
+.reveal .continuum {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.25fr 1fr;
+  column-gap: 1.2em;
+  margin-top: 4.2em;   // sits in the vertical middle of the slide
+  padding-top: 2.6em;
+}
+// the line itself, with arrowheads at both ends
+.reveal .continuum::before {
+  content: "";
+  position: absolute;
+  top: 1.15em;
+  left: 0.6em;
+  right: 0.6em;
+  height: 4px;
+  background: $euf-blue;
+}
+// arrowheads: CSS triangles on an empty ::: {.cline} ::: inside the continuum
+.reveal .continuum .cline {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.reveal .continuum .cline::before,
+.reveal .continuum .cline::after {
+  content: "";
+  position: absolute;
+  top: calc(1.15em - 10px);
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+.reveal .continuum .cline::before { left: 0; border-right: 20px solid $euf-blue; }
+.reveal .continuum .cline::after  { right: 0; border-left: 20px solid $euf-blue; }
+.reveal .continuum .cpos { position: relative; z-index: 1; }
+.reveal .continuum .cpos.right { grid-column: 3; text-align: right; }
+.reveal .continuum .cpos.mid {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: center;
+  background: rgba($euf-teal, 0.14);
+  margin-top: -2.6em;
+  padding: 2.6em 0.9em 1.0em 0.9em;
+}
+.reveal .continuum .chead {
+  display: block;
+  font-weight: 700;
+  color: $euf-blue;
+  margin-bottom: 0.5em;
+}
+.reveal .continuum .cpos.mid .chead { color: $euf-teal; }
+.reveal .continuum p { margin: 0; line-height: 1.35; color: $euf-blue; }
+.reveal .continuum .cpos p:last-child:not(:first-child) {
+  color: $euf-gray;
+  font-size: 0.8em;
+  margin-top: 0.7em;
+}
+
+// Two header rows: the upper one names the group a column belongs to
+// (data extraction slide).
+.reveal table.extraction tr.groups th {
+  color: $euf-teal;
+  font-size: 0.8em;
+  font-weight: 700;
+  border-bottom: none;
+  padding-bottom: 0.3em;
+  // a teal underline that stops short of the right edge, so that the
+  // underlines of adjacent groups stay apart and a two-column group reads
+  // as one bracket
+  background: linear-gradient($euf-teal, $euf-teal) left bottom /
+              calc(100% - 12px) 3px no-repeat;
+}
+
+// ---- tracker: where does this slide belong? -------------------------------
+// Drawn by assets/slide-tracker.html from data-stage / data-bias on the slide.
+.reveal .tracker {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: 0.5em;
+  font-size: 0.56em;
+  font-weight: 700;
+  line-height: 1;
+}
+.reveal .tracker span {
+  border: 1.5px solid $euf-blue;
+  color: $euf-blue;
+  padding: 0.4em 0.7em;
+  opacity: 0.25;
+}
+.reveal .tracker span.on {
+  background: $euf-blue;
+  color: #FFFFFF;
+  opacity: 1;
+}
+// room for the tracker above the title
+.reveal section.tracked > h2 { margin-top: 1.05em; }
+
+// ---- three concept boxes in one row ----------------------------------------
+.reveal .grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1em;
+  margin-bottom: 1.1em;
+}
+
+.reveal .cap.centred { text-align: center; }
+
+// ---- numbered list of the six stages ---------------------------------------
+.reveal .stages ol { margin-left: 1.3em; }
+.reveal .slides section .stages ol > li {
+  color: $euf-blue;
+  margin-bottom: 0.72em;
+}
+.reveal .stages ol > li::marker { font-weight: 700; }
+
+// ---- a consequence line: like a bullet's text, but without the bullet ------
+.reveal .consequence p { margin: 0 0 1.15em 0.8em; }
+
+// Slides with a solution need the room: tighter list in the task box
+.reveal .slides section:has(.answer) .taskbox ul > li { margin-bottom: 0.3em; }
+.reveal section:has(.answer) .taskbox { line-height: 1.4; }

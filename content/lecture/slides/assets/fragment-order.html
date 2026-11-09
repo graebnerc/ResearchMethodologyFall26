@@ -1,0 +1,41 @@
+<!-- Fragment order helpers, run after the slides are in the DOM.
+
+     1. Tables with class "stepped" are revealed row by row: every body row
+        becomes a fragment (euf-slides.scss highlights the current one).
+        reveal.js may already have numbered the slide's other fragments
+        (e.g. a closing arrow); those numbers are removed, so that
+        Reveal.sync() orders all fragments by their position in the
+        document: rows first, then what follows the table.
+
+     2. On a slide with class "sync-fragments", an element with
+        data-with="k" appears together with the k-th other fragment of the
+        slide (counted in document order, from 1) — e.g. a diagram part
+        together with the bullet that explains it. -->
+<script>
+(function () {
+  document.querySelectorAll("table.stepped").forEach(function (table) {
+    table.querySelectorAll("tbody tr").forEach(function (tr) {
+      tr.classList.add("fragment");
+    });
+    var slide = table.closest("section");
+    if (slide) {
+      slide.querySelectorAll(".fragment").forEach(function (f) {
+        f.removeAttribute("data-fragment-index");
+      });
+    }
+  });
+  document.querySelectorAll("section.sync-fragments").forEach(function (slide) {
+    var all = Array.prototype.slice.call(slide.querySelectorAll(".fragment"));
+    var regular = all.filter(function (f) { return !f.hasAttribute("data-with"); });
+    regular.forEach(function (f, i) { f.setAttribute("data-fragment-index", i); });
+    all.forEach(function (f) {
+      if (f.hasAttribute("data-with")) {
+        f.setAttribute("data-fragment-index", parseInt(f.getAttribute("data-with"), 10) - 1);
+      }
+    });
+  });
+  function sync() { if (window.Reveal && Reveal.sync) Reveal.sync(); }
+  if (window.Reveal && Reveal.isReady && Reveal.isReady()) sync();
+  else if (window.Reveal && Reveal.on) Reveal.on("ready", sync);
+})();
+</script>

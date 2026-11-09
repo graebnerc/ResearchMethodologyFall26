@@ -1,0 +1,30 @@
+<!-- Tracker: a row of small labels at the top right of a slide that shows
+     where the slide belongs in a larger structure. The label(s) of the
+     current part are highlighted, the others fade out.
+
+     In the slide heading, give the positions (from 1) in one of the lists:
+       ## Title {data-stage="3"}       one of the six stages of a review
+       ## Title {data-bias="3 4"}      one or more of the four bias groups -->
+<script>
+(function () {
+  var lists = {
+    stage: ["Protocol", "Search", "Screening", "Extraction", "Synthesis", "Reporting"],
+    bias: ["The literature", "Database and search", "Screening", "Synthesis and reporting"]
+  };
+  Object.keys(lists).forEach(function (key) {
+    document.querySelectorAll("section[data-" + key + "]").forEach(function (slide) {
+      var active = slide.getAttribute("data-" + key).split(" ");
+      var row = document.createElement("div");
+      row.className = "tracker";
+      lists[key].forEach(function (label, i) {
+        var item = document.createElement("span");
+        item.textContent = label;
+        if (active.indexOf(String(i + 1)) !== -1) item.className = "on";
+        row.appendChild(item);
+      });
+      slide.classList.add("tracked");
+      slide.insertBefore(row, slide.firstChild);
+    });
+  });
+})();
+</script>
