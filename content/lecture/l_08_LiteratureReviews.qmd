@@ -24,7 +24,7 @@ shows what it means for the literature review section of your term paper or
 thesis. After this session you can …
 
 1. **choose** a type of review (narrative, integrative, scoping, systematic,
-   meta-analysis, bibliometric) that fits a given purpose, and justify the
+   meta-analysis) that fits a given purpose, and justify the
    choice;
 2. **explain** what a literature review can establish and what it cannot;
 3. **translate** a topic into a reviewable question and a concept table, and

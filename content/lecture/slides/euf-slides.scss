@@ -602,3 +602,54 @@ body:has(section.divider.present) .slide-logo { display: none !important; }
   background: linear-gradient($euf-teal, $euf-teal) left bottom /
               calc(100% - 12px) 3px no-repeat;
 }
+
+// ---- tracker: where does this slide belong? -------------------------------
+// Drawn by assets/slide-tracker.html from data-stage / data-bias on the slide.
+.reveal .tracker {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: 0.5em;
+  font-size: 0.56em;
+  font-weight: 700;
+  line-height: 1;
+}
+.reveal .tracker span {
+  border: 1.5px solid $euf-blue;
+  color: $euf-blue;
+  padding: 0.4em 0.7em;
+  opacity: 0.25;
+}
+.reveal .tracker span.on {
+  background: $euf-blue;
+  color: #FFFFFF;
+  opacity: 1;
+}
+// room for the tracker above the title
+.reveal section.tracked > h2 { margin-top: 1.05em; }
+
+// ---- three concept boxes in one row ----------------------------------------
+.reveal .grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1em;
+  margin-bottom: 1.1em;
+}
+
+.reveal .cap.centred { text-align: center; }
+
+// ---- numbered list of the six stages ---------------------------------------
+.reveal .stages ol { margin-left: 1.3em; }
+.reveal .slides section .stages ol > li {
+  color: $euf-blue;
+  margin-bottom: 0.72em;
+}
+.reveal .stages ol > li::marker { font-weight: 700; }
+
+// ---- a consequence line: like a bullet's text, but without the bullet ------
+.reveal .consequence p { margin: 0 0 1.15em 0.8em; }
+
+// Slides with a solution need the room: tighter list in the task box
+.reveal .slides section:has(.answer) .taskbox ul > li { margin-bottom: 0.3em; }
+.reveal section:has(.answer) .taskbox { line-height: 1.4; }

@@ -36,8 +36,8 @@ explains the *why*; here we focus on the *how*.
   [Web of Science](#sec-wos) adds if you have access through a university.
 - **Optional R part:** [the R part](#sec-r) runs the whole search from R, which makes it fully
   reproducible. The code is shown but not run on this page, because it needs
-  your own (free) API key. The complete example, with all results, is the
-  project [RM-LitReviewTutorial](https://github.com/graebnerc/RM-LitReviewTutorial) on GitHub.
+  your own (free) API key. The complete example, with all results, is available
+  via the repo [RM-LitReviewTutorial](https://github.com/graebnerc/RM-LitReviewTutorial) on GitHub.
 :::
 
 ::: {.callout-warning}
@@ -45,6 +45,13 @@ explains the *why*; here we focus on the *how*.
 OpenAlex is updated continuously. Your numbers will not match anyone else's
 exactly — which is why you record the **date** and the **exact query** of every
 search, and why the R part saves a copy of each result set.
+:::
+
+::: {.callout-tip}
+## The illustration matters
+This tutorial is meant to mimic a complete review. But you can easily follow
+the steps by just doing a reduced version. This might be more time-efficient
+if you just want to get an idea of how to do such a review.
 :::
 
 # Step 1: From topic to question and concept table

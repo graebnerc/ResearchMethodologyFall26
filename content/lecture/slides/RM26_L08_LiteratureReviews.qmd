@@ -1,10 +1,10 @@
 ---
 title: "Literature reviews"
-subtitle: "Theoretical and Empirical Research Methodology, lecture 8"
+# subtitle: "Theoretical and Empirical Research Methodology, lecture 8"
 author: "Prof. Dr. Claudius Gräbner-Radkowitsch"
-institute: "Department of Pluralist Economics, Europa-Universität Flensburg"
-date: "2026-11-09"
-date-format: "D MMMM YYYY"
+institute: "Department of Pluralist Economics, Europa-Universität Flensburg<br> Institute for the Comprehensive Analysis of the Economy, Johannes Kepler University Linz"
+# date: "2026-11-09"
+# date-format: "D MMMM YYYY"
 # Declared here, not inherited from _quarto.yml: the deck is excluded from the
 # project render list (it must not reach the students before the lecture), so
 # it is rendered standalone and would otherwise print raw @keys and an empty
@@ -29,7 +29,9 @@ format:
     progress: false
     transition: none
     history: false
-    include-after-body: assets/fragment-order.html
+    include-after-body:
+      - assets/fragment-order.html
+      - assets/slide-tracker.html
 ---
 
 ## Introduction {.divider background-color="#00395B"}
@@ -74,7 +76,7 @@ format:
 - **Translate** a topic into a concept table and a search string
 - **Assess** a search: precision, recall, validation
 - **Select** studies by explicit criteria; document in a **PRISMA** flow diagram
-- **Synthesise** with a concept matrix
+- **Synthesize** with a concept matrix
 - **Identify** biases — in literature, databases, search and synthesis
 
 ::: {.notes}
@@ -179,7 +181,7 @@ Same logic, different scale
 ::: {.columns .divided}
 ::: {.column width="50%"}
 ::: {.colhead}
-Stand-alone review
+Stand-alone review: systematic
 :::
 
 - Review **is** the contribution
@@ -193,14 +195,14 @@ Stand-alone review
 
 ::: {.column width="50%"}
 ::: {.colhead}
-Review section
+Review section: non-systematic
 :::
 
 - Review **motivates** the contribution
 
-- One database, documented string, explicit criteria
+- Optional: documented string, explicit criteria
 
-- One **paragraph** + flow diagram
+- One **paragraph** + flow diagram, if anything
 
 - Paper, thesis, report
 :::
@@ -220,6 +222,66 @@ Learning the left is helpful for the right as well!
 - Arrow: discipline of the left, at the scale of the right
 :::
 
+## Reviews come in two families
+
+::: {.dek}
+Explicit, documented method — or not
+:::
+
+```{=html}
+<svg viewBox="0 0 1400 470" width="100%" role="img"
+     aria-label="Tree diagram: a review is either narrative and non-systematic, or systematic. Integrative lies between the two branches; under systematic: scoping and meta-analysis.">
+  <g font-family="Inter, sans-serif" text-anchor="middle">
+    <g stroke="#00395B" stroke-width="3" fill="none">
+      <path d="M560 100 V140 H230 V180"/>
+      <path d="M560 140 H890 V180"/>
+    </g>
+    <rect x="430" y="10" width="260" height="90" fill="#00395B"/>
+    <text x="560" y="68" font-size="38" font-weight="700" fill="#FFFFFF">Review</text>
+    <rect x="50" y="180" width="360" height="110" fill="#FFFFFF" stroke="#00395B" stroke-width="3"/>
+    <text x="230" y="227" font-size="33" font-weight="700" fill="#00395B">Narrative /</text>
+    <text x="230" y="267" font-size="33" font-weight="700" fill="#00395B">non-systematic</text>
+    <rect x="720" y="180" width="340" height="110" fill="#FFFFFF" stroke="#00395B" stroke-width="3"/>
+    <text x="890" y="247" font-size="33" font-weight="700" fill="#00395B">Systematic</text>
+    <g class="fragment">
+      <g stroke="#6F6F6F" stroke-width="3" fill="none">
+        <path d="M890 290 V330 H560 V370"/>
+        <path d="M230 290 V330 H560"/>
+        <path d="M890 330 V370"/>
+        <path d="M890 330 H1190 V370"/>
+      </g>
+      <g fill="#FFFFFF" stroke="#6F6F6F" stroke-width="2.5">
+        <rect x="425" y="370" width="270" height="90"/>
+        <rect x="755" y="370" width="270" height="90"/>
+        <rect x="1055" y="370" width="270" height="90"/>
+      </g>
+      <g font-size="31" fill="#6F6F6F">
+        <text x="560" y="426">Integrative</text>
+        <text x="890" y="426">Scoping</text>
+        <text x="1190" y="426">Meta-analysis</text>
+      </g>
+    </g>
+  </g>
+</svg>
+```
+
+::: {.source}
+Simplified from @snyder2019literature and @grant2009typology.
+:::
+
+::: {.notes}
+- Review: first question — is the method explicit and documented?
+- Narrative / non-systematic: selective, interpretive · often undocumented ·
+  not worthless, but not checkable
+- Systematic: explicit question, documented search, explicit criteria
+- Click — variants, by what they are for:
+  - Integrative: between the branches · new framework from diverse work ·
+    purposive search, can lean either way
+  - Scoping: size and variety of a field
+  - Meta-analysis: pools effect sizes
+- Real reviews mix these · next slide: purpose of each
+:::
+
 ## Choose the review type by purpose
 
 ::: {.dek}
@@ -229,11 +291,10 @@ Purpose first, label second
 | Type | Purpose | Search | Synthesis | Example |
 |:-----|:--------|:-------|:----------|:--------|
 | Narrative | Overview, interpretation | Selective, often undocumented | Narrative | Textbook chapters |
+| Systematic | Focused question | Exhaustive, reproducible | Structured, often thematic | @lane2006reification |
 | Integrative | New framework from diverse work | Purposive, documented | Conceptual | @becker2004organizational |
 | Scoping | Size and variety of a field | Broad, documented | Mapping, counts | @arksey2005scoping (method) |
-| Systematic | Focused question | Exhaustive, reproducible | Structured, often thematic | @lane2006reification |
 | Meta-analysis | Pooled effect sizes | Exhaustive | Statistical | @orlitzky2003corporate |
-| Bibliometric | Structure of a field | Database export | Citation networks | — |
 
 : {.tasks .stepped}
 
@@ -245,6 +306,8 @@ Simplified from @snyder2019literature and @grant2009typology. Lane et al.:
 ::: {.notes}
 - Purpose first, label second · real reviews mix types
 - Narrative: overview, interpretation · search often undocumented · textbooks
+- Systematic: focused question, exhaustive, reproducible · Lane et al.: 289
+  papers, 14 journals
 - Integrative: new framework from diverse work · Becker 2004 on routines
 - Scoping: size and variety of a field
   - how much research, of what kind — not "does it work?"
@@ -252,11 +315,8 @@ Simplified from @snyder2019literature and @grant2009typology. Lane et al.:
   - "mapping" = counting and categorising: years, disciplines, countries,
     methods, concepts
   - result: a map — where research is dense, where thin
-- Systematic: focused question, exhaustive, reproducible · Lane et al.: 289
-  papers, 14 journals
 - Meta-analysis: pooled effect sizes · Orlitzky et al. on CSR and financial
   performance
-- Bibliometric: structure of a field from citations — no reading of content
 :::
 
 ## One literature, several review types
@@ -290,7 +350,13 @@ State of the literature → possible review type
 - Box: state of the literature decides which type is possible
 :::
 
-## What a review can do
+## What a review can and cannot do
+
+::: {.columns .divided}
+::: {.column width="50%"}
+::: {.colhead}
+A review can
+:::
 
 - **Map** a debate and its positions
 
@@ -301,16 +367,12 @@ State of the literature → possible review type
 - **Locate** gaps — relative to a documented search
 
 - **Clarify** inconsistently used concepts
-
-::: {.notes}
-- Map: positions in a debate — who argues what
-- Establish: amount and kind of evidence
-- Show: where results agree, conflict, depend on context
-- Locate gaps: always relative to the documented search
-- Clarify: concepts used in different ways
 :::
 
-## What a review cannot do
+::: {.column width="50%"}
+::: {.colhead}
+A review cannot deliver
+:::
 
 - **Better evidence** than its primary studies
 
@@ -321,17 +383,26 @@ State of the literature → possible review type
 - **Causal answers** the primary studies lack
 
 - **Evidence** from the frequency of a claim
+:::
+:::
 
 ::: {.keybox .fragment}
 No substitute for reading the key works
 :::
 
 ::: {.notes}
-- Better evidence: garbage in, garbage out
-- Proof of absence: only "not found by this search"
-- Objectivity: question, database, terms, criteria — all choices
-- Causal answers: not if the primary studies cannot give them
-- Frequency: often claimed ≠ well supported
+- Can:
+  - Map: positions in a debate — who argues what
+  - Establish: amount and kind of evidence
+  - Show: where results agree, conflict, depend on context
+  - Locate gaps: always relative to the documented search
+  - Clarify: concepts used in different ways
+- Cannot:
+  - Better evidence: garbage in, garbage out
+  - Proof of absence: only "not found by this search"
+  - Objectivity: question, database, terms, criteria — all choices
+  - Causal answers: not if the primary studies cannot give them
+  - Frequency: often claimed ≠ well supported
 - Box: no substitute for reading the key works
 - Naming limits = competence, not weakness
 :::
@@ -351,7 +422,9 @@ Lock-in
 - Technical interrelatedness, scale economies, quasi-irreversibility
   [@david1985clio]
 
-- → markets can lock in **inferior** standards
+::: {.fragment .consequence}
+→ markets can lock in **inferior** standards
+:::
 :::
 
 ::: {.column width="50%"}
@@ -362,7 +435,9 @@ Lock-in
 - Weak evidence for Dvorak's superiority, partly from Dvorak himself
   [@liebowitz1990fable]
 
-- → lock-in claim **not established**
+::: {.fragment .consequence}
+→ lock-in claim **not established**
+:::
 :::
 :::
 
@@ -422,30 +497,18 @@ capabilities in family firms."
 Each stage constrains the next · question changed after the results ≈ p-hacking
 :::
 
-::: {.grid2}
-::: {.cap .fragment}
-[1 Protocol · 2 Search]{.caphead}
+::: {.stages}
+1. **Protocol:** question, scope, criteria **written down**
 
-Question, scope, criteria **written down** · then a documented search
-:::
+2. **Search:** documented and rerunnable
 
-::: {.cap .fragment}
-[3 Screening · 4 Extraction]{.caphead}
+3. **Screening:** criteria applied to titles, abstracts, full texts
 
-Criteria on titles, abstracts, full texts · fixed extraction format
-:::
+4. **Extraction:** the same fixed format for every study
 
-::: {.cap .fragment}
-[5 Synthesis]{.caphead}
+5. **Synthesis:** by concept, not by author — explain agreement and disagreement
 
-By concept, not by author · explain agreement and disagreement
-:::
-
-::: {.cap .fragment}
-[6 Reporting]{.caphead}
-
-What you did, what you found, what your choices cost
-:::
+6. **Reporting:** what you did, what you found, what your choices cost
 :::
 
 ::: {.source}
@@ -456,14 +519,17 @@ research.
 ::: {.notes}
 - Each stage constrains the next
 - Question changed after seeing results ≈ p-hacking
-- 1–2: protocol written down first, then a documented search
-- 3–4: screening by criteria · extraction in a fixed format
-- 5: synthesis by concept · explain agreement and disagreement
-- 6: reporting — including what your choices cost
+- Protocol: written down before any search
+- Search: documented, so that someone else can rerun it
+- Screening: criteria only — titles and abstracts, then full texts
+- Extraction: same format for every study
+- Synthesis: by concept · explain agreement and disagreement
+- Reporting: including what your choices cost
+- Top right from now on: which stage we are in
 - Source: Tranfield et al. — medical template adapted to management
 :::
 
-## A topic is not a question
+## A topic is not a question {data-stage="1"}
 
 ::: {.continuum}
 <div class="cline"></div>
@@ -502,7 +568,7 @@ Object · context · what you want to know
 - Test: two people, same in/out decisions?
 :::
 
-## Two frameworks for a reviewable question
+## Two frameworks for a reviewable question {data-stage="1"}
 
 ::: {.columns .divided}
 ::: {.column width="50%"}
@@ -566,7 +632,7 @@ reviews. PICO = Population, Intervention, Comparison, Outcome —
 - Arrow: P and C → inclusion criteria · I and O, or the concept → string
 :::
 
-## The concept table: building blocks of the search
+## The concept table: building blocks of the search {data-stage="1"}
 
 ::: {.dek}
 One column per concept · one row per wording
@@ -601,7 +667,7 @@ third column: in the string or in the criteria — document the choice
 - Source line: spelling variants listed · plurals via stemming
 :::
 
-## Criteria for inclusion: fixed before the results
+## Criteria for inclusion: fixed before the results {data-stage="1"}
 
 ::: {.dek}
 Part of the protocol · replicable by a second person
@@ -628,7 +694,7 @@ Contestable is fine — invisible is not
 - Box: criteria may be contested — but must be visible
 :::
 
-## Check yourself — chapter 2 {.no-dash}
+## Check yourself — chapter 2 {.no-dash data-stage="1"}
 
 ::: {.dek}
 Applies: question, frameworks, concept table
@@ -666,7 +732,7 @@ Your own topic:
 03
 :::
 
-## Not every search system fits a systematic review
+## Not every search system fits a systematic review {data-stage="2"}
 
 ::: {.dek}
 Requirements: reliable search · precise query · documented, rerunnable
@@ -701,13 +767,13 @@ Baseline: OpenAlex · economics: + EconBiz · paid databases: optional, with ben
 - Box: OpenAlex baseline · EconBiz for economics · paid databases optional
 :::
 
-## Three families of search tools
+## Three families of search tools {data-stage="2"}
 
 ::: {.dek}
 Different logics → different roles in a review
 :::
 
-::: {.grid2}
+::: {.grid3}
 ::: {.cap .fragment}
 [Keyword (Boolean) search]{.caphead}
 
@@ -723,15 +789,16 @@ Matches meaning · reveals vocabulary · opaque, not reproducible
 ::: {.cap .fragment}
 [Citation-based search]{.caphead}
 
-Follows seed papers' citations · finds what keywords miss — within one community
+**Snowballing** from seed papers · finds what keywords miss — within one
+community
+:::
 :::
 
-::: {.cap .fragment}
+::: {.cap .centred .fragment}
 [In a review]{.caphead}
 
 Boolean: **backbone** · semantic: **input** to the concept table · citation:
 **supplement**
-:::
 :::
 
 ::: {.keybox .fragment}
@@ -742,14 +809,14 @@ Non-systematic additions are fine **if documented** — e.g. expert suggestions
 - Different logics → different roles
 - Keyword: matches your terms — transparent, blind to words you don't know
 - Semantic: matches meaning — reveals vocabulary · opaque, not rerunnable
-- Citation: follows links from seed papers — finds what keywords miss,
-  within one community
+- Citation: snowballing — follows links from seed papers · finds what
+  keywords miss, within one community
 - In a review: Boolean backbone · semantic input · citation supplement
 - Box: expert tips, chance finds — fine · own count in the flow diagram,
   same criteria
 :::
 
-## From concept table to search string
+## From concept table to search string {data-stage="2"}
 
 ::: {.code-lg}
 ```text
@@ -790,7 +857,7 @@ help pages and tutorial.
 - No wildcards in the web interface
 :::
 
-## Every search trades recall against precision
+## Every search trades recall against precision {data-stage="2"}
 
 ::: {.columns .divided}
 ::: {.column width="50%"}
@@ -826,7 +893,7 @@ Wider string: recall ↑ precision ↓ · narrower: the reverse
 - Arrow: trade-off — wider string: recall up, precision down
 :::
 
-## Recall: tested against known papers
+## Recall: tested against known papers {data-stage="2"}
 
 ::: {.dek}
 All relevant papers: unknown · some: known · missed known → missed unknown
@@ -856,7 +923,7 @@ Illustrative: v1 finds 5/8 → + "competenc\*", "routine\*" → v2 finds 8/8
 - Box: illustrative — v1 5/8, terms added, v2 8/8
 :::
 
-## The blind spot: records without abstract
+## The blind spot: records without abstract {data-stage="2"}
 
 ::: {.dek}
 No abstract → title and keywords only · gap not random
@@ -881,7 +948,7 @@ No abstract → title and keywords only · gap not random
 - Why it happens → ch. 6
 :::
 
-## Countermeasures: what the method can compensate
+## Countermeasures: what the method can compensate {data-stage="2"}
 
 - **Snowballing:** citation links independent of abstracts
 
@@ -907,7 +974,7 @@ Optional add-on: same string in a paid database — compare hit lists
 - Box: paid database as a comparison — optional
 :::
 
-## Spotlight: words follow communities
+## Spotlight: words follow communities {data-stage="2"}
 
 ::: {.dek}
 Capabilities: overlapping ideas, different names
@@ -938,7 +1005,7 @@ Use only "dynamic capabilit\*" → present one community's view as "the field"
 - Arrow: one community's term → its view sold as "the field"
 :::
 
-## Snowballing: what keywords missed {.sync-fragments}
+## Snowballing: what keywords missed {.sync-fragments data-stage="2"}
 
 ::: {.dek}
 From a few strong included papers · both directions [@wohlin2014guidelines]
@@ -957,7 +1024,7 @@ From a few strong included papers · both directions [@wohlin2014guidelines]
 
 ::: {.column width="45%"}
 ```{=html}
-<svg viewBox="0 0 560 360" width="100%" role="img"
+<svg viewBox="0 0 560 360" width="84%" style="display: block; margin: 0 auto;" role="img"
      aria-label="A seed paper in the middle; arrows from the seed point to three older papers it cites (backward), and arrows from three newer papers point to the seed (forward)">
   <defs>
     <marker id="sb-arrow" viewBox="0 0 10 10" refX="9" refY="5"
@@ -1026,7 +1093,7 @@ Supplement, never substitute — with OpenAlex: compulsory
 - Box: supplement, never substitute · with OpenAlex compulsory
 :::
 
-## Check yourself — chapter 3 {.no-dash}
+## Check yourself — chapter 3 {.no-dash data-stage="2"}
 
 ::: {.dek}
 Applies: recall and precision
@@ -1065,7 +1132,6 @@ Stop the video — answer from memory:
 - Three review types — and the purpose of each?
 - What makes a question reviewable?
 - Recall vs. precision — and how a test set checks recall?
-- Why is snowballing compulsory with OpenAlex?
 :::
 
 ::: {.answer .fragment .nonincremental}
@@ -1077,8 +1143,6 @@ Stop the video — answer from memory:
   two people, same in/out decisions
 - **Recall:** relevant papers found · **precision:** found papers relevant ·
   test set: known papers that must appear
-- **Snowballing:** many records without abstract → citation links do not need
-  them
 :::
 
 ::: {.notes}
@@ -1094,7 +1158,7 @@ Stop the video — answer from memory:
 04
 :::
 
-## Screening in two rounds
+## Screening in two rounds {data-stage="3"}
 
 ::: {.dek}
 Cheap decisions first · protocol criteria only
@@ -1106,7 +1170,7 @@ Cheap decisions first · protocol criteria only
 
 - **Round 2 — full texts:** decide; **reason** for every exclusion
 
-- **Second screener:** all records, or a sample; disagreements resolved
+- **Second screener:** all records, or a sample; disagreements resolved; compmute interrater agreement
 
 - **Criteria drift:** criterion changed → restart, document
 
@@ -1124,10 +1188,10 @@ One row per record + reason column → template in the tutorial
 - Arrow: one row per record — template in the tutorial
 :::
 
-## The flow diagram: the fate of every record
+## The flow diagram: the fate of every record {data-stage="3"}
 
 ```{=html}
-<svg viewBox="0 0 1400 640" width="100%" role="img"
+<svg viewBox="0 0 1400 640" width="86%" style="display: block; margin: 0 auto;" role="img"
      aria-label="PRISMA 2020 flow diagram with illustrative numbers: 612 records identified and screened, 540 excluded; 72 reports sought, 3 not retrieved; 69 assessed, 41 excluded with reasons; 6 records from snowballing; 34 studies included">
   <defs>
     <marker id="pr-arrow" viewBox="0 0 10 10" refX="9" refY="5"
@@ -1199,7 +1263,7 @@ Illustrative numbers · 69 − 41 = 28 from the database + 6 from snowballing
 - Full PRISMA template: more boxes, e.g. duplicates → tutorial, R package
 :::
 
-## The same numbers as a table
+## The same numbers as a table {data-stage="3"}
 
 ::: {.dek}
 Fallback when a diagram does not fit · same illustrative numbers
@@ -1231,7 +1295,7 @@ Template: @page2021prisma.
 - Snowballing 6 · included 34
 :::
 
-## Check yourself — chapter 4 {.no-dash}
+## Check yourself — chapter 4 {.no-dash data-stage="3"}
 
 ::: {.dek}
 Applies: screening and documenting decisions
@@ -1240,7 +1304,7 @@ Applies: screening and documenting decisions
 ::: {.taskbox .nonincremental}
 - Reasons for every full-text exclusion — but not for title/abstract
   exclusions: why?
-- What can a reader do with them?
+- What can a reader do with the documented reasons?
 :::
 
 ::: {.answer .fragment .nonincremental}
@@ -1267,7 +1331,7 @@ Applies: screening and documenting decisions
 05
 :::
 
-## Weak reviews: a list of summaries
+## Weak reviews: a list of summaries {data-stage="5"}
 
 ::: {.dek}
 Same sources · organised by author vs. by idea
@@ -1307,7 +1371,7 @@ Concept-centric
 - Disagreement is the finding · dynamic capabilities as an attempted bridge
 :::
 
-## The concept matrix forces synthesis
+## The concept matrix forces synthesis {data-stage="4 5"}
 
 ::: {.dek}
 Rows: studies · columns: concepts · simplified version of @webster2002analyzing
@@ -1335,7 +1399,7 @@ Read by column → synthesis
 - Arrow: read by column → patterns → synthesis
 :::
 
-## Data extraction: how the matrix gets its columns
+## Data extraction: how the matrix gets its columns {data-stage="4"}
 
 ::: {.dek}
 [Green]{.teal}: kind of information · **blue: column of the matrix** · fixed before reading
@@ -1378,7 +1442,7 @@ Tempting for AI — silent errors across the sample (ch. 7)
 - Box: AI extraction tempting — silent errors (ch. 7)
 :::
 
-## Spotlight: firm growth — sorting conflicting results
+## Spotlight: firm growth — sorting conflicting results {data-stage="5"}
 
 ::: {.dek}
 Gibrat's law: growth independent of size · concept matrix, illustrative rows
@@ -1412,7 +1476,7 @@ synthesis: @coad2009growth.
 - Surveys add sector, country, period
 :::
 
-## Quality appraisal: not all studies count the same
+## Quality appraisal: not all studies count the same {data-stage="4 5"}
 
 ::: {.dek}
 Record it in the matrix · use it in the text
@@ -1442,7 +1506,7 @@ dropped
 - Check: conclusion without the weakest studies?
 :::
 
-## Check yourself — chapter 5 {.no-dash}
+## Check yourself — chapter 5 {.no-dash data-stage="5"}
 
 ::: {.dek}
 Applies: from summary to synthesis
@@ -1518,7 +1582,7 @@ Vote counting · apples and oranges · overclaiming from absence
 - Synthesis: vote counting, apples and oranges, overclaiming from absence
 :::
 
-## Publication bias: a filtered literature
+## Publication bias: a filtered literature {data-bias="1"}
 
 - Significant, novel, positive → more likely published
 
@@ -1527,7 +1591,7 @@ Vote counting · apples and oranges · overclaiming from absence
 - **Economics overall:** 159 literatures — ~**80%** of effects exaggerated,
   typically **× 2** [@ioannidis2017power]
 
-- **CSR and profitability:**
+- **Corporate Social Responsability and profitability:**
   - 2003, 52 studies: clearly **positive** link [@orlitzky2003corporate]
   - 2023, 512 studies, corrected for publication bias: **small**
     [@hirsch2023csr]
@@ -1547,7 +1611,7 @@ Same question, more studies, bias corrected → a much weaker answer
 - Arrow: more studies, bias corrected → much weaker answer
 :::
 
-## Citation bias: often cited ≠ well supported
+## Citation bias: often cited ≠ well supported {data-bias="1"}
 
 ::: {.dek}
 Citations attract citations · works cited for what they are believed to say
@@ -1572,7 +1636,7 @@ Read the original · check how it is used
 - Box: read the original · check how it is used
 :::
 
-## Survivorship bias: inherited from primary studies
+## Survivorship bias: inherited from primary studies {data-bias="1"}
 
 ::: {.dek}
 Aggregation can hide it
@@ -1595,7 +1659,7 @@ Aggregation can hide it
   growth slide)
 :::
 
-## Coverage bias: the database decides
+## Coverage bias: the database decides {data-bias="2"}
 
 ::: {.dek}
 Curation = selection · selection ≠ neutral
@@ -1626,7 +1690,7 @@ No neutral database · test with known papers, report the gaps
 - Arrow: no neutral database → test with known papers, report the gaps
 :::
 
-## Terminology bias: the pluralism problem of search
+## Terminology bias: the pluralism problem of search {data-bias="2"}
 
 ::: {.dek}
 Search terms encode a perspective
@@ -1639,8 +1703,12 @@ Search terms encode a perspective
 
 - Result: **systematic**, yet **one-sided**
 
-- **Countermeasures:** terms from several communities, alternative strings,
+
+::: {.keybox .fragment}
+**Countermeasures:** terms from several communities, alternative strings,
   compared hit lists
+:::
+
 
 ::: {.notes}
 - Search terms encode a perspective
@@ -1652,7 +1720,7 @@ Search terms encode a perspective
   compare hit lists
 :::
 
-## Political economy: who owns the record of science?
+## Political economy: who owns the record of science? {data-bias="2"}
 
 ::: {.dek}
 What you can find depends on who controls publications and metadata
@@ -1688,7 +1756,7 @@ Missing abstracts: a political decision, not a technical accident
 - Arrow: choosing a database = choosing an infrastructure
 :::
 
-## Reviewer bias: screening and synthesis
+## Reviewer bias: screening and synthesis {data-bias="3 4"}
 
 ::: {.dek}
 Reviewer = part of the instrument · protocol = constraint
@@ -1719,7 +1787,7 @@ Fixed criteria · second screener · concept matrix · careful wording
   wording
 :::
 
-## Check yourself — chapter 6 {.no-dash}
+## Check yourself — chapter 6 {.no-dash data-bias="1 4"}
 
 ::: {.dek}
 Applies: biases in the literature and in the synthesis
@@ -1728,8 +1796,8 @@ Applies: biases in the literature and in the synthesis
 ::: {.taskbox .nonincremental}
 40 studies on dynamic capabilities and performance · 32 significantly positive
 
-- Why not "works in 80% of firms"?
-- Three reasons
+- Why not conclude: "works in 80% of firms"?
+- Give three reasons for your assessment
 :::
 
 ::: {.answer .fragment .nonincremental}
@@ -1756,8 +1824,7 @@ Applies: biases in the literature and in the synthesis
 ::: {.taskbox .nonincremental}
 Stop the video — answer from memory:
 
-- Two screening rounds: what is decided where — and where are reasons
-  required?
+- Two screening rounds: what is decided where — and when should you document your reasons?
 - What does a flow diagram show?
 - Summary vs. synthesis — what does the concept matrix add?
 - One bias inherited from the literature, one introduced by you?
@@ -1789,7 +1856,7 @@ Stop the video — answer from memory:
 07
 :::
 
-## Reproducible from the report alone
+## Reproducible from the report alone {data-stage="6"}
 
 - **Database** and date of the search
 
@@ -1815,7 +1882,7 @@ Stop the video — answer from memory:
 - PRISMA 2020, PRISMA-S · search log template in the tutorial
 :::
 
-## Limitations: as specific as the method
+## Limitations: as specific as the method {data-stage="6"}
 
 ::: {.dek}
 The bias · its direction · why accepted
@@ -1838,9 +1905,13 @@ Specific
 - OpenAlex, titles and abstracts; 41 of 411 hits without abstract, mostly
   Elsevier and Springer Nature (tutorial example)
 
-- → recall loss for closed-access articles: one test paper found by no route
+::: {.fragment .consequence}
+→ recall loss for closed-access articles: one test paper found by no route
+:::
 
-- → snowballing added 13 studies; residual gap reported
+::: {.fragment .consequence}
+→ snowballing added 13 studies; residual gap reported
+:::
 :::
 :::
 
@@ -1885,7 +1956,7 @@ Disclose every use
 - Arrow: disclose every use
 :::
 
-## Check yourself — chapter 7 {.no-dash}
+## Check yourself — chapter 7 {.no-dash data-stage="6"}
 
 ::: {.dek}
 Applies: reproducible reporting
