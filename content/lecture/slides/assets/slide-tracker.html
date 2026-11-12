@@ -4,12 +4,15 @@
 
      In the slide heading, give the positions (from 1) in one of the lists:
        ## Title {data-stage="3"}       one of the six stages of a review
-       ## Title {data-bias="3 4"}      one or more of the four bias groups -->
+       ## Title {data-bias="3 4"}      one or more of the four bias groups
+       ## Title {data-step="2 3"}      one or more of the six steps of a
+                                       regression analysis (L10) -->
 <script>
 (function () {
   var lists = {
     stage: ["Protocol", "Search", "Screening", "Extraction", "Synthesis", "Reporting"],
-    bias: ["The literature", "Database and search", "Screening", "Synthesis and reporting"]
+    bias: ["The literature", "Database and search", "Screening", "Synthesis and reporting"],
+    step: ["Question", "Explore", "Specify", "Estimate", "Diagnose", "Interpret"]
   };
   Object.keys(lists).forEach(function (key) {
     document.querySelectorAll("section[data-" + key + "]").forEach(function (slide) {

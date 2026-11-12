@@ -2,42 +2,77 @@
 title: "🗓️ Lecture 10: Regression analysis"
 date: "2026-11-23"
 date-modified: last-modified
+strip-comments: true
 ---
 
 ## 🎯 Content and goals
 
+- You can estimate and interpret a simple regression, including its uncertainty.
 - You understand the logic behind multiple linear regression and how to interpret it.
 - You understand the logic behind different models for interaction effects.
 - You can choose the right functional form based on the visual analysis of the data.
 - You know the steps of a regression analysis.
 
+The whole lecture follows one question through one data set: *What determines
+the weekly earnings of market research analysts — and do women earn less?* The
+data are 252 market research analysts from the US Current Population Survey
+2014 [@bekes2021data]. The
+[lab session on Friday](/content/material/s_10_LinearModels.qmd) rebuilds every
+model of the lecture in R, on exactly the same data.
+
+::: {.callout-important}
+## Prerequisite: the statistics recap
+The lecture builds directly on the track
+[A Recap of Undergraduate Statistics](https://euf-methodology-hub.netlify.app/tracks/statistics-recap)
+on *Method and Inquiry*. In particular, it assumes that you know the regression
+line as a descriptive tool, residuals, sampling distributions, standard errors,
+hypothesis tests and confidence intervals. These concepts are not repeated in
+the lecture.
+:::
+
 ## 🖥️ Lecture Slides
 
-*The slides for this lecture will be made available here.*
+*The slides for this lecture will be made available here after the lecture.*
 
-<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
-and embed it with the block below (adjust the filename):
+<!-- After the lecture: add content/lecture/slides/RM26_L10_Regression.qmd to
+project.render in _quarto.yml, replace the line above with the block below,
+render, publish.
 
 ```{=html}
 <div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
-<iframe src="slides/RM26_L10_Regression.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
+<iframe src="slides/RM26_L10_Regression.html" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
 </div>
 ```
+
+[Open the slides in a separate tab](slides/RM26_L10_Regression.html){.btn .btn-primary}
 -->
 
 ## 📚 Mandatory Reading
 
-- @ismay2025moderndive [chapters 5--6]
+- @ismay2025moderndive [chapters 5--6] — the lecture uses its terminology
+  (*parallel slopes model* vs *interaction model*)
 
 ## 🏆 Further Readings
 
 - @jamesIntroductionStatisticalLearning2021 [chapter 3]
+- On *Method and Inquiry*, as companions to the lecture:
+  - [Categorical Variables and Interaction Terms in Regression](https://euf-methodology-hub.netlify.app/resources/multiple-regression-categorical-interactions)
+    [@graebner2026-multiple-regression-categorical-interactions] — same data
+    set as the lecture
+  - [Regression Residuals and Model Diagnostics](https://euf-methodology-hub.netlify.app/resources/regression-residuals-diagnostics)
+    [@graebner2026-regression-residuals-diagnostics]
+  - [Causal Reasoning with DAGs](https://euf-methodology-hub.netlify.app/resources/reasoning-with-dags)
+    [@graebner2026-reasoning-with-dags] — on which variables to control for
+- On the role of working hours in the gender pay gap: @goldin2014grand; for an
+  overview of the literature: @blau2017gender
 
 ## ✍️ Exercises and coursework
 
-*Take-home exercise:*
-
-- Conduct a regression analysis for the example data provided and present the results in a Quarto report.
+- Work through the
+  [lab session 10](/content/material/s_10_LinearModels.qmd), which implements
+  the lecture in R, and complete its coursework: a short Quarto report that
+  applies the six steps of a regression analysis to a new data set.
+- Answer the recap questions at the end of the slides.
 
 -------
 

@@ -4,46 +4,63 @@ date: "2026-11-27"
 date-modified: last-modified
 ---
 
-This session focuses on the practical implementation of linear regression models
-and on how to conduct the most common tasks associated with
-designing and implementing experiments in R.
+This session implements the [lecture on regression analysis](/content/lecture/l_10_Regression.qmd)
+in R. We work on **exactly the same data** as the lecture — 252 market research
+analysts from the US Current Population Survey 2014 [@bekes2021data] — and
+rebuild its models step by step, following the six steps of a regression
+analysis (question, explore, specify, estimate, diagnose, interpret). More
+precisely, we focus on the following topics:
 
-This way it complements the more theoretical lectures. More precisely, we focus
-on the following topics:
+- Fit simple and multiple linear regressions with `lm()` and present them in
+  regression tables
+- Reproduce the omitted variable bias formula from the lecture numerically
+- Choose the functional form visually with `geom_smooth()`, and add quadratic
+  and log terms
+- Include categorical variables, set the reference category, and fit
+  interaction models
+- Plot predicted values to interpret nonlinear terms and interactions
+- Produce and read diagnostic plots (Tukey-Anscombe plot, Q-Q plot)
 
-- Implement simple and multiple linear regression in R
-- Calculate and interpret $R^2$ manually and using `R` functions
-- Understand and demonstrate omitted variable bias
-- Perform data transformations to linearize relationships
-- Create effective visualizations using `geom_smooth()`
-- Conduct basic model diagnostics
-- Implement a power analysis in R
+The analysis of experimental data (t-tests, ANOVA, power analysis) follows in
+[session 11](/content/material/s_11_Experiments.qmd), after the
+[lecture on experiments](/content/lecture/l_11_Experiments.qmd).
 
-## 👨‍🏫 Lecture Slides 
+## 👨‍🏫 Lecture Slides
 
-There are no slides for this lecture. The relevant information is given through
-the corresponding [lecture](/content/lecture/l_10_Regression.qmd) and the mandatory readings.
+There are no slides for this lab session. The relevant information is given
+through the corresponding [lecture](/content/lecture/l_10_Regression.qmd) and
+the mandatory readings.
 
 ## 📚 Mandatory Reading
 
 - [Linear Regression in R](https://euf-methodology-hub.netlify.app/resources/linear-regression-r) on *Method and Inquiry* [@graebner2026-linear-regression-r]
   - [Data sets used](/content/material/data/RegressionDataSets.zip)
-- [Experiments in R](https://euf-methodology-hub.netlify.app/resources/experiments-in-r) on *Method and Inquiry* [@graebner2026-experiments-in-r]
-  - [Data sets used](/content/material/data/ExperimentsDataSets.zip)
+- [Categorical Variables and Interaction Terms in Regression](https://euf-methodology-hub.netlify.app/resources/multiple-regression-categorical-interactions)
+  on *Method and Inquiry* [@graebner2026-multiple-regression-categorical-interactions] — uses the same CPS data as the lecture and this session
 
 ## Further Reading
 
-- [Chapter 5](https://moderndive.com/v2/regression.html) and [Chapter 6](https://moderndive.com/v2/multiple-regression.html) in @moderndive
+- [Regression Residuals and Model Diagnostics](https://euf-methodology-hub.netlify.app/resources/regression-residuals-diagnostics)
+  on *Method and Inquiry* [@graebner2026-regression-residuals-diagnostics]
+- [Chapter 5](https://moderndive.com/v2/regression.html) and [Chapter 6](https://moderndive.com/v2/multiple-regression.html) in @ismay2025moderndive
 
 ## In-class exercises
 
-- [Work sheet](/content/material/session10/_student_template.qmd){download="_student_template.qmd"} 
-- [Data sets](/content/material/session10/session10_data.zip)
+- [Data set of the lecture and the lab](/content/material/data/cps-earnings-mra-2014.csv){download="cps-earnings-mra-2014.csv"}
+  (CPS 2014, market research analysts; variables `earnwke`, `uhours`, `age`,
+  `sex` (1 = male, 2 = female), `grade92` (highest grade completed; 43 = Bachelor's degree))
+- [Work sheet](/content/material/session10/_student_template.qmd){download="_student_template.qmd"}
+  and its [data sets](/content/material/session10/session10_data.zip)
 - [Cheat Sheet](/content/material/session10/cheat_sheet.html)
 
 ## ✍️ Coursework
 
-- Complete the in-class exercises at home 
+- Complete the in-class exercises at home
+- Apply the six steps of a regression analysis to the data set `hr_salaries.csv`
+  (in the [data sets of the mandatory reading](/content/material/data/RegressionDataSets.zip)):
+  How are experience and education related to salaries — and does the return
+  to experience differ by education? Write up your analysis as a short Quarto
+  report.
 - Do the exercises `LinearRegression1` and `LinearRegression2` from the `DataScienceExercises` package
 
 ::: {.callout-tip collapse="true"}
@@ -51,8 +68,8 @@ the corresponding [lecture](/content/lecture/l_10_Regression.qmd) and the mandat
 ```{r}
 #| eval: false
 learnr::run_tutorial(
-  name = "LinearRegression1", 
-  package = "DataScienceExercises", 
+  name = "LinearRegression1",
+  package = "DataScienceExercises",
   shiny_args=list("launch.browser"=TRUE))
 ```
 :::
@@ -62,9 +79,13 @@ learnr::run_tutorial(
 ```{r}
 #| eval: false
 learnr::run_tutorial(
-  name = "LinearRegression2", 
-  package = "DataScienceExercises", 
+  name = "LinearRegression2",
+  package = "DataScienceExercises",
   shiny_args=list("launch.browser"=TRUE))
 ```
 :::
 
+## References
+
+::: {#refs}
+:::

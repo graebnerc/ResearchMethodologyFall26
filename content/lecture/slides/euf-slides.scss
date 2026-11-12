@@ -653,3 +653,30 @@ body:has(section.divider.present) .slide-logo { display: none !important; }
 // Slides with a solution need the room: tighter list in the task box
 .reveal .slides section:has(.answer) .taskbox ul > li { margin-bottom: 0.3em; }
 .reveal section:has(.answer) .taskbox { line-height: 1.4; }
+
+// ---- display maths -----------------------------------------------------------
+// KaTeX/MathJax set formulas in a smaller-looking face than Inter at the same
+// size; displayed equations (L10) are the centre of their slide, so enlarge them.
+.reveal .katex-display,
+.reveal .MathJax_Display,
+.reveal mjx-container[display="true"] { font-size: 130% !important; margin: 0.6em 0 0.9em !important; }
+
+// ---- Drawn arrows in inline SVG diagrams (L10) -----------------------------
+// Inside a fragment, <line class="draw-line" style="--len: N"> is drawn from
+// its start when the fragment appears (N ≥ the line's length), and
+// <polygon class="draw-head"> — the arrowhead — follows once the line is there.
+.reveal .draw-line {
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+  transition: stroke-dashoffset 0.9s ease-in-out;
+}
+.reveal .fragment.visible .draw-line { stroke-dashoffset: 0; }
+.reveal .draw-head { opacity: 0; transition: opacity 0.2s ease 0.8s; }
+.reveal .fragment.visible .draw-head { opacity: 1; }
+
+// ---- Check-yourself tasks: the correct option turns green ------------------
+// [option text]{.fragment .highlight-green} — reveal's default green is neon.
+.reveal .slides section .fragment.highlight-green.visible {
+  color: #2E7D32 !important;
+  font-weight: 700;
+}

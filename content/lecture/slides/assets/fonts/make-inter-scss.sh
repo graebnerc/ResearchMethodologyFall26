@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenerate _inter.scss: the five Inter woff2 files as base64 data URIs.
+# Regenerate _inter.scss: the six Inter font files as base64 data URIs.
 #
 # Why base64 rather than url("assets/fonts/…")? A url() inside a reveal.js
 # *theme* SCSS is resolved relative to the compiled theme in site_libs/, not
@@ -22,15 +22,15 @@ OUT=_inter.scss
   echo
 } > "$OUT"
 
-emit() { # weight style file
-  local weight="$1" style="$2" file="$3"
+emit() { # weight style file [format]
+  local weight="$1" style="$2" file="$3" fmt="${4:-woff2}"
   {
     echo "@font-face {"
     echo "  font-family: \"Inter\";"
     echo "  font-style: $style;"
     echo "  font-weight: $weight;"
     echo "  font-display: block;"
-    printf '  src: url("data:font/woff2;base64,%s") format("woff2");\n' "$(base64 < "$file" | tr -d '\n')"
+    printf '  src: url("data:font/%s;base64,%s") format("%s");\n' "$fmt" "$(base64 < "$file" | tr -d '\n')" "$fmt"
     echo "}"
     echo
   } >> "$OUT"
@@ -41,5 +41,12 @@ emit 400 italic inter-latin-400-italic.woff2
 emit 500 normal inter-latin-500-normal.woff2
 emit 600 normal inter-latin-600-normal.woff2
 emit 700 normal inter-latin-700-normal.woff2
+# Bold italic (L10: questions set in bold italic). Not from @fontsource: made
+# from Inter 4.001 Bold Italic with the same latin subset, as woff because the
+# woff2 encoder needs the brotli module:
+#   pyftsubset Inter-BoldItalic.ttf --flavor=woff --layout-features='*' \
+#     --unicodes="U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD" \
+#     --output-file=inter-latin-700-italic.woff
+emit 700 italic inter-latin-700-italic.woff woff
 
 echo "wrote $OUT ($(du -h "$OUT" | cut -f1))"
