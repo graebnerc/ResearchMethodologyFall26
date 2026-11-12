@@ -34,6 +34,19 @@ the corresponding [lecture](/content/lecture/l_11_Experiments.qmd) and the manda
 
 - TBD
 
+## In-class exercises
+
+- [Work sheet](/content/material/session11/_student_template.qmd){download="lab11_worksheet.qmd"}
+  and its [data sets](/content/material/session11/session11_data.zip)
+- [Cheat Sheet](/content/material/session11/cheat_sheet.html)
+
+<!--- Solutions are made available here after the session.
+To publish them, also remove "!content/material/session11/student_solutions.qmd"
+from project.render in _quarto.yml.
+
+- [Solutions to the work sheet](/content/material/session11/student_solutions.qmd)
+--->
+
 ## ✍️ Coursework
 
 - TBD

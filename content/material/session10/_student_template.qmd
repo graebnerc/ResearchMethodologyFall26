@@ -1,501 +1,417 @@
 ---
-title: "Implementation Lab: Linear Regression & Experimental Analysis"
+title: "Implementation Lab 10: Linear models in R"
 subtitle: "Student Worksheet"
 format:
   html:
     code-fold: show
-    theme:
-      light: 
-        - journal
-        - css/custom.scss # Change the default colour
+    theme: journal
     toc: true
 execute:
   error: true
 ---
 
+This worksheet rebuilds the models of the lecture on regression analysis in
+R, on the same data and in the same order: a simple regression through all
+six steps (question, explore, specify, estimate, diagnose, interpret), then
+multiple regression, then groups and interactions. Fill in the blanks
+(`____`) and the interpretations (`_______`).
+
 # Setup
+
+Save `cps-earnings-mra-2014.csv` in the same folder as this worksheet (best:
+the folder of an R project).
 
 ```{r}
 #| label: setup
 #| message: false
 
-# Load required packages
-library(ggplot2)
-library(dplyr)
-library(broom)
-library(effectsize)
-library(car)
+library(tidyverse)  # readr, dplyr, ggplot2, purrr
+library(broom)      # tidy(), glance(), augment()
 ```
 
 ```{r}
 #| label: load-data
 
-# Load the datasets
-marketing_data <- read.csv("marketing_data.csv")
-firm_growth_data <- read.csv("firm_growth_data.csv")
-leadership_study_between <- read.csv("leadership_study_between.csv")
-communication_study <- read.csv("communication_study.csv")
+cps <- read_csv("cps-earnings-mra-2014.csv")
+```
+
+The variables: `earnwke` (weekly earnings, USD), `uhours` (usual weekly
+hours), `age`, `sex` (1 = male, 2 = female), `grade92` (highest grade
+completed; 43 = Bachelor's degree, above = graduate degree).
+
+```{r}
+#| label: prepare-data
+
+cps <- cps |>
+  mutate(
+    female  = as.integer(sex == ____),
+    gender  = factor(if_else(female == 1, "Women", "Men")),
+    college = as.integer(grade92 >= ____),
+    edu_cat = factor(
+      case_when(grade92 < 43 ~ "No degree",
+                grade92 == 43 ~ "Bachelor",
+                TRUE ~ "Graduate"),
+      levels = c("No degree", "Bachelor", "Graduate")
+    )
+  )
+glimpse(cps)
 ```
 
 ---
 
-# Part 1: Linear Regression
+# Part 1: Simple regression in six steps
 
-## 1.1 Simple vs. Multiple Regression
+## 1.1 Question and exploration
 
-**Research Question:** How does ad spending affect sales revenue?
-
-### Simple Regression
+**Question:** How are weekly earnings related to age?
 
 ```{r}
-#| label: simple-regression
+#| label: scatter
 
-# Fit simple regression: sales_revenue ~ ad_spend; use marketing_data
-model_simple <- lm(___ ~ ___, data = ___)
-summary(model_simple)
+ggplot(cps, aes(x = ____, y = ____)) +
+  geom_point(alpha = 0.5) +
+  labs(x = "Age (years)", y = "Weekly earnings (USD)")
 ```
-
-**Coefficient interpretation:**
-
-For every EUR 1 increase in ad spending, there is an associated sales revenue increases by approximately _______ EUR on average.
-
-### Multiple Regression
 
 ```{r}
-#| label: multiple-regression
+#| label: ceiling
 
-# Add website_traffic to the model
-model_multiple <- lm(___ ~ ___ + ___, data = marketing_data)
-summary(model_multiple)
+# Highest value of earnwke, and how many analysts have it
+max(cps$earnwke)
+sum(cps$earnwke == ____)
 ```
-
-### Compare Coefficients
 
 ```{r}
-#| label: compare-coefficients
+#| label: histograms
 
-# Extract coefficient for ad_spend from both models
-coef_simple <- coef(model_simple)["ad_spend"]
-coef_multiple <- coef(model_multiple)["ad_spend"]
+# Histogram of earnwke, then of log(earnwke)
+ggplot(cps, aes(x = earnwke)) +
+  ____(bins = 25)
 
-cat("Simple model:", round(coef_simple, 3), "\n")
-cat("Multiple model:", round(coef_multiple, 3), "\n")
-cat("Difference:", round(coef_simple - coef_multiple, 3), "\n")
+ggplot(cps, aes(x = ____)) +
+  ____(bins = 25)
 ```
 
-**Notes on omitted variable bias:**
+**What do you see?**
 
-_Space for your notes:_
+- The relationship between age and earnings is _______
+- Earnings stop at _______ USD because _______
+- In levels, earnings are _______; in logs, _______
+
+## 1.2 Specify and estimate
+
+```{r}
+#| label: slr
+
+m1 <- lm(____ ~ ____, data = cps)
+summary(m1)
+```
+
+```{r}
+#| label: slr-tidy
+
+tidy(m1, conf.int = ____)  # coefficients with 95% confidence intervals
+glance(m1)$____            # R²
+```
+
+**Interpretation:**
+
+- Slope: _______ — analysts who are one year older _______
+- 95% CI: [_______, _______] — can we rule out a slope of zero? _______
+- R² = _______ — what does it describe, and what does it *not* tell you? _______
+
+## 1.3 Diagnose
+
+`augment()` adds the fitted values (`.fitted`) and the residuals (`.resid`)
+to the data.
+
+```{r}
+#| label: slr-diagnose
+
+augment(m1) |>
+  ggplot(aes(x = ____, y = ____)) +
+  geom_hline(yintercept = 0) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "loess", formula = y ~ x, se = FALSE)
+```
+
+**Is there a pattern in the residuals? What does it tell you about the
+straight line?** _______
+
+## 1.4 Back to the data: age²
+
+```{r}
+#| label: smoother
+
+# A smoother (no form imposed), the straight line, and a parabola
+ggplot(cps, aes(x = age, y = earnwke)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "____", formula = y ~ x, se = FALSE, linetype = "dashed") +
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE, colour = "darkgreen") +
+  geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = FALSE, colour = "red")
+```
+
+```{r}
+#| label: quadratic
+
+# I(age^2) adds the square of age as a second variable
+m2 <- lm(earnwke ~ age + ____, data = cps)
+tidy(m2)
+glance(m2)$r.squared
+```
+
+```{r}
+#| label: quadratic-diagnose
+
+# Residuals vs fitted values for m2 — has the pattern gone?
+
+```
+
+## 1.5 Interpret the curve
+
+With age², the slope depends on age: $\hat\beta_1 + 2\hat\beta_2 \cdot a$.
+
+```{r}
+#| label: slope-at-age
+
+b <- coef(m2)
+slope_at <- function(a) b[["age"]] + 2 * b[["I(age^2)"]] * a
+slope_at(c(30, 45, 60))
+
+# Age with the highest predicted earnings: -b1 / (2 * b2)
+
+```
+
+**Interpretation:**
+
+- Slope at 30: _______, at 45: _______, at 60: _______
+- Predicted earnings are highest at _______ years
+- Why is the coefficient of `age` in `m2` on its own not "the effect of age"? _______
+
+## 1.6 Logs
+
+```{r}
+#| label: log-model
+
+m_log <- lm(____(earnwke) ~ age, data = cps)
+tidy(m_log)
+```
+
+**Interpretation:** one year of age goes with about _______ % higher
+earnings.
 
 ---
 
-## 1.2 Model Diagnostics
+# Part 2: Multiple regression
+
+**Question:** Do women earn less?
+
+## 2.1 The raw gap
 
 ```{r}
-#| label: diagnostic-plots
+#| label: group-means
 
-# Extract fitted values and residuals
-fitted_values <- fitted(model_multiple)
-residuals_values <- residuals(model_multiple)
+cps |>
+  group_by(____) |>
+  summarise(n = n(), earnings = mean(earnwke), hours = mean(____))
+```
 
-# Create diagnostic plots
-library(gridExtra)
+```{r}
+#| label: raw-gap
 
-# Residuals vs Fitted
-p1 <- ggplot(data.frame(fitted = fitted_values, resid = residuals_values),
-             aes(x = fitted, y = resid)) +
-  geom_point(alpha = 0.6) +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
-  geom_smooth(se = FALSE, color = "blue") +
-  labs(title = "Residuals vs Fitted",
-       x = "Fitted Values", 
-       y = "Residuals") +
-  theme_minimal()
+m_gap <- lm(earnwke ~ female, data = cps)
+tidy(m_gap)
+```
 
-# Q-Q Plot
-p2 <- ggplot(data.frame(resid = residuals_values), aes(sample = resid)) +
+**Interpretation:** the intercept is _______; the coefficient of `female`
+is _______.
+
+## 2.2 Holding hours constant
+
+```{r}
+#| label: gap-hours
+
+m_hours <- lm(earnwke ~ female + ____, data = cps)
+tidy(m_hours)
+```
+
+```{r}
+#| label: decomposition
+
+# Hours gap between women and men
+delta <- coef(lm(____ ~ female, data = cps))[["female"]]
+delta
+
+# Direct gap + effect of hours × hours gap — compare with the raw gap
+coef(m_hours)[["female"]] + coef(m_hours)[["uhours"]] * ____
+```
+
+**Interpretation:**
+
+- Among analysts working the same hours, the gap is _______
+- The raw gap splits into a direct part (_______) and a part via hours (_______)
+- Which number answers "Do women earn less?" — and when would you rather
+  use the other one? _______
+
+## 2.3 Model (3): more controls
+
+```{r}
+#| label: model-3
+
+m3 <- lm(earnwke ~ female + age + I(age^2) + uhours + ____, data = cps)
+tidy(m3, conf.int = TRUE)
+glance(m3) |> select(r.squared, ____)
+```
+
+```{r}
+#| label: compare-gap
+
+# The female coefficient across the three models
+list(`(1) raw` = m_gap, `(2) + hours` = m_hours, `(3) + age, age², college` = m3) |>
+  map_dfr(\(m) tidy(m) |> filter(term == "____"), .id = "model") |>
+  select(model, estimate, std.error)
+```
+
+## 2.4 Diagnose model (3) — and a better-behaved model (4)
+
+```{r}
+#| label: diagnose-3
+
+d3 <- augment(m3)
+
+# 1. Residuals vs fitted values
+
+
+# 2. Normal Q-Q plot of the residuals
+ggplot(d3, aes(sample = .resid)) +
   stat_qq() +
-  stat_qq_line(color = "red") +
-  labs(title = "Normal Q-Q Plot",
-       x = "Theoretical Quantiles",
-       y = "Sample Quantiles") +
-  theme_minimal()
-
-grid.arrange(p1, p2, ncol = 2)
+  ____()
 ```
 
-**What to look for:**
-- Residuals vs Fitted: _______________
-- Q-Q Plot: _______________
-
----
-
-## 1.3 Log Transformation
-
-**Research Question:** How has company revenue grown over time?
-
-### Visualize Raw Data
-
 ```{r}
-#| label: visualize-exponential
+#| label: model-4
 
-# Create scatter plot with linear fit
-ggplot(firm_growth_data, aes(x = year, y = revenue)) +
-  geom_point(size = 3) +
-  geom_smooth(method = "lm", se = FALSE, color = "red") +
-  labs(title = "Revenue Growth Over Time",
-       x = "Year",
-       y = "Revenue (EUR)") +
-  theme_minimal()
+# Log earnings, log hours
+m4 <- lm(log(earnwke) ~ female + age + I(age^2) + ____ + college, data = cps)
+tidy(m4)
+glance(m4)$r.squared
 ```
 
-**Observation:**
-
-_Does the linear fit look appropriate?_
-
-### Apply Log Transformation
-
 ```{r}
-#| label: log-transform
+#| label: diagnose-4
 
-# Create log-transformed variable
-firm_growth_data <- firm_growth_data %>%
-  mutate(log_revenue = ____(revenue))
+# Q-Q plot of the residuals of m4
 
-# Fit models
-model_linear <- lm(revenue ~ year, data = firm_growth_data)
-model_log <- lm(log_revenue ~ year, data = firm_growth_data)
-
-# Compare R²
-summary(model_linear)$r.squared
-summary(model_log)$r.squared
-```
-
-### Visualize Log-Transformed Data
-
-```{r}
-#| label: visualize-log
-
-# Plot log(revenue) vs year
-ggplot(firm_growth_data, aes(x = year, y = log_revenue)) +
-  geom_point(size = 3) +
-  geom_smooth(method = "lm", se = FALSE, color = "blue") +
-  labs(title = "Log(Revenue) vs Year",
-       x = "Year",
-       y = "Log(Revenue)") +
-  theme_minimal()
-```
-
-### Interpret Coefficients
-
-```{r}
-#| label: interpret-log
-
-# Get coefficient
-coef_log <- coef(model_log)["year"]
-percentage_change <- (exp(coef_log) - 1) * 100
-
-cat("Annual growth rate:", round(percentage_change, 2), "%\n")
 ```
 
 **Interpretation:**
 
-When the dependent variable is log-transformed, coefficients represent _____________.
+- Compared with model (3), the residuals of model (4) _______
+- Gap in model (4): _______ → about _______ % (exact: $e^{\hat\beta} - 1$)
+- Coefficient of `log(uhours)`: _______ — 1 % more hours go with _______
 
 ---
 
-# Part 2: Experimental Analysis
+# Part 3: Groups and interactions
 
-## 2.1 t-Test
-
-**Research Question:** Does leadership training improve team performance?
-
-### Visualize the Data
+## 3.1 Categories with more levels
 
 ```{r}
-#| label: visualize-ttest
+#| label: education
 
-ggplot(leadership_study_between, aes(x = group, y = team_performance, fill = group)) +
-  geom_boxplot(alpha = 0.7) +
-  geom_jitter(width = 0.2, alpha = 0.5) +
-  stat_summary(fun = mean, geom = "point", shape = 23, size = 3, fill = "red") +
-  labs(title = "Team Performance by Group",
-       x = "Group",
-       y = "Team Performance Score") +
-  theme_minimal() +
-  theme(legend.position = "none")
+table(cps$edu_cat)
+
+m_edu <- lm(earnwke ~ female + age + I(age^2) + uhours + ____, data = cps)
+tidy(m_edu)
 ```
 
-### Check Assumptions
+**Interpretation:** the reference group is _______; the coefficient of
+`edu_catGraduate` means _______
 
 ```{r}
-#| label: check-assumptions-ttest
+#| label: relevel
 
-# Normality test for each group: the Shapiro test
-____(filter(leadership_study_between, group == "control")$team_performance)
-____(filter(leadership_study_between, group == "training")$team_performance)
+# Make "Bachelor" the reference group and refit
+cps_b <- cps |> mutate(edu_cat = ____(edu_cat, ref = "Bachelor"))
 
-# Equal variances test: Levene test
-____(team_performance ~ group, data = leadership_study_between)
 ```
 
-**Interpretation:**
-- p-values > 0.05? If yes, assumptions are met: _______
-
-### Run t-test
+## 3.2 Parallel slopes vs interaction model
 
 ```{r}
-#| label: run-ttest
+#| label: par-int
 
-t_result <- t.test(
-  team_performance ~ group,
-  data = leadership_study_between,
-  var.equal = TRUE
-)
-
-print(t_result)
-```
-
-**Results:**
-- Mean difference: _______
-- p-value: _______
-- Conclusion: _______
-
-### Calculate Effect Size
-
-```{r}
-#| label: cohens-d-ttest
-
-cohens_d_result <- ____(team_performance ~ group, 
-                            data = leadership_study_between)
-print(cohens_d_result)
-```
-
-**Effect size interpretation:**
-- Cohen's d = _______ 
-- This is a _______ effect (small/medium/large)
-
----
-
-## 2.2 One-Way ANOVA
-
-**Research Question:** Which communication method leads to highest satisfaction?
-
-### Visualize the Data
-
-```{r}
-#| label: visualize-anova
-
-ggplot(communication_study, aes(x = communication_method, 
-                                 y = satisfaction_score, 
-                                 fill = communication_method)) +
-  geom_boxplot(alpha = 0.7) +
-  geom_jitter(width = 0.2, alpha = 0.3) +
-  stat_summary(fun = mean, geom = "point", shape = 23, size = 4, fill = "red") +
-  labs(title = "Satisfaction Score by Communication Method",
-       x = "Communication Method",
-       y = "Satisfaction Score") +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
-### Fit ANOVA
-
-```{r}
-#| label: fit-anova
-
-# Using aov()
-anova_model <- ____(satisfaction_score ~ communication_method, 
-                   data = communication_study)
-summary(anova_model)
-```
-
-**Results:**
-- F-statistic: _______
-- p-value: _______
-- Conclusion: _______
-
-### ANOVA as Regression
-
-```{r}
-#| label: anova-regression
-
-# Show that lm() gives same results
-lm_model <- lm(satisfaction_score ~ communication_method, 
-               data = communication_study)
-anova(lm_model)
+m_par <- lm(earnwke ~ age + female, data = cps)
+m_int <- lm(earnwke ~ age ____ female, data = cps)  # with the interaction
+tidy(m_par)
+tidy(m_int)
 ```
 
 ```{r}
-#| label: coefficients
+#| label: plot-par-int
 
-# Look at coefficients
-summary(lm_model)$coefficients
-```
-
-**Notes:**
-- Reference group: _______
-- Coefficients show: _______
-
-### Effect Size
-
-```{r}
-#| label: eta-squared
-
-eta_sq <- eta_squared(anova_model)
-print(eta_sq)
+bind_rows(
+  augment(m_par, data = cps) |> mutate(model = "Parallel slopes"),
+  augment(m_int, data = cps) |> mutate(model = "Interaction")
+) |>
+  mutate(model = fct_inorder(model)) |>  # panels in this order, not alphabetical
+  ggplot(aes(x = age, colour = gender)) +
+  geom_point(aes(y = earnwke), alpha = 0.25) +
+  geom_line(aes(y = ____), linewidth = 1.2) +
+  facet_wrap(~model)
 ```
 
 **Interpretation:**
 
-Communication method explains _______ % of variance in satisfaction.
+- Slope for men: _______; for women: _______
+- Is the difference in slopes precisely estimated? _______
+- What does the coefficient of `female` in `m_int` measure? _______
 
-### Post-Hoc Tests
+## 3.3 Centring
 
 ```{r}
-#| label: tukey
+#| label: centring
 
-# Which groups differ?
-tukey_result <- TukeyHSD(anova_model)
-print(tukey_result)
+# Measure age from 40 instead of from 0
+m_int40 <- lm(earnwke ~ I(age - ____) * female, data = cps)
+tidy(m_int40)
 ```
 
-**Significant differences:**
-- _______
-- _______
+**Interpretation:** the coefficient of `female` is now _______ — the gap at
+age _______.
 
-**No significant difference:**
-- _______
+## 3.4 Plot the gap instead of reading coefficients (challenge)
+
+Centring at each age in turn gives the gap at that age, with its confidence
+interval.
+
+```{r}
+#| label: gap-by-age
+
+gap_by_age <- map_dfr(seq(25, 60, by = 5), \(a) {
+  lm(earnwke ~ I(age - a) * female, data = cps) |>
+    tidy(conf.int = TRUE) |>
+    filter(term == "female") |>
+    mutate(age = a)
+})
+
+# Plot estimate against age, with a ribbon from conf.low to conf.high
+
+```
+
+**At which ages can we rule out a gap of zero?** _______
 
 ---
 
-# Part 3: Guided Exercise
+# The running example in six steps
 
-## Dataset: Website A/B Test
+Summarise what you did in each step.
 
-**Variables:**
-- `design`: Simple vs. Complex
-- `time_on_site`: Time spent (seconds)
-- `previous_visits`: Number of previous visits
-- `converted`: Purchase made (1 = yes, 0 = no)
-
-```{r}
-#| label: load-exercise-data
-
-exercise_data <- read.csv("exercise_data.csv")
-head(exercise_data)
-```
-
-## Task 1: Regression Analysis
-
-### a. Scatter plot
-
-```{r}
-#| label: task1a
-
-# Create scatter plot of time_on_site vs converted
-
-
-```
-
-### b. Fit simple regression
-
-```{r}
-#| label: task1b
-
-# Fit: converted ~ time_on_site
-
-
-```
-
-### c. Interpret coefficient
-
-**Interpretation:**
-
-
-### d. Report R²
-
-```{r}
-#| label: task1d
-
-# Calculate R²
-
-
-```
-
----
-
-## Task 2: Compare Designs
-
-### a. t-test
-
-```{r}
-#| label: task2a
-
-# Compare time_on_site between designs
-
-
-```
-
-### b. Effect size
-
-```{r}
-#| label: task2b
-
-# Calculate Cohen's d
-
-
-```
-
-### c. Conclusion
-
-**Which design keeps users longer?**
-
-
----
-
-## Task 3: Omitted Variable Bias (Challenge)
-
-### a. Add previous_visits
-
-```{r}
-#| label: task3a
-
-# Fit: converted ~ time_on_site + previous_visits
-
-
-```
-
-### b. Compare coefficients
-
-```{r}
-#| label: task3b
-
-# Extract and compare coefficients for time_on_site
-
-
-```
-
-### c. Interpret
-
-**Is there omitted variable bias? Why or why not?**
-
-
----
-
-# Key Takeaways
-
-Write down 3 key things you learned today:
-
-1. 
-
-2. 
-
-3. 
-
----
-
-# Questions for Office Hours
-
-Write down any questions or concepts you'd like to discuss further:
-
+| Step | What we did |
+|:--|:--|
+| **Question** | |
+| **Explore** | |
+| **Specify** | |
+| **Estimate** | |
+| **Diagnose** | |
+| **Interpret** | |

@@ -49,9 +49,17 @@ the mandatory readings.
 - [Data set of the lecture and the lab](/content/material/data/cps-earnings-mra-2014.csv){download="cps-earnings-mra-2014.csv"}
   (CPS 2014, market research analysts; variables `earnwke`, `uhours`, `age`,
   `sex` (1 = male, 2 = female), `grade92` (highest grade completed; 43 = Bachelor's degree))
-- [Work sheet](/content/material/session10/_student_template.qmd){download="_student_template.qmd"}
-  and its [data sets](/content/material/session10/session10_data.zip)
+- [Work sheet](/content/material/session10/_student_template.qmd){download="lab10_worksheet.qmd"}
+  — save it in the same folder as the data set; it follows the lecture slide
+  by slide
 - [Cheat Sheet](/content/material/session10/cheat_sheet.html)
+
+<!--- Solutions are made available here after the session.
+To publish them, also remove "!content/material/session10/student_solutions.qmd"
+from project.render in _quarto.yml.
+
+- [Solutions to the work sheet](/content/material/session10/student_solutions.qmd)
+--->
 
 ## ✍️ Coursework
 

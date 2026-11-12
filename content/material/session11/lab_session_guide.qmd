@@ -1,0 +1,627 @@
+---
+title: "Implementation Lab 11: Experimental data in R"
+subtitle: "90-Minute Session Guide"
+author: "Instructor Guide"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+    code-tools: true
+    theme: cosmo
+  pdf:
+    toc: true
+    number-sections: true
+    geometry: margin=2cm
+---
+
+<!-- Moved here from lab 10 in Nov 2026, when lab 10 was rebuilt around the
+     regression lecture. Timings were planned for a 35-minute block within a
+     regression lab; with a full session, the remaining time goes to the
+     topics on the lab page (paired designs, two-way ANOVA, power analysis)
+     via the hub page "Experiments in R". -->
+
+# Lab Overview
+
+**Duration:** 90 minutes
+**Format:** Live coding demonstration + guided exercise
+**Datasets:** All created via simulation code below
+
+## Learning Objectives
+
+By the end of this lab, students will be able to:
+
+- Conduct t-tests and ANOVA for experimental data
+- Calculate and interpret effect sizes
+- Check key statistical assumptions
+- See ANOVA as a regression with a categorical predictor
+
+# Preparation: Data Generation
+
+**The CSV files in `session11_data.zip` are the data to use.** They were drawn
+with the original lab-10 script, which generated two regression data sets
+first; re-running the code below therefore gives different numbers. It is
+kept (not run) to document how the data were simulated.
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+# Load required packages
+library(ggplot2)
+library(dplyr)
+library(effectsize)
+library(car)
+
+# Set seed for reproducibility
+set.seed(42)
+```
+
+## Dataset 1: Leadership Training (t-test)
+
+**Purpose:** Demonstrate independent samples t-test
+
+```{r}
+#| label: create-leadership-data
+#| eval: false
+
+# Generate between-subjects leadership data
+n_per_group <- 30
+
+leadership_study_between <- data.frame(
+  participant_id = 1:(2 * n_per_group),
+  group = rep(c("control", "training"), each = n_per_group),
+  team_performance = c(
+    rnorm(n_per_group, mean = 75, sd = 9),  # control
+    rnorm(n_per_group, mean = 84, sd = 9)   # training
+  )
+)
+
+# Save for students
+write.csv(leadership_study_between, "leadership_study_between.csv", row.names = FALSE)
+
+head(leadership_study_between)
+```
+
+## Dataset 2: Communication Study (ANOVA)
+
+**Purpose:** Demonstrate one-way ANOVA with three groups
+
+```{r}
+#| label: create-communication-data
+#| eval: false
+
+# Generate communication study data with 3 groups
+n_per_group <- 30
+
+communication_study <- data.frame(
+  participant_id = 1:(3 * n_per_group),
+  communication_method = rep(c("email", "video_call", "face_to_face"), each = n_per_group),
+  satisfaction_score = c(
+    rnorm(n_per_group, mean = 5.8, sd = 1.3),  # email
+    rnorm(n_per_group, mean = 7.0, sd = 1.3),  # video_call
+    rnorm(n_per_group, mean = 7.5, sd = 1.3)   # face_to_face
+  )
+)
+
+# Save for students
+write.csv(communication_study, "communication_study.csv", row.names = FALSE)
+
+head(communication_study)
+```
+
+## Dataset 3: Exercise Dataset
+
+**Purpose:** Student guided exercise combining regression and t-test
+
+```{r}
+#| label: create-exercise-data
+#| eval: false
+
+# Generate website A/B test data
+n_per_design <- 50
+
+exercise_data <- data.frame(
+  user_id = 1:(2 * n_per_design),
+  design = rep(c("Simple", "Complex"), each = n_per_design),
+  previous_visits = rpois(2 * n_per_design, lambda = 8),
+  time_on_site = c(
+    rnorm(n_per_design, mean = 180, sd = 40),  # Simple
+    rnorm(n_per_design, mean = 240, sd = 50)   # Complex
+  )
+)
+
+# Conversion rate depends on time_on_site and previous_visits
+exercise_data <- exercise_data %>%
+  mutate(
+    conversion_prob = plogis(-2 + 0.01 * time_on_site + 0.05 * previous_visits),
+    converted = rbinom(n(), 1, conversion_prob)
+  )
+
+# Save for students
+write.csv(exercise_data, "exercise_data.csv", row.names = FALSE)
+
+head(exercise_data)
+```
+
+---
+
+```{r}
+#| label: read-shipped-data
+
+# The data used below: the files students get
+leadership_study_between <- read.csv("leadership_study_between.csv")
+communication_study <- read.csv("communication_study.csv")
+exercise_data <- read.csv("exercise_data.csv")
+```
+
+---
+
+# Part 1: Introduction & Setup (5 minutes)
+
+## What to Do
+
+1. **Have students open RStudio**
+2. **Share the data files** (`session11_data.zip`, or have them run the generation code)
+3. **Load packages together:**
+
+```{r}
+#| label: student-setup
+#| eval: false
+
+# Students run this
+library(ggplot2)
+library(dplyr)
+library(effectsize)
+library(car)
+```
+
+---
+
+# Part 2: Experimental Analysis
+
+## 2.1 t-Tests (15 min)
+
+### Teaching Notes
+
+**Research Question:** Does leadership training improve team performance?
+
+**Key workflow:** 
+1. Explore data visually
+2. Check assumptions
+3. Run test
+4. Calculate effect size
+5. Interpret for business decisions
+
+### Visual Exploration
+
+```{r}
+#| label: leadership-visualization
+#| fig-width: 8
+#| fig-height: 5
+
+ggplot(leadership_study_between, aes(x = group, y = team_performance, fill = group)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(width = 0.2, alpha = 0.5) +
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 3, fill = "red") +
+  labs(title = "Team Performance by Group",
+       subtitle = "Red diamonds show group means",
+       x = "Group",
+       y = "Team Performance Score") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+**Ask class:** "Based on this plot, do you think there's a difference?"
+
+### Check Assumptions
+
+```{r}
+#| label: t-test-assumptions
+
+# Normality test for each group
+shapiro_control <- shapiro.test(
+  filter(leadership_study_between, group == "control")$team_performance
+)
+shapiro_training <- shapiro.test(
+  filter(leadership_study_between, group == "training")$team_performance
+)
+
+cat("Shapiro-Wilk test for control group: p =", 
+    round(shapiro_control$p.value, 4), "\n")
+cat("Shapiro-Wilk test for training group: p =", 
+    round(shapiro_training$p.value, 4), "\n")
+
+# Equal variances test
+levene_result <- leveneTest(team_performance ~ group, 
+                            data = leadership_study_between)
+cat("\nLevene's test for equal variances: p =", 
+    round(levene_result$`Pr(>F)`[1], 4), "\n")
+```
+
+**Interpretation:**
+
+> "Both p-values are > 0.05, so we cannot reject the hypotheses of normality and equal variances. We can proceed with the standard t-test."
+
+### Run t-test
+
+```{r}
+#| label: independent-t-test
+
+t_result <- t.test(
+  team_performance ~ group,
+  data = leadership_study_between,
+  var.equal = TRUE
+)
+
+print(t_result)
+```
+
+**Interpretation guide:**
+
+```{r}
+#| label: t-test-interpretation
+
+mean_diff <- diff(t_result$estimate)
+p_value <- t_result$p.value
+ci_lower <- t_result$conf.int[1]
+ci_upper <- t_result$conf.int[2]
+
+cat("Mean difference:", round(mean_diff, 2), "\n")
+cat("95% CI: [", round(ci_lower, 2), ",", round(ci_upper, 2), "]\n")
+cat("p-value:", format.pval(p_value, digits = 3), "\n")
+```
+
+> "The training group scored `r abs(round(mean_diff, 1))` points higher on average. With p `r ifelse(p_value < 0.001, '< 0.001', paste('=', round(p_value, 3)))`, this difference is highly statistically significant."
+
+### Effect Size
+
+```{r}
+#| label: cohens-d
+
+cohens_d_result <- cohens_d(team_performance ~ group, 
+                            data = leadership_study_between)
+print(cohens_d_result)
+```
+
+**Interpretation:**
+
+```{r}
+#| label: effect-size-interpretation
+
+d_value <- abs(cohens_d_result$Cohens_d)
+
+effect_label <- ifelse(d_value < 0.5, "small",
+                      ifelse(d_value < 0.8, "medium", "large"))
+
+cat("Cohen's d =", round(d_value, 2), "(", effect_label, "effect)\n")
+```
+
+> "Cohen's d = `r round(d_value, 2)` indicates a **`r effect_label` effect**. This means the difference is not only statistically significant but also **practically meaningful** for business decisions."
+
+**Business decision:**
+
+> "Based on these results, the leadership training shows a large, significant improvement in team performance. If the training costs less than the value of a `r abs(round(mean_diff, 1))`-point performance improvement, it's worth implementing."
+
+---
+
+## 2.2 One-Way ANOVA (12 min)
+
+### Teaching Notes
+
+**Research Question:** Which communication method leads to highest satisfaction?
+
+**Key concept:** ANOVA tests whether at least one group differs from others (not which specific groups differ - that requires post-hoc tests)
+
+### Visual Exploration
+
+```{r}
+#| label: anova-visualization
+#| fig-width: 8
+#| fig-height: 5
+
+# Calculate means for plotting
+comm_means <- communication_study %>%
+  group_by(communication_method) %>%
+  summarise(
+    mean_satisfaction = mean(satisfaction_score),
+    se = sd(satisfaction_score) / sqrt(n())
+  )
+
+ggplot(communication_study, aes(x = communication_method, y = satisfaction_score)) +
+  geom_jitter(width = 0.2, alpha = 0.4, color = "gray40") +
+  geom_point(data = comm_means, aes(y = mean_satisfaction), 
+             size = 4, color = "red") +
+  geom_errorbar(data = comm_means, 
+                aes(y = mean_satisfaction, 
+                    ymin = mean_satisfaction - 1.96*se,
+                    ymax = mean_satisfaction + 1.96*se),
+                width = 0.2, color = "red", linewidth = 1) +
+  labs(title = "Satisfaction Score by Communication Method",
+       subtitle = "Red points = means with 95% confidence intervals",
+       x = "Communication Method",
+       y = "Satisfaction Score") +
+  theme_minimal()
+```
+
+### Fit ANOVA
+
+```{r}
+#| label: fit-anova
+
+# Fit model
+anova_model <- aov(satisfaction_score ~ communication_method, 
+                   data = communication_study)
+summary(anova_model)
+```
+
+**Interpretation:**
+
+```{r}
+#| label: anova-interpretation
+
+anova_summary <- summary(anova_model)
+f_value <- anova_summary[[1]]$`F value`[1]
+p_value_anova <- anova_summary[[1]]$`Pr(>F)`[1]
+
+cat("F-statistic =", round(f_value, 2), "\n")
+cat("p-value:", format.pval(p_value_anova, digits = 3), "\n")
+```
+
+> "The very small p-value (p `r ifelse(p_value_anova < 0.001, '< 0.001', paste('=', round(p_value_anova, 3)))`) tells us that **at least one** communication method produces significantly different satisfaction scores than the others. But it doesn't tell us *which* methods differ."
+
+### Connection to Regression
+
+**Key teaching point:**
+
+```{r}
+#| label: anova-as-regression
+
+# Show that lm() gives identical results
+lm_model <- lm(satisfaction_score ~ communication_method, 
+               data = communication_study)
+anova(lm_model)
+```
+
+> "ANOVA is just a special case of regression! When we use categorical predictors, R creates dummy variables automatically."
+
+```{r}
+#| label: show-coefficients
+
+summary(lm_model)$coefficients
+```
+
+**Explain:**
+
+> "Since 'email' comes first alphabetically, it's the reference group. The coefficients show:
+>
+> - Intercept = mean satisfaction for email group
+> - face_to_face coefficient = difference between face_to_face and email
+> - video_call coefficient = difference between video_call and email"
+
+### Effect Size
+
+```{r}
+#| label: eta-squared
+
+eta_sq <- eta_squared(anova_model)
+print(eta_sq)
+```
+
+**Interpretation:**
+
+```{r}
+#| label: eta-interpretation
+
+eta_value <- eta_sq$Eta2[1]
+cat("η² =", round(eta_value, 3), "\n")
+cat("Communication method explains", round(eta_value * 100, 1), 
+    "% of variance in satisfaction\n")
+```
+
+### Post-Hoc Tests
+
+```{r}
+#| label: tukey-hsd
+
+tukey_result <- TukeyHSD(anova_model)
+print(tukey_result)
+```
+
+**Create visualization:**
+
+```{r}
+#| label: tukey-plot
+#| fig-width: 8
+#| fig-height: 5
+
+# Convert to data frame for plotting
+tukey_df <- as.data.frame(tukey_result$communication_method)
+tukey_df$comparison <- rownames(tukey_df)
+
+ggplot(tukey_df, aes(x = comparison, y = diff)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = lwr, ymax = upr), width = 0.2) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  coord_flip() +
+  labs(title = "Pairwise Comparisons (Tukey HSD)",
+       subtitle = "Significant if confidence interval doesn't include zero",
+       x = "Comparison",
+       y = "Mean Difference") +
+  theme_minimal()
+```
+
+**Interpretation:**
+
+> "The post-hoc tests reveal:
+>
+> - Face-to-face vs email: Significant difference (CI doesn't include 0)
+> - Video_call vs email: Significant difference
+> - Video_call vs face_to_face: NOT significant (CI includes 0)
+>
+> **Conclusion:** Both face-to-face and video calls produce higher satisfaction than email, but face-to-face and video don't differ significantly from each other."
+
+---
+
+## 2.3 Brief Preview: Factorial Designs (8 min)
+
+### Teaching Notes
+
+**Note:** Students haven't learned about interactions formally in the tutorials. Keep this light and conceptual.
+
+**Goal:** Plant the seed that effects can depend on other variables
+
+### Conceptual Introduction
+
+> "So far we've looked at one factor at a time. But what if the effect of one variable **depends on** another variable? That's what factorial designs let us explore."
+
+### Simple Example (Conceptual)
+
+**On board/slide:**
+
+```
+Research Question: Does feedback type (positive vs. critical) 
+affect performance improvement?
+
+But wait... does this depend on experience level?
+
+Maybe:
+- Novices benefit from positive feedback (encouragement)
+- Experts benefit from critical feedback (growth mindset)
+
+This is called an INTERACTION EFFECT.
+```
+
+### Show the Pattern Visually
+
+```{r}
+#| label: interaction-concept
+#| echo: false
+
+# Create simple interaction data for illustration
+interaction_example <- data.frame(
+  experience = rep(c("Novice", "Expert"), each = 2),
+  feedback = rep(c("Positive", "Critical"), 2),
+  performance = c(8, 4, 5, 9)  # Pattern showing interaction
+)
+
+ggplot(interaction_example, aes(x = feedback, y = performance, 
+                                 group = experience, color = experience)) +
+  geom_point(size = 4) +
+  geom_line(linewidth = 1.2) +
+  labs(title = "Example: Interaction Between Feedback and Experience",
+       subtitle = "Lines cross = interaction effect",
+       x = "Feedback Type",
+       y = "Performance Improvement",
+       color = "Experience Level") +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+
+**Point out:**
+
+> "Notice how the lines cross? This tells us the effect of feedback type is **different** for novices vs. experts. That's an interaction!
+>
+> - For novices: Positive feedback works better
+> - For experts: Critical feedback works better
+>
+> If there was no interaction, the lines would be parallel."
+
+### Why This Matters
+
+> "Interactions are everywhere in business:
+>
+> - Does advertising effectiveness depend on customer segment?
+> - Does training effectiveness depend on prior knowledge?
+> - Does pricing strategy depend on market conditions?
+>
+> The tutorials cover how to test for interactions with two-way ANOVA. For now, just remember: **effects can depend on context**."
+
+**Transition to exercise:**
+
+> "In your exercise, you'll work with simpler designs - just regression and t-tests. But keep interactions in mind for future analyses!"
+
+---
+
+# Part 3: Guided Exercise (15 minutes)
+
+## Scenario
+
+You have data from an A/B test of two website designs (`exercise_data.csv`):
+`design` (Simple vs. Complex), `time_on_site` (seconds), `previous_visits`,
+`converted` (1 = purchase).
+
+## Task for Students
+
+a. Use a t-test to compare `time_on_site` between the two designs
+b. Calculate Cohen's d effect size
+c. Which design keeps users on the site longer?
+
+## Solution Guide (For Discussion)
+
+### Solution
+
+```{r}
+#| label: exercise-solution-2
+#| eval: false
+
+# a. t-test
+t_test_design <- t.test(time_on_site ~ design, data = exercise_data)
+print(t_test_design)
+
+# b. Effect size
+cohens_d_design <- cohens_d(time_on_site ~ design, data = exercise_data)
+print(cohens_d_design)
+
+# c. Interpretation
+cat("Complex design keeps users", abs(round(diff(t_test_design$estimate), 1)),
+    "seconds longer on average\n")
+```
+
+---
+
+# Part 4: Wrap-up (5 minutes)
+
+## Key Concepts Review
+
+### Experimental Analysis
+
+✅ **Always check assumptions** before running tests  
+✅ **t-tests** compare two groups  
+✅ **ANOVA** compares three or more groups  
+✅ **Effect sizes** (Cohen's d, η²) tell us about practical significance  
+✅ **Post-hoc tests** identify which specific groups differ  
+✅ **ANOVA is regression** with categorical predictors
+
+## Resources
+
+- **Hub page:** [Experiments in R](https://euf-methodology-hub.netlify.app/resources/experiments-in-r) — paired designs, two-way ANOVA, power analysis
+- **Office hours:** For questions on your own data/projects
+
+---
+
+# Appendix: Common Student Questions
+
+## "What if my assumptions are violated?"
+
+- **Non-normal data:** Use non-parametric tests (Wilcoxon, Kruskal-Wallis)
+- **Unequal variances:** Use Welch's t-test or robust ANOVA
+- **Small samples:** Bootstrap methods
+- **Always visualize first** - sometimes transformations help!
+
+## "How do I know if an effect size is 'big enough'?"
+
+- Cohen's guidelines are just rules of thumb
+- Consider the **context**:
+  - A 2% improvement in click-through rate might be huge for online advertising
+  - A 10-point IQ difference might be small for educational interventions
+- Ask: "Is this large enough to matter for decisions?"
+
+## "What's the difference between aov() and lm()?"
+
+- They're the same! ANOVA is regression with categorical predictors
+- Use `aov()` for traditional ANOVA output
+- Use `lm()` when you want to see coefficients or add continuous predictors
+- Both give identical F-statistics and p-values
+

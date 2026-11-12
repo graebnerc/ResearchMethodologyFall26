@@ -21,6 +21,11 @@ project:
     - "content/lecture/slides/RM26_L08_LiteratureReviews.qmd"
     - "content/material/*.qmd"
     - "content/material/session*/*.qmd"
+    # Solutions are published only after their session (remove the line,
+    # and uncomment the link on the session page); instructor guides never.
+    - "!content/material/session10/student_solutions.qmd"
+    - "!content/material/session11/student_solutions.qmd"
+    - "!content/material/session*/lab_session_guide.qmd"
     # Only decks that have been reviewed are built. The remaining decks in
     # content/material/slides/ stay unrendered (and therefore unreachable)
     # until they are checked; add them here one by one. Never leave a

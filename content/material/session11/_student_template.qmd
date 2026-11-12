@@ -1,0 +1,268 @@
+---
+title: "Implementation Lab 11: Experimental data in R"
+subtitle: "Student Worksheet"
+format:
+  html:
+    code-fold: show
+    theme: journal
+    toc: true
+execute:
+  error: true
+---
+
+# Setup
+
+Put this worksheet and the three data files of
+`session11_data.zip` into the same folder (best: the folder of an R project).
+
+```{r}
+#| label: setup
+#| message: false
+
+# Load required packages
+library(ggplot2)
+library(dplyr)
+library(effectsize)
+library(car)
+```
+
+```{r}
+#| label: load-data
+
+# Load the datasets
+leadership_study_between <- read.csv("leadership_study_between.csv")
+communication_study <- read.csv("communication_study.csv")
+exercise_data <- read.csv("exercise_data.csv")
+```
+
+---
+
+# Part 1: Comparing two groups
+
+## 1.1 t-Test
+
+**Research Question:** Does leadership training improve team performance?
+
+### Visualize the Data
+
+```{r}
+#| label: visualize-ttest
+
+ggplot(leadership_study_between, aes(x = group, y = team_performance, fill = group)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(width = 0.2, alpha = 0.5) +
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 3, fill = "red") +
+  labs(title = "Team Performance by Group",
+       x = "Group",
+       y = "Team Performance Score") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+### Check Assumptions
+
+```{r}
+#| label: check-assumptions-ttest
+
+# Normality test for each group: the Shapiro test
+____(filter(leadership_study_between, group == "control")$team_performance)
+____(filter(leadership_study_between, group == "training")$team_performance)
+
+# Equal variances test: Levene test
+____(team_performance ~ group, data = leadership_study_between)
+```
+
+**Interpretation:**
+- p-values > 0.05? If yes, assumptions are met: _______
+
+### Run t-test
+
+```{r}
+#| label: run-ttest
+
+t_result <- t.test(
+  team_performance ~ group,
+  data = leadership_study_between,
+  var.equal = TRUE
+)
+
+print(t_result)
+```
+
+**Results:**
+- Mean difference: _______
+- p-value: _______
+- Conclusion: _______
+
+### Calculate Effect Size
+
+```{r}
+#| label: cohens-d-ttest
+
+cohens_d_result <- ____(team_performance ~ group, 
+                            data = leadership_study_between)
+print(cohens_d_result)
+```
+
+**Effect size interpretation:**
+- Cohen's d = _______ 
+- This is a _______ effect (small/medium/large)
+
+---
+
+# Part 2: Comparing three or more groups
+
+## 2.1 One-Way ANOVA
+
+**Research Question:** Which communication method leads to highest satisfaction?
+
+### Visualize the Data
+
+```{r}
+#| label: visualize-anova
+
+ggplot(communication_study, aes(x = communication_method, 
+                                 y = satisfaction_score, 
+                                 fill = communication_method)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(width = 0.2, alpha = 0.3) +
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 4, fill = "red") +
+  labs(title = "Satisfaction Score by Communication Method",
+       x = "Communication Method",
+       y = "Satisfaction Score") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+### Fit ANOVA
+
+```{r}
+#| label: fit-anova
+
+# Using aov()
+anova_model <- ____(satisfaction_score ~ communication_method, 
+                   data = communication_study)
+summary(anova_model)
+```
+
+**Results:**
+- F-statistic: _______
+- p-value: _______
+- Conclusion: _______
+
+### ANOVA as Regression
+
+```{r}
+#| label: anova-regression
+
+# Show that lm() gives same results
+lm_model <- lm(satisfaction_score ~ communication_method, 
+               data = communication_study)
+anova(lm_model)
+```
+
+```{r}
+#| label: coefficients
+
+# Look at coefficients
+summary(lm_model)$coefficients
+```
+
+**Notes:**
+- Reference group: _______
+- Coefficients show: _______
+
+### Effect Size
+
+```{r}
+#| label: eta-squared
+
+eta_sq <- eta_squared(anova_model)
+print(eta_sq)
+```
+
+**Interpretation:**
+
+Communication method explains _______ % of variance in satisfaction.
+
+### Post-Hoc Tests
+
+```{r}
+#| label: tukey
+
+# Which groups differ?
+tukey_result <- TukeyHSD(anova_model)
+print(tukey_result)
+```
+
+**Significant differences:**
+- _______
+- _______
+
+**No significant difference:**
+- _______
+
+---
+
+# Part 3: Guided Exercise
+
+## Dataset: Website A/B Test
+
+**Variables:**
+- `design`: Simple vs. Complex
+- `time_on_site`: Time spent (seconds)
+- `previous_visits`: Number of previous visits
+- `converted`: Purchase made (1 = yes, 0 = no)
+
+```{r}
+#| label: look-at-exercise-data
+
+head(exercise_data)
+```
+
+## Task: Compare Designs
+
+### a. t-test
+
+```{r}
+#| label: task2a
+
+# Compare time_on_site between designs
+
+
+```
+
+### b. Effect size
+
+```{r}
+#| label: task2b
+
+# Calculate Cohen's d
+
+
+```
+
+### c. Conclusion
+
+**Which design keeps users longer?**
+
+
+---
+
+# Key Takeaways
+
+Write down 3 key things you learned today:
+
+1. 
+
+2. 
+
+3. 
+
+---
+
+# Questions for Office Hours
+
+Write down any questions or concepts you'd like to discuss further:
+
+
