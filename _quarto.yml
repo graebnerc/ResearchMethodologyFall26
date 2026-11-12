@@ -6,20 +6,29 @@ project:
     - "index.qmd"
     - "content/*.qmd"
     - "content/lecture/*.qmd"
-    - "content/lecture/*/*.qmd"
-    # Lecture decks are NOT built into the site: a deck must not reach the
+    # Every subfolder of content/lecture/ EXCEPT slides/: lecture decks are
+    # NOT built into the site by default, because a deck must not reach the
     # students before its lecture has been held, and everything in _site/ is
     # uploaded by `quarto publish netlify`. After a lecture, add that deck
-    # back here by name (and uncomment the embed block on its session page).
-    - "!content/lecture/slides/*.qmd"
+    # here by name (and uncomment the embed block on its session page).
+    # Do not use a "!content/lecture/slides/*.qmd" exclusion instead: Quarto
+    # applies "!" patterns after all others, so it would also drop the decks
+    # listed below, which then only reach _site/ as stale copies of a
+    # hand render.
+    - "content/lecture/!(slides)/*.qmd"
     # Embargo lifted after the lecture was held:
     - "content/lecture/slides/RM26_L02_AITools.qmd"
+    - "content/lecture/slides/RM26_L08_LiteratureReviews.qmd"
     - "content/material/*.qmd"
     - "content/material/session*/*.qmd"
     # Only decks that have been reviewed are built. The remaining decks in
     # content/material/slides/ stay unrendered (and therefore unreachable)
-    # until they are checked; add them here one by one.
+    # until they are checked; add them here one by one. Never leave a
+    # hand-rendered .html next to a deck instead: Quarto copies it into _site/
+    # as a resource of the page that links it, stale or not.
     - "content/material/slides/E1-Introduction.qmd"
+    - "content/material/slides/E3-ProjectSetup.qmd"
+    - "content/material/slides/E3b-WritingFunctions.qmd"
     - "content/exercises/*.qmd"
     - "content/exercises/*/*.qmd"
     - "content/statrecap/*.qmd"

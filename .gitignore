@@ -79,3 +79,6 @@ content/lecture/slides/*.html
 # Keeping it out of git avoids the churn it caused in every commit.
 _freeze/
 take-homes
+# Hand renders of the lab decks: a published deck is built by the project
+# (listed by name in project.render), never committed as .html.
+content/material/slides/*.html
