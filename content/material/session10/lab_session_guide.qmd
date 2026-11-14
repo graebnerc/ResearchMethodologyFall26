@@ -1,5 +1,5 @@
 ---
-title: "Implementation Lab 10: Linear models in R"
+title: "Lab 10: Linear models in R"
 subtitle: "90-Minute Session Guide"
 author: "Instructor Guide"
 format:
@@ -14,151 +14,157 @@ format:
 ---
 
 <!-- Not published: excluded from project.render in _quarto.yml. The code
-     lives in student_solutions.qmd; this guide only gives timing, teaching
-     notes and the links to the lecture (RM26_L10_Regression). -->
+     lives in the worksheet (_student_template.qmd) and the solutions; this
+     guide gives the rhythm, timing and teaching notes. -->
 
 # Lab Overview
 
 **Date:** Fri 27 Nov 2026, on-site (MAD 024), four days after lecture 10
 **Duration:** 90 minutes
-**Format:** live coding along the worksheet, students code along
 **Data:** `cps-earnings-mra-2014.csv` — the 252 market research analysts of
 the lecture (CPS 2014 via Békés & Kézdi 2021). Lecture and lab work on exactly
-the same rows, so every number on the slides can be reproduced.
+the same rows, so every number on the slides can be reproduced — the slides
+double as an answer key for the *numbers*, not for the code.
 
-**Files:**
+**What students download:** `lab10.zip` — an R project with the worksheet
+(`lab10_worksheet.qmd`) and the data in `data/`. Unzip, open `lab10.Rproj`,
+open the worksheet, render. Rebuild the zip with `make-lab10-zip.sh` after
+any change to the worksheet or the data.
 
-- `_student_template.qmd` — the worksheet with blanks (download for students)
-- `student_solutions.qmd` — complete solutions; published after the session
-- `cheat_sheet.qmd` — one-page reference (HTML and PDF)
+**Other files:** `student_solutions.qmd` (published after the session),
+`cheat_sheet.qmd` (HTML and PDF, linked on the session page).
 
-## Learning Objectives
+## Didactic approach: show, then copy and adapt
 
-By the end of the lab, students can
+Students rarely implement something new right after seeing it once. So each
+of the three parts runs the same cycle:
 
-- fit simple and multiple regressions with `lm()` and read them with
-  `tidy()`, `glance()` and `augment()`,
-- diagnose a model with residual plots and respond with age² or logs,
-- reproduce the split of the raw gender gap into a direct part and a part via
-  hours,
-- use factors, reference groups, interactions and centring, and plot
-  predicted values instead of reading coefficients.
+1. 👀 **Together** (7–15 min): the code is *complete* in the worksheet. You
+   type it live in your own copy and explain; students run the same chunk in
+   theirs and read along. Nobody falls behind typing.
+2. ✍️ **Your turn** (10–15 min, in pairs): short fill-in-the-blank tasks
+   (`____`), each a near-copy of a *Together* chunk just shown. Every task
+   names the lecture slide to check the result against. No empty chunks.
+3. **Debrief** (3–5 min): one or two students read out their numbers; you
+   show the slide.
+
+⭐ tasks are for the fast pairs; everyone else skips them — the solutions
+cover them.
+
+**In the room:**
+
+- **Pairs:** one types, one reads the worksheet; swap every part.
+- **Type, do not paste** during *Together*, and make one deliberate mistake:
+  `age^2` without `I()` (it fails silently — the model just has `age` once).
+- **Walk around** during *Your turn*. If the same problem appears three
+  times, stop the room for 30 seconds and solve it on the projector.
+- **Note** the two or three most common problems; answer them in the Moodle
+  forum or at the start of lab 11.
 
 ## Session Structure
 
-| Time | Worksheet | Lecture slides |
-|:--|:--|:--|
-| 0:00–0:05 | Setup: project, data, packages | — |
-| 0:05–0:40 | Part 1: simple regression in six steps | ch. 1 |
-| 0:40–1:05 | Part 2: multiple regression | ch. 2 |
-| 1:05–1:25 | Part 3: groups and interactions | ch. 3 |
-| 1:25–1:30 | Six-step summary table, coursework | wrap-up |
-
-If time runs short: 2.4 (model 4) and 3.4 (gap by age) are the parts to
-leave for home — both are in the solutions.
+| Time | 👀 Together | ✍️ Your turn | Debrief |
+|:--|:--|:--|:--|
+| 0:00–0:05 | Unzip, open the project, render once | | |
+| 0:05–0:40 | 1.1–1.3: explore, `lm()`, `tidy`/`glance`, `augment` and the hump (15 min) | 1.4: age², slopes, logs (15 min) | +42 / +7 / −27; 1.2 % (5 min) |
+| 0:40–1:05 | 2.1: raw gap, equal hours, the −218 = −69 + (−150) split; 3 min on total vs direct (10 min) | 2.2: model (3); ⭐ 2.3: model (4) (12 min) | −83 (SE 74); ≈ −5 % (3 min) |
+| 1:05–1:25 | 3.1: `relevel`, `age * female`, the two-panel plot (7 min) | 3.2: centring at 30/40/50; ⭐ 3.3: gap by age (13 min) | −149 / −221 / −293 |
+| 1:25–1:30 | Six-step table, coursework | | |
 
 ---
 
 # Setup (5 minutes)
 
-- Students open (or create) an R project, put the worksheet and the CSV into
-  it, and render once: the setup chunks must run.
-- Packages: only `tidyverse` and `broom`. Anyone missing one:
-  `install.packages(c("tidyverse", "broom"))`.
-- `execute: error: true` is set in the worksheet: the blanks (`____`) raise
-  errors but the document still renders — students fill them in one by one.
+- Download `lab10.zip` from the session page, unzip, double-click
+  `lab10.Rproj`, open `lab10_worksheet.qmd`, click *Render*.
+- The setup chunk must run: it needs `tidyverse` and `broom`. Anyone missing
+  one: `install.packages(c("tidyverse", "broom"))`.
+- Blanks raise errors, but `execute: error: true` lets the document render
+  anyway — say this explicitly, or students think they broke something.
 
 ---
 
 # Part 1: Simple regression in six steps (35 minutes)
 
-## 1.1 Question and exploration (5 min)
+## 👀 1.1–1.3 Explore, estimate, diagnose (15 min)
 
 - Scatter plot first — the lecture's "look first" slide. Ask: what does the
   ceiling at 2,885 USD do to a fitted line?
-- Histograms in levels and logs: logs make earnings *more* symmetric, not
-  symmetric.
+- Histograms in levels and logs: logs make earnings *more* symmetric.
+- `lm()`, then `tidy(conf.int = TRUE)` and `glance()`: introduce broom here;
+  the rest of the session uses it. Numbers: slope 14.4, SE 3.7,
+  CI [7.0, 21.7], R² 0.056.
+- `augment()` adds `.fitted` and `.resid`; the residual plot shows the hump.
+  This is the plot students copy in 1.4b — point that out.
 
-## 1.2 Specify and estimate (10 min)
+## ✍️ 1.4 Your turn (15 min)
 
-- `lm()`, then `tidy(conf.int = TRUE)` and `glance()`: introduce broom here,
-  it is used for the rest of the session.
-- Numbers to find: slope 14.4, SE 3.7, CI [7.0, 21.7], R² 0.056.
-- **Check for understanding:** the four statements of "Check yourself —
-  chapter 1" — which one is correct? Only "on average, across people".
-- R²: describes the fit to this sample; says nothing about whether the slope
-  is right or how well we predict new analysts.
+- a: `I(age^2)` — the hint is in the task text.
+- b: replace `m1` by `m2` in the copy of the residual plot.
+- c: the function is given; they fill in 30, 45, 60.
+- d: `log`.
 
-## 1.3–1.4 Diagnose, back to the data (12 min)
+## Debrief (5 min)
 
-- `augment()` adds `.fitted` and `.resid`. The residual plot of `m1` shows
-  the hump — the same figure as in the lecture.
-- Loess vs straight line vs parabola in one plot; then `m2` with
-  `I(age^2)`. **Typical error:** `age^2` without `I()` is silently dropped.
-- Residuals of `m2`: hump gone; the diagonal stripe = top-coded analysts.
-
-## 1.5–1.6 Interpret the curve, logs (8 min)
-
-- Slope at 30 / 45 / 60 = +42 / +7 / −27; peak ≈ 48. The coefficient 110.2
-  alone is the slope at age 0.
-- Log–level: 0.0115 → about 1.2 % per year of age.
+- Slopes +42 / +7 / −27 (slide "With age², the slope depends on age");
+  1.2 % per year (slide "Logs change the meaning of the coefficient").
+- Ask: why is the coefficient 110.2 of `age` in `m2` not "the effect of age"?
 
 ---
 
 # Part 2: Multiple regression (25 minutes)
 
-## 2.1–2.2 Raw gap, holding hours constant (12 min)
+## 👀 2.1 Raw gap, equal hours (10 min)
 
-- Group means first, then `lm(earnwke ~ female)`: the dummy coefficient
-  equals the difference in means (−218).
+- Group means first, then `lm(earnwke ~ female)`: the dummy coefficient is
+  the difference in means (−218).
 - With hours: −69 (SE 79). The decomposition chunk reproduces
-  −218 = −69 + 40.9 × (−3.66) exactly — the total vs direct effect of the
-  lecture's causal diagram (and the optional OVB slide).
-- **Discussion (2 min):** which number answers "Do women earn less?" —
+  −218 = −69 + 40.9 × (−3.66) exactly — the lecture's causal diagram in
+  numbers.
+- **3 minutes of discussion:** which number answers "Do women earn less?" —
   total (−218) or direct (−69)? Both are legitimate; the question decides.
 
-## 2.3–2.4 Model (3), diagnostics, model (4) (13 min)
+## ✍️ 2.2 Your turn, ⭐ 2.3 (12 min)
 
-- Model (3): −83 (SE 74), R² 0.33, adjusted 0.317.
-- The `map_dfr()` chunk compares the female coefficient across models — the
-  table on the lecture slide.
-- Q-Q plot of (3): heavy right tail. Model (4) with `log(earnwke)` and
-  `log(uhours)`: residuals close to normal, R² 0.40; gap −0.051 ≈ −5 %;
-  hours elasticity 1.3.
+- 2.2a: add `college`. 2.2b: put `m3` into the list.
+- ⭐ 2.3: `augment(m3)` for the Q-Q plot; `log` for hours.
+
+## Debrief (3 min)
+
+- −83 (SE 74), adjusted R² 0.317 (slide "Adding hours shrinks the gap").
+- If a pair did 2.3: the Q-Q plot of (3) has a heavy right tail; model (4)
+  fixes it, gap ≈ −5 %.
 
 ---
 
 # Part 3: Groups and interactions (20 minutes)
 
-## 3.1 Categories with more levels (5 min)
+## 👀 3.1 Reference groups and interactions (7 min)
 
-- `edu_cat` is a factor with "No degree" as the first level → reference
-  group. Bachelor's +236, graduate +521.
-- `relevel(edu_cat, ref = "Bachelor")`: same model, same fit, different
-  comparisons. Graduate vs Bachelor's ≈ +285.
+- `edu_cat` is a factor; its first level ("No degree") is the reference.
+  `relevel()`: same model, same fit, other comparisons.
+- `age * female` expands to `age + female + age:female`. Slopes: men 18.5,
+  women 11.3 — difference −7.2 (SE 7.5), not precisely estimated.
+- The coefficient of `female` (+68) is the gap at age 0 — the setup for 3.2.
 
-## 3.2–3.3 Parallel slopes, interaction, centring (10 min)
+## ✍️ 3.2 Your turn, ⭐ 3.3 (13 min)
 
-- `age * female` expands to `age + female + age:female`.
-- Slopes: men 18.5, women 11.3; difference −7.2 (SE 7.5) — not precisely
-  estimated.
-- `female` = +68 in `m_int` is the gap at age 0. Centring with
-  `I(age - 40)`: the coefficient becomes −221 = the gap at 40.
-
-## 3.4 Gap by age (challenge, 5 min)
-
-- Centring at each age in turn gives the gap with its CI — the band of the
-  lecture's "Plot the gap" figure. Band includes zero below about 34.
+- 3.2: `40`; then change it to 30 and 50 → −149, −221, −293 — the numbers of
+  the slide "The interaction model lets the gap widen with age". The point:
+  centring changes the meaning of the coefficient, not the model.
+- ⭐ 3.3: `estimate`, `conf.low`, `conf.high` — the band of the lecture
+  figure; it includes zero up to about age 34.
 
 ---
 
 # Wrap-up (5 minutes)
 
-- Students fill in the six-step table at the end of the worksheet; compare
-  with the table in the lecture's wrap-up.
+- The six-step table at the end of the worksheet: fill in together if time
+  allows, otherwise it is the first part of the coursework.
 - **Coursework:** a short Quarto report applying the six steps to
   `hr_salaries.csv` (in `RegressionDataSets.zip`, linked on the session page),
   plus the exercises `LinearRegression1` and `LinearRegression2`.
+- Solutions: published on the session page after the session.
 
 ---
 

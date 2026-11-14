@@ -46,13 +46,19 @@ the mandatory readings.
 
 ## In-class exercises
 
-- [Data set of the lecture and the lab](/content/material/data/cps-earnings-mra-2014.csv){download="cps-earnings-mra-2014.csv"}
-  (CPS 2014, market research analysts; variables `earnwke`, `uhours`, `age`,
-  `sex` (1 = male, 2 = female), `grade92` (highest grade completed; 43 = Bachelor's degree))
-- [Work sheet](/content/material/session10/_student_template.qmd){download="lab10_worksheet.qmd"}
-  — save it in the same folder as the data set; it follows the lecture slide
-  by slide
+Please download and unzip this R project **before the session**, open
+`lab10.Rproj`, open `lab10_worksheet.qmd` and render it once:
+
+- [R project for the lab (zip)](/content/material/session10/lab10.zip){download="lab10.zip"}
+  — the worksheet and the data, ready to run. The worksheet follows the
+  lecture slide by slide: in the 👀 *Together* sections the code is complete
+  and we go through it in class; in the ✍️ *Your turn* sections you fill in
+  the blanks.
 - [Cheat Sheet](/content/material/session10/cheat_sheet.html)
+- The [data set](/content/material/data/cps-earnings-mra-2014.csv){download="cps-earnings-mra-2014.csv"}
+  on its own (CPS 2014, market research analysts; variables `earnwke`,
+  `uhours`, `age`, `sex` (1 = male, 2 = female), `grade92` (highest grade
+  completed; 43 = Bachelor's degree)) — already included in the zip
 
 <!--- Solutions are made available here after the session.
 To publish them, also remove "!content/material/session10/student_solutions.qmd"

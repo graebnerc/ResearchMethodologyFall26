@@ -1,9 +1,9 @@
 ---
-title: "Implementation Lab 10: Linear models in R"
-subtitle: "Student Worksheet"
+title: "Lab 10: Linear models in R"
+subtitle: "Worksheet"
 format:
   html:
-    code-fold: show
+    code-fold: false
     theme: journal
     toc: true
 execute:
@@ -11,15 +11,21 @@ execute:
 ---
 
 This worksheet rebuilds the models of the lecture on regression analysis in
-R, on the same data and in the same order: a simple regression through all
-six steps (question, explore, specify, estimate, diagnose, interpret), then
-multiple regression, then groups and interactions. Fill in the blanks
-(`____`) and the interpretations (`_______`).
+R, on the same data and in the same order. It has two kinds of sections:
 
-# Setup
+- 👀 **Together** — the code is complete. Run each chunk while we go through
+  it in class, and read the comments.
+- ✍️ **Your turn** — fill in the blanks `____`. Every task is a near-copy of
+  the *Together* chunk just before it: look there first. Then check your
+  numbers against the lecture slide named in the task.
 
-Save `cps-earnings-mra-2014.csv` in the same folder as this worksheet (best:
-the folder of an R project).
+⭐ marks tasks for the fast ones; if you run out of time, skip them — the
+solutions published after the session cover everything.
+
+**Tip:** render the document now and then. Blanks you have not filled in yet
+show up as errors, but the rest of the document still renders.
+
+# Setup 👀
 
 ```{r}
 #| label: setup
@@ -27,12 +33,8 @@ the folder of an R project).
 
 library(tidyverse)  # readr, dplyr, ggplot2, purrr
 library(broom)      # tidy(), glance(), augment()
-```
 
-```{r}
-#| label: load-data
-
-cps <- read_csv("cps-earnings-mra-2014.csv")
+cps <- read_csv("data/cps-earnings-mra-2014.csv")
 ```
 
 The variables: `earnwke` (weekly earnings, USD), `uhours` (usual weekly
@@ -44,9 +46,9 @@ completed; 43 = Bachelor's degree, above = graduate degree).
 
 cps <- cps |>
   mutate(
-    female  = as.integer(sex == ____),
+    female  = as.integer(sex == 2),             # 1 = woman, 0 = man
     gender  = factor(if_else(female == 1, "Women", "Men")),
-    college = as.integer(grade92 >= ____),
+    college = as.integer(grade92 >= 43),        # 1 = at least a Bachelor's degree
     edu_cat = factor(
       case_when(grade92 < 43 ~ "No degree",
                 grade92 == 43 ~ "Bachelor",
@@ -61,14 +63,14 @@ glimpse(cps)
 
 # Part 1: Simple regression in six steps
 
-## 1.1 Question and exploration
-
 **Question:** How are weekly earnings related to age?
+
+## 1.1 Explore 👀
 
 ```{r}
 #| label: scatter
 
-ggplot(cps, aes(x = ____, y = ____)) +
+ggplot(cps, aes(x = age, y = earnwke)) +
   geom_point(alpha = 0.5) +
   labs(x = "Age (years)", y = "Weekly earnings (USD)")
 ```
@@ -76,51 +78,31 @@ ggplot(cps, aes(x = ____, y = ____)) +
 ```{r}
 #| label: ceiling
 
-# Highest value of earnwke, and how many analysts have it
-max(cps$earnwke)
-sum(cps$earnwke == ____)
+max(cps$earnwke)                        # the highest value ...
+sum(cps$earnwke == max(cps$earnwke))    # ... and how many analysts have it
 ```
 
 ```{r}
 #| label: histograms
 
-# Histogram of earnwke, then of log(earnwke)
 ggplot(cps, aes(x = earnwke)) +
-  ____(bins = 25)
+  geom_histogram(bins = 25)
 
-ggplot(cps, aes(x = ____)) +
-  ____(bins = 25)
+ggplot(cps, aes(x = log(earnwke))) +
+  geom_histogram(bins = 25)
 ```
 
-**What do you see?**
-
-- The relationship between age and earnings is _______
-- Earnings stop at _______ USD because _______
-- In levels, earnings are _______; in logs, _______
-
-## 1.2 Specify and estimate
+## 1.2 Estimate 👀
 
 ```{r}
 #| label: slr
 
-m1 <- lm(____ ~ ____, data = cps)
-summary(m1)
+m1 <- lm(earnwke ~ age, data = cps)
+tidy(m1, conf.int = TRUE)   # coefficients, standard errors, 95% CIs
+glance(m1)$r.squared        # R²
 ```
 
-```{r}
-#| label: slr-tidy
-
-tidy(m1, conf.int = ____)  # coefficients with 95% confidence intervals
-glance(m1)$____            # R²
-```
-
-**Interpretation:**
-
-- Slope: _______ — analysts who are one year older _______
-- 95% CI: [_______, _______] — can we rule out a slope of zero? _______
-- R² = _______ — what does it describe, and what does it *not* tell you? _______
-
-## 1.3 Diagnose
+## 1.3 Diagnose 👀
 
 `augment()` adds the fitted values (`.fitted`) and the residuals (`.resid`)
 to the data.
@@ -129,66 +111,49 @@ to the data.
 #| label: slr-diagnose
 
 augment(m1) |>
-  ggplot(aes(x = ____, y = ____)) +
+  ggplot(aes(x = .fitted, y = .resid)) +
   geom_hline(yintercept = 0) +
   geom_point(alpha = 0.5) +
   geom_smooth(method = "loess", formula = y ~ x, se = FALSE)
 ```
 
-**Is there a pattern in the residuals? What does it tell you about the
-straight line?** _______
+## 1.4 Your turn ✍️ — age² and logs
 
-## 1.4 Back to the data: age²
-
-```{r}
-#| label: smoother
-
-# A smoother (no form imposed), the straight line, and a parabola
-ggplot(cps, aes(x = age, y = earnwke)) +
-  geom_point(alpha = 0.3) +
-  geom_smooth(method = "____", formula = y ~ x, se = FALSE, linetype = "dashed") +
-  geom_smooth(method = "lm", formula = y ~ x, se = FALSE, colour = "darkgreen") +
-  geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = FALSE, colour = "red")
-```
+**a.** Add the square of age. Inside a formula, a square needs `I()`:
+`I(age^2)`.
 
 ```{r}
 #| label: quadratic
 
-# I(age^2) adds the square of age as a second variable
 m2 <- lm(earnwke ~ age + ____, data = cps)
 tidy(m2)
-glance(m2)$r.squared
 ```
+
+**b.** Copy of 1.3 — the residuals of `m2`. Has the hump gone?
 
 ```{r}
 #| label: quadratic-diagnose
 
-# Residuals vs fitted values for m2 — has the pattern gone?
-
+augment(____) |>
+  ggplot(aes(x = .fitted, y = .resid)) +
+  geom_hline(yintercept = 0) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "loess", formula = y ~ x, se = FALSE)
 ```
 
-## 1.5 Interpret the curve
-
-With age², the slope depends on age: $\hat\beta_1 + 2\hat\beta_2 \cdot a$.
+**c.** The slope of the curve at ages 30, 45 and 60.
+*Check:* slide "With age², the slope depends on age".
 
 ```{r}
 #| label: slope-at-age
 
 b <- coef(m2)
 slope_at <- function(a) b[["age"]] + 2 * b[["I(age^2)"]] * a
-slope_at(c(30, 45, 60))
-
-# Age with the highest predicted earnings: -b1 / (2 * b2)
-
+slope_at(c(____, ____, ____))
 ```
 
-**Interpretation:**
-
-- Slope at 30: _______, at 45: _______, at 60: _______
-- Predicted earnings are highest at _______ years
-- Why is the coefficient of `age` in `m2` on its own not "the effect of age"? _______
-
-## 1.6 Logs
+**d.** Log earnings on age.
+*Check:* slide "Logs change the meaning of the coefficient".
 
 ```{r}
 #| label: log-model
@@ -197,8 +162,11 @@ m_log <- lm(____(earnwke) ~ age, data = cps)
 tidy(m_log)
 ```
 
-**Interpretation:** one year of age goes with about _______ % higher
-earnings.
+**Your answers:**
+
+- Has the hump gone in **b**? _______
+- Slopes at 30 / 45 / 60: _______ / _______ / _______
+- One year of age goes with about _______ % higher earnings (100 × the coefficient)
 
 ---
 
@@ -206,144 +174,118 @@ earnings.
 
 **Question:** Do women earn less?
 
-## 2.1 The raw gap
+## 2.1 The raw gap, and holding hours constant 👀
 
 ```{r}
 #| label: group-means
 
 cps |>
-  group_by(____) |>
-  summarise(n = n(), earnings = mean(earnwke), hours = mean(____))
+  group_by(gender) |>
+  summarise(n = n(), earnings = mean(earnwke), hours = mean(uhours))
 ```
 
 ```{r}
-#| label: raw-gap
+#| label: gaps
 
-m_gap <- lm(earnwke ~ female, data = cps)
+m_gap   <- lm(earnwke ~ female, data = cps)            # (1) the raw gap
+m_hours <- lm(earnwke ~ female + uhours, data = cps)   # (2) at equal hours
 tidy(m_gap)
-```
-
-**Interpretation:** the intercept is _______; the coefficient of `female`
-is _______.
-
-## 2.2 Holding hours constant
-
-```{r}
-#| label: gap-hours
-
-m_hours <- lm(earnwke ~ female + ____, data = cps)
 tidy(m_hours)
 ```
 
 ```{r}
 #| label: decomposition
 
-# Hours gap between women and men
-delta <- coef(lm(____ ~ female, data = cps))[["female"]]
+delta <- coef(lm(uhours ~ female, data = cps))[["female"]]   # hours gap
 delta
 
-# Direct gap + effect of hours × hours gap — compare with the raw gap
-coef(m_hours)[["female"]] + coef(m_hours)[["uhours"]] * ____
+# direct gap + effect of hours × hours gap  =  the raw gap
+coef(m_hours)[["female"]] + coef(m_hours)[["uhours"]] * delta
 ```
 
-**Interpretation:**
+## 2.2 Your turn ✍️ — model (3)
 
-- Among analysts working the same hours, the gap is _______
-- The raw gap splits into a direct part (_______) and a part via hours (_______)
-- Which number answers "Do women earn less?" — and when would you rather
-  use the other one? _______
-
-## 2.3 Model (3): more controls
+**a.** Add age, age² and the college dummy to model (2).
+*Check:* slide "Adding hours shrinks the gap from −218 to −69", column (3).
 
 ```{r}
 #| label: model-3
 
-m3 <- lm(earnwke ~ female + age + I(age^2) + uhours + ____, data = cps)
-tidy(m3, conf.int = TRUE)
-glance(m3) |> select(r.squared, ____)
+m3 <- lm(earnwke ~ female + uhours + age + I(age^2) + ____, data = cps)
+tidy(m3)
+glance(m3) |> select(r.squared, adj.r.squared)
 ```
+
+**b.** Put model (3) into the comparison — the `female` row of all three
+models.
 
 ```{r}
 #| label: compare-gap
 
-# The female coefficient across the three models
-list(`(1) raw` = m_gap, `(2) + hours` = m_hours, `(3) + age, age², college` = m3) |>
-  map_dfr(\(m) tidy(m) |> filter(term == "____"), .id = "model") |>
+list(`(1) raw` = m_gap, `(2) + hours` = m_hours, `(3) + age, college` = ____) |>
+  map_dfr(\(m) tidy(m) |> filter(term == "female"), .id = "model") |>
   select(model, estimate, std.error)
 ```
 
-## 2.4 Diagnose model (3) — and a better-behaved model (4)
+**Your answers:**
+
+- The gap in model (3): _______ USD, standard error _______
+- Can we tell it apart from zero? _______
+
+## 2.3 ⭐ Your turn — model (4) in logs
+
+**a.** The Q-Q plot of the residuals of `m3`.
+*Check:* slide "Diagnostics show what model (3) missed".
 
 ```{r}
 #| label: diagnose-3
 
-d3 <- augment(m3)
-
-# 1. Residuals vs fitted values
-
-
-# 2. Normal Q-Q plot of the residuals
-ggplot(d3, aes(sample = .resid)) +
+augment(____) |>
+  ggplot(aes(sample = .resid)) +
   stat_qq() +
-  ____()
+  stat_qq_line()
 ```
+
+**b.** Model (4): log earnings, log hours.
+*Check:* slide "Logs fix most of what model (3) missed".
 
 ```{r}
 #| label: model-4
 
-# Log earnings, log hours
-m4 <- lm(log(earnwke) ~ female + age + I(age^2) + ____ + college, data = cps)
+m4 <- lm(log(earnwke) ~ female + ____(uhours) + age + I(age^2) + college, data = cps)
 tidy(m4)
-glance(m4)$r.squared
+
+augment(m4) |>
+  ggplot(aes(sample = .resid)) +
+  stat_qq() +
+  stat_qq_line()
 ```
 
-```{r}
-#| label: diagnose-4
-
-# Q-Q plot of the residuals of m4
-
-```
-
-**Interpretation:**
-
-- Compared with model (3), the residuals of model (4) _______
-- Gap in model (4): _______ → about _______ % (exact: $e^{\hat\beta} - 1$)
-- Coefficient of `log(uhours)`: _______ — 1 % more hours go with _______
+**Your answers:** the gap in model (4) is _______ → about _______ %.
 
 ---
 
 # Part 3: Groups and interactions
 
-## 3.1 Categories with more levels
+## 3.1 Reference groups and interactions 👀
 
 ```{r}
 #| label: education
 
-table(cps$edu_cat)
+m_edu <- lm(earnwke ~ female + uhours + age + I(age^2) + edu_cat, data = cps)
+tidy(m_edu)   # reference group: the first level, "No degree"
 
-m_edu <- lm(earnwke ~ female + age + I(age^2) + uhours + ____, data = cps)
-tidy(m_edu)
+# Same model with "Bachelor" as the reference group
+cps_b <- cps |> mutate(edu_cat = relevel(edu_cat, ref = "Bachelor"))
+lm(earnwke ~ female + uhours + age + I(age^2) + edu_cat, data = cps_b) |>
+  tidy()
 ```
-
-**Interpretation:** the reference group is _______; the coefficient of
-`edu_catGraduate` means _______
-
-```{r}
-#| label: relevel
-
-# Make "Bachelor" the reference group and refit
-cps_b <- cps |> mutate(edu_cat = ____(edu_cat, ref = "Bachelor"))
-
-```
-
-## 3.2 Parallel slopes vs interaction model
 
 ```{r}
 #| label: par-int
 
-m_par <- lm(earnwke ~ age + female, data = cps)
-m_int <- lm(earnwke ~ age ____ female, data = cps)  # with the interaction
-tidy(m_par)
+m_par <- lm(earnwke ~ age + female, data = cps)   # parallel slopes
+m_int <- lm(earnwke ~ age * female, data = cps)   # interaction: age + female + age:female
 tidy(m_int)
 ```
 
@@ -354,36 +296,35 @@ bind_rows(
   augment(m_par, data = cps) |> mutate(model = "Parallel slopes"),
   augment(m_int, data = cps) |> mutate(model = "Interaction")
 ) |>
-  mutate(model = fct_inorder(model)) |>  # panels in this order, not alphabetical
+  mutate(model = fct_inorder(model)) |>   # panels in this order, not alphabetical
   ggplot(aes(x = age, colour = gender)) +
   geom_point(aes(y = earnwke), alpha = 0.25) +
-  geom_line(aes(y = ____), linewidth = 1.2) +
+  geom_line(aes(y = .fitted), linewidth = 1.2) +
   facet_wrap(~model)
 ```
 
-**Interpretation:**
+## 3.2 Your turn ✍️ — centring
 
-- Slope for men: _______; for women: _______
-- Is the difference in slopes precisely estimated? _______
-- What does the coefficient of `female` in `m_int` measure? _______
-
-## 3.3 Centring
+In `m_int`, the coefficient of `female` (+68) is the gap at age **0**.
+Measure age from 40 instead, and the coefficient becomes the gap at 40.
+*Check:* slide "Interactions are easy to fit — and easy to misread".
 
 ```{r}
 #| label: centring
 
-# Measure age from 40 instead of from 0
 m_int40 <- lm(earnwke ~ I(age - ____) * female, data = cps)
 tidy(m_int40)
 ```
 
-**Interpretation:** the coefficient of `female` is now _______ — the gap at
-age _______.
+**b.** Change 40 to 30, then to 50, and run the chunk again.
+*Check:* slide "The interaction model lets the gap widen with age".
 
-## 3.4 Plot the gap instead of reading coefficients (challenge)
+**Your answers:** gap at 30: _______ · at 40: _______ · at 50: _______
 
-Centring at each age in turn gives the gap at that age, with its confidence
-interval.
+## 3.3 ⭐ Your turn — plot the gap by age
+
+The first part is complete: it repeats 3.2 for every age from 25 to 60 and
+keeps the `female` row. Fill in the plot.
 
 ```{r}
 #| label: gap-by-age
@@ -394,18 +335,22 @@ gap_by_age <- map_dfr(seq(25, 60, by = 5), \(a) {
     filter(term == "female") |>
     mutate(age = a)
 })
+gap_by_age
 
-# Plot estimate against age, with a ribbon from conf.low to conf.high
-
+ggplot(gap_by_age, aes(x = age, y = ____)) +
+  geom_hline(yintercept = 0) +
+  geom_ribbon(aes(ymin = ____, ymax = ____), alpha = 0.2) +
+  geom_line()
 ```
 
-**At which ages can we rule out a gap of zero?** _______
+**Your answer:** at which ages does the band include zero? _______
 
 ---
 
-# The running example in six steps
+# Summary: the six steps
 
-Summarise what you did in each step.
+Fill in what we did in each step — in class if there is time, otherwise as
+the first part of the coursework.
 
 | Step | What we did |
 |:--|:--|
