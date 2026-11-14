@@ -1,6 +1,6 @@
 ---
-title: "Implementation Lab 11: Experimental data in R"
-subtitle: "Complete Solutions"
+title: "Lab 11: Experimental data in R"
+subtitle: "Solutions"
 format:
   html:
     toc: true
@@ -8,335 +8,258 @@ format:
     theme: cosmo
 ---
 
-# Setup
+These are the solutions to the worksheet of lab 11, section by section. The
+👀 *Together* sections repeat the code from class with the explanations; the
+✍️ *Your turn* sections show the filled-in code and the answers.
+
+# Setup 👀
 
 ```{r}
 #| label: setup
 #| message: false
 #| warning: false
 
-# Load required packages
 library(ggplot2)
 library(dplyr)
-library(effectsize)
-library(car)
+library(effectsize)   # cohens_d(), eta_squared()
+library(car)          # leveneTest()
+```
+
+```{r}
+#| label: fmt
+#| include: false
+
+# numbers in the text: fixed decimals, typographic minus
+fmt <- function(x, d = 0) sub("-", "−", formatC(x, format = "f", digits = d))
+pfmt <- function(p) if (p < 0.001) "< 0.001" else paste("=", formatC(p, format = "f", digits = 3))
 ```
 
 ```{r}
 #| label: load-data
 
-# Load the datasets
-leadership_study_between <- read.csv("leadership_study_between.csv")
-communication_study <- read.csv("communication_study.csv")
-exercise_data <- read.csv("exercise_data.csv")
+leadership    <- read.csv("data/leadership_study_between.csv")
+communication <- read.csv("data/communication_study.csv")
+ab_test       <- read.csv("data/exercise_data.csv")
 ```
 
 ---
 
 # Part 1: Comparing two groups
 
-## 1.1 t-Test
-
-**Research Question:** Does leadership training improve team performance?
-
-### Visualize the Data
+## 1.1 Does leadership training improve team performance? 👀
 
 ```{r}
-#| label: visualize-ttest
-#| fig-width: 8
-#| fig-height: 5
+#| label: leadership-plot
 
-ggplot(leadership_study_between, aes(x = group, y = team_performance, fill = group)) +
-  geom_boxplot(alpha = 0.7) +
+ggplot(leadership, aes(x = group, y = team_performance)) +
+  geom_boxplot() +
   geom_jitter(width = 0.2, alpha = 0.5) +
-  stat_summary(fun = mean, geom = "point", shape = 23, size = 3, fill = "red") +
-  labs(title = "Team Performance by Group",
-       subtitle = "Red diamonds show group means",
-       x = "Group",
-       y = "Team Performance Score") +
-  theme_minimal() +
-  theme(legend.position = "none")
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 3, fill = "red")
 ```
-
-Visually, the training group appears to have higher performance scores on average.
-
-### Check Assumptions
 
 ```{r}
-#| label: check-assumptions-ttest
+#| label: leadership-assumptions
+#| warning: false
 
-# Normality test for each group
-shapiro_control <- shapiro.test(
-  filter(leadership_study_between, group == "control")$team_performance
-)
-shapiro_training <- shapiro.test(
-  filter(leadership_study_between, group == "training")$team_performance
-)
+leadership |>
+  group_by(group) |>
+  summarise(shapiro_p = shapiro.test(team_performance)$p.value)
 
-cat("Shapiro-Wilk test - Control group: p =", round(shapiro_control$p.value, 4), "\n")
-cat("Shapiro-Wilk test - Training group: p =", round(shapiro_training$p.value, 4), "\n")
-
-# Equal variances test
-levene_result <- leveneTest(team_performance ~ group, data = leadership_study_between)
-cat("\nLevene's test for equal variances: p =", round(levene_result$`Pr(>F)`[1], 4), "\n")
+lev_l <- leveneTest(team_performance ~ factor(group), data = leadership)
+lev_l
 ```
 
-**Interpretation:**
-
-Both p-values are > 0.05, so:
-- ✓ Data is approximately normally distributed in each group
-- ✓ Variances are approximately equal
-
-We can proceed with the standard t-test.
-
-### Run t-test
+Both Shapiro–Wilk p-values and Levene's p-value
+(`r fmt(lev_l[1, "Pr(>F)"], 3)`) are above 0.05: no sign against normality
+within the groups or against equal variances. The classic t-test is fine.
 
 ```{r}
-#| label: run-ttest
+#| label: leadership-test
 
-t_result <- t.test(
-  team_performance ~ group,
-  data = leadership_study_between,
-  var.equal = TRUE
-)
-
-print(t_result)
+t_l <- t.test(team_performance ~ group, data = leadership, var.equal = TRUE)
+t_l
+d_l <- cohens_d(team_performance ~ group, data = leadership)
+d_l
 ```
 
-**Results:**
+- The training group scores `r fmt(diff(t_l$estimate), 1)` points higher
+  on average (p `r pfmt(t_l$p.value)`).
+- Cohen's d = `r fmt(abs(d_l$Cohens_d), 2)`: a large effect. The sign of
+  `cohens_d()` only reflects the order of the groups (control − training).
 
-- **Mean difference:** `r round(abs(diff(t_result$estimate)), 2)` points (training group scored higher)
-- **95% CI:** [`r round(t_result$conf.int[1], 2)`, `r round(t_result$conf.int[2], 2)`]
-- **p-value:** `r format.pval(t_result$p.value, digits = 3)`
-- **Conclusion:** The training group performed significantly better than the control group (p < 0.001)
+## 1.2 Your turn ✍️ — the A/B test
 
-### Calculate Effect Size
+**a.**
 
 ```{r}
-#| label: cohens-d-ttest
+#| label: ab-plot
 
-cohens_d_result <- cohens_d(team_performance ~ group, 
-                            data = leadership_study_between)
-print(cohens_d_result)
+ggplot(ab_test, aes(x = design, y = time_on_site)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.2, alpha = 0.5) +
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 3, fill = "red")
 ```
 
-**Effect size interpretation:**
+**b.**
 
-- **Cohen's d = `r round(abs(cohens_d_result$Cohens_d), 2)`**
-- This is a **large effect** (d > 0.8)
+```{r}
+#| label: ab-levene
 
-**What this means:**
-- The groups differ by more than 1 standard deviation
-- Not only is the difference statistically significant, it's also practically meaningful
-- This suggests the training has a substantial real-world impact
+lev_ab <- leveneTest(time_on_site ~ factor(design), data = ab_test)
+lev_ab
+```
 
-**Business decision:** Given the large effect size and statistical significance, the leadership training appears highly effective and worth implementing if costs are reasonable.
+Levene's p-value is `r fmt(lev_ab[1, "Pr(>F)"], 3)` — below 0.05: the
+variances differ (the boxes have different heights). So: Welch's t-test.
+
+**c.**
+
+```{r}
+#| label: ab-test
+
+t_ab <- t.test(time_on_site ~ design, data = ab_test)
+t_ab
+d_ab <- cohens_d(time_on_site ~ design, data = ab_test)
+d_ab
+```
+
+- Mean time: Complex `r fmt(t_ab$estimate[1])` s, Simple
+  `r fmt(t_ab$estimate[2])` s — the complex design keeps visitors
+  `r fmt(t_ab$estimate[1] - t_ab$estimate[2])` seconds longer (p
+  `r pfmt(t_ab$p.value)`).
+- Cohen's d = `r fmt(abs(d_ab$Cohens_d), 2)`: a large effect.
+- Whether longer is *better* is another question: time on site is not sales.
 
 ---
 
 # Part 2: Comparing three or more groups
 
-## 2.1 One-Way ANOVA
-
-**Research Question:** Which communication method leads to highest satisfaction?
-
-### Visualize the Data
+## 2.1 Which communication method satisfies most? 👀
 
 ```{r}
-#| label: visualize-anova
-#| fig-width: 8
-#| fig-height: 5
+#| label: comm-plot
 
-ggplot(communication_study, aes(x = communication_method, 
-                                 y = satisfaction_score, 
-                                 fill = communication_method)) +
-  geom_boxplot(alpha = 0.7) +
+ggplot(communication, aes(x = communication_method, y = satisfaction_score)) +
+  geom_boxplot() +
   geom_jitter(width = 0.2, alpha = 0.3) +
-  stat_summary(fun = mean, geom = "point", shape = 23, size = 4, fill = "red") +
-  labs(title = "Satisfaction Score by Communication Method",
-       subtitle = "Red diamonds show group means",
-       x = "Communication Method",
-       y = "Satisfaction Score") +
-  theme_minimal() +
-  theme(legend.position = "none")
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 3, fill = "red")
 ```
 
-The groups appear to have different mean satisfaction scores, with email showing the lowest satisfaction.
-
-### Fit ANOVA
-
 ```{r}
-#| label: fit-anova
+#| label: comm-anova
 
-# Using aov()
-anova_model <- aov(satisfaction_score ~ communication_method, 
-                   data = communication_study)
+anova_model <- aov(satisfaction_score ~ communication_method, data = communication)
 summary(anova_model)
 ```
 
-**Results:**
-
-- **F-statistic:** `r round(summary(anova_model)[[1]]$"F value"[1], 2)`
-- **p-value:** `r format.pval(summary(anova_model)[[1]]$"Pr(>F)"[1], digits = 3)`
-
-**Conclusion:** There is a statistically significant difference in satisfaction scores among the three communication methods (p `r ifelse(summary(anova_model)[[1]]$"Pr(>F)"[1] < 0.001, "< 0.001", paste("=", round(summary(anova_model)[[1]]$"Pr(>F)"[1], 3)))`).
-
-**Important:** ANOVA only tells us that *at least one* group differs from the others. It doesn't tell us *which* groups differ - we need post-hoc tests for that.
-
-### ANOVA as Regression
-
 ```{r}
-#| label: anova-regression
+#| label: comm-lm
 
-# Show that lm() gives same results
-lm_model <- lm(satisfaction_score ~ communication_method, 
-               data = communication_study)
+lm_model <- lm(satisfaction_score ~ communication_method, data = communication)
 anova(lm_model)
+coef(lm_model)
 ```
 
-The F-statistic and p-value are identical! This demonstrates that ANOVA is just a special case of regression with categorical predictors.
+- F = `r fmt(summary(anova_model)[[1]][["F value"]][1], 1)`, p
+  `r pfmt(summary(anova_model)[[1]][["Pr(>F)"]][1])`: at least one method
+  differs from the others — ANOVA does not say which.
+- `aov()` and `lm()` give the same F and p-value: ANOVA is a regression with
+  a categorical variable.
+- Email comes first alphabetically and is the reference group: the intercept
+  (`r fmt(coef(lm_model)[[1]], 2)`) is its mean; face-to-face scores
+  `r fmt(coef(lm_model)[[2]], 2)` and video calls
+  `r fmt(coef(lm_model)[[3]], 2)` points higher.
+
+## 2.2 Your turn ✍️ — effect size, post-hoc tests, reference group
+
+**a.**
 
 ```{r}
-#| label: coefficients
+#| label: comm-eta
 
-# Look at coefficients
-summary(lm_model)$coefficients
+eta <- eta_squared(anova_model)
+eta
 ```
 
-**Understanding the coefficients:**
+η² = `r fmt(eta$Eta2[1], 2)`: the method explains about
+`r fmt(100 * eta$Eta2[1])` % of the variance in satisfaction — a large effect
+(0.01 small, 0.06 medium, 0.14 large).
 
-R automatically creates dummy variables for categorical predictors. Since "email" comes first alphabetically, it becomes the **reference group**:
-
-- **Intercept (5.78):** Mean satisfaction for email group
-- **face_to_face coefficient (1.70):** Face-to-face scores 1.70 points higher than email on average
-- **video_call coefficient (1.23):** Video call scores 1.23 points higher than email on average
-
-### Effect Size
+**b.**
 
 ```{r}
-#| label: eta-squared
+#| label: comm-tukey
 
-eta_sq <- eta_squared(anova_model)
-print(eta_sq)
+TukeyHSD(anova_model)
 ```
 
-**Interpretation:**
+Face-to-face and video calls both differ significantly from email; they do
+not differ from each other (p ≈ 0.97).
 
-η² = `r round(eta_sq$Eta2[1], 3)` means communication method explains `r round(eta_sq$Eta2[1] * 100, 1)`% of the variance in satisfaction scores.
-
-**Effect size guidelines:**
-- Small: η² ≈ 0.01
-- Medium: η² ≈ 0.06
-- Large: η² ≈ 0.14
-
-Our effect (`r round(eta_sq$Eta2[1], 2)`) is large, indicating communication method has a substantial impact on satisfaction.
-
-### Post-Hoc Tests
+**c.**
 
 ```{r}
-#| label: tukey
+#| label: comm-relevel
 
-# Tukey HSD controls for multiple comparisons
-tukey_result <- TukeyHSD(anova_model)
-print(tukey_result)
+communication_f2f <- communication |>
+  mutate(communication_method = relevel(factor(communication_method), ref = "face_to_face"))
+coef(lm(satisfaction_score ~ communication_method, data = communication_f2f))
 ```
 
-**Interpretation:**
-
-Looking at the p-values (p adj column):
-
-1. **face_to_face - email:** p < 0.001 → **Significant difference**
-   - Face-to-face has ~1.70 points higher satisfaction than email
-
-2. **video_call - email:** p < 0.001 → **Significant difference**
-   - Video call has ~1.23 points higher satisfaction than email
-
-3. **video_call - face_to_face:** p = `r round(tukey_result$communication_method["video_call-face_to_face", "p adj"], 3)` → **No significant difference**
-   - Face-to-face and video call don't differ significantly from each other
-
-**Business conclusion:** Both face-to-face and video call communication produce significantly higher satisfaction than email, but there's no meaningful difference between face-to-face and video call. Consider phasing out email-only communication for important interactions.
+Same model, other comparisons: email scores
+`r fmt(coef(lm_model)[[2]], 2)` points lower than face-to-face.
 
 ---
 
-# Part 3: Guided Exercise - Solutions
+# Part 3: How many participants do you need?
 
-## Dataset: Website A/B Test
+## 3.1 Power analysis 👀
 
 ```{r}
-#| label: look-at-exercise-data
+#| label: power-n
 
-head(exercise_data)
-summary(exercise_data)
+power.t.test(delta = 9, sd = 9, power = 0.80)
 ```
+
+```{r}
+#| label: power-power
+
+power.t.test(n = 30, delta = 9, sd = 9)
+```
+
+For a large effect (d = 1), 17 per group are enough for 80 % power; with 30
+per group, the leadership study had a power of about 97 %.
+
+## 3.2 Your turn ✍️ — a small effect
+
+**a.**
+
+```{r}
+#| label: power-small
+
+power.t.test(delta = 0.3, sd = 1, power = 0.80)
+```
+
+**b.**
+
+```{r}
+#| label: power-small-2
+
+power.t.test(delta = 0.3, sd = 1, power = 0.90)
+power.t.test(n = 30, delta = 0.3, sd = 1)
+```
+
+For d = 0.3: 176 participants per group for 80 % power, 235 for 90 % — and
+with 30 per group, the power is only about 21 %. A study that small would
+miss a real small effect four times out of five.
 
 ---
 
-## Task: Compare Designs
+# Key takeaways
 
-### a. t-test
-
-```{r}
-#| label: task2a
-
-t_test_design <- t.test(time_on_site ~ design, data = exercise_data)
-print(t_test_design)
-```
-
-**Results:**
-
-- **Complex design mean:** `r round(t_test_design$estimate[1], 1)` seconds
-- **Simple design mean:** `r round(t_test_design$estimate[2], 1)` seconds
-- **Difference:** `r round(abs(diff(t_test_design$estimate)), 1)` seconds
-- **p-value:** `r format.pval(t_test_design$p.value, digits = 3)`
-
-The complex design keeps users on the site significantly longer (p < 0.001).
-
-### b. Effect size
-
-```{r}
-#| label: task2b
-
-cohens_d_design <- cohens_d(time_on_site ~ design, data = exercise_data)
-print(cohens_d_design)
-```
-
-**Effect size:** Cohen's d = `r round(abs(cohens_d_design$Cohens_d), 2)` (large effect)
-
-### c. Conclusion
-
-**Which design keeps users longer?**
-
-The **Complex design** keeps users on the site significantly longer - about `r round(abs(diff(t_test_design$estimate)), 1)` seconds more on average. This is both statistically significant (p < 0.001) and a large practical effect (d ≈ `r round(abs(cohens_d_design$Cohens_d), 1)`).
-
-**Business consideration:** While complex design increases time on site, we should also check if this translates to higher conversion rates - longer time doesn't always mean better outcomes!
-
----
-
-# Summary: Key Concepts
-
-## Experimental Analysis
-
-1. **t-Tests:**
-   - Compare means between two groups
-   - Check assumptions: normality, equal variances
-   - Always calculate effect sizes (Cohen's d)
-
-2. **ANOVA:**
-   - Compare means across 3+ groups
-   - ANOVA = regression with categorical predictors
-   - Post-hoc tests (Tukey HSD) identify which groups differ
-   - Report effect sizes (η²)
-
-3. **Effect Sizes:**
-   - Statistical significance ≠ practical significance
-   - Cohen's d guidelines: 0.2 (small), 0.5 (medium), 0.8 (large)
-   - η² guidelines: 0.01 (small), 0.06 (medium), 0.14 (large)
-
-4. **Assumptions Matter:**
-   - Always check before running tests
-   - Violations can lead to incorrect conclusions
-   - Alternatives exist when assumptions are violated
-
----
-
-*If you have questions about any of these concepts, please come to office hours or post in the course forum!*
+1. **Look first, then test:** plot the groups, check the assumptions, and
+   choose the test accordingly (classic vs Welch).
+2. **Report effect sizes**, not only p-values: statistical significance is
+   not practical importance.
+3. **Plan the sample size** before the experiment: small effects need large
+   samples.

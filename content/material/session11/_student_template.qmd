@@ -1,268 +1,262 @@
 ---
-title: "Implementation Lab 11: Experimental data in R"
-subtitle: "Student Worksheet"
+title: "Lab 11: Experimental data in R"
+subtitle: "Worksheet"
 format:
   html:
-    code-fold: show
+    code-fold: false
     theme: journal
     toc: true
 execute:
   error: true
 ---
 
-# Setup
+This worksheet analyses data from three experiments: a training programme
+(two groups), three ways of communicating (three groups), and a website A/B
+test. It has two kinds of sections:
 
-Put this worksheet and the three data files of
-`session11_data.zip` into the same folder (best: the folder of an R project).
+- 👀 **Together** — the code is complete. Run each chunk while we go through
+  it in class, and read the comments.
+- ✍️ **Your turn** — fill in the blanks `____`. Every task is a near-copy of
+  the *Together* chunk just before it: look there first. Each task ends with
+  a short check of your result.
+
+⭐ marks tasks for the fast ones; if you run out of time, skip them — the
+solutions published after the session cover everything.
+
+**Tip:** render the document now and then. Blanks you have not filled in yet
+show up as errors, but the rest of the document still renders.
+
+# Setup 👀
 
 ```{r}
 #| label: setup
 #| message: false
 
-# Load required packages
 library(ggplot2)
 library(dplyr)
-library(effectsize)
-library(car)
-```
+library(effectsize)   # cohens_d(), eta_squared()
+library(car)          # leveneTest()
 
-```{r}
-#| label: load-data
-
-# Load the datasets
-leadership_study_between <- read.csv("leadership_study_between.csv")
-communication_study <- read.csv("communication_study.csv")
-exercise_data <- read.csv("exercise_data.csv")
+leadership    <- read.csv("data/leadership_study_between.csv")
+communication <- read.csv("data/communication_study.csv")
+ab_test       <- read.csv("data/exercise_data.csv")
 ```
 
 ---
 
 # Part 1: Comparing two groups
 
-## 1.1 t-Test
+## 1.1 Does leadership training improve team performance? 👀
 
-**Research Question:** Does leadership training improve team performance?
-
-### Visualize the Data
+60 teams, randomly assigned: 30 to a training programme, 30 to a control
+group.
 
 ```{r}
-#| label: visualize-ttest
+#| label: leadership-plot
 
-ggplot(leadership_study_between, aes(x = group, y = team_performance, fill = group)) +
-  geom_boxplot(alpha = 0.7) +
+ggplot(leadership, aes(x = group, y = team_performance)) +
+  geom_boxplot() +
   geom_jitter(width = 0.2, alpha = 0.5) +
-  stat_summary(fun = mean, geom = "point", shape = 23, size = 3, fill = "red") +
-  labs(title = "Team Performance by Group",
-       x = "Group",
-       y = "Team Performance Score") +
-  theme_minimal() +
-  theme(legend.position = "none")
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 3, fill = "red")
 ```
-
-### Check Assumptions
 
 ```{r}
-#| label: check-assumptions-ttest
+#| label: leadership-assumptions
 
-# Normality test for each group: the Shapiro test
-____(filter(leadership_study_between, group == "control")$team_performance)
-____(filter(leadership_study_between, group == "training")$team_performance)
+# Normal within each group? (H0: normal)
+leadership |>
+  group_by(group) |>
+  summarise(shapiro_p = shapiro.test(team_performance)$p.value)
 
-# Equal variances test: Levene test
-____(team_performance ~ group, data = leadership_study_between)
+# Equal variances? (H0: equal)
+leveneTest(team_performance ~ factor(group), data = leadership)
 ```
-
-**Interpretation:**
-- p-values > 0.05? If yes, assumptions are met: _______
-
-### Run t-test
 
 ```{r}
-#| label: run-ttest
+#| label: leadership-test
 
-t_result <- t.test(
-  team_performance ~ group,
-  data = leadership_study_between,
-  var.equal = TRUE
-)
+# Both p-values above 0.05: the classic t-test with equal variances
+t.test(team_performance ~ group, data = leadership, var.equal = TRUE)
 
-print(t_result)
+# Effect size: the difference in standard deviations
+cohens_d(team_performance ~ group, data = leadership)
 ```
 
-**Results:**
-- Mean difference: _______
-- p-value: _______
-- Conclusion: _______
+## 1.2 Your turn ✍️ — the A/B test
 
-### Calculate Effect Size
+100 website visitors, randomly shown a `Simple` or a `Complex` design. Does
+the design change the time spent on the site (`time_on_site`, seconds)?
+
+**a.** Copy of the plot in 1.1.
 
 ```{r}
-#| label: cohens-d-ttest
+#| label: ab-plot
 
-cohens_d_result <- ____(team_performance ~ group, 
-                            data = leadership_study_between)
-print(cohens_d_result)
+ggplot(ab_test, aes(x = ____, y = ____)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.2, alpha = 0.5) +
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 3, fill = "red")
 ```
 
-**Effect size interpretation:**
-- Cohen's d = _______ 
-- This is a _______ effect (small/medium/large)
+**b.** Are the variances equal?
+
+```{r}
+#| label: ab-levene
+
+leveneTest(____ ~ factor(design), data = ab_test)
+```
+
+**c.** If Levene's p-value is *below* 0.05, the variances differ: use
+Welch's t-test, which is what `t.test()` does when you leave out
+`var.equal = TRUE`.
+
+```{r}
+#| label: ab-test
+
+t.test(time_on_site ~ ____, data = ab_test)
+cohens_d(time_on_site ~ design, data = ____)
+```
+
+*Check:* the complex design should come out with the longer mean time.
+
+**Your answers:**
+
+- Levene's p-value: _______ → equal variances? _______
+- Mean time: Complex _______ s, Simple _______ s; p-value _______
+- Cohen's d = _______ — a _______ effect (0.2 small, 0.5 medium, 0.8 large)
 
 ---
 
 # Part 2: Comparing three or more groups
 
-## 2.1 One-Way ANOVA
+## 2.1 Which communication method satisfies most? 👀
 
-**Research Question:** Which communication method leads to highest satisfaction?
-
-### Visualize the Data
+90 participants, randomly assigned to email, video call or face-to-face.
 
 ```{r}
-#| label: visualize-anova
+#| label: comm-plot
 
-ggplot(communication_study, aes(x = communication_method, 
-                                 y = satisfaction_score, 
-                                 fill = communication_method)) +
-  geom_boxplot(alpha = 0.7) +
+ggplot(communication, aes(x = communication_method, y = satisfaction_score)) +
+  geom_boxplot() +
   geom_jitter(width = 0.2, alpha = 0.3) +
-  stat_summary(fun = mean, geom = "point", shape = 23, size = 4, fill = "red") +
-  labs(title = "Satisfaction Score by Communication Method",
-       x = "Communication Method",
-       y = "Satisfaction Score") +
-  theme_minimal() +
-  theme(legend.position = "none")
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 3, fill = "red")
 ```
 
-### Fit ANOVA
-
 ```{r}
-#| label: fit-anova
+#| label: comm-anova
 
-# Using aov()
-anova_model <- ____(satisfaction_score ~ communication_method, 
-                   data = communication_study)
-summary(anova_model)
+anova_model <- aov(satisfaction_score ~ communication_method, data = communication)
+summary(anova_model)   # is at least one group different?
 ```
 
-**Results:**
-- F-statistic: _______
-- p-value: _______
-- Conclusion: _______
-
-### ANOVA as Regression
+ANOVA is a regression with a categorical variable — same F, same p-value:
 
 ```{r}
-#| label: anova-regression
+#| label: comm-lm
 
-# Show that lm() gives same results
-lm_model <- lm(satisfaction_score ~ communication_method, 
-               data = communication_study)
+lm_model <- lm(satisfaction_score ~ communication_method, data = communication)
 anova(lm_model)
+coef(lm_model)   # intercept = mean of the reference group ("email", first alphabetically)
 ```
+
+## 2.2 Your turn ✍️ — effect size, post-hoc tests, reference group
+
+**a.** How much of the variance does the method explain? (Copy of
+`cohens_d()`, for ANOVA.)
 
 ```{r}
-#| label: coefficients
+#| label: comm-eta
 
-# Look at coefficients
-summary(lm_model)$coefficients
+eta_squared(____)
 ```
 
-**Notes:**
-- Reference group: _______
-- Coefficients show: _______
-
-### Effect Size
+**b.** Which groups differ? Tukey's test compares all pairs and corrects for
+multiple testing.
 
 ```{r}
-#| label: eta-squared
+#| label: comm-tukey
 
-eta_sq <- eta_squared(anova_model)
-print(eta_sq)
+TukeyHSD(____)
 ```
 
-**Interpretation:**
-
-Communication method explains _______ % of variance in satisfaction.
-
-### Post-Hoc Tests
+**c.** Make face-to-face the reference group, as in lab 10: turn the
+variable into a factor, then `relevel()`.
 
 ```{r}
-#| label: tukey
+#| label: comm-relevel
 
-# Which groups differ?
-tukey_result <- TukeyHSD(anova_model)
-print(tukey_result)
+communication_f2f <- communication |>
+  mutate(communication_method = relevel(factor(communication_method), ref = "____"))
+coef(lm(satisfaction_score ~ communication_method, data = communication_f2f))
 ```
 
-**Significant differences:**
-- _______
-- _______
+*Check:* in **c**, the intercept is the mean of the face-to-face group, and
+the two other coefficients are differences to it.
 
-**No significant difference:**
-- _______
+**Your answers:**
+
+- η² = _______ → the method explains _______ % of the variance in satisfaction
+- Pairs that differ significantly: _______; pair that does not: _______
+- Email vs face-to-face: _______ points
 
 ---
 
-# Part 3: Guided Exercise
+# Part 3: How many participants do you need?
 
-## Dataset: Website A/B Test
+## 3.1 Power analysis 👀
 
-**Variables:**
-- `design`: Simple vs. Complex
-- `time_on_site`: Time spent (seconds)
-- `previous_visits`: Number of previous visits
-- `converted`: Purchase made (1 = yes, 0 = no)
+Before an experiment: how many participants per group do we need to detect
+an effect of a given size with, say, 80 % probability (*power*)? Base R does
+this for t-tests.
 
 ```{r}
-#| label: look-at-exercise-data
+#| label: power-n
 
-head(exercise_data)
+# Leadership study: a difference of 9 points, standard deviation 9 (d = 1)
+power.t.test(delta = 9, sd = 9, power = 0.80)   # → n per group
 ```
-
-## Task: Compare Designs
-
-### a. t-test
 
 ```{r}
-#| label: task2a
+#| label: power-power
 
-# Compare time_on_site between designs
-
-
+# The other way round: with 30 per group, how much power did the study have?
+power.t.test(n = 30, delta = 9, sd = 9)
 ```
 
-### b. Effect size
+## 3.2 Your turn ✍️ — a small effect
+
+Most effects in management research are small. Set `sd = 1`; then `delta`
+is Cohen's d directly.
+
+**a.** How many participants per group for d = 0.3 and 80 % power?
 
 ```{r}
-#| label: task2b
+#| label: power-small
 
-# Calculate Cohen's d
-
-
+power.t.test(delta = ____, sd = 1, power = 0.80)
 ```
 
-### c. Conclusion
+**b.** ⭐ And for 90 % power? And how much power would 30 per group give for
+d = 0.3?
 
-**Which design keeps users longer?**
+```{r}
+#| label: power-small-2
 
+power.t.test(delta = 0.3, sd = 1, power = ____)
+power.t.test(n = ____, delta = 0.3, sd = 1)
+```
+
+*Check:* the answer in **a** is in the hundreds, not in the tens.
+
+**Your answers:** n per group for d = 0.3: _______ (80 %), _______ (90 %);
+power with 30 per group: _______
 
 ---
 
-# Key Takeaways
+# Key takeaways
 
-Write down 3 key things you learned today:
+Write down three things you will do in every analysis of an experiment:
 
-1. 
-
-2. 
-
-3. 
-
----
-
-# Questions for Office Hours
-
-Write down any questions or concepts you'd like to discuss further:
-
-
+1.
+2.
+3.

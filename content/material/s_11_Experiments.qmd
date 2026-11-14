@@ -36,8 +36,14 @@ the corresponding [lecture](/content/lecture/l_11_Experiments.qmd) and the manda
 
 ## In-class exercises
 
-- [Work sheet](/content/material/session11/_student_template.qmd){download="lab11_worksheet.qmd"}
-  and its [data sets](/content/material/session11/session11_data.zip)
+Please download and unzip this R project **before the session**, open
+`lab11.Rproj`, open `lab11_worksheet.qmd` and render it once. You need the
+packages `effectsize` and `car`: `install.packages(c("effectsize", "car"))`.
+
+- [R project for the lab (zip)](/content/material/session11/lab11.zip){download="lab11.zip"}
+  — the worksheet and the data, ready to run. In the 👀 *Together* sections
+  the code is complete and we go through it in class; in the ✍️ *Your turn*
+  sections you fill in the blanks.
 - [Cheat Sheet](/content/material/session11/cheat_sheet.html)
 
 <!--- Solutions are made available here after the session.

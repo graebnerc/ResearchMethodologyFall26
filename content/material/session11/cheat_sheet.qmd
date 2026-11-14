@@ -22,7 +22,7 @@ t.test(outcome ~ group, data = mydata)
 t.test(outcome ~ group, data = mydata, var.equal = TRUE)
 
 # With unequal variances (Welch's test)
-t.test(outcome ~ group, data = mydata, var.equal = FALSE)
+t.test(outcome ~ group, data = mydata, var.equal = FALSE)   # = the default
 ```
 
 ## Paired t-test
@@ -97,6 +97,21 @@ qqline(mydata$variable)
 library(car)
 # Levene's test (H0: variances are equal)
 leveneTest(outcome ~ group, data = mydata)
+```
+
+---
+
+# Power Analysis
+
+```r
+# n per group to detect a difference delta (sd: standard deviation) with 80% power
+power.t.test(delta = 9, sd = 9, power = 0.80)
+
+# Power of a given design
+power.t.test(n = 30, delta = 9, sd = 9)
+
+# With sd = 1, delta is Cohen's d
+power.t.test(delta = 0.3, sd = 1, power = 0.80)   # ≈ 176 per group
 ```
 
 ---
