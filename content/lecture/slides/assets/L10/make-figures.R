@@ -236,16 +236,33 @@ fits <- bind_rows(
   grid_age |> mutate(fit = predict(m_slr,  grid_age), model = "Linear"),
   grid_age |> mutate(fit = predict(m_quad, grid_age), model = "Quadratic")
 )
-p_form <- ggplot(cps, aes(age, earnwke)) +
-  geom_point(colour = euf_blue, alpha = 0.25, size = 2.2) +
-  geom_smooth(aes(linetype = "Smoother (loess)"), method = "loess", formula = y ~ x,
-              se = FALSE, colour = euf_gray, linewidth = 1.1) +
-  geom_line(data = fits, aes(y = fit, colour = model), linewidth = 1.6) +
-  scale_colour_manual(values = c(Linear = euf_teal, Quadratic = euf_red)) +
-  scale_linetype_manual(values = c("Smoother (loess)" = "dashed")) +
-  scale_y_continuous(labels = usd, limits = c(0, 3100)) +
-  labs(x = lab_age, y = lab_earn)
-save_fig(p_form, "L10-form")
+# Built up in three steps (smoother → + linear → + quadratic). The smoother
+# runs almost on top of the quadratic curve, so it is drawn last, dark, thin
+# and dashed — over a broad red quadratic curve that stays visible beneath it.
+smooth_df <- grid_age |>
+  mutate(fit = predict(loess(earnwke ~ age, cps), grid_age), model = "Smoother (loess)")
+form_cols <- c("Smoother (loess)" = euf_blue, Linear = euf_teal, Quadratic = euf_red)
+form_lty  <- c("Smoother (loess)" = "22", Linear = "solid", Quadratic = "solid")
+form_lwd  <- c("Smoother (loess)" = 1.4, Linear = 1.8, Quadratic = 3.6)
+make_form <- function(models) {
+  keep <- intersect(names(form_cols), models)
+  df <- bind_rows(fits, smooth_df) |>
+    filter(model %in% keep) |>
+    # drawing order = level order: the smoother on top
+    mutate(model = factor(model, levels = c("Linear", "Quadratic", "Smoother (loess)")))
+  ggplot(cps, aes(age, earnwke)) +
+    geom_point(colour = euf_blue, alpha = 0.25, size = 2.2) +
+    geom_line(data = df, aes(y = fit, colour = model, linetype = model, linewidth = model)) +
+    scale_colour_manual(values = form_cols, limits = keep) +
+    scale_linetype_manual(values = form_lty, limits = keep) +
+    scale_linewidth_manual(values = form_lwd, limits = keep) +
+    scale_y_continuous(labels = usd, limits = c(0, 3100)) +
+    labs(x = lab_age, y = lab_earn) +
+    theme(legend.key.width = unit(2.2, "lines"))
+}
+save_fig(make_form("Smoother (loess)"), "L10-form-1")
+save_fig(make_form(c("Smoother (loess)", "Linear")), "L10-form-2")
+save_fig(make_form(names(form_cols)), "L10-form")
 
 # 4a. Straight line vs age², with the slope of the curve at 30, 45 and 60 --------
 b_q <- coef(m_quad)
@@ -494,6 +511,10 @@ cat("exp(b)-1: college =", round(exp(coef(m_log)[["college"]]) - 1, 3),
     " female =", round(exp(coef(m_log)[["female"]]) - 1, 3),
     " uhours =", round(exp(coef(m_log)[["uhours"]]) - 1, 3), "\n")
 cat("Log earnings on age: b =", round(coef(m_lnage)[["age"]], 4), "\n")
+cat("Examples for the logs table: earnings on ln hours: b =",
+    round(coef(lm(earnwke ~ log(uhours), cps))[[2]], 0),
+    "| ln earnings on ln hours: b =", round(coef(lm(log(earnwke) ~ log(uhours), cps))[[2]], 2), "\n")
+cat("SLR p-value of age:", signif(coef(summary(m_slr))["age", 4], 2), "\n")
 skew <- function(x) mean((x - mean(x))^3) / sd(x)^3
 cat("Model (4), log earnings + log hours:\n"); print(round(coef(summary(m_loglog)), 4))
 cat("R2 (4) =", round(summary(m_loglog)$r.squared, 3),

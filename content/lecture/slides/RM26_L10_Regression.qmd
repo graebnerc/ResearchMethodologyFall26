@@ -464,7 +464,7 @@ OLS can fit curves — if you tell it which
 
 - **95% CI:** [7.0, 21.7]
 
-- **If $H_0: \beta_1 = 0$:** estimates near 0 · ours lies far out → t = 14.4 / 3.7 ≈ 3.9 → reject
+- **If $H_0: \beta_1 = 0$:** estimates near 0 · ours lies far out → p < 0.001 → reject
 
 - Exactly the recap — applied to a slope
 
@@ -475,8 +475,8 @@ OLS can fit curves — if you tell it which
 - CI: bounds marked with the bullet — zero far outside
 - Right: where slopes would fall if the true slope were 0 (red, SE 3.7) vs ours (dashed)
 - Shaded tails: beyond ±7.3 we reject at 5% — 14.4 far beyond
-- t: estimate / SE, as for a mean · p < 0.001
-- Recap pages 5 and 6 — nothing new, only a new statistic
+- p < 0.001: a slope this far from 0 would almost never turn up if the true slope were 0
+- Recap pages 5 and 6 — nothing new, only applied to a slope
 :::
 
 ## The straight line leaves a hump in the residuals {data-step="5"}
@@ -507,11 +507,17 @@ OLS can fit curves — if you tell it which
 - Recap: Anscombe's quartet — same lesson, now from the residuals
 :::
 
-## Back to the data: a smoother shows the hump {data-step="2 3"}
+## Back to the data: a smoother shows the hump {.sync-fragments data-step="2 3"}
 
 ::: {.columns}
 ::: {.column width="62%"}
-![](assets/L10/L10-form.png)
+::: {.r-stack}
+![](assets/L10/L10-form-1.png){height="555px"}
+
+![](assets/L10/L10-form-2.png){.fragment data-with="2" height="555px"}
+
+![](assets/L10/L10-form.png){.fragment data-with="3" height="555px"}
+:::
 :::
 
 ::: {.column width="38%"}
@@ -527,9 +533,9 @@ OLS can fit curves — if you tell it which
 
 ::: {.notes}
 - Back from the diagnosis: explore again, with a smoother
-- Loess: local averages — dashed line, almost hidden under the red
+- Loess: local averages — dark dashed line; the figure adds each line with its bullet
 - Linear: too high for the young and the old, too low in the middle
-- Quadratic: follows the smoother closely
+- Quadratic: follows the smoother closely — the dashes run inside the red curve
 - Theory fits: earnings rise with experience, flatten, fall near retirement
 - Data + theory point the same way → good reason for age²
 :::
@@ -602,11 +608,11 @@ Compares people ('cross-section), not changes within a person
 - **At 30:** +42 USD per year · **at 45:** +7 · **at 60:** −27
 
 - **Peak:** $-\hat{\beta}_1 / 2\hat{\beta}_2$ ≈ 48 years
-:::
-:::
 
-::: {.arrow .xl .fragment}
+::: {.arrow .lg .fragment}
 Report slopes at meaningful values — or plot the curve
+:::
+:::
 :::
 
 ::: {.notes}
@@ -620,25 +626,22 @@ Report slopes at meaningful values — or plot the curve
 
 ## Logs change the meaning of the coefficient {data-step="6"}
 
-| Model | Equation | $\hat{\beta}_1$ reads as |
-|:--|:--|:--|
-| Level–level | $y = \beta_0 + \beta_1 x$ | $x$ +1 unit → $y$ + $\beta_1$ units |
-| Log–level | $\ln y = \beta_0 + \beta_1 x$ | $x$ +1 unit → $y$ + ≈ $100 \cdot \beta_1$ % |
-| Level–log | $y = \beta_0 + \beta_1 \ln x$ | $x$ +1 % → $y$ + ≈ $\beta_1 / 100$ units |
-| Log–log | $\ln y = \beta_0 + \beta_1 \ln x$ | $x$ +1 % → $y$ + ≈ $\beta_1$ % (elasticity) |
+| Model | Equation | $\hat{\beta}_1$ reads as | Example: our analysts |
+|:--|:--|:--|:--|
+| Level–level | $y = \beta_0 + \beta_1 x$ | $x$ +1 unit → $y$ + $\beta_1$ units | Earnings on age: **+14.4** → 14 USD more per year |
+| Log–level | $\ln y = \beta_0 + \beta_1 x$ | $x$ +1 unit → $y$ + ≈ $100 \cdot \beta_1$ % | Log earnings on age: **+0.0115** → ≈ 1.2 % more per year |
+| Level–log | $y = \beta_0 + \beta_1 \ln x$ | $x$ +1 % → $y$ + ≈ $\beta_1 / 100$ units | Earnings on log hours: **+1,574** → 1 % more hours ≈ 16 USD more |
+| Log–log | $\ln y = \beta_0 + \beta_1 \ln x$ | $x$ +1 % → $y$ + ≈ $\beta_1$ % (elasticity) | Log earnings on log hours: **+1.47** → 1 % more hours ≈ 1.5 % more |
 
-: {.lg}
-
-::: {.arrow .xl .fragment}
-Log earnings on age: **+0.0115** → ≈ **1.2 %** more per year of age
-:::
+: {.lg .stepped}
 
 ::: {.notes}
 - The table to keep — also in the lab cheat sheet
 - Log–level: semi-elasticity — most common for wages
 - Approximation good for small β; exact: exp(β) − 1
 - Log–log: elasticity — e.g. demand and price
-- Arrow: ln(earnings) on age · 0.0115 × 100 ≈ 1.2 % per year
+- One row per click; examples: simple regressions on our 252 analysts (make-figures.R)
+- Log–level: 0.0115 × 100 ≈ 1.2 % per year · level–log: 1,574 / 100 ≈ 16 USD
 - We stay in USD for now — logs return in model (4), with an elasticity for hours
 :::
 
@@ -659,7 +662,7 @@ R² describes the fit to this sample — not whether the coefficient is right, n
 ::: {.notes}
 - Definition: 1 − residual variance / total variance
 - 5.6 %: as the scatter plot suggested
-- Low R²: slope still clearly different from zero — t ≈ 3.9
+- Low R²: slope still clearly different from zero — p < 0.001
 - High R²: spurious trends have R² close to 1
 - Box: description, not truth — and not prediction: in-sample R² flatters
 - Prediction quality: judged on new data (out-of-sample, cross-validation)
@@ -677,7 +680,7 @@ Which statements are correct?
 - \(d\) "With R² = 0.056, the model is useless."
 :::
 
-::: {.answer .fragment data-with="2"}
+::: {.answer .fragment .nonincremental data-with="1"}
 [Solution]{.solhead}
 
 - **(b)** the standard sentence: on average, across people
@@ -688,7 +691,7 @@ Which statements are correct?
 
 ::: {.notes}
 - 2 minutes, with your neighbour
-- Click 1: (b) turns green — then one explanation per click
+- One click: (b) turns green and the whole solution appears
 - (a): two errors — causal, individual
 - (b): the standard sentence
 - (c): classic CI misreading — recap page 6
