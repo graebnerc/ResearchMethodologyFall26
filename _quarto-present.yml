@@ -1,0 +1,8 @@
+# Profile for presenting a published deck with its speaker notes:
+#     quarto render content/lecture/slides/NAME.qmd --profile present
+# → _present/content/lecture/slides/NAME.html (gitignored, never uploaded).
+# Without this profile, filters/strip-notes.lua removes the notes.
+project:
+  output-dir: _present
+
+keep-notes: true

@@ -73,6 +73,9 @@ venv.bak/
 # cannot reach the students before the lecture; rendering one by hand writes
 # the .html next to its .qmd instead, which is a local build artifact.
 content/lecture/slides/*.html
+# Decks rendered with their speaker notes for presenting
+# (quarto render … --profile present); never uploaded.
+/_present/
 # Quarto's freeze cache. It is a local build artifact: the site is rendered on
 # this machine and uploaded as finished HTML by `quarto publish netlify`, so
 # Netlify never needs it, and renv.lock is what makes a rebuild reproducible.
