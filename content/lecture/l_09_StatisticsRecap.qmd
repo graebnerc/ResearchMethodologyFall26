@@ -4,6 +4,14 @@ date: "2026-11-16"
 date-modified: last-modified
 ---
 
+::: {.callout-note collapse="false"}
+## We already started with linear regression
+Since there were no questions on the statistics recap, we used the session of
+16 November to start with linear regression: we covered the first part of
+[lecture 10](/content/lecture/l_10_Regression.qmd), whose slides are available
+on its page. Lecture 10 continues on 23 November.
+:::
+
 ## 🎯 Content and goals
 
 - This lecture clarifies your questions regarding the concepts described under "Required prior knowledge in Mathematics and Statistics" in the [seminar description](/content/SeminarDescription.qmd).
@@ -12,7 +20,8 @@ date-modified: last-modified
 
 ## 🖥️ Lecture Slides
 
-*The slides for this lecture will be made available here.*
+*There are no slides for this session: we used it to start with
+[lecture 10](/content/lecture/l_10_Regression.qmd) — see the slides there.*
 
 <!-- When a slide PDF is ready, place it in `content/lecture/slides/`
 and embed it with the block below (adjust the filename):

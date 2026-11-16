@@ -19,6 +19,7 @@ project:
     # Embargo lifted after the lecture was held:
     - "content/lecture/slides/RM26_L02_AITools.qmd"
     - "content/lecture/slides/RM26_L08_LiteratureReviews.qmd"
+    - "content/lecture/slides/RM26_L10_Regression.qmd"
     - "content/material/*.qmd"
     - "content/material/session*/*.qmd"
     # Solutions are published only after their session (remove the line,

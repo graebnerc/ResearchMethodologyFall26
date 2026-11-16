@@ -32,11 +32,9 @@ the lecture.
 
 ## 🖥️ Lecture Slides
 
-*The slides for this lecture will be made available here after the lecture.*
-
-<!-- After the lecture: add content/lecture/slides/RM26_L10_Regression.qmd to
-project.render in _quarto.yml, replace the line above with the block below,
-render, publish.
+We started this lecture on 16 November, in the slot of the
+[statistics recap](/content/lecture/l_09_StatisticsRecap.qmd), and continue on
+23 November.
 
 ```{=html}
 <div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
@@ -45,7 +43,6 @@ render, publish.
 ```
 
 [Open the slides in a separate tab](slides/RM26_L10_Regression.html){.btn .btn-primary}
--->
 
 ## 📚 Mandatory Reading
 
