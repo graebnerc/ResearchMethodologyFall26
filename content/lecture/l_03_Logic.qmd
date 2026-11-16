@@ -27,7 +27,11 @@ date-modified: last-modified
 
 ## 🏆 Further Readings
 
-*To be announced.*
+*Excerpts from the following texts:*
+
+- @dobelli2013art
+- @mir2021philosophy
+- @vonplato2014elements
 
 ## ✍️ Exercises and coursework
 

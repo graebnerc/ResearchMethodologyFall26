@@ -13,17 +13,9 @@ date-modified: last-modified
 
 ## 🖥️ Lecture Slides
 
-*The slides for this lecture will be made available here.*
-
-<!-- When a slide PDF is ready, place it in `content/lecture/slides/`
-and embed it with the block below (adjust the filename):
-
-```{=html}
-<div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
-<iframe src="slides/RM26_L05_QuantQual.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
-</div>
-```
--->
+There is no separate deck for this lecture: its slides are part of the deck of
+Lecture 04. You find them on the page of
+[Lecture 04: Logic, argumentation, models, and explanation](l_04_Argumentation.qmd).
 
 ## 📚 Mandatory Reading
 
@@ -31,6 +23,7 @@ and embed it with the block below (adjust the filename):
 
 ## 🏆 Further Readings
 
+- @saunders2019research [ch. 4--5]
 - @mahoney2006twocultures
 - @nowell2019rigor
 

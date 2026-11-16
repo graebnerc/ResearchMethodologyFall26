@@ -28,7 +28,7 @@ date-modified: last-modified
 
 ## 🏆 Further Readings
 
-*To be announced.*
+- @bogner2009interviewing [ch. 9]
 
 ## ✍️ Exercises and coursework
 

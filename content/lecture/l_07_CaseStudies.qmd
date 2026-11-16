@@ -28,6 +28,8 @@ date-modified: last-modified
 
 ## 🏆 Further Readings
 
+- @tsang2013case
+- @welch2022reconciling
 - @beach2016causal
 - @yin2018casestudy
 
