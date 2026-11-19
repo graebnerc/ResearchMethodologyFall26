@@ -1,8 +1,15 @@
 ---
 title: "🗓️ Session 10: Linear models in R"
-date: "2026-11-27"
+date: "2026-11-30"
 date-modified: last-modified
 ---
+
+::: {.callout-important collapse="false"}
+## Monday, 30 November, in the lecture slot
+This lab takes place on **Monday, 30 November, 11:30–13:00** (MAD 024), in
+the slot of the lecture, because the lecture of 23 November was cancelled and
+lecture 10 moved to Friday, 27 November. **Please bring your laptop.**
+:::
 
 This session implements the [lecture on regression analysis](/content/lecture/l_10_Regression.qmd)
 in R. We work on **exactly the same data** as the lecture — 252 market research

@@ -19,7 +19,7 @@ format:
 
 # Lab Overview
 
-**Date:** Fri 27 Nov 2026, on-site (MAD 024), four days after lecture 10
+**Date:** Mon 30 Nov 2026, on-site (MAD 024, lecture slot 11:30–13:00), three days after lecture 10 (Fri 27 Nov)
 **Duration:** 90 minutes
 **Data:** `cps-earnings-mra-2014.csv` — the 252 market research analysts of
 the lecture (CPS 2014 via Békés & Kézdi 2021). Lecture and lab work on exactly

@@ -57,16 +57,22 @@ For information on how to use the exercise code, read
 |     7     | 06 Nov 2026 | [Data preparation](/content/material/s_07_DataPreparation.qmd)                 | video   | `Wrangling1`, `Wrangling2`               |
 |     8     | 13 Nov 2026 | [Data visualization](/content/material/s_08_Visualization.qmd)              | video        | `Visualization1`                         |
 |     9     | 20 Nov 2026 | [Using AI for coding](/content/material/s_09_AICoding.qmd)              | on-site          |                                          |
-|    10     | 27 Nov 2026 | [Linear models in R](/content/material/s_10_LinearModels.qmd)              | on-site       | `LinearRegression1`, `LinearRegression2` |
-|    11     | 04 Dec 2026 | [Experimental data in R](/content/material/s_11_Experiments.qmd)           | on-site       |                                          |
+|     —     | 27 Nov 2026 | *No lab — [lecture 10](/content/lecture/l_10_Regression.qmd) takes this slot* | —        |                                          |
+|    10     | **Mon** 30 Nov 2026 | [Linear models in R](/content/material/s_10_LinearModels.qmd)      | on-site (Mon, 11:30–13:00) | `LinearRegression1`, `LinearRegression2` |
+|     —     | 04 Dec 2026 | *No lab — [lecture 11](/content/lecture/l_11_Experiments.qmd) takes this slot* | —        |                                          |
+|    11     | **Mon** 07 Dec 2026 | [Experimental data in R](/content/material/s_11_Experiments.qmd)   | on-site (Mon, 11:30–13:00) |                                          |
 |    12     | 11 Dec 2026 | Recap session & open Q&A *(material TBA)*                           | on-site           |                                          |
 
-: There is no class in the week of 12–16 October 2026. The lab dates are
-**unaffected** by the rescheduling of the lecture that followed the cancelled
-session of 5 October (see the [lecture overview](/content/lecture/)). The three
+: There is no class in the week of 12–16 October 2026. Because the lecture of
+23 November is cancelled (Student General Assembly), lecture and lab **swap
+slots** from 27 November on, so that the labs on regression and experiments
+still follow their lectures: labs 10 and 11 take place on the **Mondays** 30
+November and 7 December (11:30–13:00, MAD 024; please bring your laptop), and
+lectures 10 and 11 on the Fridays 27 November and 4 December (see the
+[lecture overview](/content/lecture/)). The three
 **take-home examinations** are published after lecture 04 (19 Oct, on logic and
 argumentation; due 4 Nov), lecture 08 (the video lecture released 9 Nov, on
-literature reviews; due 22 Nov) and lecture 09 (16 Nov, on statistics; due 22
+literature reviews; due 22 Nov) and lecture 09 (16 Nov, on statistics; due 27
 Nov); you must pass two of them to be admitted to the final exam (see the
 [seminar description](/content/SeminarDescription.qmd)).
 

@@ -1,8 +1,15 @@
 ---
 title: "🗓️ Session 11: Experimental data in R"
-date: "2026-12-04"
+date: "2026-12-07"
 date-modified: last-modified
 ---
+
+::: {.callout-important collapse="false"}
+## Monday, 7 December, in the lecture slot
+This lab takes place on **Monday, 7 December, 11:30–13:00** (MAD 024), in the
+slot of the lecture; lecture 11 is held on Friday, 4 December, in the lab slot.
+**Please bring your laptop.**
+:::
 
 This session focuses on the practical analysis of data obtained from experiments
 in R, and on the most common tasks associated with designing and evaluating them.

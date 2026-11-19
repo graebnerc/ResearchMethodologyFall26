@@ -19,7 +19,7 @@ format:
 
 # Lab Overview
 
-**Date:** Fri 4 Dec 2026, on-site (MAD 024), four days after lecture 11
+**Date:** Mon 7 Dec 2026, on-site (MAD 024, lecture slot 11:30–13:00), three days after lecture 11 (Fri 4 Dec)
 **Duration:** 90 minutes
 **Data:** three simulated experiments in `data/` — a leadership training
 (two groups), three communication methods (three groups), and a website A/B
