@@ -324,6 +324,35 @@ Where you disagree, your criteria are not yet precise enough. Sharpen them, and
 note the change in the search log.
 :::
 
+## How far do two screeners agree? Cohen's kappa {#sec-kappa}
+
+When two people screen the same records independently, report how far they
+agree. The share of identical decisions flatters: most records are easy
+exclusions, so two screeners agree often by chance alone. **Cohen's kappa** ($\kappa$)
+corrects for this [@cohen1960coefficient].
+
+Take the records that both screened, compare their decisions (in the workbook:
+`decision_ta` and *Screener 2 (sample)*), and count the four combinations.
+Treat *unsure* as *include*, because both go on to round 2. An example with
+100 records:
+
+|                       | Screener B: include | Screener B: exclude |
+|:----------------------|:-------------------:|:-------------------:|
+| **Screener A: include** |      15 (*a*)     |       5 (*b*)       |
+| **Screener A: exclude** |      10 (*c*)     |      70 (*d*)       |
+
+1. **Observed agreement:** $p_o = \frac{a + d}{N} = \frac{85}{100} = 0.85$
+2. **Agreement expected by chance**, from how often each screener says include
+   and exclude:
+   $p_e = \frac{a+b}{N} \cdot \frac{a+c}{N} + \frac{c+d}{N} \cdot \frac{b+d}{N} = 0.20 \cdot 0.25 + 0.80 \cdot 0.75 = 0.65$
+3. **Kappa:** $\kappa = \frac{p_o - p_e}{1 - p_e} = \frac{0.85 - 0.65}{1 - 0.65} \approx 0.57$
+
+So 85% agreement is only a kappa of 0.57. A value of 0 means no better than
+chance and 1 means perfect agreement. A common rough convention calls 0.41–0.60
+*moderate*, 0.61–0.80 *substantial* and anything above that *almost perfect*
+[@landis1977measurement]. With few records, kappa is unstable, so always report
+the counts as well, and say how the disagreements were resolved.
+
 # Step 6: Snowball from your best papers — compulsory
 
 *Lecture chapter 3.*
@@ -451,7 +480,8 @@ In a term paper, the following fits into one paragraph plus an appendix:
 2. The full final string and all filters (appendix), plus the query URL or script
 3. Inclusion and exclusion criteria
 4. How missing abstracts were handled
-5. Who screened, and how disagreements were handled
+5. Who screened, how far screeners agreed ([Cohen's kappa](#sec-kappa)), and how
+   disagreements were handled
 6. The numbers → flow diagram
 7. How you synthesised (concept matrix, which dimensions)
 
