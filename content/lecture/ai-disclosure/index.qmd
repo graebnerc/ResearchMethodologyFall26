@@ -34,76 +34,69 @@ The core principle is simple:
 > While AI tools may assist your work, **you remain fully responsible** for every
 > claim, analysis, and conclusion you submit.
 
-This page gives you (1) a **fillable template** to include in your work, (2) a
-**worked example**, and (3) a short note on how to **cite** AI in your reference
-list. Always check the concrete requirements of your specific course or
-examination regulations — this template is a sensible default, not a rule that
-overrides them. If in doubt, always clarify this topic with your instructor
-_as early as possible_.
-
-## How to use this template
-
-Copy the table below into an appendix (or, for short pieces, summarise the core
-rows in your methodology section). Fill in the right-hand column for your own
-work. The elements are grouped into two tiers:
-
-- **Core elements** — always report these, even for a one-paragraph disclosure.
-- **Additional elements** — report these when they are relevant to your work
-  (e.g. when AI touched your data, or when its limitations affected your
-  results).
+A disclosure should tell a reader what the AI did and how you made sure the
+result is sound. It does not need to retrace your work with the tool. This page
+gives you (1) a short **template** to include in your work, (2) a **worked
+example**, and (3) a note on how to **cite** AI in your reference list. Always
+check the concrete requirements of your specific course or examination
+regulations — this template is a sensible default, not a rule that overrides
+them. If in doubt, clarify this topic with your instructor _as early as
+possible_.
 
 ## The disclosure template (fill this in)
 
-### Core elements — always report
+Copy the table into an appendix or to the end of your work and add the
+statement of responsibility below it. If you did not use any AI tool, write
+"No AI tools were used." and you are done.
 
 | Element | What to include | Your entry |
 |---|---|---|
-| **AI tool & version** | Name and provider of the system, the specific model/version, and the date(s) you accessed it. | |
-| **Access method & plan** | How you used it (web interface, API, IDE plugin …) and which subscription tier, noting capabilities that shaped the output (e.g. document upload, extended reasoning). | |
-| **Contribution scope** | Exactly which parts of the work involved AI (e.g. brainstorming, restructuring, code, language editing) — and, just as importantly, which parts did not. | |
-| **Human oversight & verification** | How you checked, corrected, and revised AI output, and against which sources. | |
-| **Documentation location** | Where the full record lives (e.g. chat logs in Appendix B, key prompts in the methodology section); only if this is required to report. | |
+| **Tool** | Name of the system, model or version (as far as it is shown to you), how you accessed it (browser, app, API, IDE plugin), and your subscription plan (free or which paid plan). | |
+| **Used for** | What the AI did, and in which parts of your work (e.g. finding literature, feedback on the structure of a section, debugging code, translating a passage). | |
+| **What I checked** | How you checked the output, and against what. | |
+| **What I changed** | What you corrected or discarded as a result — or that nothing needed changing. | |
+| **My own** | The parts of the work done without AI. | |
+| **Personal or confidential data** | *Only if you entered any:* what it was and why this was permitted. | |
 
-### Additional elements — report when relevant
+### Statement of responsibility
 
-| Element | What to include | Your entry |
-|---|---|---|
-| **Prompt & iteration strategy** | How you structured your requests and how many rounds of refinement were needed to get usable output. | |
-| **Ethical & data-protection considerations** | How you handled confidentiality, personal data (GDPR — e.g. interview data), and possible bias in the model. | |
-| **Limitations noted** | Known constraints of the tool that affected your work (knowledge cut-off, hallucinated references, topical bias). | |
+Close your disclosure with this statement, adapted if necessary:
 
-## Integrity statement
+> I checked all AI output that I used and take full responsibility for the
+> content of this work.
 
-Close your disclosure with an explicit statement of responsibility. You can
-adapt the following:
+## What you do not need to report
 
-> While AI tools assisted with aspects of this work, as documented above, I
-> maintain full intellectual responsibility for all content, analysis, and
-> conclusions presented. All AI-generated content has been critically evaluated,
-> substantially revised, and personally endorsed as academically sound. No
-> confidential or personal data was shared with the AI system except where noted
-> and permitted.
+- **Prompts, chat logs, or the number of attempts** — you do not hand these in.
+- **Exact dates of access.**
+- **Spelling and grammar checks** that only correct errors, and the routine
+  functions of a reference manager. Once a tool rewrites sentences, reorganises
+  a text, or translates it, this counts as use and belongs in the table.
+- **General weaknesses of AI tools.** Mention a problem only if it affected
+  your work, under *What I checked* or *What I changed*.
 
-## Worked example: using an AI assistant for a term paper
+::: {.callout-tip}
+## Keep your chats until your work is graded
+Although you do not submit them, your chats let you answer questions about how
+a passage or result came about. Journals and other institutions may ask for
+more than this template does, so check their rules when you publish.
+:::
+
+## Worked example
 
 The following shows the template filled in for a fictional Management-Studies
-term paper. Your actual tool, model name, and cut-off date will differ — record
-whatever your tool actually reports.
+term paper.
 
 | Element | Example entry |
 |---|---|
-| **AI tool & version** | Claude (Sonnet 5) by Anthropic; accessed 21–25 September 2026. |
-| **Access method & plan** | Web chat interface at claude.ai, Pro subscription — used for document upload of research papers, extended reasoning, and higher message limits. |
-| **Contribution scope** | (a) Organising the initial literature review; (b) generating *alternative* interpretations of my interview data for me to evaluate; (c) checking the clarity of my argument structure. The research design, data collection, coding, and all conclusions were my own. |
-| **Human oversight & verification** | Every AI suggestion was cross-referenced with course literature, substantially edited to reflect my own analysis, and verified against additional peer-reviewed sources. |
-| **Documentation location** | Full conversation logs in Appendix B; key prompts summarised in the methodology section. |
-| **Prompt & iteration strategy** | Provided specific management theories and asked how they might apply to my case data; used iterative follow-up prompts; shared sample paragraphs for feedback. Roughly three rounds were needed to clarify the theoretical framework. |
-| **Ethical & data-protection considerations** | No confidential company data and no personally identifying interview details were shared. AI-suggested frameworks were always verified against published sources. I stayed alert to the model's tendency toward mainstream management perspectives. |
-| **Limitations noted** | The model's knowledge cut-off preceded some recent developments in the field; I checked recent literature manually. The tool occasionally produced plausible-looking but incorrect citations, which I removed. |
+| **Tool** | Claude (Sonnet 5), Anthropic; in the browser; Pro plan. |
+| **Used for** | Synonyms for my concept table · feedback on the structure of section 2 · debugging the R code for the descriptive statistics. |
+| **What I checked** | Each suggested term in the database · the code by rerunning it and calculating one variable by hand. |
+| **What I changed** | Dropped four terms not used in the literature · rewrote section 2 myself, adopting only the feedback I agreed with. |
+| **My own** | Research question, screening of the literature, analysis, all conclusions. |
 
-> While AI tools assisted in aspects of this work, as documented above, I
-> maintain full intellectual responsibility for all content, analysis, and
-> conclusions presented in this paper.
+> I checked all AI output that I used and take full responsibility for the
+> content of this work.
 
 ## Citing AI in your reference list
 

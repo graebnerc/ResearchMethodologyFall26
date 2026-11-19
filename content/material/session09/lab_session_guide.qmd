@@ -1,0 +1,200 @@
+---
+title: "Lab 9: Using AI for coding"
+subtitle: "90-Minute Session Guide"
+author: "Instructor Guide"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    theme: cosmo
+execute:
+  message: false
+  warning: false
+---
+
+<!-- Not published: excluded from project.render in _quarto.yml
+     (session*/lab_session_guide.qmd). -->
+
+# Lab overview
+
+**Date:** Fri 20 Nov 2026, on-site (MAD 024, 11:15–12:45)
+**Deck:** `content/material/slides/E9-AICoding.qmd` (figures:
+`slides/figures/E9/make-figures.R`)
+**What students download:** `lab09.zip` — an R project with the worksheet
+`lab09_worksheet.qmd`, the chart template `chart_template.R` and the data in
+`data/gdplifexp2007.csv` (`DataScienceExercises::gdplifexp2007` from session 8,
+exported as CSV). Rebuild the zip with `make-lab09-zip.sh` after any change to
+`_student_template.qmd`, `chart_template.R` or `data/`.
+**Students need:** laptop, R with `ggplot2` and `dplyr`, and any free AI chat
+assistant in the browser.
+
+## Timing
+
+| Time | Block | Notes |
+|---|---|---|
+| 0–5 | Goals · the rule from lecture 2 · four Ds | |
+| 5–12 | Delegation | the trade-off slide is the core message |
+| 12–20 | Description | vague prompt → good prompt → template |
+| 20–28 | Discernment | weighted mean; the "25 years" number; four steps |
+| 28–30 | Diligence · exercise instructions | assign routes P and T |
+| 30–40 | Round 1 · just ask | |
+| 40–55 | Round 2 · two routes | walk round; route T may ask small questions only |
+| 55–65 | Round 3 · check and own | push for `count()` before the title |
+| 65–80 | Sharing | minutes per route on the board; four questions on the slide |
+| 80–85 | Summary | |
+
+The exercise blocks (rounds 1–3 plus sharing) add up to about 50 minutes. If
+the input runs long, shorten round 3 to `n` + title and skip the declaration.
+
+## Assigning the routes
+
+Split the room into halves: one half takes **route P** (good prompt), the
+other **route T** (the chart template; session 8 showed similar code but students did not save a template of their own). The comparison in the sharing round
+only works if both routes are represented. Fast pairs do the other route
+(⭐ b).
+
+# What to expect in each round
+
+## Round 1 · just ask
+
+Typical outcomes from a one-sentence prompt:
+
+- `library(gapminder)` and `gapminder` instead of `gdp_data` — all twelve
+  years, 1,704 rows, or an error if the package is not installed
+- a `read.csv("gapminder.csv")` of a file that does not exist
+- a bar chart of the **mean** life expectancy per continent — answers a
+  different question (no variation, no countries)
+- a sentence such as *"Africa has the lowest and most unequal life
+  expectancy"* — half wrong, see below
+
+## Round 2 · what a good answer looks like
+
+Route T, finished: the chart template with the `# <- CHANGE` lines adapted.
+
+```{r}
+#| label: solution
+library(ggplot2)
+library(dplyr)
+
+gdp_data <- read.csv("data/gdplifexp2007.csv")
+
+base_size <- 14   # font size of the whole chart: larger for slides
+edge_space <- expansion(mult = 0.1)  # 10% extra room at both ends of the
+                                     # x-axis, so that no label is cut off
+
+
+# 1. The number for the title -- computed, never typed ----------------------
+
+spread <- gdp_data |>
+  group_by(continent) |>
+  summarise(range = max(lifeExp) - min(lifeExp))      # <- CHANGE
+
+asia_range <- spread$range[spread$continent == "Asia"]    # <- CHANGE
+
+
+# 2. The countries that get a label: one per continent ----------------------
+
+label_data <- gdp_data |>
+  group_by(continent) |>
+  slice_min(lifeExp, n = 1)    # <- CHANGE: slice_max() = highest,
+                                 #    slice_min() = lowest
+
+
+# 3. The chart ---------------------------------------------------------------
+
+my_chart <- ggplot(
+  data = gdp_data,
+  # the variable on x, the groups on y: long group names stay readable
+  mapping = aes(x = lifeExp, y = continent)              # <- CHANGE
+) +
+  # the box: median, middle half of the countries, and the range.
+  # outlier.shape = NA hides the box's own outlier dots, because the
+  # points below show every country anyway
+  geom_boxplot(outlier.shape = NA, width = 0.6, colour = "grey50") +
+  # every country as one point; alpha = 0.4 makes them see-through, so
+  # where many countries overlap, the colour gets darker
+  geom_point(alpha = 0.4, size = 2.5, colour = "#00395B") +
+  # the labelled countries again, on top and in red ...
+  geom_point(data = label_data, size = 3, colour = "#E65032") +
+  # ... and their names, placed just above each box
+  geom_text(
+    data = label_data, mapping = aes(label = country),
+    nudge_y = 0.4, size = base_size / 3.5, colour = "#E65032") +
+
+  # x-axis: keep ONE of the two lines, put a # in front of the other.
+  # log axis: for skewed variables such as income or population
+  # scale_x_log10(labels = scales::label_dollar(accuracy = 1), expand = edge_space) +
+  # linear axis: for most other variables, e.g. life expectancy
+  scale_x_continuous(expand = edge_space) +
+
+  labs(
+    # the title states the finding, with the number computed above
+    title = paste0("Life expectancy varies by ", round(asia_range),
+                   " years within Asia"),      # <- CHANGE
+    subtitle = "Life expectancy, 142 countries, 2007; red: lowest per continent",     # <- CHANGE
+    x = "Life expectancy in years",                     # <- CHANGE: with unit
+    y = NULL,                       # the continent names speak for themselves
+    caption = "Data: Gapminder."    # always name the source
+  ) +
+  theme_minimal(base_size = base_size) +
+  theme(
+    plot.title            = element_text(face = "bold"),
+    plot.title.position   = "plot",     # title flush with the left edge
+    plot.caption          = element_text(colour = "grey45", hjust = 1),
+    plot.caption.position = "plot",
+    panel.grid.minor      = element_blank(),  # fewer lines, less clutter
+    legend.position       = "top",      # if you add a legend: on top, left
+    legend.justification  = "left"
+  )
+
+my_chart
+```
+
+Route T changes from the template: `lifeExp` instead of `gdpPercap` (mapping,
+`summarise()`, labels); `slice_min()` instead of `slice_max()`; the
+`scale_x_continuous()` line instead of `scale_x_log10()`; a difference instead
+of a ratio in the title; new subtitle and axis label. The template already
+has the right chart type, so a pair that reads the comments should get a
+chart it can hand in within 15 minutes — that is deliberate: route T should
+show that a good template gets you there without frustration.
+
+Route P usually produces a vertical box plot (continents on x) with
+`geom_jitter()`, which is fine; check whether the labels sit on the right
+points and whether Oceania (n = 2) gets a box.
+
+## Round 3 · the numbers to check against
+
+```{r}
+#| label: numbers
+gdp_data |>
+  group_by(continent) |>
+  summarise(n = n(), lowest = min(lifeExp), median = median(lifeExp),
+            highest = max(lifeExp), range = highest - lowest)
+label_data |> select(continent, country, lifeExp)
+```
+
+Points to raise if nobody does:
+
+- **Oceania has two countries.** A box plot of two points is not a
+  distribution; "the lowest in Oceania" is New Zealand at 80.2 years.
+- **Asia, not Africa, has the widest range** (Afghanistan 43.8 to Japan
+  82.6). A title written from the AI's prior — "most unequal in Africa" — is
+  wrong; a title written from `count()` and `summarise()` is not.
+- **Turkey is the lowest in Europe** — a classification in the data, not a
+  fact about the world. Check how the data define a continent.
+- **Swaziland** is the 2007 name (Eswatini since 2018) — the AI may "correct"
+  it and then the label no longer matches the data.
+
+# Sharing (15 min)
+
+Put a two-column table on the board: route P / route T, minutes to a chart
+the pair would hand in. Then the four questions on the slide. Steer towards:
+
+1. **Time:** route T is usually as fast or faster — for people who know the
+   template. That is the trade-off: good AI use needs the same knowledge.
+2. **Worse outcomes:** collect concrete examples from round 1 (wrong data,
+   invented file, made-up claim).
+3. **Own knowledge:** which geom shows variation, what `n` is, which numbers
+   to trust.
+4. **Next time:** templates for routine charts; AI for small syntax
+   questions and for explaining errors.

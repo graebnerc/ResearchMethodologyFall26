@@ -1,0 +1,298 @@
+---
+title: "Lab 9: Using AI for coding"
+subtitle: "Worksheet"
+format:
+  html:
+    code-fold: false
+    theme: journal
+    toc: true
+execute:
+  error: true
+---
+
+Work **in pairs**. You need a **free AI chat assistant** in your browser — any
+one you like. Nothing to install in R beyond what you already have.
+
+All three rounds work on **one chart**:
+
+> **In 2007, how much does life expectancy vary within each continent — and
+> which country has the lowest life expectancy in each?**
+
+Two rules for today:
+
+- **Write down your minutes** in each round, in the log table at the end. How
+  long it took is part of the result.
+- Every chunk may fail — that is fine (`error: true` above keeps the document
+  rendering). Note *what* failed.
+
+# Setup
+
+```{r}
+#| label: setup
+#| message: false
+
+library(ggplot2)
+library(dplyr)
+
+gdp_data <- read.csv("data/gdplifexp2007.csv")   # the data from session 8
+```
+
+```{r}
+#| label: look-at-data
+str(gdp_data)
+```
+
+---
+
+# Round 1 · Just ask (10 min)
+
+Type **one sentence** into your assistant — the way you would if you were in a
+hurry. Do not explain the data. For example: *"make a chart of life expectancy
+by continent"*.
+
+**Your prompt:**
+
+> ____
+
+Paste the code you get into the chunk below and run it. If it uses a different
+data object or file than `gdp_data`, change only that name.
+
+```{r}
+#| label: round-1
+
+# paste the AI's code here
+
+```
+
+Answer in one line each:
+
+- Did it run at once? If not, what was the error?
+- Does the chart answer **our** question (variation *within* continents, lowest
+  country in each)?
+- Did the AI write anything about the result — a title, a sentence, a number?
+  Is it true?
+
+---
+
+# Round 2 · Two routes (15 min)
+
+Choose one route and start the clock.
+
+## Route P: the good prompt
+
+Fill in **every** blank, then send the whole prompt to a **new chat**. The
+blanks are the point: each one is a decision only you can make.
+
+```text
+I work in R with ggplot2 and dplyr. My data frame is called gdp_data and
+has one row per country in 2007. Here is str(gdp_data):
+[paste the output of str(gdp_data) here]
+
+Question: ____
+
+Chart:   x = ____ , y = ____
+         geom(s): ____          (which geom shows variation within a group?)
+         label: ____            (which countries get a label?)
+
+Style:   write data = and mapping = aes() explicitly; use theme_minimal().
+         Do not write a title, a subtitle or any numbers. I will.
+```
+
+```{r}
+#| label: route-p
+
+# paste the AI's code here
+
+```
+
+## Route T: the chart template
+
+Start from the **chart template** below. It already has the right chart type
+for our question — a box plot per continent with every country on top and one
+country labelled — but it shows **GDP per capita** and labels the **richest**
+country. Change it yourself until it answers our question. The lines you need
+to change are marked `# <- CHANGE`. The same code is in `chart_template.R`
+in this project; keep that file for later charts.
+
+You may ask the AI **small** questions only — one function, one argument —
+such as *"what does expansion() do in ggplot2?"*. Do not paste the task.
+
+```{r}
+#| label: route-t
+
+base_size <- 14   # font size of the whole chart: larger for slides
+edge_space <- expansion(mult = 0.1)  # 10% extra room at both ends of the
+                                     # x-axis, so that no label is cut off
+
+
+# 1. The number for the title -- computed, never typed ----------------------
+
+spread <- gdp_data |>
+  group_by(continent) |>
+  summarise(ratio = max(gdpPercap) / min(gdpPercap))      # <- CHANGE
+
+asia_ratio <- spread$ratio[spread$continent == "Asia"]    # <- CHANGE
+
+
+# 2. The countries that get a label: one per continent ----------------------
+
+label_data <- gdp_data |>
+  group_by(continent) |>
+  slice_max(gdpPercap, n = 1)    # <- CHANGE: slice_max() = highest,
+                                 #    slice_min() = lowest
+
+
+# 3. The chart ---------------------------------------------------------------
+
+my_chart <- ggplot(
+  data = gdp_data,
+  # the variable on x, the groups on y: long group names stay readable
+  mapping = aes(x = gdpPercap, y = continent)              # <- CHANGE
+) +
+  # the box: median, middle half of the countries, and the range.
+  # outlier.shape = NA hides the box's own outlier dots, because the
+  # points below show every country anyway
+  geom_boxplot(outlier.shape = NA, width = 0.6, colour = "grey50") +
+  # every country as one point; alpha = 0.4 makes them see-through, so
+  # where many countries overlap, the colour gets darker
+  geom_point(alpha = 0.4, size = 2.5, colour = "#00395B") +
+  # the labelled countries again, on top and in red ...
+  geom_point(data = label_data, size = 3, colour = "#E65032") +
+  # ... and their names, placed just above each box
+  geom_text(
+    data = label_data, mapping = aes(label = country),
+    nudge_y = 0.4, size = base_size / 3.5, colour = "#E65032") +
+
+  # x-axis: keep ONE of the two lines, put a # in front of the other.
+  # log axis: for skewed variables such as income or population
+  scale_x_log10(labels = scales::label_dollar(accuracy = 1), expand = edge_space) +
+  # linear axis: for most other variables, e.g. life expectancy
+  # scale_x_continuous(expand = edge_space) +
+
+  labs(
+    # the title states the finding, with the number computed above
+    title = paste0("In Asia, the richest country is ", round(asia_ratio),
+                   " times as rich as the poorest"),      # <- CHANGE
+    subtitle = "GDP per capita, 142 countries, 2007",     # <- CHANGE
+    x = "GDP per capita (log scale)",                     # <- CHANGE: with unit
+    y = NULL,                       # the continent names speak for themselves
+    caption = "Data: Gapminder."    # always name the source
+  ) +
+  theme_minimal(base_size = base_size) +
+  theme(
+    plot.title            = element_text(face = "bold"),
+    plot.title.position   = "plot",     # title flush with the left edge
+    plot.caption          = element_text(colour = "grey45", hjust = 1),
+    plot.caption.position = "plot",
+    panel.grid.minor      = element_blank(),  # fewer lines, less clutter
+    legend.position       = "top",      # if you add a legend: on top, left
+    legend.justification  = "left"
+  )
+
+my_chart
+```
+
+::: {.callout-tip collapse="true"}
+## Hints for route T — open only if you are stuck
+1. Replace `gdpPercap` by `lifeExp` everywhere it is marked `# <- CHANGE`.
+2. Life expectancy is not skewed like income: put a `#` in front of the
+   `scale_x_log10()` line and remove the `#` in front of
+   `scale_x_continuous()`.
+3. Our question asks for the **lowest** country: `slice_min()` instead of
+   `slice_max()`.
+4. A ratio of life expectancies makes little sense. Compute the
+   **difference** instead: `max(lifeExp) - min(lifeExp)`, and rewrite the
+   title around it.
+5. Update the subtitle and the x-axis label — with the unit.
+:::
+
+---
+
+# Round 3 · Check and own (10 min)
+
+Take your **best chart** from round 1 or 2.
+
+## Check `n`
+
+How many countries are in each continent? Is any continent too thin for a box
+plot?
+
+```{r}
+#| label: check-n
+count(gdp_data, ____)
+```
+
+## Recompute one number
+
+Pick one number your chart shows — the lowest life expectancy in Africa, say,
+or the median in Asia — and compute it **yourself**, in a different way than
+the chart code does.
+
+```{r}
+#| label: recompute
+gdp_data |>
+  filter(continent == "____") |>
+  summarise(lowest = min(____), median = median(____))
+```
+
+## Write the title yourself
+
+Add a title to your chart that **states the finding** — every number in it
+taken from your own output above, not from the AI.
+
+```{r}
+#| label: final-chart
+
+# your final chart, with labs(title = "...")
+
+```
+
+## Declare it
+
+Fill in the disclosure template from
+[lecture 2](https://researchmethodology-fall26.netlify.app/content/lecture/ai-disclosure/),
+as you would at the end of a take-home. One short line per row is enough.
+
+| Element | Your entry |
+|---|---|
+| **Tool** | name, version (if shown), browser or app, free or paid plan: ____ |
+| **Used for** | ____ |
+| **What I checked** | ____ |
+| **What I changed** | ____ |
+| **My own** | ____ |
+| **Personal or confidential data** | only if you entered any: what it was and why this was permitted ____ |
+
+> I checked all AI output that I used and take full responsibility for the
+> content of this work.
+
+---
+
+# Log
+
+| Round | Route | Minutes | Ran at once? | What was wrong or what did you change? |
+|---|---|---|---|---|
+| 1 | just ask | | | |
+| 2 | P / T | | | |
+| 3 | check | | | |
+
+
+---
+
+# If you finish early ⭐
+
+a) **Ask twice.** Send your route P prompt again, in a new chat. Same code?
+   Same chart?
+
+b) **The other route.** Do the route your pair did not do. Which was faster?
+
+c) **The average.** Ask your assistant for *"the average life expectancy per
+   continent"*. Does it weight countries by population? Should it? (Think of
+   China and India.)
+
+d) **Make it a snippet.** Save the chart template as an RStudio snippet
+   (*Tools → Edit Code Snippets*, see the appendix of the slides) and insert
+   it with its name and <kbd>Shift</kbd>+<kbd>Tab</kbd>.
+
+e) **Explain it back.** Ask the assistant to explain one line of your final
+   code that you did not fully understand. Then close the chat and explain the
+   line to your partner.

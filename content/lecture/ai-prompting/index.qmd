@@ -38,16 +38,15 @@ The examples use Claude, but both templates work with any comparable assistant
 ## A better prompt does not replace your judgement
 A well-crafted prompt gets you a more useful *draft* — it does **not** make the
 output true. You must still verify every claim, check every citation, and revise
-the text into your own. **Keep your prompts**: you will need them for the
-"Prompt & iteration strategy" row of the
+the text into your own, and state how you checked it in the
 [AI use disclosure template](../ai-disclosure/index.qmd).
 :::
 
 ::: {.callout-important}
-## Keep your prompts
-You will need them for the "Prompt & iteration strategy" row of the
-[AI use disclosure template](../ai-disclosure/index.qmd).
-Also, it is worth re-using good prompts and not always start from scratch.
+## Keep your good prompts
+You do not have to report them in the
+[AI use disclosure template](../ai-disclosure/index.qmd), but it is worth
+re-using good prompts and not always starting from scratch.
 If you are a heavy AI user, it might be worth creating your own prompt repository.
 :::
 
