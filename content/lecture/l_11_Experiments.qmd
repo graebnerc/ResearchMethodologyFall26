@@ -1,8 +1,16 @@
 ---
 title: "🗓️ Lecture 11: Experiments"
-date: "2026-11-30"
+date: "2026-12-04"
 date-modified: last-modified
 ---
+
+::: {.callout-important collapse="false"}
+## Friday, 4 December, in the lab slot
+This lecture takes place on **Friday, 4 December, 11:15–12:45** (MAD 024),
+in the slot of the lab. The
+[lab session on experimental data](/content/material/s_11_Experiments.qmd)
+follows on **Monday, 7 December**, in the lecture slot.
+:::
 
 ## 🎯 Content and goals
 

@@ -36,9 +36,12 @@ the semester. It is also available there as a PDF for printing.
 The lecture period runs from **14 September to 11 December 2026**. There is no
 class in the week of 12–16 October. Since the lecture of 5 October had to be
 cancelled, all later lectures moved by one week; the lecture on *Literature
-reviews* is delivered as a video lecture released on 9 November, and the Monday
-of 7 December is kept in reserve. **The dates of the implementation lab did not
-change.** Please always check the most recent version
+reviews* is delivered as a video lecture released on 9 November. The lecture of
+23 November is cancelled because of the Student General Assembly; from 27
+November on, **lecture and lab swap slots**: lectures 10 and 11 take place on the
+Fridays 27 November and 4 December, labs 10 and 11 on the **Mondays** 30
+November and 7 December (please bring your laptop). This uses up the reserve
+slot of 7 December. Please always check the most recent version
 of the seminar timetable, since dates and rooms can differ from one week to
 another. The authoritative timetable, rooms and times are provided _on this page_.
 For all kinds of official announcement please watch the
@@ -58,13 +61,15 @@ authoritative schedule:
 |  7   | [Interviews](/content/lecture/l_06_Interviews.qmd) | [Data preparation](/content/material/s_07_DataPreparation.qmd) *(video)* |
 |  8   | [Case studies](/content/lecture/l_07_CaseStudies.qmd) · [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd) *(video lecture)* | [Data visualization](/content/material/s_08_Visualization.qmd) *(video)* |
 |  9   | [Statistics recap](/content/lecture/l_09_StatisticsRecap.qmd) | [Using AI for coding](/content/material/s_09_AICoding.qmd) *(on-site)* |
-|  10  | [Regression analysis](/content/lecture/l_10_Regression.qmd) | [Linear models in R](/content/material/s_10_LinearModels.qmd) *(on-site)* |
-|  11  | [Experiments](/content/lecture/l_11_Experiments.qmd) | [Experimental data in R](/content/material/s_11_Experiments.qmd) *(on-site)* |
-|  12  | *No lecture (reserve slot)* | Recap session & open Q&A *(on-site; material TBA)* |
+|  10  | *Lecture cancelled (23 Nov)* · [Regression analysis](/content/lecture/l_10_Regression.qmd) *(Fri 27 Nov, lab slot)* | *No lab* |
+|  11  | [Experiments](/content/lecture/l_11_Experiments.qmd) *(Fri 4 Dec, lab slot)* | [Linear models in R](/content/material/s_10_LinearModels.qmd) *(on-site, Mon 30 Nov, lecture slot)* |
+|  12  | *No lecture* | [Experimental data in R](/content/material/s_11_Experiments.qmd) *(on-site, Mon 7 Dec, lecture slot)* · Recap session & open Q&A *(on-site, Fri 11 Dec; material TBA)* |
 
 : Week 4 lost its lecture (5 October) but kept its video lab; the lecture
 schedule shifted by one week from week 5 onwards, while the lab schedule did
-not. There is no class in the week of 12–16 October 2026. The exact dates are
+not. The lecture of 23 November (week 10) is cancelled because of the Student
+General Assembly; from then on lecture and lab swap slots, so that each lab
+still follows its lecture. There is no class in the week of 12–16 October 2026. The exact dates are
 listed on the [lecture overview](/content/lecture/index.qmd) and the
 [lab overview](/content/material/index.qmd).
 

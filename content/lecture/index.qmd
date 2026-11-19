@@ -39,16 +39,24 @@ hands-on in the Friday lab. You find the lab schedule on the
 |     7     | 09 Nov 2026 | [Case studies](/content/lecture/l_07_CaseStudies.qmd)                       |    Anna-Katharina     |
 |     8     | 09 Nov 2026 | [Literature reviews](/content/lecture/l_08_LiteratureReviews.qmd) — *video lecture* |    Claudius     |
 |     9     | 16 Nov 2026 | [Statistics recap](/content/lecture/l_09_StatisticsRecap.qmd)               |    Claudius     |
-|    10     | 23 Nov 2026 | [Regression analysis](/content/lecture/l_10_Regression.qmd)                 |    Claudius     |
-|    11     | 30 Nov 2026 | [Experiments](/content/lecture/l_11_Experiments.qmd)                       |    Claudius     |
-|     —     | 07 Dec 2026 | *Reserve slot — no lecture*                                                |    —     |
+|     —     | 23 Nov 2026 | *Session cancelled (Student General Assembly)*                             |    —     |
+|    10     | **Fri** 27 Nov 2026 | [Regression analysis](/content/lecture/l_10_Regression.qmd) — *in the lab slot, 11:15–12:45* |    Claudius     |
+|     —     | 30 Nov 2026 | *No lecture — [lab session 10](/content/material/s_10_LinearModels.qmd) takes this slot* |    —     |
+|    11     | **Fri** 04 Dec 2026 | [Experiments](/content/lecture/l_11_Experiments.qmd) — *in the lab slot, 11:15–12:45* |    Claudius     |
+|     —     | 07 Dec 2026 | *No lecture — [lab session 11](/content/material/s_11_Experiments.qmd) takes this slot* |    —     |
 
 : The lecture of 5 October had to be cancelled and was moved to 19 October; all
 later sessions shifted accordingly. There is no class in the week of 12–16
 October 2026. Lecture 08 is a **video lecture** released on 9 November, alongside
-the on-site lecture 07 of that day; it has no on-site session of its own. The
-Monday of 7 December is kept in reserve. The concluding open Q&A of the whole
-module is the [lab session on 11 December](/content/material/).
+the on-site lecture 07 of that day; it has no on-site session of its own. Lecture 10
+started on 16 November, in the slot of the statistics recap. The lecture of 23
+November is cancelled because of the Student General Assembly
+(*Vollversammlung der Studierenden*). So that every lecture still comes before
+its lab, lecture and lab **swap slots** from 27 November on: lectures 10 and 11
+take place on the **Fridays** 27 November and 4 December (11:15–12:45), and the
+labs 10 and 11 on the **Mondays** 30 November and 7 December (11:30–13:00), all
+in MAD 024. This uses up the reserve slot of 7 December. The concluding open
+Q&A of the whole module is the [lab session on 11 December](/content/material/).
 
 Slides and reading lists are distributed via the individual session pages above
 and via [Moodle](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920).

@@ -1,6 +1,6 @@
 ---
 title: "🗓️ Lecture 10: Regression analysis"
-date: "2026-11-23"
+date: "2026-11-27"
 date-modified: last-modified
 strip-comments: true
 ---
@@ -17,7 +17,7 @@ The whole lecture follows one question through one data set: *What determines
 the weekly earnings of market research analysts — and do women earn less?* The
 data are 252 market research analysts from the US Current Population Survey
 2014 [@bekes2021data]. The
-[lab session on Friday](/content/material/s_10_LinearModels.qmd) rebuilds every
+[lab session on Monday, 30 November](/content/material/s_10_LinearModels.qmd) rebuilds every
 model of the lecture in R, on exactly the same data.
 
 ::: {.callout-important}
@@ -34,7 +34,18 @@ the lecture.
 
 We started this lecture on 16 November, in the slot of the
 [statistics recap](/content/lecture/l_09_StatisticsRecap.qmd), and continue on
-23 November.
+**Friday, 27 November**, in the lab slot (11:15–12:45, MAD 024).
+
+::: {.callout-important collapse="false"}
+## Changed schedule: lecture and lab swap slots
+The lecture of 23 November is cancelled because of the Student General Assembly
+(*Vollversammlung der Studierenden*). So that each lab still follows its
+lecture, lecture and lab swap slots: lectures 10 and 11 take place on the
+**Fridays** 27 November and 4 December (11:15–12:45), labs 10 and 11 on the
+**Mondays** 30 November and 7 December (11:30–13:00), all in MAD 024. Please
+bring your laptop to the two Monday labs.
+:::
+
 
 ```{=html}
 <div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
