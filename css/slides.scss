@@ -330,9 +330,20 @@ $code-block-border-color:           #DDE4E9;
   box-shadow: none;
   border: 1px solid #DDE4E9;
   border-radius: 4px;
+  tab-size: 2;   // a Tab-indented block (e.g. an RStudio snippet) stays narrow
 }
 
 .reveal code { color: $euf-blue; }
+
+// Keys (<kbd>): the default padding makes the box taller than the line, so
+// it overlaps the lines above and below. Smaller, tight, on the baseline.
+.reveal kbd {
+  font-size: 0.75em;
+  line-height: 1;
+  padding: 0.05em 0.3em;
+  border-radius: 3px;
+  white-space: nowrap;
+}
 
 // ---------------------------------------------------------------
 // Images
