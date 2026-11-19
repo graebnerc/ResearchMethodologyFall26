@@ -26,494 +26,593 @@ format:
     menu:
       side: right
       numbers: true
+# Declared here as well as in _quarto.yml, so that a standalone render of the
+# deck resolves the citations too.
+bibliography: ../../../references/references.bib
+csl: ../../../references/jepp.csl
+# All AI answers on these slides were written for this course, in the style of
+# a chat assistant: real assistants answer differently every time, so a slide
+# cannot rely on one making a given mistake. The mistakes are real ones.
+# Figures: figures/E9/make-figures.R (run outside the project directory).
 ---
 
 ## Goals for today
 
 ::: {.nonincremental}
-1. Understand **when, how and which** AI tools you can use to assist with coding
-2. Know about **AI-like tools** that are useful in practice
-3. Know some **tips to avoid typos** in your code, especially when in a hurry
+1. Decide **what to hand over** to an AI assistant — and what to keep
+2. Know **what it costs** to use AI well — and when a template is faster
+3. **Check** AI-written code before you trust it
 :::
 
-::: {.smaller}
-Outline: common AI tools · use cases · style and formatters · avoiding typos
+::: {.notes}
+- Lecture 2 was about AI in research in general; today: AI for R code
+- Short input, then most of the time for the exercise
 :::
 
-# Part I: Common AI tools {.divider background-color="#EAF0F4"}
+## The rule from lecture 2 still holds
 
-## Common AI tools
+- Use AI freely — the take-homes included
+- **You own every line** you hand in
+- **Declare** what you used it for
 
-::: {.columns .smaller}
+::: {.takeaway .fragment}
+Today: what that means when an AI writes your R code
+:::
+
+::: {.notes}
+- Same rule as in lecture 2, no new rules today
+- "Own every line" = you must be able to explain it
+:::
+
+## Four competencies structure the session
+
+<!-- Raw HTML so that each row can be a fragment (one row per click) -->
+```{=html}
+<table>
+<thead><tr><th></th><th>Question</th><th>Topic today</th></tr></thead>
+<tbody>
+<tr class="fragment"><td><strong>Delegation</strong></td><td>What does the AI do, what do I do?</td><td>what to hand over · what it costs</td></tr>
+<tr class="fragment"><td><strong>Description</strong></td><td>How do I say what I need?</td><td>the prompt · the template</td></tr>
+<tr class="fragment"><td><strong>Discernment</strong></td><td>Is the result any good?</td><td>code · numbers · charts</td></tr>
+<tr class="fragment"><td><strong>Diligence</strong></td><td>Do I take responsibility?</td><td>what not to paste · declaring it</td></tr>
+</tbody>
+</table>
+```
+
+::: {.smaller .muted}
+Source: AI Fluency framework [@anthropic2025aifluency]
+:::
+
+::: {.callout-important .fragment}
+## The AI answers on these slides
+Written **for this course** · mistakes planted on purpose · all of them real ones
+:::
+
+::: {.notes}
+- The four Ds come from Anthropic's free AI Fluency course
+- Assistants answer differently each time → answers on slides are constructed
+:::
+
+# Delegation {.divider background-color="#EAF0F4"}
+
+*What does the AI do, what do I do?*
+
+## Hand over the *how*, keep the *what*
+
+::: {.columns}
 ::: {.column width="50%"}
-**General AI tools** that can help you to code:
+_How to_: **Hand it over**
 
-- Claude
-- ChatGPT
-- Gemini Code Assist
+- syntax you forgot
+- explaining an error message
+- explaining code, line by line
+- a first draft of a chart
 :::
 
 ::: {.column width="50%"}
-**Specific coding tools** with advanced code completion and chat interfaces,
-usually built on top of the basic models:
+_What to_: **Keep it**
 
-- Windsurf
-- Cursor
-- GitHub Copilot
+- the **question** the chart answers
+- which **rows** count
+- which **summary** is right
+- what the result **means**
 :::
-:::
-
-- **Free plans are usually sufficient** for students
-- IDE integration is great — but **R Studio is less supported** than, e.g., VS Code
-
-# Part II: Use cases for AI {.divider background-color="#EAF0F4"}
-
-## 1. Code generation
-
-::: {.boxed}
-You know **what** you want to achieve, but you have no clue **how** to program it
-:::
-
-::: {.small}
-> Help me in writing R code. Stay within the tidyverse dialect and explain your
-> code using inline comments. I have a data set on wine: `alcohol`, `quality`,
-> `residual sugar`, `kind`. Write code that computes average alcohol for all
-> kinds of wine.
-
-:::
-
-::: {.callout-warning appearance="default"}
-## Careful
-This code might include **(silent) errors** — check carefully! The more details
-and context you provide, the better.
-:::
-
-## 2. Development & syntax support
-
-::: {.boxed}
-You know what to do on the **content level** and which steps to take in R — but
-you are unsure about the **implementation**
-:::
-
-::: {.small}
-> I need to analyse our company's quarterly sales data using R and the tidyverse
-> dialect. My background is in management studies, not programming. The csv has
-> the columns `quarter_date`, `quarter`, `sales`, `region`, `product_category`.
-> Write R code that imports the file, cleans the data, and creates a ggplot2
-> figure that highlights trends and seasonality.
-
-:::
-
-::: {.callout-warning appearance="default"}
-## Careful
-Code is often **out of context** and might lead you down a blind alley. Precise
-prompting and reflection on the answer are especially important.
-:::
-
-## 3. Code optimisation
-
-::: {.boxed}
-You have some code that does what you want — but it is very slow…
-:::
-
-::: {.small}
-> I have written the following R function to compute the sum of squares from 1 to
-> n. Please review my code and suggest changes to optimise this function for
-> speed. Do not change the functioning of the code, only improve speed. Mark
-> changes using comments and summarise them alongside your code answer.
-
-:::
-
-::: {.smaller}
-In the example from the original slides, runtime fell to **0.005 %** and **8 %**
-of the original — the loop was replaced by the closed formula $\frac{n(n+1)(2n+1)}{6}$
-:::
-
-::: {.callout-warning appearance="default"}
-## Careful
-Test carefully whether the functioning of the code really did **not** change, and
-make sure the code works in **your** context(s)!
-:::
-
-## 4. Code explanation
-
-::: {.boxed}
-You found code that does what you need — but you do not understand it
-:::
-
-::: {.small}
-> I am operating in a management context. I use the sales data from above. I want
-> to predict future sales using Meta's prophet algorithm. I found the following R
-> code that does this. I do not understand this code. Please explain it to me
-> step by step.
-
 :::
 
 ::: {.takeaway .fragment}
-This is the use case with the **lowest risk** and often the highest learning
-value — you are not asking for code, you are asking for understanding
+A _chat assistant_ has **not seen your data** and **does not run your code**
 :::
 
-## 5. Code documentation
-
-::: {.boxed}
-You have written code that works — but you need to document it
+::: {.notes}
+- Left: about how to write it; right: decisions about data and question
+- The AI cannot make the right-hand decisions: it does not know your data
+- It sounds equally confident when wrong
 :::
 
-::: {.small}
-> I have written the following function that computes ROI in R. Please provide a
-> full `roxygen2` documentation of the function, including an example.
+## Good AI use costs knowledge and time
 
-:::
-
-::: {.callout-warning appearance="default"}
-## Careful
-Be **specific** regarding the kind of documentation you want — and check it!
-:::
-
-## 6. Code debugging
-
-::: {.boxed}
-Your code produces a warning or an unexpected result — and you cannot see why
-:::
-
-::: {.columns .smaller}
+::: {.columns}
 ::: {.column width="50%"}
+**What a good prompt needs**
+
+::: {.nonincremental}
+- the structure of your data
+- the rows and the summary you want
+- the chart: x, y, colour, facets
+- **time**: write · read · check · fix
+:::
+:::
+
+::: {.column width="50%" .fragment}
+**What the evidence says**
+
+::: {.nonincremental}
+- Experienced developers were **slower** with AI — and believed they were faster [@metr2025measuring]
+- Let the AI do it all → you **learn less** [@darvishi2024impact]
+:::
+:::
+:::
+
+::: {.takeaway .fragment}
+Before you prompt: **could I write this myself or use one of my templates?**
+:::
+
+::: {.notes}
+- The knowledge for a good prompt is the knowledge from sessions 4–8
+- Prompting is not free: writing, reading, checking, fixing
+- METR: 19% slower, felt 20% faster
+- Learning: if the AI writes everything, you cannot check it later
+:::
+
+# Description {.divider background-color="#EAF0F4"}
+
+*How do I say what I need?*
+
+## Vague prompt, confident answer
+
+::: {.columns}
+::: {.column width="38%"}
+**Prompt**
+
+> make a chart of life expectancy and income by continent
+:::
+
+::: {.column width="62%" .fragment}
+**Answer**
+
 ```r
-df <- data.frame(
-  id = 1:3,
-  group = factor(c(1, 2, 3)))
+library(gapminder)
 
-filtered_df <- df %>%
-  filter(group > "1")
-
-print(filtered_df)
+ggplot(gapminder, aes(x = gdpPercap,
+                      y = lifeExp,
+                      color = continent)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "black")
 ```
-:::
 
-::: {.column width="50%"}
-```
-Warning message:
-There was 1 warning in `filter()`.
-i In argument: `group > "1"`.
-Caused by warning in `Ops.factor()`:
-! '>' not meaningful for factors
-```
+*"As expected, life expectancy rises steadily with income."*
 :::
 :::
 
-::: {.smaller}
-Paste **the code, the data structure and the exact error message**, and ask for
-an explanation *before* asking for a solution
+::: {.notes}
+- Typical answer: runs, looks plausible
+- Next slide: what is wrong with it
 :::
 
-## The six use cases at a glance
-
-::: {.columns .smaller}
-::: {.column width="50%"}
-::: {.boxed}
-**Code generation**
-:::
-::: {.boxed}
-**Development & syntax support**
-:::
-::: {.boxed}
-**Code optimisation**
-:::
-:::
-
-::: {.column width="50%"}
-::: {.boxed}
-**Code explanation**
-:::
-::: {.boxed}
-**Code documentation**
-:::
-::: {.boxed}
-**Debugging**
-:::
-:::
-:::
-
-::: {.nonincremental .smaller}
-- Always **cross-check** proposed code, beware of blind alleys
-- Follow the guidelines for **prompt engineering** (appendix)
-- Be cautious with **sensitive data**
-- Properly **acknowledge and document** the use of AI tools
-:::
-
-## Verification strategies {.divider background-color="#EAF0F4"}
-
-::: {.nonincremental .smaller}
-1. **The three-check method**
-   - Does it run without errors/warnings?
-   - Does it produce sensible output? → dimensions, data types, NAs, viable ranges
-   - Does it match your understanding? → can *you* explain the code?
-2. **Test with a known example** → AI creates `calculate_roi()`, test it with
-   `revenue = 150`, `cost = 100`
-3. **Test with trivial data subsets** → reduce the data to 3–10 rows and compare
-   with a manual calculation
-4. **Add documentation, cross-check with other AIs** → ask for an explanation and
-   a code review; paste it into a different tool or a fresh chat
-:::
-
-## Application exercise {.divider background-color="#EAF0F4"}
-
-Get together in **groups of 2–3** and choose one task (material on the course
-homepage):
-
-::: {.columns .smaller}
-::: {.column width="25%"}
-::: {.boxed}
-**Generate** code to find hidden patterns in sales data
-:::
-:::
-::: {.column width="25%"}
-::: {.boxed}
-**Debug** an erroneous R function
-:::
-:::
-::: {.column width="25%"}
-::: {.boxed}
-**Optimise** a slow loop
-:::
-:::
-::: {.column width="25%"}
-::: {.boxed}
-**Document** an existing function
-:::
-:::
-:::
-
-::: {.nonincremental .smaller}
-- Write down your specific prompt (~3 min) · generate a solution (~2 min) ·
-  evaluate and improve the result (~10 min)
-- What worked well? What needed improvement? How would you modify your prompt?
-  Did you need to correct the code?
-- After 15 minutes: share your experience in the plenum
-:::
-
-# Part III: Style and formatters {.divider background-color="#EAF0F4"}
-
-## Formatter tools
+## The answer fits the prompt, not your question
 
 ::: {.columns}
 ::: {.column width="58%"}
-Writing code in good style is **more than a matter of style**:
-
-- Easier to **read** → facilitates collaboration, improves transparency
-- Easier to **understand** → facilitates debugging and finding mistakes
-
-There are good style guidelines, especially the
-[Tidyverse Style Guide](https://style.tidyverse.org)
-
-Re-writing code in good style is time consuming → use **formatters**
+![](figures/E9/E9-vague.png){width="100%"}
 :::
 
 ::: {.column width="42%"}
-::: {.smaller}
-**`styler`** — easy to use, established, great R Studio integration → best option
-for casual users
-
-**`air`** — a modern formatter, extremely fast and powerful, but harder to set up
-→ best option for power users
-:::
+- Not **your** data: a package you never loaded
+- All **12 years** mixed: 1,704 rows
+- "Steadily"? The points **flatten out** — the line predicts **140 years**
+- "As expected": it has **never seen** your data
 :::
 :::
 
-## Intermediate task {.divider background-color="#EAF0F4"}
+::: {.notes}
+- gapminder package: 1952–2007; our data from session 8 is 2007 only
+- Straight line on a linear axis: wrong shape, runs far beyond any real value
+- The sentence describes the line it drew, not the data
+:::
+
+## A good prompt carries what you know
+
+```text
+I work in R with ggplot2. My data frame gdp_data has one row per country
+in 2007. Here is str(gdp_data):  [paste the output]
+
+Question: within each continent, do richer countries live longer?
+
+Chart: x = gdpPercap on a log scale, y = lifeExp, point size = pop,
+one panel per continent, label the most populous country per continent.
+
+Style: data = and mapping = aes() written out; theme_minimal().
+Do not write a title or any numbers. I will.
+```
+
+- **Data** · **question** · **chart** · **style**
+- Every line needs what you learned in sessions 4–8
+
+::: {.notes}
+- str() output: AI sees column names and types
+- Mapping sentence from session 8
+- "No title, no numbers": we write those ourselves
+:::
+
+## The good prompt gets our chart
+
+![](figures/E9/E9-good.png){width="84%" fig-align="center"}
+
+::: {.fragment}
+Runs at once · our rows · **we** decided, the AI typed
+:::
+
+::: {.notes}
+- But: writing the prompt took ten minutes
+- And every decision came from us
+:::
+
+## Often your own template beats a prompt
 
 ::: {.columns}
-::: {.column width="58%"}
-::: {.nonincremental}
-- Take some code that you have produced so far and style it using **`styler`**
-- Compare the styled and the original version — do you always like the styled
-  version better?
+::: {.column width="55%"}
+```r
+ggplot(
+  data = gdp_data,
+  mapping = aes(x = gdpPercap, y = lifeExp,
+                size = pop)) +
+  geom_point(alpha = 0.65, shape = 21) +
+  scale_x_log10() +                  # new
+  facet_wrap(~ continent) +          # new
+  labs(x = "GDP per capita",
+       y = "Life expectancy in years") +
+  theme_minimal()
+```
 :::
 
-::: {.callout-tip appearance="default"}
-## If you have not installed it yet
-`install.packages("styler")` — then it also appears in the **Addins** menu of
-R Studio
+::: {.column width="45%"}
+- The **session 8 code** + two new lines
+- Three minutes, **no prompt**
+- You understand every line
+- Ask the AI one **small** question: *"how do I label only some points?"*
+- Save it as an **RStudio snippet**: type its name, press <kbd>Shift</kbd>+<kbd>Tab</kbd> → appendix
 :::
 :::
 
-::: {.column width="42%"}
-![](figures/E9/styler-addins.png){.shadow width="88%"}
-:::
+::: {.takeaway .fragment}
+A good template is a prompt you write **once**
 :::
 
-# Part IV: Avoiding typos {.divider background-color="#EAF0F4"}
+::: {.notes}
+- Same chart as before, from our own code
+- AI still useful for one small syntax question
+- Snippet idea: write the code once, insert it with a short name; no copy-paste from old projects
+- Tools → Edit Code Snippets; how-to and a full template in the appendix
+- Templates can also go into a prompt: "use this code as the style"
+:::
 
-## Tips to avoid typos
+# Discernment {.divider background-color="#EAF0F4"}
+
+*Is the result any good?*
+
+## AI can make your results worse
+
+- **Easy:** code that **crashes** 
+- **Dangerous:** Code that **runs and is wrong**
+- **Numbers** it never computed — in titles and sentences
+- More code than you **understand** — you cannot check it
+
+::: {.notes}
+- Crash: e.g. geom_text_repel() without library(ggrepel)
+- The other three you only catch if you check
+- Next: one example for "runs and is wrong"
+:::
+
+## Code that runs — and is wrong
 
 ::: {.columns}
-::: {.column width="52%"}
+::: {.column width="38%"}
+**Prompt:** *average GDP per capita by continent, 2007*
+
+```r
+gdp_data |>
+  group_by(continent) |>
+  summarise(
+    gdp = mean(gdpPercap))
+```
+
+*"On average, Asians are richer than people in the Americas."*
+:::
+
+::: {.column width="62%" .fragment}
+::: {.r-stack}
+![](figures/E9/E9-mean-1.png){width="100%"}
+
+![](figures/E9/E9-mean-2.png){.fragment width="100%"}
+:::
+:::
+:::
+
+::: {.notes}
+- Every line correct, every number correct
+- mean() over countries: Kuwait counts as much as China
+- Weighted by population: Asia $5,400, Americas $21,600
+- aggGDPlifexp from session 8 is built the same way — fine for some questions, wrong for "the average person"
+:::
+
+## Never let it write a number it has not computed
+
 ::: {.nonincremental}
-- Develop code **step by step** and always **test** it regularly
-- **Copy-paste** code that has worked
-- **Copy-paste variable names**
-- Use **auto-completion**
-- Make use of the **linting tool** of R Studio
-- **Style tools** such as `styler` also help
-- If you suspect but cannot find a typo: ask your coding AI of choice
+**AI:** *"Since 1952, life expectancy in Africa rose by 25 years."*
+:::
+
+::: {.columns}
+::: {.column width="58%" .fragment}
+**Compute it first …**
+
+```r
+change <- aggGDPlifexp |>
+  filter(continent == "Africa") |>
+  summarise(change = lifeExp[year == 2007] -
+                     lifeExp[year == 1952]) |>
+  pull(change)
+```
+
+**… then paste it in**
+
+```r
+labs(title = paste(
+  "Since 1952, life expectancy in Africa rose by",
+  round(change, 1), "years"))
+```
+:::
+
+::: {.column width="42%" .fragment}
+| | 1952 | 2007 | Change |
+|---|---|---|---|
+| Africa | 39.1 | 54.8 | **+15.7** |
+
+*"Since 1952, life expectancy in Africa rose by **15.7** years"*
 :::
 :::
 
-::: {.column width="48%"}
-![](figures/E9/autocomplete.png){.shadow width="96%"}
+::: {.takeaway .fragment}
+Every number in a title comes from **your code** — never typed, never from the chat
+:::
 
-![](figures/E9/lint-error.png){.shadow width="96%"}
+::: {.notes}
+- Numbers: aggGDPlifexp, mean over African countries
+- The AI produced a plausible-sounding number
+- Fix: compute the number in R, store it, paste() it into the title
+- Data change → title changes with it; no typos
+:::
+
+## Check AI code in four steps
+
+1. **Run** it — fresh R session, your data
+2. Check **`n`** — Oceania has **2** countries
+3. **Recompute** one number — in a different way
+4. **Read** every line — can you explain it?
+
+::: {.takeaway .fragment}
+The mistakes above are caught by steps 2 and 3, not by reading the code
+:::
+
+::: {.notes}
+- n: count(gdp_data, continent)
+- Recompute: e.g. weighted.mean() or filter one continent
+- Read: if you cannot explain a line, ask the AI to explain it, then check
+:::
+
+# Diligence {.divider background-color="#EAF0F4"}
+
+*Do I take responsibility?*
+
+## Declare what you did — and what you checked
+
+::: {.columns}
+::: {.column width="45%"}
+**Do not paste**
+
+::: {.nonincremental}
+- personal data
+- interview transcripts
+- anything confidential
 :::
 :::
 
-## Summary and outlook
+::: {.column width="55%"}
+**Declare**
 
-- Use AI for coding assistance **if you feel comfortable using the language on
-  your own** — only then can AI boost your productivity enormously
-- Many tools exist, and free tiers are often sufficient
-  - **Claude**, **ChatGPT**, **Gemini Code Assist** as general tools
-  - **GitHub Copilot** as a specific tool with R Studio integration
-- Use AI especially for **generation, debugging, optimisation, documentation and
-  explanation**
-  - Do not expect the final solution, but useful **hints and drafts**
-- There are also **non-AI tools** that are very useful in practice, e.g. formatters
-
-# Appendix: Prompt engineering for coding {.divider background-color="#EAF0F4"}
-
-## The SPEC framework
-
-::: {.smaller}
-| | ❌ | ✅ |
-|:--|:--|:--|
-| **S**pecify the context | Create a plot of sales data | I have a tibble called `sales_df` with columns `date` (Date), `revenue` (numeric), `region` (character). Create a `ggplot2` line plot showing revenue over time. |
-| **P**rovide constraints | Calculate average by group | Calculate average alcohol content by wine type using `dplyr`. Use pipe operators and keep the result in tidyverse format. |
-| **E**xplain the goal | Filter my data | I need to identify outliers in my sales data. Filter for sales values more than 2 standard deviations from the mean. |
-| **C**all for explanation | — | Explain your code using inline comments for each step. Include an example showing how to use this function. |
+::: {.nonincremental}
+- **Tool** · **Used for**
+- **What I checked** · **What I changed**
+- **My own**
+- **Personal or confidential data** — if any
+- the statement of responsibility
+:::
+:::
 :::
 
-## A general blueprint
+::: {.takeaway .fragment}
+"I used ChatGPT" is not a declaration → template in [lecture 2](https://researchmethodology-fall26.netlify.app/content/lecture/ai-disclosure/)
+:::
+
+::: {.notes}
+- Same as lecture 2; the disclosure page has the template
+:::
+
+# Exercise {.divider background-color="#EAF0F4"}
+
+## One chart, three rounds
+
+::: {.boxed}
+*In 2007, how much does life expectancy vary within each continent — and which country has the lowest in each?*
+:::
+
+::: {.nonincremental}
+| Round | Time | What you do |
+|---|---|---|
+| 1 · Just ask | 10 min | one-sentence prompt · run it · note what is wrong |
+| 2 · Two routes | 15 min | **P**: the good prompt · **T**: the chart template |
+| 3 · Check and own | 10 min | `n` · recompute one number · your title · declaration |
+
+: {tbl-colwidths="[24,12,64]"}
+:::
+
+In pairs · worksheet on the course page · note your **minutes** in each round
+
+::: {.notes}
+- Pairs: left side route P, right side route T
+- Route T: AI only for one small syntax question
+- Log table in the worksheet: minutes, ran first time?, what was wrong
+:::
+
+## What did you find?
+
+1. Which route got you **fastest** to a chart you would hand in?
+2. What did the AI do that you would **not** have done?
+3. Where did you need **your own** knowledge?
+4. Your plan for the exam: **prompt**, **template**, or **yourself**?
+
+::: {.notes}
+- Collect minutes per route on the board
+- Ask for examples of wrong answers
+:::
+
+## Summary
+
+- Hand over the **how**, keep the **what** and the **whether**
+- Good prompts need **knowledge and time** — compare with doing it yourself
+- A good **template** often beats a prompt
+- Check **`n`** and **recompute** — runs ≠ right
+- Never let it write a **number** it has not computed
+
+::: {.smaller .muted}
+More: AI Fluency course on Anthropic Academy — free, 3–4 h [@anthropic2025aifluency]
+:::
+
+## References
+
+::: {#refs .smaller}
+:::
+
+# Appendix {.divider background-color="#EAF0F4"}
+
+*Prompt blueprints · a chart template · RStudio snippets*
+
+## Blueprints for debugging and explaining
 
 ::: {.columns .smaller}
 ::: {.column width="50%"}
-```
-Help me write R code using [package name].
-
-I have data with these columns:
-- [column1]: [type] - [description]
-- [column2]: [type] - [description]
-
-I want to [specific goal].
-
-Please use [preferred style, e.g. tidyverse /
-base R] and add comments explaining each step.
-```
-:::
-
-::: {.column width="50%"}
-```
-Help me write R code using dplyr and ggplot2.
-
-I have data with these columns:
-- quarter_date: Date - quarterly dates 2020–2024
-- sales: numeric - sales revenue in dollars
-- region: character - North, South, East, West
-
-I want to create a faceted line plot showing
-sales trends for each region with proper labels
-and a title.
-
-Please use tidyverse pipes and add comments.
-```
-:::
-:::
-
-## More specific blueprints
-
-::: {.columns .smaller}
-::: {.column width="33%"}
 **Debugging**
 
 ```
 I want to achieve [X].
-I'm getting this error:
+I get this error:
   [exact error message]
-Here's my code:
+Here is my code:
   [paste your code]
-Here's my data structure:
+Here is my data:
   [paste str(your_data)]
-Explain what's wrong and
-how to fix it.
+Explain what is wrong and how to fix it.
 ```
 :::
 
-::: {.column width="33%"}
-**Optimisation**
+::: {.column width="50%"}
+**Explaining**
 
 ```
-I want to achieve [X].
-This code works but runs
-slowly on my dataset of
-[X rows/size]:
-  [paste your code]
-Please suggest optimisations
-for speed. Explain what makes
-your version faster, and
-ensure the output remains
-identical.
-```
-:::
-
-::: {.column width="34%"}
-**Explanation**
-
-```
-I found this R code, but
-don't fully understand it:
+I found this R code but do not
+fully understand it:
   [paste code]
-Please explain:
-1. What does each section do?
-2. Why is [part] written
-   this way?
-3. What would happen if I
-   changed [element]?
-4. Is it a good
-   implementation?
+1. What does each line do?
+2. Why is [part] written this way?
+3. What happens if I change [element]?
 ```
 :::
 :::
 
-## What to include, and iterating
+::: {.takeaway .fragment}
+Then explain it back **without** the chat
+:::
 
-::: {.columns .smaller}
-::: {.column width="50%"}
-**Information to include (at least by default)**
+## A template for a good chart
+
+::: {.columns}
+::: {.column width="55%"}
+```r
+ggplot(data = gdp_data,
+       mapping = aes(x = gdpPercap, y = continent)) +
+  geom_boxplot(outlier.shape = NA, width = 0.6) +
+  geom_point(alpha = 0.4, size = 2.5) +
+  geom_point(data = label_data, colour = "red") +
+  geom_text(data = label_data, nudge_y = 0.4,
+            mapping = aes(label = country)) +
+  scale_x_log10(labels = label_dollar()) +
+  # scale_x_continuous() +
+  labs(title = paste0("In Asia, the richest ...",
+                      round(asia_ratio), " ..."),
+       x = "GDP per capita (log scale)", y = NULL,
+       caption = "Data: Gapminder.") +
+  theme_minimal(base_size = base_size) +
+  theme(plot.title = element_text(face = "bold"),
+        plot.title.position = "plot", ...)
+```
+:::
+
+::: {.column width="45%"}
+![](figures/E9/E9-template.png){width="100%"}
 
 ::: {.nonincremental}
-- **The overall goal**: context of the code
-- **Data structure**: column names, types, sample values
-- **Desired output**: what should the result look like?
-- **Package preferences**: base R, tidyverse, data.table?
-- **Current errors**: paste exact error messages
-- **Your skill level**: "I'm new to ggplot2"
-:::
-:::
-
-::: {.column width="50%"}
-**Iteration is normal**
-
-::: {.nonincremental}
-- **Start broad**, get initial code
-- **Test it**, identify issues
-- **Follow up** with specific problems:
-  - "This gives a warning about X, how do I fix it?"
-  - "The output has unexpected NAs in column Y"
-- Don't expect perfection on the first try — and don't accept unsatisfactory
-  responses
+- Title states a **computed** finding
+- **Units** on axes · **source** in caption
+- Every country visible · one **highlighted**
 :::
 :::
 :::
 
-::: {.takeaway .center .fragment}
-Treat it as a **conversation**, not a magic spell 🪄
+::: {.notes}
+- Shortened here; full version with a comment on every line: chart_template.R in lab09.zip
+- Log or linear axis: one line each, switch with a #
+- Route T starts from this; marked lines say what to change
+:::
+
+## Keep the template as an RStudio snippet
+
+::: {.columns}
+::: {.column width="55%"}
+```
+snippet gggood
+	ggplot(
+	  data = ${1:data},
+	  mapping = aes(x = ${2:x}, y = ${3:y})
+	) +
+	  geom_point() +
+	  labs(title = "${4:the finding}",
+	       caption = "Data: ${5:source}.") +
+	  theme_minimal()
+```
+:::
+
+::: {.column width="45%"}
+1. *Tools → Edit Code Snippets* → **R**
+2. Paste it at the end: every line after `snippet` starts with a **Tab**
+3. In a script or chunk: type `gggood`, press <kbd>Shift</kbd>+<kbd>Tab</kbd>
+4. <kbd>Tab</kbd> jumps from one `${…}` field to the next
+:::
+:::
+
+::: {.takeaway .fragment}
+Write it **once**, insert it in every project with a few keystrokes
+:::
+
+::: {.notes}
+- Snippets ship with RStudio (e.g. `fun` for a function); you add your own
+- Same idea as the template: decisions taken once, reused
 :::
