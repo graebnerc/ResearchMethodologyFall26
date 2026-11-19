@@ -41,8 +41,9 @@ format:
 :::
 
 <!-- =========================================================================
-     RM26 L08 — Literature reviews. Video lecture, ~90 minutes, recorded as
-     nine chapters (00–08). Each divider below starts a new recording.
+     RM26 L08 — Literature reviews. Video lecture, ~110 minutes, recorded as
+     eight videos: sections 00 and 01 are one recording, every other divider
+     below starts a new one.
 
      Reuse: chapters 01–07 are COURSE-NEUTRAL, so that their recordings can
      be published on the Method and Inquiry hub without re-recording. All
@@ -1170,7 +1171,7 @@ Cheap decisions first · protocol criteria only
 
 - **Round 2 — full texts:** decide; **reason** for every exclusion
 
-- **Second screener:** all records, or a sample; disagreements resolved; compmute interrater agreement
+- **Second screener:** all records, or a sample; disagreements resolved; compute interrater agreement (Cohen's κ)
 
 - **Criteria drift:** criterion changed → restart, document
 
@@ -1183,7 +1184,7 @@ One row per record + reason column → template in the tutorial
 - Round 1: titles, abstracts — clearly out → exclude · in doubt → keep
 - No abstract: publisher page via DOI — free to read
 - Round 2: full texts — a reason for every exclusion
-- Second screener: all records or a sample · resolve disagreements
+- Second screener: all records or a sample · resolve disagreements · Cohen's κ → tutorial
 - Criteria drift: criterion changed → re-screen, document
 - Arrow: one row per record — template in the tutorial
 :::
@@ -1942,7 +1943,7 @@ AI suggests · the documented, reproducible step is yours
 : {.lg .stepped tbl-colwidths="[19,27,27,27]"}
 
 ::: {.arrow .xl .fragment}
-Disclose every use
+Disclose every use (except spelling checks)
 :::
 
 ::: {.notes}
@@ -1953,7 +1954,7 @@ Disclose every use
 - Extraction: many PDFs — silent errors → verify a sample by hand
 - Synthesis: structure, critique — generic, mainstream → your matrix, your
   argument
-- Arrow: disclose every use
+- Arrow: disclose every use — plain spelling and grammar checks excepted
 :::
 
 ## Check yourself — chapter 7 {.no-dash data-stage="6"}

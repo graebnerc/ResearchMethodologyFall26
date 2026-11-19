@@ -7,7 +7,7 @@ strip-comments: true
 
 **This is a video lecture.** It is released on **9 November 2026** and has *no*
 on-site session on a Monday — you work through it on your own, at your own pace.
-It is recorded as nine short chapters (about 90 minutes in total).
+It is recorded as eight videos (about 110 minutes in total).
 Please post any questions in the
 [Moodle forum](https://elearning.uni-flensburg.de/moodle/course/view.php?id=17920);
 we also take them up in the concluding Q&A session of 11 December.
@@ -23,24 +23,14 @@ The lecture uses the systematic literature review as the reference model and
 shows what it means for the literature review section of your term paper or
 thesis. After this session you can …
 
-1. **choose** a type of review (narrative, integrative, scoping, systematic,
-   meta-analysis) that fits a given purpose, and justify the
-   choice;
-2. **explain** what a literature review can establish and what it cannot;
-3. **translate** a topic into a reviewable question and a concept table, and
-   from there into a documented Boolean search string for OpenAlex;
-4. **assess** a search in terms of precision and recall, and validate it
-   against known key publications;
-5. **apply** explicit inclusion and exclusion criteria and document the
-   selection in a PRISMA 2020 flow diagram;
-6. **synthesise** literature with a concept matrix instead of summarising it
-   paper by paper;
-7. **identify** the main sources of bias in the literature, in databases —
-   including who owns them —, in your own search and in your synthesis, and
-   report them as limitations;
-8. **distinguish** keyword-based, semantic (AI) and citation-based search
-   tools, and use AI at each stage without giving up reproducibility (see
-   [Lecture 02](l_02_AITools.qmd)).
+1. **choose** a review type that fits the purpose;
+2. **explain** what a review can and cannot establish;
+3. **translate** a topic into a concept table and a search string;
+4. **assess** a search: precision, recall, validation;
+5. **select** studies by explicit criteria and document this in a **PRISMA**
+   flow diagram;
+6. **synthesize** with a concept matrix;
+7. **identify** biases — in literature, databases, search and synthesis.
 
 Everything in the lecture and the tutorial works with **open tools only**: the
 search uses [OpenAlex](https://openalex.org), a free and open database. Its
@@ -54,26 +44,95 @@ debate on corporate social and financial performance.
 
 ## 🎬 Video chapters
 
-| # | Chapter | Length | Video |
-|:-:|:--------|:------:|:-----:|
-| 0 | Introduction and running example | ~4 min | *tba* |
-| 1 | What a review is for — and what it can and cannot do | ~12 min | *tba* |
-| 2 | The workflow and a reviewable question | ~9 min | *tba* |
-| 3 | Searching (OpenAlex) | ~17 min | *tba* |
-| 4 | Screening and selection | ~9 min | *tba* |
-| 5 | From summary to synthesis | ~12 min | *tba* |
-| 6 | Biases, limitations, and caveats | ~13 min | *tba* |
-| 7 | Reporting, reproducibility, and AI | ~10 min | *tba* |
-| 8 | Wrap-up | ~4 min | *tba* |
+All the videos are available via this
+[playlist](https://www.youtube.com/playlist?list=PLP6plWM-cgR4).
 
-: Each chapter ends with a short self-check question. You do not need to watch
-everything in one go, but please keep the order.
+Click on a chapter to open its video. Chapters 1 to 7 each end with a short
+self-check question, and two pause tasks recap the material so far. You do not
+need to watch everything in one go, but please keep the order.
+
+::: {.callout-note icon=false title="1 · Introduction (30:48)"}
+```{=html}
+<div class="ratio ratio-16x9">
+<iframe src="https://www.youtube-nocookie.com/embed/Ju_PYRFQ0dc" title="Literature reviews, video 1: Introduction" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+
+[Open on YouTube](https://youtu.be/Ju_PYRFQ0dc)
+:::
+
+::: {.callout-note icon=false title="2 · The Workflow (12:33)"}
+```{=html}
+<div class="ratio ratio-16x9">
+<iframe src="https://www.youtube-nocookie.com/embed/mcxW1OKH8zo" title="Literature reviews, video 2: The Workflow" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+
+[Open on YouTube](https://youtu.be/mcxW1OKH8zo)
+:::
+
+::: {.callout-note icon=false title="3 · Searching (19:31)"}
+```{=html}
+<div class="ratio ratio-16x9">
+<iframe src="https://www.youtube-nocookie.com/embed/97ptgjnB3UI" title="Literature reviews, video 3: Searching" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+
+[Open on YouTube](https://youtu.be/97ptgjnB3UI)
+:::
+
+::: {.callout-note icon=false title="4 · Screening & Selection (05:46)"}
+```{=html}
+<div class="ratio ratio-16x9">
+<iframe src="https://www.youtube-nocookie.com/embed/gx7e49d7t5g" title="Literature reviews, video 4: Screening &amp; Selection" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+
+[Open on YouTube](https://youtu.be/gx7e49d7t5g)
+:::
+
+::: {.callout-note icon=false title="5 · Synthesis (07:35)"}
+```{=html}
+<div class="ratio ratio-16x9">
+<iframe src="https://www.youtube-nocookie.com/embed/3SlXM5pbUIE" title="Literature reviews, video 5: Synthesis" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+
+[Open on YouTube](https://youtu.be/3SlXM5pbUIE)
+:::
+
+::: {.callout-note icon=false title="6 · Limitations (18:06)"}
+```{=html}
+<div class="ratio ratio-16x9">
+<iframe src="https://www.youtube-nocookie.com/embed/5c7KXNtI3to" title="Literature reviews, video 6: Limitations" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+
+[Open on YouTube](https://youtu.be/5c7KXNtI3to)
+:::
+
+::: {.callout-note icon=false title="7 · Reporting & AI (08:16)"}
+```{=html}
+<div class="ratio ratio-16x9">
+<iframe src="https://www.youtube-nocookie.com/embed/N5KvkXlNrdY" title="Literature reviews, video 7: Reporting &amp; AI" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+
+[Open on YouTube](https://youtu.be/N5KvkXlNrdY)
+:::
+
+::: {.callout-note icon=false title="8 · Wrap-Up (06:30)"}
+```{=html}
+<div class="ratio ratio-16x9">
+<iframe src="https://www.youtube-nocookie.com/embed/9cCemJCrv8E" title="Literature reviews, video 8: Wrap-Up" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+</div>
+```
+
+[Open on YouTube](https://youtu.be/9cCemJCrv8E)
+:::
 
 ## 🖥️ Lecture Slides
 
-*The slides are made available here when the video lecture is released on 9 November.*
-
-<!-- Uncomment on release (and add the deck to the render list in _quarto.yml):
 
 ```{=html}
 <div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
@@ -82,7 +141,9 @@ everything in one go, but please keep the order.
 ```
 
 [Open the slides in a separate tab](slides/RM26_L08_LiteratureReviews.html){.btn .btn-primary}
--->
+
+- [PDF version](slides/RM26_L08_LiteratureReviews.pdf)
+
 
 ## 🧰 Tutorial and templates
 
@@ -102,6 +163,10 @@ everything in one go, but please keep the order.
   (download) — a **search log**, a **screening sheet**, a **concept matrix**
   and a sheet for **limitations**, which you can reuse for your term paper. It
   works in Excel, LibreOffice and Numbers.
+
+- [**AI disclosure**](ai-disclosure/index.qmd) — the template for declaring any
+  use of AI tools in your review, whether in a term paper, a thesis or the
+  take-home.
 
 OpenAlex is free; you only need a free account (and API key) for the R part.
 EconBiz is free and needs no account at all.

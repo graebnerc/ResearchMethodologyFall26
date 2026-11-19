@@ -9,7 +9,8 @@ date-modified: last-modified
 Since there were no questions on the statistics recap, we used the session of
 16 November to start with linear regression: we covered the first part of
 [lecture 10](/content/lecture/l_10_Regression.qmd), whose slides are available
-on its page. Lecture 10 continues on 23 November.
+on its page. Lecture 10 continues on **Friday, 27 November** (in the lab slot,
+11:15–12:45), since the lecture of 23 November is cancelled.
 :::
 
 ## 🎯 Content and goals

@@ -511,23 +511,21 @@ preprint; Oviedo et al. is industry-authored.
 
 - **No binding EUF-wide rules** → ask each instructor, every time
 
-- Here additionally: a **paragraph of self-reflection**
-
 ::: {.arrow .xl .fragment}
 Disclosure costs nothing — non-disclosure can cost you your reputation.
 :::
 
 ## What a disclosure has to contain
 
-- **Which system**, in which version, accessed when
+- **Which system:** name, version, access route, subscription plan
 
-- **Where** in your work it was used — which sections, which tasks
+- **What for:** which sections, which tasks
 
-- **How** you prompted it, in outline
-
-- **How you checked** the output, and what you changed
+- **What you checked**, what you changed, and what is your own
 
 - **A statement of responsibility**: the text is yours, and you stand behind it
+
+- **Not needed:** prompts, chat logs, plain spelling and grammar checks
 
 ::: {.source}
 Template: lecture page → "Documenting and disclosing the use of AI"
@@ -554,7 +552,7 @@ Template: lecture page → "Documenting and disclosing the use of AI"
 
 - Confidentiality, bias, environment: **central**, not side issues
 
-- **Disclose** everything, and keep your prompts
+- **Disclose** what AI did and how you checked it
 
 ::: {.keybox .fragment}
 Used with judgment, these tools make you better. Used without, they make you
@@ -579,8 +577,7 @@ confidently wrong.
 
 - In what sense is an LLM "theory-laden"? Relate it to lecture 1.
 
-- What has to appear in an AI disclosure, and why does the self-reflection
-  paragraph matter?
+- What has to appear in an AI disclosure, and what can be left out?
 :::
 
 ## References {.smaller .scrollable}

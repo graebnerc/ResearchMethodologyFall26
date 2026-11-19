@@ -30,6 +30,10 @@ It is published on Moodle on **21 October 2026** and must be submitted there by
 
 ## 🖥️ Lecture Slides
 
+This deck also contains the slides of
+[Lecture 05: Quantitative and qualitative research](l_05_QuantQual.qmd),
+which has no separate deck.
+
 ```{=html}
 <div class="container" style="position: relative;overflow: hidden;width: 100%;padding-top: 56.25%;">
 <iframe src="slides/RM26_L04_Argumentation.pdf" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" allowfullscreen loading="lazy"></iframe>
